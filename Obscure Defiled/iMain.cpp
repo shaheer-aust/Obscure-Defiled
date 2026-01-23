@@ -11,7 +11,7 @@ int bg1, bg2;
 int bgX = 0;   // scrolling offset
 int charX = 0;
 int idx = 0;
-int charImg[3];
+int charImg[8];
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -21,7 +21,7 @@ void iDraw()
     // Draw connected backgrounds
     iShowImage(bgX, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg1);
     iShowImage(bgX + SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg2);
-	iShowImage(charX, 0, 50, 100, charImg[idx]);
+	iShowImage(charX, 100, 50, 100, charImg[idx]);
 
     // Wrap background for continuous effect
     if (bgX <= -SCREEN_WIDTH)
@@ -43,7 +43,7 @@ void iSpecialKeyboard(unsigned char key)
         bgX -= SCROLL_SPEED;  // move background left
 		charX +=10;
 		idx+=1;
-		if(idx==3)
+		if(idx==8)
 			idx = 0;
 
     }
@@ -54,7 +54,7 @@ void initBackground()
 {
     bg1 = iLoadImage("Images//bg1.jpg");
     bg2 = iLoadImage("Images//bg2.jpg");
-	for(int i =0;i<3;i++)
+	for(int i =0;i<8;i++)
 	{
 		char a[100];
 		sprintf_s(a,"Images//c%d.png",i+1);
