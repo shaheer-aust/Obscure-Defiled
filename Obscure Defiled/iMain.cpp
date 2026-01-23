@@ -2,8 +2,8 @@
 #include "iGraphics.h"
 
 /* -------------------- CONSTANTS -------------------- */
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 800
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 #define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
