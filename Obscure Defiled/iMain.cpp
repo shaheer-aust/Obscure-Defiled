@@ -1,6 +1,6 @@
 ﻿#include <cstdio>
 #include "iGraphics.h";
-#include <menu_screen.hpp>
+#include "Screens/menu_screen.hpp";
 
 /* -------------------- CONSTANTS -------------------- */
 #define SCREEN_WIDTH 1280
@@ -10,13 +10,13 @@
 
 
 /* -------------------- GLOBALS -------------------- */
-
+menu_screen menuScreen("resources//menu_screen//menu.jpg", {"Start Game", "Options", "Exit"});
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
     iClear();
     iSetColor(255, 255, 255);
-    menu_screen.draw();
+    menuScreen.draw();
 }
 
 /* -------------------- INPUT -------------------- */
