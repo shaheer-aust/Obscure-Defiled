@@ -10,7 +10,7 @@
 
 
 /* -------------------- GLOBALS -------------------- */
-menu_screen menuScreen("resources//menu_screen//menu.jpg", {"Start Game", "Options", "Exit"});
+menu_screen menuScreen;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
