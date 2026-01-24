@@ -1,10 +1,13 @@
 ﻿#include <cstdio>
-#include "iGraphics.h"
+#include "iGraphics.h";
+#include "test.cpp";
 
 /* -------------------- CONSTANTS -------------------- */
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define SCROLL_SPEED 20
+
+
 
 /* -------------------- GLOBALS -------------------- */
 int bg1, bg2;
@@ -12,6 +15,7 @@ int bgX = 0;   // scrolling offset
 int charX = 0;
 int idx = 0;
 int charImg[8];
+Node* head=new Node(10);
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
