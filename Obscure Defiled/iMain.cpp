@@ -16,7 +16,7 @@ void iDraw()
     iClear();
     iSetColor(255, 255, 255);
 	iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, menu_images[0]);
-    iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.2, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.2, menu_images[1]);
+    iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.6 / 2), SCREEN_HEIGHT / 2, SCREEN_WIDTH * 0.6, SCREEN_HEIGHT * 0.5, menu_images[1]);
 }
 
 /* -------------------- INPUT -------------------- */
