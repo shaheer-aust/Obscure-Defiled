@@ -42,13 +42,14 @@ struct MenuScreen
 	// hover and click detection for menu
 	   void checkButtonHover(int mx, int my)
     {
+		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
         long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
         if (isQuitButtonClicked(mx, my) && !lastFrameQuitClicked)
         {
             if (currentTime - lastQuitBlipTime > HOVER_COOLDOWN)
             {
-				mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
+				mciSendString("play ggsong from 0", NULL, 0, NULL);
                 lastQuitBlipTime = currentTime;
             }
             lastFrameQuitClicked = true;
@@ -62,7 +63,7 @@ struct MenuScreen
         {
             if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
             {
-				mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
+				mciSendString("play ggsong from 0", NULL, 0, NULL);
                 lastSettingsBlipTime = currentTime;
             }
             lastFrameSettingsClicked = true;
@@ -76,7 +77,7 @@ struct MenuScreen
         {
             if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
             {
-				mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
+				mciSendString("play ggsong from 0", NULL, 0, NULL);
                 lastPlayBlipTime = currentTime;
             }
             lastFramePlayClicked = true;
