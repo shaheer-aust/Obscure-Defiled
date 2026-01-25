@@ -1,4 +1,4 @@
-﻿#include <cstdio>
+﻿#include <stdio.h>
 #include "iGraphics.h"
 #include "Screens\menu_screen.hpp"
 #include <vector>
@@ -13,7 +13,8 @@ using namespace std;
 
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
-stack<string> screens ={"menu","options","gameplay"};
+stack<string> sc;
+
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -33,7 +34,8 @@ void iSpecialKeyboard(unsigned char key)
 {
     if (key == GLUT_KEY_RIGHT)
     {
-        cout << screens.top() << endl;
+        cout << sc.top() << endl;
+		printf("%d",sc.top());
         //bgX -= SCROLL_SPEED;  // move background left
 		//charX +=10;
 		//idx+=1;
@@ -68,6 +70,9 @@ int main()
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Connected Background Scroll");
 	MenuScreen menu;
 	menu_images=menu.initmenubar();
+	sc.push("1");
+	sc.push("2");
+	sc.push("3");
 	//menu_images[1] = menu.initmenubar1();
 
     iStart();
