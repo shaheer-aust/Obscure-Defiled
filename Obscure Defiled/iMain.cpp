@@ -1,6 +1,6 @@
 ﻿#include <cstdio>
 #include "iGraphics.h"
-
+#include "Screens\menu_screen.hpp"
 /* -------------------- CONSTANTS -------------------- */
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -63,11 +63,7 @@ void iSpecialKeyboard(unsigned char key)
 // 		charImg[i]=iLoadImage(a); 
 // 	}
 // }
-void initmenubar()
-{
-    bg = iLoadImage("resources//menu_screen//menu.jpg");
 
-}
 void moveBG()
 {
 	bgX -= 1;
@@ -77,8 +73,8 @@ int main()
 {	
     //iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Connected Background Scroll");
-
-    initmenubar();
+	MenuScreen menu;
+	bg = menu.initmenubar();
 
     iStart();
     return 0;
