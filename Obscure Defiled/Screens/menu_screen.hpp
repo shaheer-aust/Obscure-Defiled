@@ -23,13 +23,13 @@ struct MenuScreen
 	{
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
 		iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);
-		iText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 100, "PLAY");
+		iText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 100, "EXIT");
 		iText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 50, "SETTINGS");
-		iText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2, "EXIT");
+		iText(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2, "PLAY");
 	}
 
 	// butoons
-	bool isPlayButtonClicked(int mx, int my)
+	bool isQuitButtonClicked(int mx, int my)
 	{
 		int buttonX = SCREEN_WIDTH / 2 - 50;
 		int buttonY = SCREEN_HEIGHT / 2 - 100;
@@ -51,7 +51,7 @@ struct MenuScreen
 				my >= buttonY && my <= buttonY + buttonHeight);
 	}
 
-	bool isQuitButtonClicked(int mx, int my)
+	bool isPlayButtonClicked(int mx, int my)
 	{
 		int buttonX = SCREEN_WIDTH / 2 - 50;
 		int buttonY = SCREEN_HEIGHT / 2;

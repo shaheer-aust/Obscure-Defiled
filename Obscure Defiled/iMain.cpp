@@ -23,15 +23,17 @@ void iDraw()
     
     if (screens.top() == "Menu")
     {
-        menu.drawMenuScreen(menu_images, SCREEN_WIDTH, SCREEN_HEIGHT);
+        menu.drawMenuScreen(menu_images);
     }
     else if (screens.top() == "Game")
     {
         // Draw game screen
+		cout << "In Game Screen" << endl;
     }
     else if (screens.top() == "Settings")
     {
         // Draw settings screen
+		cout << "In Settings Screen" << endl;
     }
 }
 
