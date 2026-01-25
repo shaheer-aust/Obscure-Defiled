@@ -13,15 +13,19 @@ using namespace std;
 
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
-stack<string> sc;
+stack<string> screens;
 
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
     iClear();
     iSetColor(255, 255, 255);
-	iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, menu_images[0]);
-    iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 +SCREEN_HEIGHT*0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, menu_images[1]);
+	if(screens.top()=="Menu")
+	{
+		menu.drawMenuScreen(menu_images,SCREEN_WIDTH,SCREEN_HEIGHT);
+	}
+	//
+	
 }
 
 /* -------------------- INPUT -------------------- */
@@ -70,9 +74,7 @@ int main()
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Connected Background Scroll");
 	MenuScreen menu;
 	menu_images=menu.initmenubar();
-	sc.push("1");
-	sc.push("2");
-	sc.push("3");
+	screens.push("Menu");
 	//menu_images[1] = menu.initmenubar1();
 
     iStart();
