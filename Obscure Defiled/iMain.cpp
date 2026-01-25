@@ -71,7 +71,7 @@ void iKeyboard(unsigned char key)
 			screens.pop();
 			if (screens.top() == "Menu")
 			{
-				PlaySound("resources//menu_screen//bg_audio.wav", NULL, SND_LOOP | SND_ASYNC);
+				PlaySound("resources//menu_screen//bg_audio//menu_bg.wav", NULL, SND_LOOP | SND_ASYNC);
 			}
 		}
 	}
@@ -120,7 +120,7 @@ int main()
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
 	{
-		PlaySound("resources//menu_screen//bg_audio.wav", NULL, SND_LOOP | SND_ASYNC);
+		PlaySound("resources//menu_screen//bg_audio//menu_bg.wav", NULL, SND_LOOP | SND_ASYNC);
 	}
 
 	iStart();
