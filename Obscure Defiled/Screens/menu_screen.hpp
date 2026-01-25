@@ -16,9 +16,9 @@ struct MenuScreen
 		vector<int> images(5);
 		images[0] = iLoadImage("resources//menu_screen//menu.jpg");
 		images[1] = iLoadImage("resources//menu_screen//title.png");
-		images[2] = iLoadImage("resources//menu_screen//Buttons//play.png");
+		images[4] = iLoadImage("resources//menu_screen//Buttons//play.png");
 		images[3] = iLoadImage("resources//menu_screen//Buttons//option.png");
-		images[4] = iLoadImage("resources//menu_screen//Buttons//exit.png");
+		images[2] = iLoadImage("resources//menu_screen//Buttons//exit.png");
 		return images;
 	}
 
