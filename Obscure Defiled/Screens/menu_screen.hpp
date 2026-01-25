@@ -4,6 +4,7 @@
 #define SCREEN_HEIGHT 720
 #define BUTTON_WIDTH 294
 #define BUTTON_HEIGHT 90
+#define HOVER_COOLDOWN 500 // milliseconds
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -13,7 +14,9 @@ struct MenuScreen
 	bool lastFramePlayClicked = false;
 	bool lastFrameSettingsClicked = false;
 	bool lastFrameQuitClicked = false;
-
+	long long lastPlayBlipTime = 0;
+	long long lastSettingsBlipTime = 0;
+	long long lastQuitBlipTime = 0;
 	vector<int> initmenubar()
 	{
 		vector<int> images(5);
@@ -34,41 +37,52 @@ struct MenuScreen
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
 	}
 	// hover and click detection for menu
-	void checkButtonHover(int mx, int my)
-	{
-		if (isQuitButtonClicked(mx, my) && !lastFrameQuitClicked)
-		{
-			PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
-			lastFrameQuitClicked = true;
-		}
-		else if (!isQuitButtonClicked(mx, my))
-		{
-			lastFrameQuitClicked = false;
-		}
+	   void checkButtonHover(int mx, int my)
+    {
+        long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
-		if (isSettingsButtonClicked(mx, my) && !lastFrameSettingsClicked)
-		{
-			PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
-			lastFrameSettingsClicked = true;
-		}
-		else if (!isSettingsButtonClicked(mx, my))
-		{
-			lastFrameSettingsClicked = false;
-		}
+        if (isQuitButtonClicked(mx, my) && !lastFrameQuitClicked)
+        {
+            if (currentTime - lastQuitBlipTime > HOVER_COOLDOWN)
+            {
+                PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+                lastQuitBlipTime = currentTime;
+            }
+            lastFrameQuitClicked = true;
+        }
+        else if (!isQuitButtonClicked(mx, my))
+        {
+            lastFrameQuitClicked = false;
+        }
 
-		if (isPlayButtonClicked(mx, my) && !lastFramePlayClicked)
-		{
-			PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
-			lastFramePlayClicked = true;
-		}
-		else if (!isPlayButtonClicked(mx, my))
-		{
-			lastFramePlayClicked = false;
-		
-		}
-		
-	}
+        if (isSettingsButtonClicked(mx, my) && !lastFrameSettingsClicked)
+        {
+            if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
+            {
+                PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+                lastSettingsBlipTime = currentTime;
+            }
+            lastFrameSettingsClicked = true;
+        }
+        else if (!isSettingsButtonClicked(mx, my))
+        {
+            lastFrameSettingsClicked = false;
+        }
 
+        if (isPlayButtonClicked(mx, my) && !lastFramePlayClicked)
+        {
+            if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
+            {
+                PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+                lastPlayBlipTime = currentTime;
+            }
+            lastFramePlayClicked = true;
+        }
+        else if (!isPlayButtonClicked(mx, my))
+        {
+            lastFramePlayClicked = false;
+        }
+    }
 	// butoons
 	bool isQuitButtonClicked(int mx, int my)
 	{
