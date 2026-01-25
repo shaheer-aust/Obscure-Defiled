@@ -10,7 +10,7 @@ using namespace std;
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define SCROLL_SPEED 20
-
+MenuScreen menu;
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
 stack<string> screens;
@@ -38,8 +38,8 @@ void iSpecialKeyboard(unsigned char key)
 {
     if (key == GLUT_KEY_RIGHT)
     {
-        cout << sc.top() << endl;
-		printf("%d",sc.top());
+        cout << screens.top() << endl;
+		printf("%d",screens.top());
         //bgX -= SCROLL_SPEED;  // move background left
 		//charX +=10;
 		//idx+=1;
@@ -72,7 +72,7 @@ int main()
 {	
     //iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Connected Background Scroll");
-	MenuScreen menu;
+	
 	menu_images=menu.initmenubar();
 	screens.push("Menu");
 	//menu_images[1] = menu.initmenubar1();
