@@ -42,10 +42,13 @@ void iDraw()
 void iMouseMove(int mx, int my) {
 	if (screens.top() == "Menu")
 	{
+		cout << mx << " " << my << endl;
 		menu.checkButtonHover(mx, my);
 	}
 }
-void iPassiveMouseMove(int mx, int my) {}
+void iPassiveMouseMove(int mx, int my) {
+	cout << mx << "**" << my << endl;
+}
 void iMouse(int button, int state, int mx, int my)
 {
 	if (state == GLUT_DOWN && screens.top() == "Menu")
