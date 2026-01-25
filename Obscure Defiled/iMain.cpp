@@ -20,19 +20,53 @@ void iDraw()
 {
     iClear();
     iSetColor(255, 255, 255);
-	if(screens.top()=="Menu")
-	{
-		menu.drawMenuScreen(menu_images,SCREEN_WIDTH,SCREEN_HEIGHT);
-	}
-	//
-	
+    
+    if (screens.top() == "Menu")
+    {
+        menu.drawMenuScreen(menu_images, SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+    else if (screens.top() == "Game")
+    {
+        // Draw game screen
+    }
+    else if (screens.top() == "Settings")
+    {
+        // Draw settings screen
+    }
 }
 
 /* -------------------- INPUT -------------------- */
 void iMouseMove(int mx, int my) {}
 void iPassiveMouseMove(int mx, int my) {}
-void iMouse(int button, int state, int mx, int my) {}
-void iKeyboard(unsigned char key) {}
+void iMouse(int button, int state, int mx, int my)
+{
+    if (state == GLUT_DOWN && screens.top() == "Menu")
+    {
+        // Handle menu selection based on mouse position
+        if (menu.isPlayButtonClicked(mx, my))
+        {
+            screens.push("Game");
+        }
+        else if (menu.isSettingsButtonClicked(mx, my))
+        {
+            screens.push("Settings");
+        }
+        else if (menu.isQuitButtonClicked(mx, my))
+        {
+            exit(0);
+        }
+    }
+}
+void iKeyboard(unsigned char key)
+{
+    if (key == 27) // ESC key
+    {
+        if (screens.size() > 1)
+        {
+            screens.pop(); // Go back to previous screen
+        }
+    }
+}
 
 void iSpecialKeyboard(unsigned char key)
 {
