@@ -1,10 +1,13 @@
+#include<mmsystem.h>
+#pragma comment(lib,"winmm.lib")
+
 #ifndef MENU_SCREEN_H
 #define MENU_SCREEN_H
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define BUTTON_WIDTH 294
 #define BUTTON_HEIGHT 90
-#define HOVER_COOLDOWN 500 // milliseconds
+#define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -45,7 +48,7 @@ struct MenuScreen
         {
             if (currentTime - lastQuitBlipTime > HOVER_COOLDOWN)
             {
-                PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+				mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
                 lastQuitBlipTime = currentTime;
             }
             lastFrameQuitClicked = true;
@@ -59,7 +62,7 @@ struct MenuScreen
         {
             if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
             {
-                PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+				mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
                 lastSettingsBlipTime = currentTime;
             }
             lastFrameSettingsClicked = true;
@@ -73,7 +76,7 @@ struct MenuScreen
         {
             if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
             {
-                PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+				mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
                 lastPlayBlipTime = currentTime;
             }
             lastFramePlayClicked = true;

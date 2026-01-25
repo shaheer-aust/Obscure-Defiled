@@ -57,7 +57,7 @@ void iMouse(int button, int state, int mx, int my)
 		// Handle menu selection based on mouse position
 		if (menu.isPlayButtonClicked(mx, my))
 		{
-			PlaySound(0, 0, 0);
+			mciSendString("close bgsong", NULL, 0, NULL);
 			screens.push("Game");
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
@@ -66,7 +66,7 @@ void iMouse(int button, int state, int mx, int my)
 		}
 		else if (menu.isQuitButtonClicked(mx, my))
 		{
-			PlaySound(0, 0, 0);
+			mciSendString("close bgsong", NULL, 0, NULL);
 			exit(0);
 		}
 	}
@@ -80,7 +80,8 @@ void iKeyboard(unsigned char key)
 			screens.pop();
 			if (screens.top() == "Menu")
 			{
-				PlaySound("resources//menu_screen//bg_audio//menu_bg.wav", NULL, SND_LOOP | SND_ASYNC);
+				//PlaySound("resources//menu_screen//bg_audio//menu_bg.wav", NULL, SND_LOOP | SND_ASYNC);
+				mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
 			}
 		}
 	}
@@ -129,7 +130,8 @@ int main()
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
 	{
-		PlaySound("resources//menu_screen//bg_audio//menu_bg.wav", NULL, SND_LOOP | SND_ASYNC);
+		mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
+		mciSendString("play bgsong repeat", NULL, 0, NULL);
 	}
 
 	iStart();
