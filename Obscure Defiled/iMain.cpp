@@ -10,11 +10,11 @@ using namespace std;
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define SCROLL_SPEED 20
-MenuScreen menu;
+
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
 stack<string> screens;
-
+MenuScreen menu;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
