@@ -16,6 +16,7 @@ vector<int> menu_images;
 stack<string> screens;
 MenuScreen menu;
 int bgm_audio = -1;
+mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -81,7 +82,7 @@ void iKeyboard(unsigned char key)
 			if (screens.top() == "Menu")
 			{
 				//PlaySound("resources//menu_screen//bg_audio//menu_bg.wav", NULL, SND_LOOP | SND_ASYNC);
-				mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
+				mciSendString("play bgsong repeat", NULL, 0, NULL);
 			}
 		}
 	}
@@ -123,14 +124,14 @@ void moveBG()
 int main()
 {
 	// iSetTimer(50,moveBG);
-	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Connected Background Scroll");
-
+	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
+	
 	menu_images = menu.initmenubar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
 	{
-		mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
+		
 		mciSendString("play bgsong repeat", NULL, 0, NULL);
 	}
 
