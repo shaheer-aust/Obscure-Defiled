@@ -10,6 +10,9 @@ using namespace std;
 
 struct MenuScreen
 {
+	bool lastFramePlayClicked = false;
+	bool lastFrameSettingsClicked = false;
+	bool lastFrameQuitClicked = false;
 
 	vector<int> initmenubar()
 	{
@@ -29,6 +32,41 @@ struct MenuScreen
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 200, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 100, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
+	}
+	// hover and click detection for menu
+	void checkButtonHover(int mx, int my)
+	{
+		if (isQuitButtonClicked(mx, my) && !lastFrameQuitClicked)
+		{
+			PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+			lastFrameQuitClicked = true;
+		}
+		else if (!isQuitButtonClicked(mx, my))
+		{
+			lastFrameQuitClicked = false;
+		}
+
+		if (isSettingsButtonClicked(mx, my) && !lastFrameSettingsClicked)
+		{
+			PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+			lastFrameSettingsClicked = true;
+		}
+		else if (!isSettingsButtonClicked(mx, my))
+		{
+			lastFrameSettingsClicked = false;
+		}
+
+		if (isPlayButtonClicked(mx, my) && !lastFramePlayClicked)
+		{
+			PlaySound("resources//menu_screen//button_sound//button.wav", NULL, SND_ASYNC);
+			lastFramePlayClicked = true;
+		}
+		else if (!isPlayButtonClicked(mx, my))
+		{
+			lastFramePlayClicked = false;
+		
+		}
+		
 	}
 
 	// butoons

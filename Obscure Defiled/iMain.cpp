@@ -39,7 +39,12 @@ void iDraw()
 }
 
 /* -------------------- INPUT -------------------- */
-void iMouseMove(int mx, int my) {}
+void iMouseMove(int mx, int my) {
+	if (screens.top() == "Menu")
+	{
+		menu.checkButtonHover(mx, my);
+	}
+}
 void iPassiveMouseMove(int mx, int my) {}
 void iMouse(int button, int state, int mx, int my)
 {
