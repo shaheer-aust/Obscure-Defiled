@@ -16,7 +16,7 @@ vector<int> menu_images;
 stack<string> screens;
 MenuScreen menu;
 int bgm_audio = -1;
-mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
+
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -74,6 +74,7 @@ void iMouse(int button, int state, int mx, int my)
 }
 void iKeyboard(unsigned char key)
 {
+	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
 	if (key == 27) // ESC key
 	{
 		if (screens.size() > 1)
@@ -123,6 +124,7 @@ void moveBG()
 /* -------------------- MAIN -------------------- */
 int main()
 {
+	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	
