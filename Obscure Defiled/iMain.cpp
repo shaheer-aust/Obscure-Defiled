@@ -74,7 +74,7 @@ void iMouse(int button, int state, int mx, int my)
 }
 void iKeyboard(unsigned char key)
 {
-	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
+	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	if (key == 27) // ESC key
 	{
 		if (screens.size() > 1)
@@ -124,7 +124,7 @@ void moveBG()
 /* -------------------- MAIN -------------------- */
 int main()
 {
-	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.wav\" alias bgsong", NULL, 0, NULL);
+	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	
