@@ -15,5 +15,10 @@ struct MenuScreen{
 		 //images->push_back(iLoadImage("resources//menu_screen//exit_button.png"));
 		 return images;
 	}
+	void drawMenuScreen(vector<int> images,int SCREEN_WIDTH=1280,int SCREEN_HEIGHT=720)
+	{
+		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
+    	iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 +SCREEN_HEIGHT*0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);
+	}
 };
 #endif
