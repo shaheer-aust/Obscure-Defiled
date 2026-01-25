@@ -9,14 +9,14 @@ using namespace std;
 #define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
-vector<int> menu_images(2);
+vector<int> menu_images;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
     iClear();
     iSetColor(255, 255, 255);
 	iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, menu_images[0]);
-	iShowImage((SCREEN_WIDTH / 2) - (SCREEN_WIDTH / 10), (SCREEN_HEIGHT / 2) - (SCREEN_HEIGHT / 10), SCREEN_WIDTH / 5, SCREEN_HEIGHT / 5, menu_images[1]);
+	iShowImage((SCREEN_WIDTH / 2) - (SCREEN_WIDTH / 10), (SCREEN_HEIGHT / 2) - (SCREEN_HEIGHT / 10) +200, SCREEN_WIDTH / 5, SCREEN_HEIGHT / 5, menu_images[1]);
 }
 
 /* -------------------- INPUT -------------------- */
@@ -62,8 +62,8 @@ int main()
     //iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Connected Background Scroll");
 	MenuScreen menu;
-	menu_images[0]=menu.initmenubar();
-	menu_images[1] = menu.initmenubar1();
+	menu_images=menu.initmenubar();
+	//menu_images[1] = menu.initmenubar1();
 
     iStart();
     return 0;
