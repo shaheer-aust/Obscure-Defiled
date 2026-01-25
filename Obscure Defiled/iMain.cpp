@@ -2,6 +2,9 @@
 #include "iGraphics.h"
 #include "Screens\menu_screen.hpp"
 #include <vector>
+#include <stack>
+#include <string>
+#include <iostream>
 using namespace std;
 /* -------------------- CONSTANTS -------------------- */
 #define SCREEN_WIDTH 1280
@@ -10,6 +13,7 @@ using namespace std;
 
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
+stack<string> screens ={"menu","options","gameplay"};
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -29,6 +33,7 @@ void iSpecialKeyboard(unsigned char key)
 {
     if (key == GLUT_KEY_RIGHT)
     {
+        cout << screens.top() << endl;
         //bgX -= SCROLL_SPEED;  // move background left
 		//charX +=10;
 		//idx+=1;
