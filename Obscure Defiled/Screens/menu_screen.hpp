@@ -4,9 +4,17 @@
 using namespace std;
 struct MenuScreen{
 
-	int initmenubar()
+	vector<int> initmenubar()
 	{
-		return iLoadImage("resources//menu_screen//menu.jpg");
+		vector<int>* images=new vector<int>();
+		 images->push_back(iLoadImage("resources//menu_screen//menu.jpg"));
+		 images->push_back(iLoadImage("resources//menu_screen//title.png"));
+		 //images->push_back(iLoadImage("resources//menu_screen//play_button.png"));
+		 //images->push_back(iLoadImage("resources//menu_screen//settings_button.png"));
+		 //images->push_back(iLoadImage("resources//menu_screen//exit_button.png"));
+		 return *images;
+		
+		
 
 	}
 };

@@ -7,28 +7,14 @@
 #define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
-int bg1, bg2;
-int bg;
-int bgX = 0;   // scrolling offset
-int charX = 0;
-int idx = 0;
-int charImg[8];
+vector<int>* menu_images;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
     iClear();
     iSetColor(255, 255, 255);
-
-    // Draw connected backgrounds
-    iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg);
-    // iShowImage(bgX + SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg2);
-	// iShowImage(charX, 100, 50, 100, charImg[idx]);
-
-    // Wrap background for continuous effect
-    // if (bgX <= -SCREEN_WIDTH)
-    //     bgX = 0;
-	// if(charX>=SCREEN_WIDTH-10)
-	// 	charX=0;
+    iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, (*menu_images)[0]);
+    iShowImage(0, 0, SCREEN_WIDTH/5, SCREEN_HEIGHT/5, (*menu_images)[1]);
 }
 
 /* -------------------- INPUT -------------------- */
@@ -74,7 +60,7 @@ int main()
     //iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Connected Background Scroll");
 	MenuScreen menu;
-	bg = menu.initmenubar();
+	menu_images = menu.initmenubar();
 
     iStart();
     return 0;
