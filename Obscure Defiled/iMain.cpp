@@ -48,7 +48,7 @@ void iMouse(int button, int state, int mx, int my)
 		// Handle menu selection based on mouse position
 		if (menu.isPlayButtonClicked(mx, my))
 		{
-			iStopSound(bgm_audio); 
+			PlaySound(0, 0, 0);
 			screens.push("Game");
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
@@ -57,7 +57,7 @@ void iMouse(int button, int state, int mx, int my)
 		}
 		else if (menu.isQuitButtonClicked(mx, my))
 		{
-			iStopSound(bgm_audio); 
+			PlaySound(0, 0, 0);
 			exit(0);
 		}
 	}
@@ -71,7 +71,7 @@ void iKeyboard(unsigned char key)
 			screens.pop();
 			if (screens.top() == "Menu")
 			{
-				bgm_audio = iPlaySound("resources//menu_screen//bg_audio.wav", 1.0, true); // Restart menu music
+				PlaySound("resources//menu_screen//bg_audio.wav", NULL, SND_LOOP | SND_ASYNC);
 			}
 		}
 	}
@@ -118,7 +118,11 @@ int main()
 	menu_images = menu.initmenubar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
-	bgm_audio = iPlaySound("resources//menu_screen//bg_audio.wav", 1.0, true);
+	if (screens.top() == "Menu")
+	{
+		PlaySound("resources//menu_screen//bg_audio.wav", NULL, SND_LOOP | SND_ASYNC);
+	}
+
 	iStart();
 	return 0;
 }
