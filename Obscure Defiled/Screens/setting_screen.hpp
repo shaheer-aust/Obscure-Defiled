@@ -1,8 +1,8 @@
 #include<mmsystem.h>
 #pragma comment(lib,"winmm.lib")
 
-#ifndef MENU_SCREEN_H
-#define MENU_SCREEN_H
+#ifndef SETTING_SCREEN_H
+#define SETTING_SCREEN_H
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define BUTTON_WIDTH 294
@@ -25,3 +25,4 @@ struct Setting_screen
         // Additional drawing code for settings can be added here
     }
 };
+#endif

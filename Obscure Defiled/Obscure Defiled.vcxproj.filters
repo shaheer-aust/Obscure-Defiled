@@ -23,5 +23,8 @@
     <ClInclude Include="Screens\menu_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\setting_screen.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

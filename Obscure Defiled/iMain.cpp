@@ -107,23 +107,9 @@ void iSpecialKeyboard(unsigned char key)
 }
 
 /* -------------------- INIT -------------------- */
-// void initBackground()
-// {
-//     bg1 = iLoadImage("Images//bg1.jpg");
-//     bg2 = iLoadImage("Images//bg2.jpg");
-// 	for(int i =0;i<8;i++)
-// 	{
-// 		char a[100];
-// 		sprintf_s(a,"Images//c%d.png",i+1);
-// 		printf("%s",a);
-// 		charImg[i]=iLoadImage(a);
-// 	}
-// }
 
-void moveBG()
-{
-	// bgX -= 1;
-}
+
+
 /* -------------------- MAIN -------------------- */
 int main()
 {
