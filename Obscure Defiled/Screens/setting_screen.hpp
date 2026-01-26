@@ -1,5 +1,5 @@
-#include<mmsystem.h>
-#pragma comment(lib,"winmm.lib")
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
 
 #ifndef SETTING_SCREEN_H
 #define SETTING_SCREEN_H
@@ -14,9 +14,10 @@
 using namespace std;
 struct Setting_screen
 {
-    vector<int> images;;
+    vector<int> images;
+    ;
     bool lastFrameBackClicked = false;
-	long long lastBackBlipTime = 0;
+    long long lastBackBlipTime = 0;
 
     void initsettingbar()
     {
@@ -27,16 +28,16 @@ struct Setting_screen
     void drawsetting_screen()
     {
         iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
-        iShowImage(0, 0, BACK_BUTTON+50, SCREEN_HEIGHT-BACK_BUTTON-50, images[1]);
+        iShowImage(0, 0, BACK_BUTTON + 50, SCREEN_HEIGHT - BACK_BUTTON - 50, images[1]);
         // Additional drawing code for settings can be added here
     }
-    //back button hover and click detection for settings
+    // back button hover and click detection for settings
     bool isBackButtonClicked(int mx, int my)
     {
         return (mx >= 0 && mx <= BACK_BUTTON + 50 && my >= SCREEN_HEIGHT - (BACK_BUTTON + 50) && my <= SCREEN_HEIGHT);
     }
 
-    //hover detection
+    // hover detection
     void checkButtonHover(int mx, int my)
     {
         mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
@@ -55,5 +56,6 @@ struct Setting_screen
         {
             lastFrameBackClicked = false;
         }
-    };
+    }
+};
 #endif
