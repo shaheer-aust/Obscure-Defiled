@@ -1,6 +1,7 @@
 ﻿#include <stdio.h>
 #include "iGraphics.h"
 #include "Screens\menu_screen.hpp"
+#include "Screens\setting_screen.hpp"
 #include <vector>
 #include <stack>
 #include <string>
@@ -14,7 +15,9 @@ using namespace std;
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
 stack<string> screens;
+
 MenuScreen menu;
+Setting_screen setting;
 int bgm_audio = -1;
 
 /* -------------------- DRAW -------------------- */
@@ -35,7 +38,7 @@ void iDraw()
 	else if (screens.top() == "Settings")
 	{
 		// Draw settings screen
-		cout << "In Settings Screen" << endl;
+		setting.drawsetting_screen();
 	}
 }
 
@@ -130,6 +133,7 @@ int main()
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	
 	menu_images = menu.initmenubar();
+	setting.initsettingbar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
