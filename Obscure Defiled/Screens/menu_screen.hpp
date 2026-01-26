@@ -1,5 +1,5 @@
-#include<mmsystem.h>
-#pragma comment(lib,"winmm.lib")
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
 
 #ifndef MENU_SCREEN_H
 #define MENU_SCREEN_H
@@ -40,53 +40,53 @@ struct MenuScreen
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
 	}
 	// hover and click detection for menu
-	   void checkButtonHover(int mx, int my)
-    {
+	void checkButtonHover(int mx, int my)
+	{
 		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
-        long long currentTime = glutGet(GLUT_ELAPSED_TIME);
+		long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
-        if (isQuitButtonClicked(mx, my) && !lastFrameQuitClicked)
-        {
-            if (currentTime - lastQuitBlipTime > HOVER_COOLDOWN)
-            {
+		if (isQuitButtonClicked(mx, my) && !lastFrameQuitClicked)
+		{
+			if (currentTime - lastQuitBlipTime > HOVER_COOLDOWN)
+			{
 				mciSendString("play ggsong from 0", NULL, 0, NULL);
-                lastQuitBlipTime = currentTime;
-            }
-            lastFrameQuitClicked = true;
-        }
-        else if (!isQuitButtonClicked(mx, my))
-        {
-            lastFrameQuitClicked = false;
-        }
+				lastQuitBlipTime = currentTime;
+			}
+			lastFrameQuitClicked = true;
+		}
+		else if (!isQuitButtonClicked(mx, my))
+		{
+			lastFrameQuitClicked = false;
+		}
 
-        if (isSettingsButtonClicked(mx, my) && !lastFrameSettingsClicked)
-        {
-            if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
-            {
+		if (isSettingsButtonClicked(mx, my) && !lastFrameSettingsClicked)
+		{
+			if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
+			{
 				mciSendString("play ggsong from 0", NULL, 0, NULL);
-                lastSettingsBlipTime = currentTime;
-            }
-            lastFrameSettingsClicked = true;
-        }
-        else if (!isSettingsButtonClicked(mx, my))
-        {
-            lastFrameSettingsClicked = false;
-        }
+				lastSettingsBlipTime = currentTime;
+			}
+			lastFrameSettingsClicked = true;
+		}
+		else if (!isSettingsButtonClicked(mx, my))
+		{
+			lastFrameSettingsClicked = false;
+		}
 
-        if (isPlayButtonClicked(mx, my) && !lastFramePlayClicked)
-        {
-            if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
-            {
+		if (isPlayButtonClicked(mx, my) && !lastFramePlayClicked)
+		{
+			if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
+			{
 				mciSendString("play ggsong from 0", NULL, 0, NULL);
-                lastPlayBlipTime = currentTime;
-            }
-            lastFramePlayClicked = true;
-        }
-        else if (!isPlayButtonClicked(mx, my))
-        {
-            lastFramePlayClicked = false;
-        }
-    }
+				lastPlayBlipTime = currentTime;
+			}
+			lastFramePlayClicked = true;
+		}
+		else if (!isPlayButtonClicked(mx, my))
+		{
+			lastFramePlayClicked = false;
+		}
+	}
 	// butoons
 	bool isQuitButtonClicked(int mx, int my)
 	{

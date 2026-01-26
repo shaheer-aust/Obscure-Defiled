@@ -52,7 +52,13 @@ void iMouseMove(int mx, int my) {
 }
 void iPassiveMouseMove(int mx, int my) {
 	cout << mx << "**" << my << endl;
-	menu.checkButtonHover(mx, my);
+	if (screens.top() == "Menu"){
+		menu.checkButtonHover(mx, my);
+	}
+	else if (screens.top() == "Settings"){
+		setting.checkButtonHover(mx, my);
+	}
+	
 }
 void iMouse(int button, int state, int mx, int my)
 {
@@ -72,6 +78,18 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			exit(0);
+		}
+	}
+	else if (state == GLUT_DOWN && screens.top() == "Settings")
+	{
+		// Handle settings selection based on mouse position
+		if (setting.isBackButtonClicked(mx, my))
+		{
+			screens.pop();
+			// if (screens.top() == "Menu")
+			// {
+			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
+			// }
 		}
 	}
 }
