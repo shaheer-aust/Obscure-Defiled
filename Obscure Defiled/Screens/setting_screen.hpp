@@ -28,13 +28,13 @@ struct Setting_screen
     void drawsetting_screen()
     {
         iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
-        iShowImage(0, 0, BACK_BUTTON + 50, SCREEN_HEIGHT - BACK_BUTTON - 50, images[1]);
+        iShowImage(50, SCREEN_HEIGHT - BACK_BUTTON - 50, BACK_BUTTON, BACK_BUTTON, images[1]);
         // Additional drawing code for settings can be added here
     }
     // back button hover and click detection for settings
     bool isBackButtonClicked(int mx, int my)
     {
-        return (mx >= 0 && mx <= BACK_BUTTON + 50 && my >= SCREEN_HEIGHT - (BACK_BUTTON + 50) && my <= SCREEN_HEIGHT);
+        return (mx >= 50 && mx <= BACK_BUTTON + 50 && my >= SCREEN_HEIGHT - (BACK_BUTTON + 50) && my <= SCREEN_HEIGHT);
     }
 
     // hover detection
