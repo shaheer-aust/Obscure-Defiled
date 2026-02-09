@@ -51,12 +51,12 @@ void iMouseMove(int mx, int my) {
 	}
 }
 void iPassiveMouseMove(int mx, int my) {
-	//cout << mx << "**" << my << endl;
+	cout << mx << "**" << my << endl;
 	if (screens.top() == "Menu"){
-		//menu.checkButtonHover(mx, my);
+		menu.checkButtonHover(mx, my);
 	}
 	else if (screens.top() == "Settings"){
-		//setting.checkButtonHover(mx, my);
+		setting.checkButtonHover(mx, my);
 	}
 	
 }
@@ -64,34 +64,33 @@ void iMouse(int button, int state, int mx, int my)
 {
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
-		cout << mx << " " << my << endl;
 		// Handle menu selection based on mouse position
-		// if (menu.isPlayButtonClicked(mx, my))
-		// {
-		// 	mciSendString("close bgsong", NULL, 0, NULL);
-		// 	screens.push("Game");
-		// }
-		// else if (menu.isSettingsButtonClicked(mx, my))
-		// {
-		// 	screens.push("Settings");
-		// }
-		// else if (menu.isQuitButtonClicked(mx, my))
-		// {
-		// 	mciSendString("close bgsong", NULL, 0, NULL);
-		// 	exit(0);
-		// }
+		if (menu.isPlayButtonClicked(mx, my))
+		{
+			mciSendString("close bgsong", NULL, 0, NULL);
+			screens.push("Game");
+		}
+		else if (menu.isSettingsButtonClicked(mx, my))
+		{
+			screens.push("Settings");
+		}
+		else if (menu.isQuitButtonClicked(mx, my))
+		{
+			mciSendString("close bgsong", NULL, 0, NULL);
+			exit(0);
+		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Settings")
 	{
 		// Handle settings selection based on mouse position
-		// if (setting.isBackButtonClicked(mx, my))
-		// {
-		// 	screens.pop();
-		// 	// if (screens.top() == "Menu")
-		// 	// {
-		// 	// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
-		// 	// }
-		// }
+		if (setting.isBackButtonClicked(mx, my))
+		{
+			screens.pop();
+			// if (screens.top() == "Menu")
+			// {
+			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
+			// }
+		}
 	}
 }
 void iKeyboard(unsigned char key)
