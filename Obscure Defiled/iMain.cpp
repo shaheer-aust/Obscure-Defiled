@@ -23,6 +23,11 @@ int bgm_audio = -1;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
+	// Update screen dimensions dynamically
+	int currentWidth = glutGet(GLUT_WINDOW_WIDTH);
+	int currentHeight = glutGet(GLUT_WINDOW_HEIGHT);
+	menu.updateScreenDimensions(currentWidth, currentHeight);
+	
 	iClear();
 	iSetColor(255, 255, 255);
 

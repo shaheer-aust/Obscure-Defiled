@@ -3,8 +3,8 @@
 
 #ifndef MENU_SCREEN_H
 #define MENU_SCREEN_H
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
+#define BASE_SCREEN_WIDTH 1280
+#define BASE_SCREEN_HEIGHT 720
 #define BUTTON_WIDTH 294
 #define BUTTON_HEIGHT 90
 #define HOVER_COOLDOWN 300 // milliseconds
@@ -14,6 +14,17 @@ using namespace std;
 
 struct MenuScreen
 {
+	int screenWidth;
+	int screenHeight;
+	
+	MenuScreen() : screenWidth(BASE_SCREEN_WIDTH), screenHeight(BASE_SCREEN_HEIGHT) {}
+	
+	void updateScreenDimensions(int width, int height)
+	{
+		screenWidth = width;
+		screenHeight = height;
+	}
+	
 	bool lastFramePlayClicked = false;
 	bool lastFrameSettingsClicked = false;
 	bool lastFrameQuitClicked = false;
@@ -33,11 +44,11 @@ struct MenuScreen
 
 	void drawMenuScreen(vector<int> images)
 	{
-		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
-		iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 200, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 100, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
+		iShowImage(0, 0, screenWidth, screenHeight, images[0]);
+		iShowImage(screenWidth / 2 - (screenWidth * 0.4 / 2), screenHeight / 2 + screenHeight * 0.1, screenWidth * 0.4, screenHeight * 0.4, images[1]);
+		iShowImage(screenWidth / 2 - BUTTON_WIDTH / 2, screenHeight / 2 - 200, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
+		iShowImage(screenWidth / 2 - BUTTON_WIDTH / 2, screenHeight / 2 - 100, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
+		iShowImage(screenWidth / 2 - BUTTON_WIDTH / 2, screenHeight / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
 	}
 	// hover and click detection for menu
 	void checkButtonHover(int mx, int my)
@@ -90,8 +101,8 @@ struct MenuScreen
 	// butoons
 	bool isQuitButtonClicked(int mx, int my)
 	{
-		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
-		int buttonY = SCREEN_HEIGHT / 2 - 200;
+		int buttonX = screenWidth / 2 - BUTTON_WIDTH / 2;
+		int buttonY = screenHeight / 2 - 200;
 
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
@@ -99,16 +110,16 @@ struct MenuScreen
 
 	bool isSettingsButtonClicked(int mx, int my)
 	{
-		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
-		int buttonY = SCREEN_HEIGHT / 2 - 100;
+		int buttonX = screenWidth / 2 - BUTTON_WIDTH / 2;
+		int buttonY = screenHeight / 2 - 100;
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
 	}
 
 	bool isPlayButtonClicked(int mx, int my)
 	{
-		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
-		int buttonY = SCREEN_HEIGHT / 2 + 0;
+		int buttonX = screenWidth / 2 - BUTTON_WIDTH / 2;
+		int buttonY = screenHeight / 2 + 0;
 
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
