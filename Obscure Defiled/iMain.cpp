@@ -8,13 +8,13 @@
 #include <iostream>
 using namespace std;
 /* -------------------- CONSTANTS -------------------- */
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
 #define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
 stack<string> screens;
+int currentScreenWidth = 1280;
+int currentScreenHeight = 720;
 
 MenuScreen menu;
 Setting_screen setting;
@@ -26,7 +26,10 @@ void iDraw()
 	// Update screen dimensions dynamically
 	int currentWidth = glutGet(GLUT_WINDOW_WIDTH);
 	int currentHeight = glutGet(GLUT_WINDOW_HEIGHT);
+	currentScreenWidth = currentWidth;
+	currentScreenHeight = currentHeight;
 	menu.updateScreenDimensions(currentWidth, currentHeight);
+	setting.updateScreenDimensions(currentWidth, currentHeight);
 	
 	iClear();
 	iSetColor(255, 255, 255);
@@ -139,7 +142,7 @@ int main()
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
-	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
+	iInitialize(currentScreenWidth, currentScreenHeight, "Obscure Defiled");
 	
 	menu_images = menu.initmenubar();
 	setting.initsettingbar();

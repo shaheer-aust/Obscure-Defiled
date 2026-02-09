@@ -3,10 +3,6 @@
 
 #ifndef MENU_SCREEN_H
 #define MENU_SCREEN_H
-#define BASE_SCREEN_WIDTH 1280
-#define BASE_SCREEN_HEIGHT 720
-#define BUTTON_WIDTH 294
-#define BUTTON_HEIGHT 90
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include <vector>
@@ -17,13 +13,32 @@ struct MenuScreen
 	int screenWidth;
 	int screenHeight;
 	
-	MenuScreen() : screenWidth(BASE_SCREEN_WIDTH), screenHeight(BASE_SCREEN_HEIGHT) {}
+	MenuScreen() : screenWidth(1280), screenHeight(720) {}
 	
 	void updateScreenDimensions(int width, int height)
 	{
 		screenWidth = width;
 		screenHeight = height;
 	}
+	
+	// Responsive dimensions based on screen size
+	int getButtonWidth() { return (int)(screenWidth * 0.23); }
+	int getButtonHeight() { return (int)(screenHeight * 0.125); }
+	int getTitleWidth() { return (int)(screenWidth * 0.4); }
+	int getTitleHeight() { return (int)(screenHeight * 0.4); }
+	
+	// Responsive positions
+	int getTitleX() { return screenWidth / 2 - getTitleWidth() / 2; }
+	int getTitleY() { return (int)(screenHeight / 2 + screenHeight * 0.1); }
+	
+	int getQuitButtonX() { return screenWidth / 2 - getButtonWidth() / 2; }
+	int getQuitButtonY() { return (int)(screenHeight / 2 - screenHeight * 0.28); }
+	
+	int getSettingsButtonX() { return screenWidth / 2 - getButtonWidth() / 2; }
+	int getSettingsButtonY() { return (int)(screenHeight / 2 - screenHeight * 0.14); }
+	
+	int getPlayButtonX() { return screenWidth / 2 - getButtonWidth() / 2; }
+	int getPlayButtonY() { return screenHeight / 2; }
 	
 	bool lastFramePlayClicked = false;
 	bool lastFrameSettingsClicked = false;
@@ -45,10 +60,10 @@ struct MenuScreen
 	void drawMenuScreen(vector<int> images)
 	{
 		iShowImage(0, 0, screenWidth, screenHeight, images[0]);
-		iShowImage(screenWidth / 2 - (screenWidth * 0.4 / 2), screenHeight / 2 + screenHeight * 0.1, screenWidth * 0.4, screenHeight * 0.4, images[1]);
-		iShowImage(screenWidth / 2 - BUTTON_WIDTH / 2, screenHeight / 2 - 200, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
-		iShowImage(screenWidth / 2 - BUTTON_WIDTH / 2, screenHeight / 2 - 100, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
-		iShowImage(screenWidth / 2 - BUTTON_WIDTH / 2, screenHeight / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
+		iShowImage(getTitleX(), getTitleY(), getTitleWidth(), getTitleHeight(), images[1]);
+		iShowImage(getQuitButtonX(), getQuitButtonY(), getButtonWidth(), getButtonHeight(), images[2]);
+		iShowImage(getSettingsButtonX(), getSettingsButtonY(), getButtonWidth(), getButtonHeight(), images[3]);
+		iShowImage(getPlayButtonX(), getPlayButtonY(), getButtonWidth(), getButtonHeight(), images[4]);
 	}
 	// hover and click detection for menu
 	void checkButtonHover(int mx, int my)
@@ -101,28 +116,28 @@ struct MenuScreen
 	// butoons
 	bool isQuitButtonClicked(int mx, int my)
 	{
-		int buttonX = screenWidth / 2 - BUTTON_WIDTH / 2;
-		int buttonY = screenHeight / 2 - 200;
+		int buttonX = getQuitButtonX();
+		int buttonY = getQuitButtonY();
 
-		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
-				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
+		return (mx >= buttonX && mx <= buttonX + getButtonWidth() &&
+				my >= buttonY && my <= buttonY + getButtonHeight());
 	}
 
 	bool isSettingsButtonClicked(int mx, int my)
 	{
-		int buttonX = screenWidth / 2 - BUTTON_WIDTH / 2;
-		int buttonY = screenHeight / 2 - 100;
-		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
-				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
+		int buttonX = getSettingsButtonX();
+		int buttonY = getSettingsButtonY();
+		return (mx >= buttonX && mx <= buttonX + getButtonWidth() &&
+				my >= buttonY && my <= buttonY + getButtonHeight());
 	}
 
 	bool isPlayButtonClicked(int mx, int my)
 	{
-		int buttonX = screenWidth / 2 - BUTTON_WIDTH / 2;
-		int buttonY = screenHeight / 2 + 0;
+		int buttonX = getPlayButtonX();
+		int buttonY = getPlayButtonY();
 
-		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
-				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
+		return (mx >= buttonX && mx <= buttonX + getButtonWidth() &&
+				my >= buttonY && my <= buttonY + getButtonHeight());
 	}
 };
 #endif
