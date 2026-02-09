@@ -3,6 +3,11 @@
 
 #ifndef SETTING_SCREEN_H
 #define SETTING_SCREEN_H
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
+#define BUTTON_WIDTH 294
+#define BUTTON_HEIGHT 90
+#define BACK_BUTTON 81
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include <vector>
@@ -10,22 +15,7 @@ using namespace std;
 struct Setting_screen
 {
     vector<int> images;
-    int screenWidth;
-    int screenHeight;
-    
-    Setting_screen() : screenWidth(1280), screenHeight(720) {}
-    
-    void updateScreenDimensions(int width, int height)
-    {
-        screenWidth = width;
-        screenHeight = height;
-    }
-    
-    // Responsive dimensions based on screen size
-    int getBackButtonSize() { return (int)(screenHeight * 0.11); }
-    int getBackButtonX() { return (int)(screenWidth * 0.016); }
-    int getBackButtonY() { return (int)(screenHeight - getBackButtonSize() - screenHeight * 0.028); }
-    
+    ;
     bool lastFrameBackClicked = false;
     long long lastBackBlipTime = 0;
 
@@ -37,17 +27,14 @@ struct Setting_screen
     }
     void drawsetting_screen()
     {
-        iShowImage(0, 0, screenWidth, screenHeight, images[0]);
-        iShowImage(getBackButtonX(), getBackButtonY(), getBackButtonSize(), getBackButtonSize(), images[1]);
+        iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
+        iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, images[1]);
         // Additional drawing code for settings can be added here
     }
     // back button hover and click detection for settings
     bool isBackButtonClicked(int mx, int my)
     {
-        int x = getBackButtonX();
-        int y = getBackButtonY();
-        int size = getBackButtonSize();
-        return (mx >= x && mx <= x + size && my >= y && my <= y + size);
+        return (mx >= 20 && mx <= BACK_BUTTON + 20 && my >= SCREEN_HEIGHT - (BACK_BUTTON + 20) && my <= SCREEN_HEIGHT);
     }
 
     // hover detection

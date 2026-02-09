@@ -2,19 +2,19 @@
 #include "iGraphics.h"
 #include "Screens\menu_screen.hpp"
 #include "Screens\setting_screen.hpp"
-#include <vector> 
+#include <vector>
 #include <stack>
 #include <string>
 #include <iostream>
 using namespace std;
 /* -------------------- CONSTANTS -------------------- */
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 #define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
 vector<int> menu_images;
 stack<string> screens;
-int currentScreenWidth = 1280;
-int currentScreenHeight = 720;
 
 MenuScreen menu;
 Setting_screen setting;
@@ -23,14 +23,6 @@ int bgm_audio = -1;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
-	// Update screen dimensions dynamically
-	int currentWidth = glutGet(GLUT_WINDOW_WIDTH);
-	int currentHeight = glutGet(GLUT_WINDOW_HEIGHT);
-	currentScreenWidth = currentWidth;
-	currentScreenHeight = currentHeight;
-	menu.updateScreenDimensions(currentWidth, currentHeight);
-	setting.updateScreenDimensions(currentWidth, currentHeight);
-	
 	iClear();
 	iSetColor(255, 255, 255);
 
@@ -59,12 +51,12 @@ void iMouseMove(int mx, int my) {
 	}
 }
 void iPassiveMouseMove(int mx, int my) {
-	cout << mx << "**" << my << endl;
+	//cout << mx << "**" << my << endl;
 	if (screens.top() == "Menu"){
-		menu.checkButtonHover(mx, my);
+		//menu.checkButtonHover(mx, my);
 	}
 	else if (screens.top() == "Settings"){
-		setting.checkButtonHover(mx, my);
+		//setting.checkButtonHover(mx, my);
 	}
 	
 }
@@ -72,33 +64,34 @@ void iMouse(int button, int state, int mx, int my)
 {
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
+		cout << mx << " " << my << endl;
 		// Handle menu selection based on mouse position
-		if (menu.isPlayButtonClicked(mx, my))
-		{
-			mciSendString("close bgsong", NULL, 0, NULL);
-			screens.push("Game");
-		}
-		else if (menu.isSettingsButtonClicked(mx, my))
-		{
-			screens.push("Settings");
-		}
-		else if (menu.isQuitButtonClicked(mx, my))
-		{
-			mciSendString("close bgsong", NULL, 0, NULL);
-			exit(0);
-		}
+		// if (menu.isPlayButtonClicked(mx, my))
+		// {
+		// 	mciSendString("close bgsong", NULL, 0, NULL);
+		// 	screens.push("Game");
+		// }
+		// else if (menu.isSettingsButtonClicked(mx, my))
+		// {
+		// 	screens.push("Settings");
+		// }
+		// else if (menu.isQuitButtonClicked(mx, my))
+		// {
+		// 	mciSendString("close bgsong", NULL, 0, NULL);
+		// 	exit(0);
+		// }
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Settings")
 	{
 		// Handle settings selection based on mouse position
-		if (setting.isBackButtonClicked(mx, my))
-		{
-			screens.pop();
-			// if (screens.top() == "Menu")
-			// {
-			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
-			// }
-		}
+		// if (setting.isBackButtonClicked(mx, my))
+		// {
+		// 	screens.pop();
+		// 	// if (screens.top() == "Menu")
+		// 	// {
+		// 	// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
+		// 	// }
+		// }
 	}
 }
 void iKeyboard(unsigned char key)
@@ -142,7 +135,7 @@ int main()
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
-	iInitialize(currentScreenWidth, currentScreenHeight, "Obscure Defiled");
+	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	
 	menu_images = menu.initmenubar();
 	setting.initsettingbar();
