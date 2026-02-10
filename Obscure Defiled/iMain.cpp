@@ -78,6 +78,10 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			exit(0);
+		}else if (menu.isCreditsButtonClicked(mx, my))
+		{
+			screens.push("Credits");
+			cout << "Credits Screen" << endl;
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Settings")

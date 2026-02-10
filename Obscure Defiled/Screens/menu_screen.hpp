@@ -20,16 +20,19 @@ struct MenuScreen
 	bool lastFramePlayClicked = false;
 	bool lastFrameSettingsClicked = false;
 	bool lastFrameQuitClicked = false;
+	bool lastFrameCreditsClicked = false;
 	long long lastPlayBlipTime = 0;
 	long long lastSettingsBlipTime = 0;
 	long long lastQuitBlipTime = 0;
+	long long lastCreditsBlipTime = 0;
 	vector<int> initmenubar()
 	{
-		vector<int> images(5);
+		vector<int> images(6);
 		images[0] = iLoadImage("resources//menu_screen//menu.jpg");
 		images[1] = iLoadImage("resources//menu_screen//title.png");
 		images[4] = iLoadImage("resources//menu_screen//Buttons//play.png");
 		images[3] = iLoadImage("resources//menu_screen//Buttons//option.png");
+		images[5] = iLoadImage("resources//menu_screen//Buttons//credits.png");
 		images[2] = iLoadImage("resources//menu_screen//Buttons//exit.png");
 		return images;
 	}
@@ -39,6 +42,7 @@ struct MenuScreen
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
 		iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 300, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 225, BUTTON_WIDTH, BUTTON_HEIGHT, images[5]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 150, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
 	}
@@ -76,6 +80,20 @@ struct MenuScreen
 			lastFrameSettingsClicked = false;
 		}
 
+		if (isCreditsButtonClicked(mx, my) && !lastFrameCreditsClicked)
+		{
+			if (currentTime - lastCreditsBlipTime > HOVER_COOLDOWN)
+			{
+				mciSendString("play ggsong from 0", NULL, 0, NULL);
+				lastCreditsBlipTime = currentTime;
+			}
+			lastFrameCreditsClicked = true;
+		}
+		else if (!isCreditsButtonClicked(mx, my))
+		{
+			lastFrameCreditsClicked = false;
+		}
+
 		if (isPlayButtonClicked(mx, my) && !lastFramePlayClicked)
 		{
 			if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
@@ -104,6 +122,14 @@ struct MenuScreen
 	{
 		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
 		int buttonY = SCREEN_HEIGHT / 2 - 150;
+		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
+				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
+	}
+
+	bool isCreditsButtonClicked(int mx, int my)
+	{
+		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
+		int buttonY = SCREEN_HEIGHT / 2 - 225;
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
 	}
