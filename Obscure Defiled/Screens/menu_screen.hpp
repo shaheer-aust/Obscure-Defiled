@@ -11,10 +11,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-class buttons{
-	public:
-	static double x, y, width, height;
-}
+
 struct MenuScreen
 {
 	bool lastFramePlayClicked = false;
