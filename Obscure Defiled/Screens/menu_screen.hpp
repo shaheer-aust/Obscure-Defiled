@@ -40,8 +40,8 @@ struct MenuScreen
 		iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 250, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 170, BUTTON_WIDTH, BUTTON_HEIGHT, images[5]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 90, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 90, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
 	}
 	// hover and click detection for menu
 	void checkButtonHover(int mx, int my)
@@ -118,7 +118,7 @@ struct MenuScreen
 	bool isSettingsButtonClicked(int mx, int my)
 	{
 		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
-		int buttonY = SCREEN_HEIGHT / 2 - 10;
+		int buttonY = SCREEN_HEIGHT / 2 - 90;
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
 	}
@@ -126,7 +126,7 @@ struct MenuScreen
 	bool isPlayButtonClicked(int mx, int my)
 	{
 		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
-		int buttonY = SCREEN_HEIGHT / 2 - 90;
+		int buttonY = SCREEN_HEIGHT / 2 - 10;
 
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
