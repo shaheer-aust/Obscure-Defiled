@@ -33,13 +33,13 @@ struct MenuScreen
 		images[1] = iLoadImage("resources//menu_screen//title.png");
 		// Regular button images
 		images[2] = iLoadImage("resources//menu_screen//Buttons//exit.png");
-		images[4] = iLoadImage("resources//menu_screen//Buttons//option.png");
-		images[3] = iLoadImage("resources//menu_screen//Buttons//play.png");
+		images[3] = iLoadImage("resources//menu_screen//Buttons//option.png");
+		images[4] = iLoadImage("resources//menu_screen//Buttons//play.png");
 		images[5] = iLoadImage("resources//menu_screen//Buttons//credits.png");
 		// Active button images
 		images[6] = iLoadImage("resources//menu_screen//Buttons//exit_active.png");
-		images[8] = iLoadImage("resources//menu_screen//Buttons//option_active.png");
-		images[7] = iLoadImage("resources//menu_screen//Buttons//play_active.png");
+		images[7] = iLoadImage("resources//menu_screen//Buttons//option_active.png");
+		images[8] = iLoadImage("resources//menu_screen//Buttons//play_active.png");
 		images[9] = iLoadImage("resources//menu_screen//Buttons//credits_active.png");
 		return images;
 	}
@@ -59,11 +59,11 @@ struct MenuScreen
 		
 		// Draw play button
 		int playImg = (hoveredButton == 2 || currentSelectedButton == PLAY) ? images[8] : images[4];
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 90, BUTTON_WIDTH, BUTTON_HEIGHT, playImg);
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, BUTTON_WIDTH, BUTTON_HEIGHT, playImg);
 		
 		// Draw settings button
 		int settingsImg = (hoveredButton == 3 || currentSelectedButton == SETTINGS) ? images[7] : images[3];
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, BUTTON_WIDTH, BUTTON_HEIGHT, settingsImg);
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 90, BUTTON_WIDTH, BUTTON_HEIGHT, settingsImg);
 	}
 	// hover and click detection for menu
 	void checkButtonHover(int mx, int my)
