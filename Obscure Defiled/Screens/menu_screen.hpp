@@ -14,6 +14,8 @@ using namespace std;
 
 struct MenuScreen
 {
+	enum ButtonSelection { QUIT = 0, CREDITS = 1, PLAY = 2, SETTINGS = 3 };
+
 	bool lastFramePlayClicked = false;
 	bool lastFrameSettingsClicked = false;
 	bool lastFrameQuitClicked = false;
@@ -22,15 +24,23 @@ struct MenuScreen
 	long long lastSettingsBlipTime = 0;
 	long long lastQuitBlipTime = 0;
 	long long lastCreditsBlipTime = 0;
+	ButtonSelection currentSelectedButton = PLAY;
+	int hoveredButton = -1; // -1 = none, 0 = quit, 1 = credits, 2 = play, 3 = settings
 	vector<int> initmenubar()
 	{
-		vector<int> images(6);
+		vector<int> images(10);
 		images[0] = iLoadImage("resources//menu_screen//menu.jpg");
 		images[1] = iLoadImage("resources//menu_screen//title.png");
-		images[4] = iLoadImage("resources//menu_screen//Buttons//play.png");
-		images[3] = iLoadImage("resources//menu_screen//Buttons//option.png");
+		// Regular button images
 		images[2] = iLoadImage("resources//menu_screen//Buttons//exit.png");
+		images[3] = iLoadImage("resources//menu_screen//Buttons//option.png");
+		images[4] = iLoadImage("resources//menu_screen//Buttons//play.png");
 		images[5] = iLoadImage("resources//menu_screen//Buttons//credits.png");
+		// Active button images
+		images[6] = iLoadImage("resources//menu_screen//Buttons//exit_active.png");
+		images[7] = iLoadImage("resources//menu_screen//Buttons//option_active.png");
+		images[8] = iLoadImage("resources//menu_screen//Buttons//play_active.png");
+		images[9] = iLoadImage("resources//menu_screen//Buttons//credits_active.png");
 		return images;
 	}
 
@@ -38,72 +48,140 @@ struct MenuScreen
 	{
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
 		iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 250, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 170, BUTTON_WIDTH, BUTTON_HEIGHT, images[5]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 90, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
+		
+		// Draw quit button
+		int quitImg = (hoveredButton == 0 || currentSelectedButton == QUIT) ? images[6] : images[2];
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 250, BUTTON_WIDTH, BUTTON_HEIGHT, quitImg);
+		
+		// Draw credits button
+		int creditsImg = (hoveredButton == 1 || currentSelectedButton == CREDITS) ? images[9] : images[5];
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 170, BUTTON_WIDTH, BUTTON_HEIGHT, creditsImg);
+		
+		// Draw play button
+		int playImg = (hoveredButton == 2 || currentSelectedButton == PLAY) ? images[8] : images[4];
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 90, BUTTON_WIDTH, BUTTON_HEIGHT, playImg);
+		
+		// Draw settings button
+		int settingsImg = (hoveredButton == 3 || currentSelectedButton == SETTINGS) ? images[7] : images[3];
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, BUTTON_WIDTH, BUTTON_HEIGHT, settingsImg);
 	}
 	// hover and click detection for menu
 	void checkButtonHover(int mx, int my)
 	{
+		// Reset hovered button
+		hoveredButton = -1;
+		
 		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 		long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
-		if (isQuitButtonClicked(mx, my) && !lastFrameQuitClicked)
+		if (isQuitButtonClicked(mx, my))
 		{
-			if (currentTime - lastQuitBlipTime > HOVER_COOLDOWN)
+			hoveredButton = 0;
+			if (!lastFrameQuitClicked)
 			{
-				mciSendString("play ggsong from 0", NULL, 0, NULL);
-				lastQuitBlipTime = currentTime;
+				if (currentTime - lastQuitBlipTime > HOVER_COOLDOWN)
+				{
+					mciSendString("play ggsong from 0", NULL, 0, NULL);
+					lastQuitBlipTime = currentTime;
+				}
+				lastFrameQuitClicked = true;
 			}
-			lastFrameQuitClicked = true;
 		}
-		else if (!isQuitButtonClicked(mx, my))
+		else
 		{
 			lastFrameQuitClicked = false;
 		}
 
-		if (isSettingsButtonClicked(mx, my) && !lastFrameSettingsClicked)
+		if (isSettingsButtonClicked(mx, my))
 		{
-			if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
+			hoveredButton = 3;
+			if (!lastFrameSettingsClicked)
 			{
-				mciSendString("play ggsong from 0", NULL, 0, NULL);
-				lastSettingsBlipTime = currentTime;
+				if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
+				{
+					mciSendString("play ggsong from 0", NULL, 0, NULL);
+					lastSettingsBlipTime = currentTime;
+				}
+				lastFrameSettingsClicked = true;
 			}
-			lastFrameSettingsClicked = true;
 		}
-		else if (!isSettingsButtonClicked(mx, my))
+		else
 		{
 			lastFrameSettingsClicked = false;
 		}
 
-		if (isPlayButtonClicked(mx, my) && !lastFramePlayClicked)
+		if (isPlayButtonClicked(mx, my))
 		{
-			if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
+			hoveredButton = 2;
+			if (!lastFramePlayClicked)
 			{
-				mciSendString("play ggsong from 0", NULL, 0, NULL);
-				lastPlayBlipTime = currentTime;
+				if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
+				{
+					mciSendString("play ggsong from 0", NULL, 0, NULL);
+					lastPlayBlipTime = currentTime;
+				}
+				lastFramePlayClicked = true;
 			}
-			lastFramePlayClicked = true;
 		}
-		else if (!isPlayButtonClicked(mx, my))
+		else
 		{
 			lastFramePlayClicked = false;
 		}
 
-		if (isCreditsButtonClicked(mx, my) && !lastFrameCreditsClicked)
+		if (isCreditsButtonClicked(mx, my))
 		{
-			if (currentTime - lastCreditsBlipTime > HOVER_COOLDOWN)
+			hoveredButton = 1;
+			if (!lastFrameCreditsClicked)
 			{
-				mciSendString("play ggsong from 0", NULL, 0, NULL);
-				lastCreditsBlipTime = currentTime;
+				if (currentTime - lastCreditsBlipTime > HOVER_COOLDOWN)
+				{
+					mciSendString("play ggsong from 0", NULL, 0, NULL);
+					lastCreditsBlipTime = currentTime;
+				}
+				lastFrameCreditsClicked = true;
 			}
-			lastFrameCreditsClicked = true;
 		}
-		else if (!isCreditsButtonClicked(mx, my))
+		else
 		{
 			lastFrameCreditsClicked = false;
 		}
+	}
+	// Keyboard navigation
+	void handleKeyboardNavigation(int specialKey)
+	{
+		// UP arrow - move to previous button
+		if (specialKey == GLUT_KEY_UP)
+		{
+			if (currentSelectedButton == QUIT)
+				currentSelectedButton = SETTINGS;
+			else if (currentSelectedButton == CREDITS)
+				currentSelectedButton = QUIT;
+			else if (currentSelectedButton == PLAY)
+				currentSelectedButton = CREDITS;
+			else if (currentSelectedButton == SETTINGS)
+				currentSelectedButton = PLAY;
+		}
+		// DOWN arrow - move to next button
+		else if (specialKey == GLUT_KEY_DOWN)
+		{
+			if (currentSelectedButton == QUIT)
+				currentSelectedButton = CREDITS;
+			else if (currentSelectedButton == CREDITS)
+				currentSelectedButton = PLAY;
+			else if (currentSelectedButton == PLAY)
+				currentSelectedButton = SETTINGS;
+			else if (currentSelectedButton == SETTINGS)
+				currentSelectedButton = QUIT;
+		}
+		
+		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
+		mciSendString("play ggsong from 0", NULL, 0, NULL);
+	}
+	
+	// Get currently selected button type (0=quit, 1=credits, 2=play, 3=settings)
+	int getSelectedButtonType()
+	{
+		return (int)currentSelectedButton;
 	}
 	// butoons
 	bool isQuitButtonClicked(int mx, int my)

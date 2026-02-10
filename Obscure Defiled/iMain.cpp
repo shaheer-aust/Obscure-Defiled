@@ -108,24 +108,45 @@ void iKeyboard(unsigned char key)
 			screens.pop();
 			if (screens.top() == "Menu")
 			{
-				//PlaySound("resources//menu_screen//bg_audio//menu_bg.wav", NULL, SND_LOOP | SND_ASYNC);
 				mciSendString("play bgsong repeat", NULL, 0, NULL);
 			}
+		}
+	}
+	else if (key == 13 && screens.top() == "Menu") // Enter key
+	{
+		// Handle selection based on currently selected button
+		int buttonType = menu.getSelectedButtonType();
+		
+		if (buttonType == 0) // Quit
+		{
+			mciSendString("close bgsong", NULL, 0, NULL);
+			exit(0);
+		}
+		else if (buttonType == 1) // Credits
+		{
+			cout << "Credits Button Clicked (Keyboard)" << endl;
+		}
+		else if (buttonType == 2) // Play
+		{
+			mciSendString("close bgsong", NULL, 0, NULL);
+			screens.push("Game");
+		}
+		else if (buttonType == 3) // Settings
+		{
+			screens.push("Settings");
 		}
 	}
 }
 
 void iSpecialKeyboard(unsigned char key)
 {
-	if (key == GLUT_KEY_RIGHT)
+	if (screens.top() == "Menu")
 	{
-		cout << screens.top() << endl;
-		printf("%d", screens.top());
-		// bgX -= SCROLL_SPEED;  // move background left
-		// charX +=10;
-		// idx+=1;
-		// if(idx==8)
-		// idx = 0;
+		// Handle arrow key navigation
+		if (key == GLUT_KEY_UP || key == GLUT_KEY_DOWN)
+		{
+			menu.handleKeyboardNavigation(key);
+		}
 	}
 }
 
