@@ -14,7 +14,7 @@ using namespace std;
 
 struct MenuScreen
 {
-	enum ButtonSelection { QUIT = 0, CREDITS = 1, PLAY = 2, SETTINGS = 3 };
+	enum ButtonSelection { QUIT = 0, CREDITS = 1, PLAY = 3, SETTINGS = 2 };
 
 	bool lastFramePlayClicked = false;
 	bool lastFrameSettingsClicked = false;
@@ -58,11 +58,11 @@ struct MenuScreen
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 170, BUTTON_WIDTH, BUTTON_HEIGHT, creditsImg);
 		
 		// Draw play button
-		int playImg = (hoveredButton == 2 || currentSelectedButton == PLAY) ? images[8] : images[4];
+		int playImg = (hoveredButton == 3 || currentSelectedButton == PLAY) ? images[8] : images[4];
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 10, BUTTON_WIDTH, BUTTON_HEIGHT, playImg);
 		
 		// Draw settings button
-		int settingsImg = (hoveredButton == 3 || currentSelectedButton == SETTINGS) ? images[7] : images[3];
+		int settingsImg = (hoveredButton == 2 || currentSelectedButton == SETTINGS) ? images[7] : images[3];
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 90, BUTTON_WIDTH, BUTTON_HEIGHT, settingsImg);
 	}
 	// hover and click detection for menu
@@ -94,7 +94,7 @@ struct MenuScreen
 
 		if (isSettingsButtonClicked(mx, my))
 		{
-			hoveredButton = 3;
+			hoveredButton = 2;
 			if (!lastFrameSettingsClicked)
 			{
 				if (currentTime - lastSettingsBlipTime > HOVER_COOLDOWN)
@@ -112,7 +112,7 @@ struct MenuScreen
 
 		if (isPlayButtonClicked(mx, my))
 		{
-			hoveredButton = 2;
+			hoveredButton = 3;
 			if (!lastFramePlayClicked)
 			{
 				if (currentTime - lastPlayBlipTime > HOVER_COOLDOWN)
@@ -153,11 +153,11 @@ struct MenuScreen
 		if (specialKey == GLUT_KEY_UP)
 		{
 			if (currentSelectedButton == QUIT)
-				currentSelectedButton = SETTINGS;
-			else if (currentSelectedButton == CREDITS)
-				currentSelectedButton = QUIT;
-			else if (currentSelectedButton == PLAY)
 				currentSelectedButton = CREDITS;
+			else if (currentSelectedButton == CREDITS)
+				currentSelectedButton = SETTINGS;
+			else if (currentSelectedButton == PLAY)
+				currentSelectedButton = QUIT;
 			else if (currentSelectedButton == SETTINGS)
 				currentSelectedButton = PLAY;
 		}
@@ -165,13 +165,13 @@ struct MenuScreen
 		else if (specialKey == GLUT_KEY_DOWN)
 		{
 			if (currentSelectedButton == QUIT)
-				currentSelectedButton = CREDITS;
-			else if (currentSelectedButton == CREDITS)
 				currentSelectedButton = PLAY;
+			else if (currentSelectedButton == CREDITS)
+				currentSelectedButton = QUIT;
 			else if (currentSelectedButton == PLAY)
 				currentSelectedButton = SETTINGS;
 			else if (currentSelectedButton == SETTINGS)
-				currentSelectedButton = QUIT;
+				currentSelectedButton = CREDITS;
 		}
 		
 		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
