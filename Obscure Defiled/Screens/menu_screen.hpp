@@ -3,16 +3,15 @@
 
 #ifndef MENU_SCREEN_H
 #define MENU_SCREEN_H
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
 #define BUTTON_WIDTH 294
 #define BUTTON_HEIGHT 90
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include <vector>
 using namespace std;
-class buttons{
-	public:
-	static double x, y, width, height;
-}
+
 struct MenuScreen
 {
 	bool lastFramePlayClicked = false;
