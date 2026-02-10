@@ -33,13 +33,13 @@ struct MenuScreen
 		images[1] = iLoadImage("resources//menu_screen//title.png");
 		// Regular button images
 		images[2] = iLoadImage("resources//menu_screen//Buttons//exit.png");
-		images[3] = iLoadImage("resources//menu_screen//Buttons//option.png");
-		images[4] = iLoadImage("resources//menu_screen//Buttons//play.png");
+		images[4] = iLoadImage("resources//menu_screen//Buttons//option.png");
+		images[3] = iLoadImage("resources//menu_screen//Buttons//play.png");
 		images[5] = iLoadImage("resources//menu_screen//Buttons//credits.png");
 		// Active button images
 		images[6] = iLoadImage("resources//menu_screen//Buttons//exit_active.png");
-		images[7] = iLoadImage("resources//menu_screen//Buttons//option_active.png");
-		images[8] = iLoadImage("resources//menu_screen//Buttons//play_active.png");
+		images[8] = iLoadImage("resources//menu_screen//Buttons//option_active.png");
+		images[7] = iLoadImage("resources//menu_screen//Buttons//play_active.png");
 		images[9] = iLoadImage("resources//menu_screen//Buttons//credits_active.png");
 		return images;
 	}
