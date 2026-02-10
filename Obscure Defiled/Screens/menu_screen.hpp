@@ -5,8 +5,8 @@
 #define MENU_SCREEN_H
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-#define BUTTON_WIDTH 200
-#define BUTTON_HEIGHT 50
+#define BUTTON_WIDTH 242
+#define BUTTON_HEIGHT 62
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include <vector>
@@ -38,8 +38,8 @@ struct MenuScreen
 	{
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
 		iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 300, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
-		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 150, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 200, BUTTON_WIDTH, BUTTON_HEIGHT, images[2]);
+		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 - 100, BUTTON_WIDTH, BUTTON_HEIGHT, images[3]);
 		iShowImage(SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2, SCREEN_HEIGHT / 2 + 0, BUTTON_WIDTH, BUTTON_HEIGHT, images[4]);
 	}
 	// hover and click detection for menu
@@ -94,7 +94,7 @@ struct MenuScreen
 	bool isQuitButtonClicked(int mx, int my)
 	{
 		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
-		int buttonY = SCREEN_HEIGHT / 2 - 300;
+		int buttonY = SCREEN_HEIGHT / 2 - 200;
 
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
@@ -103,7 +103,7 @@ struct MenuScreen
 	bool isSettingsButtonClicked(int mx, int my)
 	{
 		int buttonX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
-		int buttonY = SCREEN_HEIGHT / 2 - 150;
+		int buttonY = SCREEN_HEIGHT / 2 - 100;
 		return (mx >= buttonX && mx <= buttonX + BUTTON_WIDTH &&
 				my >= buttonY && my <= buttonY + BUTTON_HEIGHT);
 	}
