@@ -63,8 +63,8 @@ struct GameScreen
         else if (key == GLUT_KEY_LEFT)
         {
             // Move player left
-            x -= bg_speed;
-            if (x <= -SCREEN_WIDTH)
+            x += bg_speed;
+            if (x >= SCREEN_WIDTH)
             {
                 x = 0; // Reset position to create a looping effect
             }
@@ -72,8 +72,9 @@ struct GameScreen
         else if (key == GLUT_KEY_RIGHT)
         {
             // Move player right
-            x += bg_speed;
-            if (x >= SCREEN_WIDTH)
+            
+            x -= bg_speed;
+            if (x <= -SCREEN_WIDTH)
             {
                 x = 0; // Reset position to create a looping effect
             }
