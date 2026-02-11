@@ -177,7 +177,10 @@ void iSpecialKeyboard(unsigned char key)
 		game.handleSpecialKeyboard(key);
 	}else if(screens.top() == "Intro"){
 		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
-		introKeyboardHandler(key);
+		bool isend=introKeyboardHandler(key);
+		if(isend){
+			screens.pop();
+		}
 	}
 }
 

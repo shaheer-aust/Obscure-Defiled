@@ -46,7 +46,7 @@ void drawIntroScreen()
 	iText(skipBtnX + 20, skipBtnY + 15, "Skip", GLUT_BITMAP_HELVETICA_18);
 }
 
-void introKeyboardHandler(unsigned char key)
+bool introKeyboardHandler(unsigned char key)
 {
 	if (key == GLUT_KEY_RIGHT)
 	{
@@ -55,6 +55,11 @@ void introKeyboardHandler(unsigned char key)
 	else if (key == GLUT_KEY_LEFT)
 	{
 		currentPic = (currentPic - 1 + TOTAL_PICS) % TOTAL_PICS;
+	}
+	if(currentPic == TOTAL_PICS - 1){
+		return true;
+	}else{
+		return false;
 	}
 }
 
