@@ -22,25 +22,31 @@ struct GameScreen
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         init_character_images();
+        iSetTimer(200, idle_animation);
     }
     void init_character_images()
     {
         // Load character idle images
-        for (int i = 1; i <= 4; i++) {
-            character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_right_" + to_string(i) + ".png"));
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_right_%d.png", i + 1);
+            character_idle_images.push_back(iLoadImage(a));
         }
-        //character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
-
+        // character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
+    }
+    int idle_index = 0;
+    void idle_animation()
+    {
+        idle_index++;
+        if (idle_index >= character_idle_images.size())
+        {
+            idle_index = 0;
+        }
     }
     void show_character_idle()
     {
-        // Display the first idle image as a placeholder
-        for (int i = 0; i < character_idle_images.size(); i++)
-        {
-            iShowImage(100, 100, 64, 64, character_idle_images[i]);
-        }
-        
-        //iShowImage(100, 100, 64, 64, character_idle_images[0]);
+        iShowImage(100, 100, 64, 64, character_idle_images[idle_index]);
     }
 
     void handleSpecialKeyboard(unsigned char key)
@@ -57,16 +63,18 @@ struct GameScreen
         else if (key == GLUT_KEY_LEFT)
         {
             // Move player left
-            x-=bg_speed;
-            if(x <= -SCREEN_WIDTH) {
+            x -= bg_speed;
+            if (x <= -SCREEN_WIDTH)
+            {
                 x = 0; // Reset position to create a looping effect
             }
         }
         else if (key == GLUT_KEY_RIGHT)
         {
             // Move player right
-            x+=bg_speed;
-            if(x >= SCREEN_WIDTH) {
+            x += bg_speed;
+            if (x >= SCREEN_WIDTH)
+            {
                 x = 0; // Reset position to create a looping effect
             }
         }

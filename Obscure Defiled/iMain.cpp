@@ -179,6 +179,7 @@ int main()
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
+	iSettim
 	menu.initmenubar();
 	
 	setting.initsettingbar();
