@@ -148,9 +148,21 @@ struct GameScreen
             jumpVelocity -= gravity;
 
             // advance jump animation frame
-            if (!character_jump_R_images.empty())
+            if (isright)
             {
-                jump_index = (jump_index + 1) % character_jump_R_images.size();
+                jump_index++;
+                if (jump_index >= character_jump_R_images.size())
+                {
+                    jump_index = 0;
+                }
+            }
+            else
+            {
+                jump_index++;
+                if (jump_index >= character_jump_L_images.size())
+                {
+                    jump_index = 0;
+                }
             }
 
             // landing check
@@ -171,12 +183,12 @@ struct GameScreen
         if (isright)
         {
             if (!character_jump_R_images.empty())
-                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_R_images[jump_index % character_jump_R_images.size()]);
+                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_R_images[jump_index]);
         }
         else
         {
             if (!character_jump_L_images.empty())
-                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_L_images[jump_index % character_jump_L_images.size()]);
+                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_L_images[jump_index]);
         }
     }
     void handleSpecialKeyboard(unsigned char key)
