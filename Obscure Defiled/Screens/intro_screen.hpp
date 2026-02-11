@@ -1,10 +1,8 @@
-#ifndef INTRO_SCREEN_HPP
-#define INTRO_SCREEN_HPP
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
 
-#include "iGraphics.h"
-#include "main.hpp"       // Assuming this header manages screen transitions
-#include "game_screen.hpp"
-
+#ifndef INTRO_SCREEN_H
+#define INTRO_SCREEN_H
 #define TOTAL_PICS 4
 
 // Global state
@@ -55,7 +53,7 @@ void introMouseHandler(int button, int state, int mx, int my) {
 		if (mx >= skipBtnX && mx <= skipBtnX + skipBtnW &&
 			my >= skipBtnY && my <= skipBtnY + skipBtnH) {
 			// Transition to game screen
-			setCurrentScreen(game_screen);
+			//setCurrentScreen(game_screen);
 		}
 	}
 }
