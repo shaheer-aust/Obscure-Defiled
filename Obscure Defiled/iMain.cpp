@@ -197,7 +197,7 @@ int main()
 	
 	menu.initmenubar();
 	iSetTimer(200, idle_animation);
-	iSetTimer(100, reset_movement);
+	iSetTimer(1000, reset_movement);
 	setting.initsettingbar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
