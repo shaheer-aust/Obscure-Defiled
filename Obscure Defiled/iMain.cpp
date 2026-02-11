@@ -201,6 +201,7 @@ void reset_movement()
 	// Reset direction flags after movement is processed
 	game.rightPressed = false;
 	game.leftPressed = false;
+	game.spacePressed = false;
 }
 void physics_update()
 {
