@@ -26,10 +26,10 @@ struct MenuScreen
 	long long lastCreditsBlipTime = 0;
 	ButtonSelection currentSelectedButton = PLAY;
 	int hoveredButton = -1; // -1 = none, 0 = quit, 1 = credits, 2 = play, 3 = settings
-	
-	vector<int> initmenubar()
+	vector<int> images(10);
+	void initmenubar()
 	{
-		vector<int> images(10);
+		
 		images[0] = iLoadImage("resources//menu_screen//menu.jpg");
 		images[1] = iLoadImage("resources//menu_screen//title.png");
 		// Regular button images
@@ -42,10 +42,10 @@ struct MenuScreen
 		images[7] = iLoadImage("resources//menu_screen//Buttons//option_active.png");
 		images[8] = iLoadImage("resources//menu_screen//Buttons//play_active.png");
 		images[9] = iLoadImage("resources//menu_screen//Buttons//credits_active.png");
-		return images;
+		
 	}
 
-	void drawMenuScreen(vector<int> images)
+	void drawMenuScreen()
 	{
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
 		iShowImage(SCREEN_WIDTH / 2 - (SCREEN_WIDTH * 0.4 / 2), SCREEN_HEIGHT / 2 + SCREEN_HEIGHT * 0.1, SCREEN_WIDTH * 0.4, SCREEN_HEIGHT * 0.4, images[1]);

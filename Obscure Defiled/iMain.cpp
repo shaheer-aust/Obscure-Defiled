@@ -139,7 +139,7 @@ void iKeyboard(unsigned char key)
 		}
 		else if (buttonType == 3) // Play
 		{
-			screens.push("Play");
+			screens.push("Game");
 		}
 	}
 }
