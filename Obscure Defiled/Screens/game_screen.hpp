@@ -15,22 +15,38 @@ struct GameScreen
 {
     vector<int> images;
     int x = 0;
+    double bg_speed = 20.0;
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
-    
     }
-    void updategame_screen()
-    {
-        // Code to update game state, animations, etc. can be added here
-        x-=10;
-        if (x <= -SCREEN_WIDTH) {
-            x = 0; // Reset to create a looping background effect
-        }
 
+    void handleSpecialKeyboard(unsigned char key)
+    {
+        // Handle special keyboard input for game controls (e.g., arrow keys for movement)
+        if (key == GLUT_KEY_UP)
+        {
+            // Move player up
+        }
+        else if (key == GLUT_KEY_DOWN)
+        {
+            // Move player down
+        }
+        else if (key == GLUT_KEY_LEFT)
+        {
+            // Move player left
+            x-=bg_speed;
+        }
+        else if (key == GLUT_KEY_RIGHT)
+        {
+            // Move player right
+            x+=bg_speed;
+        }
     }
+
     void drawgame_screen()
     {
+        iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
