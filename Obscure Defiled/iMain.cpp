@@ -37,7 +37,7 @@ void iDraw()
 	else if (screens.top() == "Game")
 	{
 		// Draw game screen
-		cout << "In Game Screen" << endl;
+		
 		game.drawgame_screen();
 
 	}
@@ -75,7 +75,6 @@ void iMouse(int button, int state, int mx, int my)
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
-		cout << mx << " " << my << endl;
 		//Handle menu selection based on mouse position
 		if (menu.isPlayButtonClicked(mx, my))
 		{
@@ -94,8 +93,7 @@ void iMouse(int button, int state, int mx, int my)
 			exit(0);
 		}else if (menu.isCreditsButtonClicked(mx, my))
 		{
-			// Handle credits button click
-			cout << "Credits Button Clicked" << endl;
+			
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Settings")
