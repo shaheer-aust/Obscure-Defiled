@@ -176,6 +176,7 @@ void iSpecialKeyboardUp(unsigned char key){
 	if (key == GLUT_KEY_RIGHT && screens.top() == "Game")
 	{
 		game.rightPressed = false;
+		cout << "Right key released" << endl;
 	}
 	else if (key == GLUT_KEY_LEFT && screens.top() == "Game")
 	{
