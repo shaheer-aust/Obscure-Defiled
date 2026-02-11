@@ -32,7 +32,7 @@ struct GameScreen
     double characterPosition_Y = 100.0;
     bool isJumping = false;
     double jumpVelocity = 0.0;
-    double gravity = 1.0;
+    double gravity = 2.0;
     double groundY = 100.0;
     double bg_speed = 20.0;
     double character_speed = 25.0;
@@ -129,7 +129,7 @@ struct GameScreen
         if (!isJumping)
         {
             isJumping = true;
-            jumpVelocity = 18.0; // initial jump impulse
+            jumpVelocity = 9.0; // initial jump impulse
         }
     }
 
