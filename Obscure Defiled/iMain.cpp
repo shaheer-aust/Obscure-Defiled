@@ -161,7 +161,7 @@ void iKeyboard(unsigned char key)
 			screens.push("Intro");
 		}
 	}else if(key == 32 && screens.top() == "Game"){// SPACE key to jump
-		startJump();
+		game.startJump();
 
 	}
 }
