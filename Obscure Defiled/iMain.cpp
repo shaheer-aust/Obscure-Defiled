@@ -160,6 +160,9 @@ void iKeyboard(unsigned char key)
 			screens.push("Game");
 			screens.push("Intro");
 		}
+	}else if(key == 32 && screens.top() == "Game"){// SPACE key to jump
+		startJump();
+
 	}
 }
 
@@ -198,6 +201,10 @@ void reset_movement()
 {
 	game.resetMovement();
 }
+void physics_update()
+{
+	game.updatePhysics();
+}
 int getIdleIndex(){
 	return idle_index;
 }
@@ -216,6 +223,7 @@ int main()
 	initIntroScreen();
 	iSetTimer(200, idle_animation);
 	iSetTimer(1000, reset_movement);
+	iSetTimer(50, physics_update);
 	setting.initsettingbar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();

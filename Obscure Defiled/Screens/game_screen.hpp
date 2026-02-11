@@ -22,18 +22,25 @@ struct GameScreen
     vector<int> character_idle_L_images;
     vector<int> character_run_L_images;
     vector<int> character_run_R_images;
+    vector<int> character_jump_R_images;
+    vector<int> character_jump_L_images;
     bool isright = true;
     int movement_index = 0;
     bool isMoving = false;
     int x = 0;
     double characterPosition_X = 100.0;
     double characterPosition_Y = 100.0;
+    bool isJumping = false;
+    double jumpVelocity = 0.0;
+    double gravity = 1.0;
+    double groundY = 100.0;
     double bg_speed = 20.0;
     double character_speed = 25.0;
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         init_character_images();
+        groundY = characterPosition_Y;
         //iSetTimer(200, idle_animation);
     }
     void init_character_images()
@@ -64,7 +71,19 @@ struct GameScreen
             sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i);
             character_run_R_images.push_back(iLoadImage(a));
         }
-        // character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
+        // load character jump images if needed
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_right_%d.png", i);
+            character_jump_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_left_%d.png", i);
+            character_jump_L_images.push_back(iLoadImage(a));
+        }
     }
     void show_character_idle()
     {
@@ -94,35 +113,65 @@ struct GameScreen
         //movement_index++;
     }
     
+    void show_character_jump()
+    {
+        
+    }
+    
     void resetMovement()
     {
         isMoving = false;
         movement_index = 0;
     }
+    
+    void startJump()
+    {
+        if (!isJumping)
+        {
+            isJumping = true;
+            jumpVelocity = 18.0; // initial jump impulse
+        }
+    }
+
+    void updatePhysics()
+    {
+        if (isJumping)
+        {
+            characterPosition_Y += jumpVelocity;
+            jumpVelocity -= gravity;
+            if (characterPosition_Y <= groundY)
+            {
+                characterPosition_Y = groundY;
+                isJumping = false;
+                jumpVelocity = 0.0;
+            }
+        }
+    }
     void handleSpecialKeyboard(unsigned char key)
     {
         // Handle special keyboard input for game controls (e.g., arrow keys for movement)
+        
         if (key == GLUT_KEY_UP)
         {
             // Move player up
-            characterPosition_Y += character_speed;
-            if (characterPosition_Y > SCREEN_HEIGHT)
-            {
-                characterPosition_Y = SCREEN_HEIGHT;
-            }
-            isMoving = true;
-            movement_index++;
+            // characterPosition_Y += character_speed;
+            // if (characterPosition_Y > SCREEN_HEIGHT)
+            // {
+            //     characterPosition_Y = SCREEN_HEIGHT;
+            // }
+            // isMoving = true;
+            // movement_index++;
         }
         else if (key == GLUT_KEY_DOWN)
         {
             // Move player down
-            characterPosition_Y -= character_speed;
-            if (characterPosition_Y < 0)
-            {
-                characterPosition_Y = 0;
-            }
-            isMoving = true;
-            movement_index++;
+            // characterPosition_Y -= character_speed;
+            // if (characterPosition_Y < 0)
+            // {
+            //     characterPosition_Y = 0;
+            // }
+            // isMoving = true;
+            // movement_index++;
         }
         else if (key == GLUT_KEY_LEFT)
         {
