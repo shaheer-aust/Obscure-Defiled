@@ -42,9 +42,7 @@ bool introKeyboardHandler(unsigned char key)
 	if (key == GLUT_KEY_RIGHT)
 	{
 		currentPic++;
-		if(currentPic > 3){
-			return true;
-		}
+		
 	}
 	else if (key == GLUT_KEY_LEFT)
 	{
@@ -53,6 +51,9 @@ bool introKeyboardHandler(unsigned char key)
 		{
 			currentPic = 0;
 		}
+	}
+	if (currentPic > 3){
+		return true;
 	}
 	return false;
 

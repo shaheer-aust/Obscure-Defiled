@@ -183,7 +183,7 @@ void iSpecialKeyboard(unsigned char key)
 		bool isend=introKeyboardHandler(key);
 		if(isend){
 			cout << "jfjhg";
-			//screens.pop();
+			screens.pop();
 		}
 	}
 }
