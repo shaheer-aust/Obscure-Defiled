@@ -39,16 +39,20 @@ void drawIntroScreen()
 
 bool introKeyboardHandler(unsigned char key)
 {
-	if(currentPic == TOTAL_PICS - 1){
-		return true;
-	}
-	else if (key == GLUT_KEY_RIGHT)
+	if (key == GLUT_KEY_RIGHT)
 	{
-		currentPic = (currentPic + 1) % TOTAL_PICS;
+		currentPic++;
+		if(currentPic >= TOTAL_PICS){
+			return true;
+		}
 	}
 	else if (key == GLUT_KEY_LEFT)
 	{
-		currentPic = (currentPic - 1 + TOTAL_PICS) % TOTAL_PICS;
+		currentPic--;
+		if (currentPic < 0)
+		{
+			currentPic = 0;
+		}
 	}
 	else{
 		return false;
