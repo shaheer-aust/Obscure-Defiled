@@ -7,25 +7,24 @@
 
 // Global state
 int currentPic = 0;
-char* storyPics[TOTAL_PICS] = {
+char *storyPics[TOTAL_PICS] = {
 	"resources//Level_1//Panels//Intro//intro_1.png",
 	"resources//Level_1//Panels//Intro//intro_2.png",
 	"resources//Level_1//Panels//Intro//intro_3.png",
-	"resources//Level_1//Panels//Intro//intro_4.png"
-};
+	"resources//Level_1//Panels//Intro//intro_4.png"};
 
-char* captions[TOTAL_PICS] = {
+char *captions[TOTAL_PICS] = {
 	"During the great war A knight, torn apart fighting an eastern Overlord.Thou doesn't know when the fight would end.Suddenly!?",
 	"A mysterious circle like magic warp appears. It succumbed both the Knight and the Overlord who was getting dragged by some monster-like eldrich trees. ",
 	"After landing on the ground The Knight found a glowing knife which is being DEFILED by the forest.",
-	"Then thou decided to venture the forest to get back to this hometown"
-};
+	"Then thou decided to venture the forest to get back to this hometown"};
 
 // Button dimensions
 int skipBtnX = 1160, skipBtnY = 57;
 int skipBtnW = 100, skipBtnH = 40;
 
-void drawIntroScreen() {
+void drawIntroScreen()
+{
 	// Draw current picture
 	iShowBMP(645, 533, storyPics[currentPic]);
 
@@ -39,23 +38,32 @@ void drawIntroScreen() {
 	iText(skipBtnX + 20, skipBtnY + 15, "Skip", GLUT_BITMAP_HELVETICA_18);
 }
 
-void introKeyboardHandler(unsigned char key) {
-	if (key == GLUT_KEY_RIGHT) {
+void introKeyboardHandler(unsigned char key)
+{
+	if (key == GLUT_KEY_RIGHT)
+	{
 		currentPic = (currentPic + 1) % TOTAL_PICS;
 	}
-	else if (key == GLUT_KEY_LEFT) {
+	else if (key == GLUT_KEY_LEFT)
+	{
 		currentPic = (currentPic - 1 + TOTAL_PICS) % TOTAL_PICS;
 	}
 }
 
-void introMouseHandler(int button, int state, int mx, int my) {
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+bool introMouseHandler(int button, int state, int mx, int my)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
 		if (mx >= skipBtnX && mx <= skipBtnX + skipBtnW &&
-			my >= skipBtnY && my <= skipBtnY + skipBtnH) {
-			// Transition to game screen
-			//setCurrentScreen(game_screen);
+			my >= skipBtnY && my <= skipBtnY + skipBtnH)
+		{
+			// Skip button clicked
+			return true; // Signal to skip intro
 		}
 	}
+	return false; // Continue showing intro
+				  // Transition to game screen
+				  // setCurrentScreen(game_screen);
 }
 
 #endif // INTRO_SCREEN_HPP

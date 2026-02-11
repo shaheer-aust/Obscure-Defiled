@@ -46,6 +46,9 @@ void iDraw()
 	{
 		// Draw settings screen
 		setting.drawsetting_screen();
+	}else if (screens.top() == "Intro")
+	{
+		drawIntroScreen();
 	}
 }
 
@@ -80,6 +83,7 @@ void iMouse(int button, int state, int mx, int my)
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			screens.push("Game");
+			screens.push("Intro");
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
 		{
@@ -105,6 +109,12 @@ void iMouse(int button, int state, int mx, int my)
 			// {
 			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
 			// }
+		}
+	}else if (state == GLUT_DOWN && screens.top() == "Intro")
+	{
+		if (introMouseHandler(button, state, mx, my))
+		{
+			screens.pop(); // Exit intro screen
 		}
 	}
 }
@@ -148,6 +158,7 @@ void iKeyboard(unsigned char key)
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			screens.push("Game");
+			screens.push("Intro");
 		}
 	}
 }
@@ -164,8 +175,9 @@ void iSpecialKeyboard(unsigned char key)
 	}else if(screens.top() == "Game"){
 		// Handle game-specific special keys (e.g., arrow keys for movement)
 		game.handleSpecialKeyboard(key);
-	
-		
+	}else if(screens.top() == "Intro"){
+		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
+		introKeyboardHandler(key);
 	}
 }
 
