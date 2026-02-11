@@ -17,7 +17,7 @@ struct GameScreen
     int x = 0;
     void initgame_screen()
     {
-        images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.png"));
+        images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
     
     }
     void updategame_screen()

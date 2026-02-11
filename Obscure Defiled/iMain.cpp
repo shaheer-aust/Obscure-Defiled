@@ -68,6 +68,7 @@ void iPassiveMouseMove(int mx, int my) {
 }
 void iMouse(int button, int state, int mx, int my)
 {
+	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
 		cout << mx << " " << my << endl;
@@ -107,6 +108,7 @@ void iMouse(int button, int state, int mx, int my)
 }
 void iKeyboard(unsigned char key)
 {
+	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	if (key == 27) // ESC key
 	{
@@ -206,6 +208,8 @@ int main()
 	{
 		
 		mciSendString("play bgsong repeat", NULL, 0, NULL);
+	}else if(screens.top() == "Game"){
+		mciSendString("play gamebg repeat", NULL, 0, NULL);
 	}
 
 	iStart();
