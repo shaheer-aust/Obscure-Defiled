@@ -23,7 +23,7 @@ struct GameScreen
     void updategame_screen()
     {
         // Code to update game state, animations, etc. can be added here
-        x--;
+        x-=10;
         if (x <= -SCREEN_WIDTH) {
             x = 0; // Reset to create a looping background effect
         }
