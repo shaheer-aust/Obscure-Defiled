@@ -14,11 +14,33 @@ using namespace std;
 struct GameScreen
 {
     vector<int> images;
+    vector<int> character_idle_images;
+    vector<int> character_run_images;
     int x = 0;
     double bg_speed = 20.0;
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
+        init_character_images();
+    }
+    void init_character_images()
+    {
+        // Load character idle images
+        for (int i = 1; i <= 4; i++) {
+            character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_right_" + to_string(i) + ".png"));
+        }
+        //character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
+
+    }
+    void show_character_idle()
+    {
+        // Display the first idle image as a placeholder
+        for (int i = 0; i < character_idle_images.size(); i++)
+        {
+            iShowImage(100, 100, 64, 64, character_idle_images[i]);
+        }
+        
+        //iShowImage(100, 100, 64, 64, character_idle_images[0]);
     }
 
     void handleSpecialKeyboard(unsigned char key)
@@ -36,11 +58,17 @@ struct GameScreen
         {
             // Move player left
             x-=bg_speed;
+            if(x <= -SCREEN_WIDTH) {
+                x = 0; // Reset position to create a looping effect
+            }
         }
         else if (key == GLUT_KEY_RIGHT)
         {
             // Move player right
             x+=bg_speed;
+            if(x >= SCREEN_WIDTH) {
+                x = 0; // Reset position to create a looping effect
+            }
         }
     }
 
@@ -50,6 +78,7 @@ struct GameScreen
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
+        show_character_idle();
     }
 };
 
