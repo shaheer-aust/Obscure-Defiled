@@ -161,27 +161,7 @@ void iSpecialKeyboard(unsigned char key)
 		}
 	}else if(screens.top() == "Game"){
 		// Handle game-specific special keys (e.g., arrow keys for movement)
-		if (key == GLUT_KEY_RIGHT)
-		{
-			// Handle right arrow key press in game
-			cout << "Right Arrow Pressed in Game" << endl;
-			game.updategame_screen();
-		}
-		else if (key == GLUT_KEY_LEFT)
-		{
-			// Handle left arrow key press in game
-			cout << "Left Arrow Pressed in Game" << endl;
-		}
-		else if (key == GLUT_KEY_UP)
-		{
-			// Handle up arrow key press in game
-			cout << "Up Arrow Pressed in Game" << endl;
-		}
-		else if (key == GLUT_KEY_DOWN)
-		{
-			// Handle down arrow key press in game
-			cout << "Down Arrow Pressed in Game" << endl;
-		}
+		game.handleSpecialKeyboard(key);
 	
 		
 	}
@@ -199,6 +179,7 @@ int main()
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
+	iSettim
 	menu.initmenubar();
 	
 	setting.initsettingbar();
