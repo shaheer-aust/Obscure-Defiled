@@ -161,9 +161,27 @@ void iKeyboard(unsigned char key)
 		}
 	}else if(key == 32 && screens.top() == "Game"){// SPACE key to jump
 		game.startJump();
+		game.spacePressed = true;
 
 	}
 }
+void iKeyBoardUp(unsigned char key)
+{
+	if (key == 32 && screens.top() == "Game") // SPACE key released
+	{
+		game.spacePressed = false;
+	}
+}
+void iSpecialKeyboardUp(unsigned char key){
+	if (key == GLUT_KEY_RIGHT && screens.top() == "Game")
+	{
+		game.rightPressed = false;
+	}
+	else if (key == GLUT_KEY_LEFT && screens.top() == "Game")
+	{
+		game.leftPressed = false;
+	}
+}			
 
 void iSpecialKeyboard(unsigned char key)
 {
@@ -177,6 +195,7 @@ void iSpecialKeyboard(unsigned char key)
 	}else if(screens.top() == "Game"){
 		// Handle game-specific special keys (e.g., arrow keys for movement)
 		game.handleSpecialKeyboard(key);
+	
 	}else if(screens.top() == "Intro"){
 		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
 		bool isend=introKeyboardHandler(key);

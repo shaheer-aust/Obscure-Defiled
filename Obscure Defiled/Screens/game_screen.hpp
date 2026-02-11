@@ -24,6 +24,9 @@ struct GameScreen
     vector<int> character_run_R_images;
     vector<int> character_jump_R_images;
     vector<int> character_jump_L_images;
+    bool spacePressed = false;
+    bool rightPressed = false;
+    bool leftPressed = false;
     bool isright = true;
     int movement_index = 0;
     int jump_index = 0;
@@ -43,7 +46,7 @@ struct GameScreen
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         init_character_images();
         groundY = characterPosition_Y;
-        //iSetTimer(200, idle_animation);
+        // iSetTimer(200, idle_animation);
     }
     void init_character_images()
     {
@@ -90,46 +93,49 @@ struct GameScreen
     void show_character_idle()
     {
         int currentIdx = getIdleIndex();
-        if(isright){
+        if (isright)
+        {
             iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_idle_R_images[currentIdx]);
         }
-        else{
+        else
+        {
             iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_idle_L_images[currentIdx]);
         }
-        
     }
     void show_character_run()
     {
-        
+
         if (movement_index >= character_run_R_images.size())
         {
-         
+
             movement_index = 0;
         }
-        if(isright){
+        if (isright)
+        {
             iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_R_images[movement_index]);
         }
-        else{
+        else
+        {
             iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_L_images[movement_index]);
         }
-        //movement_index++;
+        // movement_index++;
     }
-    
+
     void show_character_jump()
     {
-        
     }
-    
+
     void resetMovement()
     {
         isMoving = false;
         movement_index = 0;
     }
-    
+
     void startJump()
     {
         if (!isJumping)
         {
+
             isJumping = true;
             // record the ground position to return to
             groundY = characterPosition_Y;
@@ -143,6 +149,14 @@ struct GameScreen
     {
         if (isJumping)
         {
+            if(rightPressed){
+                characterPosition_X += character_speed;
+                isright = true;
+            }
+            else if(leftPressed){
+                characterPosition_X -= character_speed;
+                isright = false;
+            }
             // apply vertical movement
             characterPosition_Y += jumpVelocity;
             jumpVelocity -= gravity;
@@ -194,7 +208,7 @@ struct GameScreen
     void handleSpecialKeyboard(unsigned char key)
     {
         // Handle special keyboard input for game controls (e.g., arrow keys for movement)
-        
+
         if (key == GLUT_KEY_UP)
         {
             // Move player up
@@ -220,6 +234,7 @@ struct GameScreen
         else if (key == GLUT_KEY_LEFT)
         {
             // Move player left
+            leftPressed = true;
             isright = false;
             characterPosition_X -= character_speed;
             if (characterPosition_X < 0)
@@ -232,6 +247,7 @@ struct GameScreen
         else if (key == GLUT_KEY_RIGHT)
         {
             // Move player right (forward)
+            rightPressed = true;
             isright = true;
             characterPosition_X += character_speed;
             if (characterPosition_X > SCREEN_WIDTH)
@@ -240,12 +256,13 @@ struct GameScreen
             }
             isMoving = true;
             movement_index++;
+            
         }
     }
 
     void drawgame_screen()
     {
-		
+
         iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
