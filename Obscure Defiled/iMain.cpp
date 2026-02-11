@@ -159,26 +159,6 @@ void iKeyboard(unsigned char key)
 		}
 	}else if(key == 32 && screens.top() == "Game"){// SPACE key to jump
 		game.startJump();
-		game.spacePressed = true;
-
-	}
-}
-void iKeyBoardUp(unsigned char key)
-{
-	if (key == 32 && screens.top() == "Game") // SPACE key released
-	{
-		game.spacePressed = false;
-	}
-}
-void iSpecialKeyboardUp(unsigned char key){
-	if (key == GLUT_KEY_RIGHT && screens.top() == "Game")
-	{
-		game.rightPressed = false;
-		cout << "Right key released" << endl;
-	}
-	else if (key == GLUT_KEY_LEFT && screens.top() == "Game")
-	{
-		game.leftPressed = false;
 	}
 }			
 
@@ -218,6 +198,9 @@ void idle_animation()
 void reset_movement()
 {
 	game.resetMovement();
+	// Reset direction flags after movement is processed
+	game.rightPressed = false;
+	game.leftPressed = false;
 }
 void physics_update()
 {
