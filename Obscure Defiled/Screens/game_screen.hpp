@@ -41,26 +41,26 @@ struct GameScreen
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_right_%d.png", i + 1);
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_right_%d.png", i);
             character_idle_R_images.push_back(iLoadImage(a));
         }
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_left_%d.png", i + 1);
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_left_%d.png", i);
             character_idle_L_images.push_back(iLoadImage(a));
         }
         // Load character run images
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_left_%d.png", i + 1);
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_left_%d.png", i);
             character_run_L_images.push_back(iLoadImage(a));
         }
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i + 1);
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i);
             character_run_R_images.push_back(iLoadImage(a));
         }
         // character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
