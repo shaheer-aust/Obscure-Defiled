@@ -3,6 +3,9 @@
 
 #ifndef GAME_SCREEN_H
 #define GAME_SCREEN_H
+
+// Forward declaration of idle index getter
+extern int getIdleIndex();
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define BUTTON_WIDTH 242
@@ -36,10 +39,10 @@ struct GameScreen
         }
         // character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
     }
-	int idx=1;
     void show_character_idle()
     {
-        iShowImage(100, 100, 64, 64, character_idle_images[idx]);
+        int currentIdx = getIdleIndex();
+        iShowImage(100, 100, 64, 64, character_idle_images[currentIdx]);
     }
 
     void handleSpecialKeyboard(unsigned char key)
