@@ -182,7 +182,8 @@ void iSpecialKeyboard(unsigned char key)
 		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
 		bool isend=introKeyboardHandler(key);
 		if(isend){
-			screens.pop();
+			cout << "jfjhg";
+			//screens.pop();
 		}
 	}
 }
