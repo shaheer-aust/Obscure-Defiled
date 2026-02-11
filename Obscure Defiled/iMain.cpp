@@ -168,7 +168,18 @@ void iSpecialKeyboard(unsigned char key)
 }
 
 /* -------------------- INIT -------------------- */
-
+int idle_index = 0;
+void idle_animation()
+{
+	idle_index++;
+	if (idle_index >= 3)
+	{
+		idle_index = 0;
+	}
+}
+int getIdleIndex(){
+	return idle_index;
+}
 
 
 /* -------------------- MAIN -------------------- */
@@ -181,7 +192,7 @@ int main()
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	
 	menu.initmenubar();
-	//iSetTimer(200, game.idle_animation);
+	iSetTimer(200, idle_animation);
 	setting.initsettingbar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();

@@ -2,13 +2,14 @@
 #pragma comment(lib, "winmm.lib")
 
 #ifndef GAME_SCREEN_H
-#define GAME_H
+#define GAME_SCREEN_H
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #define BUTTON_WIDTH 242
 #define BUTTON_HEIGHT 62
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
+
 #include <vector>
 using namespace std;
 struct GameScreen
@@ -35,18 +36,10 @@ struct GameScreen
         }
         // character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
     }
-    //int idle_index = 0;
-    /*void idle_animation()
-    {
-        idle_index++;
-        if (idle_index >= character_idle_images.size())
-        {
-            idle_index = 0;
-        }
-    }*/
+	int idx=1;
     void show_character_idle()
     {
-        iShowImage(100, 100, 64, 64, character_idle_images[0]);
+        iShowImage(100, 100, 64, 64, character_idle_images[idx]);
     }
 
     void handleSpecialKeyboard(unsigned char key)
@@ -82,6 +75,7 @@ struct GameScreen
 
     void drawgame_screen()
     {
+		
         iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
