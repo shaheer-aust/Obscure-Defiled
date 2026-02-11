@@ -26,6 +26,7 @@ struct GameScreen
     vector<int> character_jump_L_images;
     bool isright = true;
     int movement_index = 0;
+    int jump_index = 0;
     bool isMoving = false;
     int x = 0;
     double characterPosition_X = 100.0;
@@ -33,6 +34,7 @@ struct GameScreen
     bool isJumping = false;
     double jumpVelocity = 0.0;
     double gravity = 2.0;
+    double base_gravity = 2.0;
     double groundY = 100.0;
     double bg_speed = 20.0;
     double character_speed = 25.0;
@@ -129,7 +131,11 @@ struct GameScreen
         if (!isJumping)
         {
             isJumping = true;
+            // record the ground position to return to
+            groundY = characterPosition_Y;
             jumpVelocity = 9.0; // initial jump impulse
+            gravity = base_gravity;
+            jump_index = 0;
         }
     }
 
@@ -137,14 +143,40 @@ struct GameScreen
     {
         if (isJumping)
         {
+            // apply vertical movement
             characterPosition_Y += jumpVelocity;
             jumpVelocity -= gravity;
+
+            // advance jump animation frame
+            if (!character_jump_R_images.empty())
+            {
+                jump_index = (jump_index + 1) % character_jump_R_images.size();
+            }
+
+            // landing check
             if (characterPosition_Y <= groundY)
             {
                 characterPosition_Y = groundY;
                 isJumping = false;
                 jumpVelocity = 0.0;
+                gravity = base_gravity;
+                jump_index = 0;
             }
+        }
+    }
+
+    void show_character_jump()
+    {
+        // choose frame based on direction and jump_index
+        if (isright)
+        {
+            if (!character_jump_R_images.empty())
+                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_R_images[jump_index % character_jump_R_images.size()]);
+        }
+        else
+        {
+            if (!character_jump_L_images.empty())
+                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_L_images[jump_index % character_jump_L_images.size()]);
         }
     }
     void handleSpecialKeyboard(unsigned char key)
@@ -206,7 +238,11 @@ struct GameScreen
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
-        if (isMoving)
+        if (isJumping)
+        {
+            show_character_jump();
+        }
+        else if (isMoving)
         {
             show_character_run();
         }
