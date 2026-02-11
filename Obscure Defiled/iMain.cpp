@@ -37,8 +37,7 @@ void iDraw()
 	else if (screens.top() == "Game")
 	{
 		// Draw game screen
-		cout << "In Game Screen" << endl;
-		game.initgame_screen();
+		
 		game.drawgame_screen();
 
 	}
@@ -68,7 +67,7 @@ void iPassiveMouseMove(int mx, int my) {
 	else if (screens.top() == "Settings"){
 		setting.checkButtonHover(mx, my);
 	}
-	printf("co-ordinates: %dx%d/n", mx, my);
+	//printf("co-ordinates: %dx%d/n", mx, my);
 	
 }
 void iMouse(int button, int state, int mx, int my)
@@ -76,7 +75,6 @@ void iMouse(int button, int state, int mx, int my)
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
-		cout << mx << " " << my << endl;
 		//Handle menu selection based on mouse position
 		if (menu.isPlayButtonClicked(mx, my))
 		{
@@ -95,8 +93,7 @@ void iMouse(int button, int state, int mx, int my)
 			exit(0);
 		}else if (menu.isCreditsButtonClicked(mx, my))
 		{
-			// Handle credits button click
-			cout << "Credits Button Clicked" << endl;
+			
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Settings")
@@ -160,8 +157,10 @@ void iKeyboard(unsigned char key)
 			screens.push("Game");
 			screens.push("Intro");
 		}
+	}else if(key == 32 && screens.top() == "Game"){// SPACE key to jump
+		game.startJump();
 	}
-}
+}			
 
 void iSpecialKeyboard(unsigned char key)
 {
@@ -175,9 +174,14 @@ void iSpecialKeyboard(unsigned char key)
 	}else if(screens.top() == "Game"){
 		// Handle game-specific special keys (e.g., arrow keys for movement)
 		game.handleSpecialKeyboard(key);
+	
 	}else if(screens.top() == "Intro"){
 		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
-		introKeyboardHandler(key);
+		bool isend=introKeyboardHandler(key);
+		if(isend){
+			//cout << "jfjhg";
+			screens.pop();
+		}
 	}
 }
 
@@ -194,6 +198,14 @@ void idle_animation()
 void reset_movement()
 {
 	game.resetMovement();
+	// Reset direction flags after movement is processed
+	game.rightPressed = false;
+	game.leftPressed = false;
+	game.spacePressed = false;
+}
+void physics_update()
+{
+	game.updatePhysics();
 }
 int getIdleIndex(){
 	return idle_index;
@@ -213,7 +225,10 @@ int main()
 	initIntroScreen();
 	iSetTimer(200, idle_animation);
 	iSetTimer(1000, reset_movement);
+	iSetTimer(50, physics_update);
 	setting.initsettingbar();
+	// initialize game assets once
+	game.initgame_screen();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
