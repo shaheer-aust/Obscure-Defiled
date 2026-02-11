@@ -42,7 +42,7 @@ bool introKeyboardHandler(unsigned char key)
 	if (key == GLUT_KEY_RIGHT)
 	{
 		currentPic++;
-		if(currentPic > TOTAL_PICS-1){
+		if(currentPic > 3){
 			return true;
 		}
 	}
