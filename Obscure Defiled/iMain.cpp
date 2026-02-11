@@ -2,6 +2,7 @@
 #include "iGraphics.h"
 #include "Screens\menu_screen.hpp"
 #include "Screens\setting_screen.hpp"
+#include "Screens\game_screen.hpp"
 #include <vector>
 #include <stack>
 #include <string>
@@ -20,7 +21,7 @@ MenuScreen menu;
 GameScreen game;
 Setting_screen setting;
 int bgm_audio = -1;
-
+vector<int> menu_images;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -30,7 +31,7 @@ void iDraw()
 	if (screens.top() == "Menu")
 	{
 		//
-		menu.drawMenuScreen(menu.initmenubar());
+		menu.drawMenuScreen(menu_images);
 	}
 	else if (screens.top() == "Game")
 	{
@@ -166,7 +167,7 @@ int main()
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
-	
+	menu_images = menu.initmenubar();
 	
 	setting.initsettingbar();
 	screens.push("Menu");

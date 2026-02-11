@@ -67,6 +67,7 @@
     <ClCompile Include="iMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Screens\game_screen.hpp" />
     <ClInclude Include="Screens\menu_screen.hpp" />
     <ClInclude Include="Screens\setting_screen.hpp" />
   </ItemGroup>
