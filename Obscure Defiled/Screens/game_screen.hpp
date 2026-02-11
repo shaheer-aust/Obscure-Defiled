@@ -22,6 +22,7 @@ struct GameScreen
     vector<int> character_idle_L_images;
     vector<int> character_run_L_images;
     vector<int> character_run_R_images;
+    bool isright = true;
     int movement_index = 0;
     bool isMoving = false;
     int x = 0;
@@ -68,7 +69,13 @@ struct GameScreen
     void show_character_idle()
     {
         int currentIdx = getIdleIndex();
-        iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_idle_R_images[currentIdx]);
+        if(isright){
+            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_idle_R_images[currentIdx]);
+        }
+        else{
+            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_idle_L_images[currentIdx]);
+        }
+        
     }
     void show_character_run()
     {
@@ -78,7 +85,12 @@ struct GameScreen
          
             movement_index = 0;
         }
-        iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_R_images[movement_index]);
+        if(isright){
+            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_R_images[movement_index]);
+        }
+        else{
+            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_L_images[movement_index]);
+        }
         //movement_index++;
     }
     
@@ -93,7 +105,7 @@ struct GameScreen
         if (key == GLUT_KEY_UP)
         {
             // Move player up
-            characterPosition_Y += bg_speed;
+            characterPosition_Y += character_speed;
             if (characterPosition_Y > SCREEN_HEIGHT)
             {
                 characterPosition_Y = SCREEN_HEIGHT;
@@ -104,7 +116,7 @@ struct GameScreen
         else if (key == GLUT_KEY_DOWN)
         {
             // Move player down
-            characterPosition_Y -= bg_speed;
+            characterPosition_Y -= character_speed;
             if (characterPosition_Y < 0)
             {
                 characterPosition_Y = 0;
@@ -115,6 +127,7 @@ struct GameScreen
         else if (key == GLUT_KEY_LEFT)
         {
             // Move player left
+            isright = false;
             characterPosition_X -= character_speed;
             if (characterPosition_X < 0)
             {
@@ -126,6 +139,7 @@ struct GameScreen
         else if (key == GLUT_KEY_RIGHT)
         {
             // Move player right (forward)
+            isright = true;
             characterPosition_X += character_speed;
             if (characterPosition_X > SCREEN_WIDTH)
             {
