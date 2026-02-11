@@ -165,7 +165,7 @@ struct GameScreen
         }
     }
 
-    void show_character_jump()
+    void show_character_jump1()
     {
         // choose frame based on direction and jump_index
         if (isright)
@@ -240,7 +240,7 @@ struct GameScreen
         // Additional drawing code for settings can be added here
         if (isJumping)
         {
-            show_character_jump();
+            show_character_jump1();
         }
         else if (isMoving)
         {
