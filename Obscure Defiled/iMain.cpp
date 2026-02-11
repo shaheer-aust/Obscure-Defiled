@@ -75,6 +75,7 @@ void iMouse(int button, int state, int mx, int my)
 		if (menu.isPlayButtonClicked(mx, my))
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
+			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			screens.push("Game");
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
@@ -114,6 +115,7 @@ void iKeyboard(unsigned char key)
 			screens.pop();
 			if (screens.top() == "Menu")
 			{
+				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play bgsong repeat", NULL, 0, NULL);
 			}
 		}
@@ -140,6 +142,7 @@ void iKeyboard(unsigned char key)
 		else if (buttonType == 3) // Play
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
+			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			screens.push("Game");
 		}
 	}
@@ -191,6 +194,7 @@ int main()
 {
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
+	mciSendString("open \"resources//game_screen//level_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	menu.initmenubar();
