@@ -81,6 +81,12 @@ struct GameScreen
         iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_R_images[movement_index]);
         //movement_index++;
     }
+    
+    void resetMovement()
+    {
+        isMoving = false;
+        movement_index = 0;
+    }
     void handleSpecialKeyboard(unsigned char key)
     {
         // Handle special keyboard input for game controls (e.g., arrow keys for movement)
@@ -92,6 +98,8 @@ struct GameScreen
             {
                 characterPosition_Y = SCREEN_HEIGHT;
             }
+            isMoving = true;
+            movement_index++;
         }
         else if (key == GLUT_KEY_DOWN)
         {
@@ -101,6 +109,8 @@ struct GameScreen
             {
                 characterPosition_Y = 0;
             }
+            isMoving = true;
+            movement_index++;
         }
         else if (key == GLUT_KEY_LEFT)
         {
@@ -110,6 +120,8 @@ struct GameScreen
             {
                 characterPosition_X = 0;
             }
+            isMoving = true;
+            movement_index++;
         }
         else if (key == GLUT_KEY_RIGHT)
         {
@@ -121,12 +133,6 @@ struct GameScreen
             }
             isMoving = true;
             movement_index++;
-            
-        }
-        else
-        {
-            isMoving = false;
-            movement_index = 0;
         }
     }
 

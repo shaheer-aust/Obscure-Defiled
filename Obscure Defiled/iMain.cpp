@@ -177,6 +177,10 @@ void idle_animation()
 		idle_index = 0;
 	}
 }
+void reset_movement()
+{
+	game.resetMovement();
+}
 int getIdleIndex(){
 	return idle_index;
 }
@@ -193,6 +197,7 @@ int main()
 	
 	menu.initmenubar();
 	iSetTimer(200, idle_animation);
+	iSetTimer(100, reset_movement);
 	setting.initsettingbar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
