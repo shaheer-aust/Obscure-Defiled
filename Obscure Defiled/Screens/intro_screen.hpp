@@ -41,16 +41,17 @@ bool introKeyboardHandler(unsigned char key)
 {
 	if(currentPic == TOTAL_PICS - 1){
 		return true;
-	}else{
-		return false;
 	}
-	if (key == GLUT_KEY_RIGHT)
+	else if (key == GLUT_KEY_RIGHT)
 	{
 		currentPic = (currentPic + 1) % TOTAL_PICS;
 	}
 	else if (key == GLUT_KEY_LEFT)
 	{
 		currentPic = (currentPic - 1 + TOTAL_PICS) % TOTAL_PICS;
+	}
+	else{
+		return false;
 	}
 	
 }
