@@ -67,7 +67,7 @@ void iPassiveMouseMove(int mx, int my) {
 	else if (screens.top() == "Settings"){
 		setting.checkButtonHover(mx, my);
 	}
-	printf("co-ordinates: %dx%d/n", mx, my);
+	//printf("co-ordinates: %dx%d/n", mx, my);
 	
 }
 void iMouse(int button, int state, int mx, int my)
