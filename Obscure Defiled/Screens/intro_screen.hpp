@@ -39,6 +39,11 @@ void drawIntroScreen()
 
 bool introKeyboardHandler(unsigned char key)
 {
+	if(currentPic == TOTAL_PICS - 1){
+		return true;
+	}else{
+		return false;
+	}
 	if (key == GLUT_KEY_RIGHT)
 	{
 		currentPic = (currentPic + 1) % TOTAL_PICS;
@@ -47,11 +52,7 @@ bool introKeyboardHandler(unsigned char key)
 	{
 		currentPic = (currentPic - 1 + TOTAL_PICS) % TOTAL_PICS;
 	}
-	if(currentPic == TOTAL_PICS - 1){
-		return true;
-	}else{
-		return false;
-	}
+	
 }
 
 bool introMouseHandler(int button, int state, int mx, int my)
