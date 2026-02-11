@@ -34,7 +34,7 @@ struct GameScreen
     bool isJumping = false;
     double jumpVelocity = 0.0;
     double gravity = 2.0;
-    double base_gravity = 8;
+    double base_gravity = 5;
     double groundY = 100.0;
     double bg_speed = 20.0;
     double character_speed = 25.0;
@@ -133,7 +133,7 @@ struct GameScreen
             isJumping = true;
             // record the ground position to return to
             groundY = characterPosition_Y;
-            jumpVelocity = 18.0; // initial jump impulse
+            jumpVelocity = 25.0; // initial jump impulse
             gravity = base_gravity;
             jump_index = 0;
         }
