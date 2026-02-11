@@ -134,11 +134,12 @@ void iKeyboard(unsigned char key)
 		}
 		else if (buttonType == 2) // Settings
 		{
-			mciSendString("close bgsong", NULL, 0, NULL);
+			
 			screens.push("Settings");
 		}
 		else if (buttonType == 3) // Play
 		{
+			mciSendString("close bgsong", NULL, 0, NULL);
 			screens.push("Game");
 		}
 	}
@@ -153,6 +154,31 @@ void iSpecialKeyboard(unsigned char key)
 		{
 			menu.handleKeyboardNavigation(key);
 		}
+	}else if(screens.top() == "Game"){
+		// Handle game-specific special keys (e.g., arrow keys for movement)
+		if (key == GLUT_KEY_RIGHT)
+		{
+			// Handle right arrow key press in game
+			cout << "Right Arrow Pressed in Game" << endl;
+			game.updategame_screen();
+		}
+		else if (key == GLUT_KEY_LEFT)
+		{
+			// Handle left arrow key press in game
+			cout << "Left Arrow Pressed in Game" << endl;
+		}
+		else if (key == GLUT_KEY_UP)
+		{
+			// Handle up arrow key press in game
+			cout << "Up Arrow Pressed in Game" << endl;
+		}
+		else if (key == GLUT_KEY_DOWN)
+		{
+			// Handle down arrow key press in game
+			cout << "Down Arrow Pressed in Game" << endl;
+		}
+	
+		
 	}
 }
 
