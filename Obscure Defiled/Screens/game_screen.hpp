@@ -22,7 +22,7 @@ struct GameScreen
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         init_character_images();
-        iSetTimer(200, idle_animation);
+        //iSetTimer(200, idle_animation);
     }
     void init_character_images()
     {
@@ -35,18 +35,18 @@ struct GameScreen
         }
         // character_idle_images.push_back(iLoadImage("resources//Main_Character//Normal/With Knife//Idle//idle_left_1.png"));
     }
-    int idle_index = 0;
-    void idle_animation()
+    //int idle_index = 0;
+    /*void idle_animation()
     {
         idle_index++;
         if (idle_index >= character_idle_images.size())
         {
             idle_index = 0;
         }
-    }
+    }*/
     void show_character_idle()
     {
-        iShowImage(100, 100, 64, 64, character_idle_images[idle_index]);
+        iShowImage(100, 100, 64, 64, character_idle_images[0]);
     }
 
     void handleSpecialKeyboard(unsigned char key)
