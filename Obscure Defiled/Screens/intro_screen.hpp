@@ -21,12 +21,6 @@ void initIntroScreen()
 	}
 }
 
-char *captions[TOTAL_PICS] = {
-	"During the great war A knight, torn apart fighting an eastern Overlord.Thou doesn't know when the fight would end.Suddenly!?",
-	"A mysterious circle like magic warp appears. It succumbed both the Knight and the Overlord who was getting dragged by some monster-like eldrich trees. ",
-	"After landing on the ground The Knight found a glowing knife which is being DEFILED by the forest.",
-	"Then thou decided to venture the forest to get back to this hometown"};
-
 // Button dimensions
 int skipBtnX = 1160, skipBtnY = 57;
 int skipBtnW = 100, skipBtnH = 40;
@@ -36,9 +30,6 @@ void drawIntroScreen()
 	// Draw current picture
 	//iShowBMP(645, 533, storyPics[currentPic]);
 	iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, intro_images[currentPic]);
-	// Draw caption
-	iSetColor(255, 255, 255);
-	iText(348, 117, captions[currentPic], GLUT_BITMAP_HELVETICA_18);
 
 	// Draw skip button
 	iSetColor(200, 0, 0);
