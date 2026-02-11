@@ -210,6 +210,7 @@ int main()
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	
 	menu.initmenubar();
+	initIntroScreen();
 	iSetTimer(200, idle_animation);
 	iSetTimer(1000, reset_movement);
 	setting.initsettingbar();

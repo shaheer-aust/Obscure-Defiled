@@ -4,14 +4,22 @@
 #ifndef INTRO_SCREEN_H
 #define INTRO_SCREEN_H
 #define TOTAL_PICS 4
+#include <iostream>
 
+#include <vector>
+using namespace std;
 // Global state
 int currentPic = 0;
-char *storyPics[TOTAL_PICS] = {
-	"resources//Level_1//Panels//Intro//intro_1.png",
-	"resources//Level_1//Panels//Intro//intro_2.png",
-	"resources//Level_1//Panels//Intro//intro_3.png",
-	"resources//Level_1//Panels//Intro//intro_4.png"};
+vector<int> intro_images;
+void initIntroScreen()
+{
+	for (int i = 1; i <= TOTAL_PICS; i++)
+	{
+		char a[200];
+		sprintf_s(a, "resources//Level_1//Panels//Intro//intro_%d.png", i);
+		intro_images.push_back(iLoadImage(a));
+	}
+}
 
 char *captions[TOTAL_PICS] = {
 	"During the great war A knight, torn apart fighting an eastern Overlord.Thou doesn't know when the fight would end.Suddenly!?",
@@ -26,8 +34,8 @@ int skipBtnW = 100, skipBtnH = 40;
 void drawIntroScreen()
 {
 	// Draw current picture
-	iShowBMP(645, 533, storyPics[currentPic]);
-
+	//iShowBMP(645, 533, storyPics[currentPic]);
+	iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, intro_images[currentPic]);
 	// Draw caption
 	iSetColor(255, 255, 255);
 	iText(348, 117, captions[currentPic], GLUT_BITMAP_HELVETICA_18);
