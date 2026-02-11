@@ -126,14 +126,14 @@ void iKeyboard(unsigned char key)
 		{
 			cout << "Credits Button Clicked (Keyboard)" << endl;
 		}
-		else if (buttonType == 2) // Play
+		else if (buttonType == 2) // Settings
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
-			screens.push("Game");
-		}
-		else if (buttonType == 3) // Settings
-		{
 			screens.push("Settings");
+		}
+		else if (buttonType == 3) // Play
+		{
+			screens.push("Play");
 		}
 	}
 }
