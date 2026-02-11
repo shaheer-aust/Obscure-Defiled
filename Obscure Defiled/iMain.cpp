@@ -13,10 +13,11 @@ using namespace std;
 #define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
-vector<int> menu_images;
+//vector<int> menu_images;
 stack<string> screens;
 
 MenuScreen menu;
+GameScreen game;
 Setting_screen setting;
 int bgm_audio = -1;
 
@@ -28,12 +29,16 @@ void iDraw()
 
 	if (screens.top() == "Menu")
 	{
-		menu.drawMenuScreen(menu_images);
+		//
+		menu.drawMenuScreen(menu.initmenubar());
 	}
 	else if (screens.top() == "Game")
 	{
 		// Draw game screen
 		cout << "In Game Screen" << endl;
+		game.initgame_screen();
+		game.drawgame_screen();
+
 	}
 	else if (screens.top() == "Settings")
 	{
@@ -162,7 +167,7 @@ int main()
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 	
-	menu_images = menu.initmenubar();
+	
 	setting.initsettingbar();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
