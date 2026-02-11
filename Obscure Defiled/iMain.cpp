@@ -38,7 +38,6 @@ void iDraw()
 	{
 		// Draw game screen
 		cout << "In Game Screen" << endl;
-		game.initgame_screen();
 		game.drawgame_screen();
 
 	}
@@ -182,7 +181,7 @@ void iSpecialKeyboard(unsigned char key)
 		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
 		bool isend=introKeyboardHandler(key);
 		if(isend){
-			cout << "jfjhg";
+			//cout << "jfjhg";
 			screens.pop();
 		}
 	}
@@ -226,6 +225,8 @@ int main()
 	iSetTimer(1000, reset_movement);
 	iSetTimer(50, physics_update);
 	setting.initsettingbar();
+	// initialize game assets once
+	game.initgame_screen();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
