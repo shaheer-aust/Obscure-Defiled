@@ -26,7 +26,7 @@ struct MenuScreen
 	long long lastCreditsBlipTime = 0;
 	ButtonSelection currentSelectedButton = PLAY;
 	int hoveredButton = -1; // -1 = none, 0 = quit, 1 = credits, 2 = play, 3 = settings
-	vector<int> images(10);
+	vector<int> images;
 	void initmenubar()
 	{
 		

@@ -31,7 +31,7 @@ void iDraw()
 	if (screens.top() == "Menu")
 	{
 		//
-		menu.drawMenuScreen(menu_images);
+		menu.drawMenuScreen();
 	}
 	else if (screens.top() == "Game")
 	{
@@ -167,7 +167,7 @@ int main()
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
-	menu_images = menu.initmenubar();
+	menu.initmenubar();
 	
 	setting.initsettingbar();
 	screens.push("Menu");
