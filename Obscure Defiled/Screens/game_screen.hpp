@@ -246,7 +246,7 @@ struct GameScreen
             // isMoving = true;
             // movement_index++;
         }
-        else if (key == GLUT_KEY_LEFT)
+        else if (key == GLUT_KEY_LEFT || key == 'a')
         {
             // Move player left
             leftPressed = true;
@@ -260,7 +260,7 @@ struct GameScreen
             // isMoving = true;
             // movement_index++;
         }
-        else if (key == GLUT_KEY_RIGHT)
+        else if (key == GLUT_KEY_RIGHT || key == 'd')
         {
             // Move player right (forward)
             rightPressed = true;

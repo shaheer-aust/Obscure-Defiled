@@ -151,7 +151,7 @@ struct MenuScreen
 	void handleKeyboardNavigation(int specialKey)
 	{
 		// UP arrow - move to previous button
-		if (specialKey == GLUT_KEY_UP)
+		if (specialKey == GLUT_KEY_UP || specialKey == 'w')
 		{
 			if (currentSelectedButton == QUIT)
 				currentSelectedButton = CREDITS;
@@ -163,7 +163,7 @@ struct MenuScreen
 				currentSelectedButton = PLAY;
 		}
 		// DOWN arrow - move to next button
-		else if (specialKey == GLUT_KEY_DOWN)
+		else if (specialKey == GLUT_KEY_DOWN || specialKey == 's')
 		{
 			if (currentSelectedButton == QUIT)
 				currentSelectedButton = PLAY;
