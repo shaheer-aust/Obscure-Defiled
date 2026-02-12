@@ -133,6 +133,7 @@ struct GameScreen
         {
 
             isJumping = true;
+            isMoving = false;
             // record the ground position to return to
             groundY = characterPosition_Y;
             jumpVelocity = 25.0; // initial jump impulse
@@ -146,11 +147,11 @@ struct GameScreen
         if (isJumping)
         {
             if(rightPressed){
-                //characterPosition_X += character_speed;
+                characterPosition_X += character_speed;
                 isright = true;
             }
             else if(leftPressed){
-                //characterPosition_X -= character_speed;
+                characterPosition_X -= character_speed;
                 isright = false;
             }
             // apply vertical movement
