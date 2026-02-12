@@ -148,20 +148,20 @@ struct GameScreen
         {
             if (rightPressed)
             {
-                game.x -= game.bg_speed;
-                if (game.x <= -SCREEN_WIDTH)
+                x -= bg_speed;
+                if (x <= -SCREEN_WIDTH)
                 {
-                    game.x = 0;
+                    x = 0;
                 }
                 characterPosition_X += character_speed;
                 isright = true;
             }
             else if (leftPressed)
             {
-                game.x += game.bg_speed;
-                if (game.x >= SCREEN_WIDTH)
+                x += bg_speed;
+                if (x >= SCREEN_WIDTH)
                 {
-                    game.x = 0;
+                    x = 0;
                 }
                 characterPosition_X -= character_speed;
                 isright = false;
