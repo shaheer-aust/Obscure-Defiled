@@ -335,7 +335,7 @@ void enemy_movement()
 void update_attack_animation()
 {
 	if(screens.top() == "Game"){
-		game.update_attack();
+		game.hero1.update_attack();
 	}
 }
 

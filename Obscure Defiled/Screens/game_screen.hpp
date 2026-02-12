@@ -220,19 +220,7 @@ struct GameScreen
                 iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_jump_L_images[hero1.jump_index]);
         }
     }
-    void show_character_attack()
-    {
-        if (hero1.isright)
-        {
-            if (!hero1.character_attack_R_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_attack_R_images[hero1.attack_index]);
-        }
-        else
-        {
-            if (!hero1.character_attack_L_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_attack_L_images[hero1.attack_index]);
-        }
-    }
+
     void handleSpecialKeyboard(unsigned char key)
     {
         // Handle special keyboard input for game controls (e.g., arrow keys for movement)
@@ -264,24 +252,7 @@ struct GameScreen
         
         }
     }
-    void update_attack()
-    {
-        if (hero1.isAttacking)
-        {
-            hero1.attack_timer++;
-            if (hero1.attack_timer >= 2) // Show each frame for 8 ticks
-            {
-                hero1.attack_index++;
-                hero1.attack_timer = 0;
-                if (hero1.attack_index >= hero1.character_attack_R_images.size())
-                {
-                    hero1.isAttacking = false;
-                    hero1.attack_index = 0;
-                    hero1.isMoving = false;
-                }
-            }
-        }
-    }
+
 
     void drawgame_screen()
     {
@@ -293,7 +264,7 @@ struct GameScreen
         iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
         if (hero1.isAttacking)
         {
-            show_character_attack();
+            hero1.show_character_attack();
         }
         else if (hero1.isJumping)
         {

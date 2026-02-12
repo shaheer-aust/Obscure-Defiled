@@ -65,16 +65,34 @@ public:
             isMoving = false;
         }
     }
+        void update_attack()
+    {
+        if (hero1.isAttacking)
+        {
+            hero1.attack_timer++;
+            if (hero1.attack_timer >= 2) // Show each frame for 8 ticks
+            {
+                hero1.attack_index++;
+                hero1.attack_timer = 0;
+                if (hero1.attack_index >= hero1.character_attack_R_images.size())
+                {
+                    hero1.isAttacking = false;
+                    hero1.attack_index = 0;
+                    hero1.isMoving = false;
+                }
+            }
+        }
+    }
     void show_character_attack()
     {
         int currentIdx = attack_index;
         if (isright)
         {
-            //iShowImage(characterPosition_X, characterPosition_Y+100, 96, 96, character_attack_R_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y+10, 96, 96, character_attack_R_images[currentIdx]);
         }
         else
         {
-            //iShowImage(characterPosition_X, characterPosition_Y+100, 96, 96, character_attack_L_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y+10, 96, 96, character_attack_L_images[currentIdx]);
         }
     }
 };
