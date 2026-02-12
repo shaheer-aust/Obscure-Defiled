@@ -39,7 +39,7 @@ struct GameScreen
     double gravity = 2.0;
     double base_gravity = 5;
     double groundY = 100.0;
-    double bg_speed = 20.0;
+    double bg_speed = 4.0;
     double character_speed = 6;
     void initgame_screen()
     {
