@@ -234,6 +234,7 @@ void character_movement()
 {
 	if(game.rightPressed && !game.isJumping){
 		game.isMoving = true;
+		game.movement_index++;
 		game.characterPosition_X += game.character_speed;
 		if (game.characterPosition_X > SCREEN_WIDTH)
 		{
@@ -242,6 +243,7 @@ void character_movement()
 		
 	}else if(game.leftPressed && !game.isJumping){
 		game.isMoving = true;
+		game.movement_index++;
 		game.characterPosition_X -= game.character_speed;
 		if (game.characterPosition_X < 0)
 		{

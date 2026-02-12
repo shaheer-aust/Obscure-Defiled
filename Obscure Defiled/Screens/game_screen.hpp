@@ -234,6 +234,7 @@ struct GameScreen
         {
             // Move player left
             leftPressed = true;
+			isMoving = true;
             isright = false;
             //characterPosition_X -= character_speed;
             // if (characterPosition_X < 0)
@@ -241,7 +242,7 @@ struct GameScreen
             //     characterPosition_X = 0;
             // }
             //isMoving = true;
-            movement_index++;
+            //movement_index++;
         }
         else if (key == GLUT_KEY_RIGHT)
         {
@@ -253,8 +254,8 @@ struct GameScreen
             // {
             //     characterPosition_X = SCREEN_WIDTH;
             // }
-            //isMoving = true;
-            movement_index++;
+            isMoving = true;
+            //movement_index++;
             
         }
     }
