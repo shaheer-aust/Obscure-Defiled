@@ -163,9 +163,26 @@ void iKeyboard(unsigned char key)
 }			
 void iKeyboardUp(unsigned char key)
 {
-	if (key=='g')
+	if (screens.top() == "Game")
 	{
-		cout << "g released" << endl;
+		if (key == 32) // Space key released
+		{
+			game.spacePressed = false; // Stop jump when space key is released
+		}
+	}
+}
+void iSpecialKeyboardUp(unsigned char key)
+{
+	if (screens.top() == "Game")
+	{
+		if (key == GLUT_KEY_RIGHT) // Right arrow key released
+		{
+			game.rightPressed = false; // Stop moving right
+		}
+		else if (key == GLUT_KEY_LEFT) // Left arrow key released
+		{
+			game.leftPressed = false; // Stop moving left
+		}
 	}
 }
 void iSpecialKeyboard(unsigned char key)
@@ -204,10 +221,7 @@ void idle_animation()
 void reset_movement()
 {
 	game.resetMovement();
-	// Reset direction flags after movement is processed
-	game.rightPressed = false;
-	game.leftPressed = false;
-	game.spacePressed = false;
+
 }
 void physics_update()
 {

@@ -29,7 +29,9 @@ int iAnimPause[10];
 
 void iDraw();
 void iKeyboard(unsigned char);
-void iKeyboardUp(unsigned char);
+void iKeyboardUp(unsigned char);//shaheer
+void iSpecialKeyboardUp(unsigned char);
+
 void iSpecialKeyboard(unsigned char);
 void iMouseMove(int, int);
 void iPassiveMouseMove(int, int);
@@ -468,7 +470,14 @@ void keyboardUpHandlerFF(unsigned char key, int x, int y)
 {
     iKeyboardUp(key);
     glutPostRedisplay();
-}//shaheer
+}
+void keyboardUpHandlerSpecialFF(int key, int x, int y)
+{
+    iSpecialKeyboardUp(key);
+    glutPostRedisplay();
+}
+
+//shaheer
 void mouseMoveHandlerFF(int mx, int my)
 {
     iMouseX = mx;
@@ -524,6 +533,7 @@ void iStart()
     glutKeyboardFunc(keyboardHandler1FF); //normal
     glutSpecialFunc(keyboardHandler2FF); //special keys
     glutKeyboardUpFunc(keyboardUpHandlerFF);//shaheer
+    glutSpecialUpFunc(keyboardUpHandlerSpecialFF);//shaheer
     glutMouseFunc(mouseHandlerFF);
     glutMotionFunc(mouseMoveHandlerFF);
 	glutPassiveMotionFunc(mousePassiveMoveHandlerFF);
