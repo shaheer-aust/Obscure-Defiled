@@ -161,7 +161,13 @@ void iKeyboard(unsigned char key)
 		game.startJump();
 	}
 }			
-
+void iKeyboardUp(unsigned char key)
+{
+	if (key=='g')
+	{
+		cout << "g released" << endl;
+	}
+}
 void iSpecialKeyboard(unsigned char key)
 {
 	if (screens.top() == "Menu")
