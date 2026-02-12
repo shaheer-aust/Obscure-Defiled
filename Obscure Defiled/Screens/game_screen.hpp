@@ -40,7 +40,7 @@ struct GameScreen
     double base_gravity = 5;
     double groundY = 100.0;
     double bg_speed = 20.0;
-    double character_speed = 25.0;
+    double character_speed = 15;
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
@@ -146,11 +146,11 @@ struct GameScreen
         if (isJumping)
         {
             if(rightPressed){
-                characterPosition_X += character_speed;
+                //characterPosition_X += character_speed;
                 isright = true;
             }
             else if(leftPressed){
-                characterPosition_X -= character_speed;
+                //characterPosition_X -= character_speed;
                 isright = false;
             }
             // apply vertical movement
@@ -183,6 +183,7 @@ struct GameScreen
                 jumpVelocity = 0.0;
                 gravity = base_gravity;
                 jump_index = 0;
+                iKeyboard(unsigned char key);
             }
         }
     }
@@ -232,11 +233,11 @@ struct GameScreen
             // Move player left
             leftPressed = true;
             isright = false;
-            characterPosition_X -= character_speed;
-            if (characterPosition_X < 0)
-            {
-                characterPosition_X = 0;
-            }
+            //characterPosition_X -= character_speed;
+            // if (characterPosition_X < 0)
+            // {
+            //     characterPosition_X = 0;
+            // }
             isMoving = true;
             movement_index++;
         }
@@ -245,11 +246,11 @@ struct GameScreen
             // Move player right (forward)
             rightPressed = true;
             isright = true;
-            characterPosition_X += character_speed;
-            if (characterPosition_X > SCREEN_WIDTH)
-            {
-                characterPosition_X = SCREEN_WIDTH;
-            }
+            //characterPosition_X += character_speed;
+            // if (characterPosition_X > SCREEN_WIDTH)
+            // {
+            //     characterPosition_X = SCREEN_WIDTH;
+            // }
             isMoving = true;
             movement_index++;
             
