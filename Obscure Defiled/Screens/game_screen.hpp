@@ -40,7 +40,7 @@ struct GameScreen
     double base_gravity = 5;
     double groundY = 100.0;
     double bg_speed = 20.0;
-    double character_speed = 15;
+    double character_speed = 6;
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
@@ -183,7 +183,7 @@ struct GameScreen
                 jumpVelocity = 0.0;
                 gravity = base_gravity;
                 jump_index = 0;
-                iKeyboard(unsigned char key);
+                //iKeyboard(unsigned char key);
             }
         }
     }
