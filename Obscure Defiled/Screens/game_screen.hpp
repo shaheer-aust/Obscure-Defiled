@@ -50,6 +50,7 @@ struct GameScreen
         enemy1.initenemy();
         // iSetTimer(200, idle_animation);
     }
+    
     void init_character_images()
     {
         // Load character idle images

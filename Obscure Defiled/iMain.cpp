@@ -271,7 +271,10 @@ void character_movement()
 }
 
 void enemy_movement(){
-	game.enemy1.move_enemy(game.characterPosition_X);
+	if(screens.top() == "Game"){
+		game.enemy1.move_enemy(game.characterPosition_X);
+	}
+	
 }
 
 /* -------------------- MAIN -------------------- */

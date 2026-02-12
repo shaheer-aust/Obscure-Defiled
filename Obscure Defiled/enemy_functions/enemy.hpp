@@ -18,6 +18,7 @@ struct Enemy
     double enemyPosition_Y = 100.0;
     bool isright = false;
     int movement_index = 0;
+    double enemy_speed = 2.0;
     void initenemy()
     {
         init_enemy_images();
@@ -54,11 +55,21 @@ struct Enemy
     void move_enemy(double characterX)
     {
         // Simple horizontal movement logic (you can customize this)
-        enemyPosition_X -= 2.0; // Move left at a constant speed
+        // Move left at a constant speed
         // if (enemyPosition_X < -64) // If the enemy goes off-screen, reset its position
         // {
         //     enemyPosition_X = SCREEN_WIDTH;
         // }
+        if (enemyPosition_X > characterX)
+        {
+            enemyPosition_X -= enemy_speed;
+            isright = false;
+        }
+        else
+        {
+            enemyPosition_X += enemy_speed;
+            isright = true;
+        }
         movement_index++;
         if (movement_index >= enemy_idle_R_images.size())
         {
