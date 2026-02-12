@@ -45,11 +45,11 @@ struct Enemy
         int currentIdx = movement_index;
         if (isright)
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 96, 96, enemy_idle_R_images[currentIdx]);
+            iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 96, 96, enemy_idle_L_images[currentIdx]);
+            iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_L_images[currentIdx]);
         }
     }
     void move_enemy(double characterX)
