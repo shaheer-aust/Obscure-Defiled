@@ -1,5 +1,5 @@
-﻿Build started 12-02-2026 17:11:41.
-     1>Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Rebuild target(s)).
+﻿Build started 12-02-2026 17:39:17.
+     1>Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt iMain.cpp
@@ -13,16 +13,16 @@
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(12): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
                  c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(63): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(110): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(179): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(187): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(74): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(111): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(180): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(188): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\imain.cpp(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.lib" /MACHINE:X86 Debug\iMain.obj
          Obscure Defiled.vcxproj -> C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe
-     1>Done Building Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.90
+Time Elapsed 00:00:01.82

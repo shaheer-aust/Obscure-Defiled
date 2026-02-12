@@ -18,7 +18,7 @@ struct Enemy
     double enemyPosition_Y = 100.0;
     bool isright = false;
     int movement_index = 0;
-    double enemy_speed = 2.0;
+    double enemy_speed = 8.0;
     void initenemy()
     {
         init_enemy_images();
