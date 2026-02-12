@@ -60,7 +60,7 @@ struct Enemy
         // {
         //     enemyPosition_X = SCREEN_WIDTH;
         // }
-        if (enemyPosition_X > characterX)
+        if (enemyPosition_X > characterX+64)
         {
             enemyPosition_X -= enemy_speed;
             isright = false;

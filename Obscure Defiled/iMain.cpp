@@ -294,7 +294,7 @@ int main()
 	iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
 	iSetTimer(16, character_movement);
-	iSetTimer(20, enemy_movement);
+	iSetTimer(100, enemy_movement);
 	setting.initsettingbar();
 	// initialize game assets once
 	game.initgame_screen();
