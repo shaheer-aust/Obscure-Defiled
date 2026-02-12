@@ -48,7 +48,7 @@ struct GameScreen
         for (int i = 0; i <= 100; i += 10)
         {
             char a[200];
-            sprintf_s(a, "resources//Health Bar//%d percent//resize_health_bar_%d.png", i, i);
+            sprintf_s(a, "resources/Health Bar//%d Percent//resize_health_bar_%d.png", i, i);
             health_bar_images.push_back(iLoadImage(a));
         }
     }
@@ -282,7 +282,7 @@ struct GameScreen
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
-        iShowImage(10, SCREEN_HEIGHT - 50, 200, 40, health_bar_images[hero1.HeroHealth / 10]);
+        iShowImage(10, SCREEN_HEIGHT - 50, 200, 40, health_bar_images[(hero1.HeroHealth / 10)]);
         if (hero1.isJumping)
         {
             show_character_jump1();
