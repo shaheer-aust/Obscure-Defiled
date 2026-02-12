@@ -233,6 +233,7 @@ int getIdleIndex(){
 void character_movement()
 {
 	if(game.rightPressed && !game.isJumping){
+		game.x += game.bg_speed;
 		game.isMoving = true;
 		game.movement_index++;
 		game.characterPosition_X += game.character_speed;
@@ -242,6 +243,7 @@ void character_movement()
 		}
 		
 	}else if(game.leftPressed && !game.isJumping){
+		game.x -= game.bg_speed;
 		game.isMoving = true;
 		game.movement_index++;
 		game.characterPosition_X -= game.character_speed;
