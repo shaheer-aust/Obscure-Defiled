@@ -265,7 +265,7 @@ int main()
 	initIntroScreen();
 	iSetTimer(200, idle_animation);
 	iSetTimer(1000, reset_movement);
-	iSetTimer(50, physics_update);
+	iSetTimer(20, physics_update);
 	iSetTimer(16, character_movement);
 	setting.initsettingbar();
 	// initialize game assets once
