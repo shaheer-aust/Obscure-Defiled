@@ -70,11 +70,11 @@ public:
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 96, 96, character_attack_R_images[currentIdx]);
+            //iShowImage(characterPosition_X, characterPosition_Y+100, 96, 96, character_attack_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 96, 96, character_attack_L_images[currentIdx]);
+            //iShowImage(characterPosition_X, characterPosition_Y+100, 96, 96, character_attack_L_images[currentIdx]);
         }
     }
 };

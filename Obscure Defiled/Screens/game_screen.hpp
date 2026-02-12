@@ -239,7 +239,7 @@ struct GameScreen
 
         if (key == GLUT_KEY_UP)
         {
-            game.startJump();
+            startJump();
      
         }
         else if (key == GLUT_KEY_DOWN)
@@ -269,7 +269,7 @@ struct GameScreen
         if (hero1.isAttacking)
         {
             hero1.attack_timer++;
-            if (hero1.attack_timer >= 8) // Show each frame for 8 ticks
+            if (hero1.attack_timer >= 2) // Show each frame for 8 ticks
             {
                 hero1.attack_index++;
                 hero1.attack_timer = 0;
