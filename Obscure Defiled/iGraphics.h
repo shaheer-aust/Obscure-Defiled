@@ -29,6 +29,7 @@ int iAnimPause[10];
 
 void iDraw();
 void iKeyboard(unsigned char);
+void iKeyboardUp(unsigned char);
 void iSpecialKeyboard(unsigned char);
 void iMouseMove(int, int);
 void iPassiveMouseMove(int, int);
