@@ -462,7 +462,13 @@ void keyboardHandler2FF(int key, int x, int y)
     iSpecialKeyboard(key);
     glutPostRedisplay();
 }
-
+//shaheer
+void keyboardUpHandlerFF(unsigned char key, int x, int y)
+{
+    iKeyboardUp(key);
+    glutPostRedisplay();
+}
+// end shaheer
 void mouseMoveHandlerFF(int mx, int my)
 {
     iMouseX = mx;
@@ -517,6 +523,7 @@ void iStart()
     glutDisplayFunc(displayFF) ;
     glutKeyboardFunc(keyboardHandler1FF); //normal
     glutSpecialFunc(keyboardHandler2FF); //special keys
+    glutKeyboardUpFunc(keyboardUpHandlerFF);//shaheer
     glutMouseFunc(mouseHandlerFF);
     glutMotionFunc(mouseMoveHandlerFF);
 	glutPassiveMotionFunc(mousePassiveMoveHandlerFF);
