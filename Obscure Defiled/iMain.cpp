@@ -16,7 +16,7 @@ using namespace std;
 #define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
-// vector<int> menu_images;
+//vector<int> menu_images;
 stack<string> screens;
 
 MenuScreen menu;
@@ -38,47 +38,45 @@ void iDraw()
 	else if (screens.top() == "Game")
 	{
 		// Draw game screen
-
+		
 		game.drawgame_screen();
+
 	}
 	else if (screens.top() == "Settings")
 	{
 		// Draw settings screen
 		setting.drawsetting_screen();
-	}
-	else if (screens.top() == "Intro")
+	}else if (screens.top() == "Intro")
 	{
 		drawIntroScreen();
 	}
 }
 
 /* -------------------- INPUT -------------------- */
-void iMouseMove(int mx, int my)
-{
+void iMouseMove(int mx, int my) {
 	if (screens.top() == "Menu")
 	{
-		// cout << mx << " " << my << endl;
+		//cout << mx << " " << my << endl;
+		
 	}
 }
-void iPassiveMouseMove(int mx, int my)
-{
-	// cout << mx << "**" << my << endl;
-	if (screens.top() == "Menu")
-	{
+void iPassiveMouseMove(int mx, int my) {
+	//cout << mx << "**" << my << endl;
+	if (screens.top() == "Menu"){
 		menu.checkButtonHover(mx, my);
 	}
-	else if (screens.top() == "Settings")
-	{
+	else if (screens.top() == "Settings"){
 		setting.checkButtonHover(mx, my);
 	}
-	// printf("co-ordinates: %dx%d/n", mx, my);
+	//printf("co-ordinates: %dx%d/n", mx, my);
+	
 }
 void iMouse(int button, int state, int mx, int my)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
-		// Handle menu selection based on mouse position
+		//Handle menu selection based on mouse position
 		if (menu.isPlayButtonClicked(mx, my))
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
@@ -94,9 +92,9 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			exit(0);
-		}
-		else if (menu.isCreditsButtonClicked(mx, my))
+		}else if (menu.isCreditsButtonClicked(mx, my))
 		{
+			
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Settings")
@@ -110,12 +108,11 @@ void iMouse(int button, int state, int mx, int my)
 			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
 			// }
 		}
-	}
-	else if (state == GLUT_DOWN && screens.top() == "Intro")
+	}else if (state == GLUT_DOWN && screens.top() == "Intro")
 	{
 		if (introMouseHandler(button, state, mx, my))
 		{
-			currentPic = 0;
+			currentPic=0;
 			screens.pop(); // Exit intro screen
 		}
 	}
@@ -138,9 +135,9 @@ void iKeyboard(unsigned char key)
 	}
 	else if (key == 13 && screens.top() == "Menu") // Enter key
 	{
-		//Handle selection based on currently selected button
+		// Handle selection based on currently selected button
 		int buttonType = menu.getSelectedButtonType();
-
+		
 		if (buttonType == 0) // Quit
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
@@ -152,7 +149,7 @@ void iKeyboard(unsigned char key)
 		}
 		else if (buttonType == 2) // Settings
 		{
-
+			
 			screens.push("Settings");
 		}
 		else if (buttonType == 3) // Play
@@ -162,27 +159,26 @@ void iKeyboard(unsigned char key)
 			screens.push("Game");
 			screens.push("Intro");
 		}
+	}else if(key == 32 && screens.top() == "Game"){// SPACE key to jump
+		game.startJump();
 	}
-	else if (screens.top() == "Game")
-	{ // SPACE key to jump
-		if(key == 32)
-		{
-			game.startJump();
+	else if(screens.top() == "Game"){
+		// Handle WASD keys for game movement
+		if(key == 'w' || key == 'W'){
+			game.startJump(); // W key to jump
 		}
-		game.handleSpecialKeyboard(key);
-	}
-	else if (screens.top() == "Intro")
-	{
-		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
-		bool isend = introKeyboardHandler(key);
-		if (isend)
-		{
-			// cout << "jfjhg";
-			currentPic = 0;
-			screens.pop();
+		else if(key == 'a' || key == 'A'){
+			game.leftPressed = true;
+			game.hero1.isMoving = true;
+			game.hero1.isright = false;
+		}
+		else if(key == 'd' || key == 'D'){
+			game.rightPressed = true;
+			game.hero1.isright = true;
+			game.hero1.isMoving = true;
 		}
 	}
-}
+}			
 void iKeyboardUp(unsigned char key)
 {
 	if (screens.top() == "Game")
@@ -191,13 +187,13 @@ void iKeyboardUp(unsigned char key)
 		{
 			game.spacePressed = false; // Stop jump when space key is released
 		}
-		if (key == 'd') // Right arrow key released
-		{
-			game.rightPressed = false; // Stop moving right
-		}
-		else if (key == 'a') // Left arrow key released
+		else if (key == 'a' || key == 'A') // A key released
 		{
 			game.leftPressed = false; // Stop moving left
+		}
+		else if (key == 'd' || key == 'D') // D key released
+		{
+			game.rightPressed = false; // Stop moving right
 		}
 	}
 }
@@ -224,20 +220,16 @@ void iSpecialKeyboard(unsigned char key)
 		{
 			menu.handleKeyboardNavigation(key);
 		}
-	}
-	else if (screens.top() == "Game")
-	{
+	}else if(screens.top() == "Game"){
 		// Handle game-specific special keys (e.g., arrow keys for movement)
 		game.handleSpecialKeyboard(key);
-	}
-	else if (screens.top() == "Intro")
-	{
+	
+	}else if(screens.top() == "Intro"){
 		// Handle intro screen navigation (e.g., arrow keys to switch pictures)
-		bool isend = introKeyboardHandler(key);
-		if (isend)
-		{
-			// cout << "jfjhg";
-			currentPic = 0;
+		bool isend=introKeyboardHandler(key);
+		if(isend){
+			//cout << "jfjhg";
+			currentPic=0;
 			screens.pop();
 		}
 	}
@@ -256,19 +248,18 @@ void idle_animation()
 void reset_movement()
 {
 	game.resetMovement();
+
 }
 void physics_update()
 {
 	game.updatePhysics();
 }
-int getIdleIndex()
-{
+int getIdleIndex(){
 	return idle_index;
 }
 void character_movement()
 {
-	if (game.rightPressed && !game.hero1.isJumping)
-	{
+	if(game.rightPressed && !game.hero1.isJumping){
 		game.x -= game.bg_speed;
 		if (game.x <= -SCREEN_WIDTH)
 		{
@@ -277,13 +268,12 @@ void character_movement()
 		game.hero1.isMoving = true;
 		game.hero1.movement_index++;
 		game.hero1.characterPosition_X += game.hero1.character_speed;
-		if (game.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
+		if (game.hero1.characterPosition_X >= SCREEN_WIDTH-70)
 		{
-			game.hero1.characterPosition_X = SCREEN_WIDTH - 70;
+			game.hero1.characterPosition_X = SCREEN_WIDTH-70;
 		}
-	}
-	else if (game.leftPressed && !game.hero1.isJumping)
-	{
+		
+	}else if(game.leftPressed && !game.hero1.isJumping){
 		game.x += game.bg_speed;
 		if (game.x >= SCREEN_WIDTH)
 		{
@@ -296,26 +286,23 @@ void character_movement()
 		{
 			game.hero1.characterPosition_X = 0;
 		}
-	}
-	else if (game.hero1.isJumping)
-	{
+		
+	}else if(game.hero1.isJumping){
 		game.hero1.isMoving = false;
-	}
-	else
-	{
+	}else{
 		game.hero1.isMoving = false;
 	}
 }
 
-void enemy_movement()
-{
-	if (screens.top() == "Game")
-	{
+void enemy_movement(){
+	if(screens.top() == "Game"){
 		game.enemy1.move_enemy(game.hero1.characterPosition_X);
 	}
+	
 }
 
 /* -------------------- MAIN -------------------- */
+
 
 int main()
 {
@@ -324,7 +311,7 @@ int main()
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
-
+	
 	menu.initmenubar();
 	initIntroScreen();
 	iSetTimer(200, idle_animation);
@@ -339,11 +326,9 @@ int main()
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
 	{
-
+		
 		mciSendString("play bgsong repeat", NULL, 0, NULL);
-	}
-	else if (screens.top() == "Game")
-	{
+	}else if(screens.top() == "Game"){
 		mciSendString("play gamebg repeat", NULL, 0, NULL);
 	}
 
