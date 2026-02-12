@@ -4,6 +4,7 @@
 #include "Screens\setting_screen.hpp"
 #include "Screens\game_screen.hpp"
 #include "Screens\intro_screen.hpp"
+#include "enemy_functions\enemy.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -111,6 +112,7 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		if (introMouseHandler(button, state, mx, my))
 		{
+			currentPic=0;
 			screens.pop(); // Exit intro screen
 		}
 	}
@@ -203,6 +205,7 @@ void iSpecialKeyboard(unsigned char key)
 		bool isend=introKeyboardHandler(key);
 		if(isend){
 			//cout << "jfjhg";
+			currentPic=0;
 			screens.pop();
 		}
 	}
@@ -266,7 +269,14 @@ void character_movement()
 		game.isMoving = false;
 	}
 }
+
+void enemy_movement(){
+	game.enemy1.move_enemy(game.characterPosition_X);
+}
+
 /* -------------------- MAIN -------------------- */
+
+
 int main()
 {
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
@@ -281,6 +291,7 @@ int main()
 	iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
 	iSetTimer(16, character_movement);
+	iSetTimer(20, enemy_movement);
 	setting.initsettingbar();
 	// initialize game assets once
 	game.initgame_screen();

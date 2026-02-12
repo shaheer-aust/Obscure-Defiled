@@ -12,7 +12,7 @@ extern int getIdleIndex();
 #define BUTTON_HEIGHT 62
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
-
+#include "enemy_functions\enemy.hpp";
 #include <vector>
 using namespace std;
 struct GameScreen
@@ -24,6 +24,7 @@ struct GameScreen
     vector<int> character_run_R_images;
     vector<int> character_jump_R_images;
     vector<int> character_jump_L_images;
+    Enemy enemy1;
     bool spacePressed = false;
     bool rightPressed = false;
     bool leftPressed = false;
@@ -46,6 +47,7 @@ struct GameScreen
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         init_character_images();
         groundY = characterPosition_Y;
+        enemy1.initenemy();
         // iSetTimer(200, idle_animation);
     }
     void init_character_images()
