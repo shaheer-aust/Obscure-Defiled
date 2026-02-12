@@ -292,6 +292,7 @@ struct GameScreen
         {
             show_character_idle();
         }
+		enemy1.show_enemy_moving();
     }
 };
 
