@@ -123,7 +123,7 @@ struct GameScreen
 
     void resetMovement()
     {
-        //isMoving = false;
+        // isMoving = false;
         movement_index = 0;
     }
 
@@ -146,11 +146,23 @@ struct GameScreen
     {
         if (isJumping)
         {
-            if(rightPressed){
+            if (rightPressed)
+            {
+                game.x -= game.bg_speed;
+                if (game.x <= -SCREEN_WIDTH)
+                {
+                    game.x = 0;
+                }
                 characterPosition_X += character_speed;
                 isright = true;
             }
-            else if(leftPressed){
+            else if (leftPressed)
+            {
+                game.x += game.bg_speed;
+                if (game.x >= SCREEN_WIDTH)
+                {
+                    game.x = 0;
+                }
                 characterPosition_X -= character_speed;
                 isright = false;
             }
@@ -185,7 +197,7 @@ struct GameScreen
                 jumpVelocity = 0.0;
                 gravity = base_gravity;
                 jump_index = 0;
-                //iKeyboard(unsigned char key);
+                // iKeyboard(unsigned char key);
             }
         }
     }
@@ -234,29 +246,28 @@ struct GameScreen
         {
             // Move player left
             leftPressed = true;
-			isMoving = true;
+            isMoving = true;
             isright = false;
-            //characterPosition_X -= character_speed;
-            // if (characterPosition_X < 0)
-            // {
-            //     characterPosition_X = 0;
-            // }
-            //isMoving = true;
-            //movement_index++;
+            // characterPosition_X -= character_speed;
+            //  if (characterPosition_X < 0)
+            //  {
+            //      characterPosition_X = 0;
+            //  }
+            // isMoving = true;
+            // movement_index++;
         }
         else if (key == GLUT_KEY_RIGHT)
         {
             // Move player right (forward)
             rightPressed = true;
             isright = true;
-            //characterPosition_X += character_speed;
-            // if (characterPosition_X > SCREEN_WIDTH)
-            // {
-            //     characterPosition_X = SCREEN_WIDTH;
-            // }
+            // characterPosition_X += character_speed;
+            //  if (characterPosition_X > SCREEN_WIDTH)
+            //  {
+            //      characterPosition_X = SCREEN_WIDTH;
+            //  }
             isMoving = true;
-            //movement_index++;
-            
+            // movement_index++;
         }
     }
 
