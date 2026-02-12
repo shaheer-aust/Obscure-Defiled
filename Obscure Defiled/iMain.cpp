@@ -235,44 +235,44 @@ int getIdleIndex(){
 }
 void character_movement()
 {
-	if(game.rightPressed && !game.isJumping){
+	if(game.rightPressed && !game.hero1.isJumping){
 		game.x -= game.bg_speed;
 		if (game.x <= -SCREEN_WIDTH)
 		{
 			game.x = 0;
 		}
-		game.isMoving = true;
-		game.movement_index++;
-		game.characterPosition_X += game.character_speed;
-		if (game.characterPosition_X >= SCREEN_WIDTH-70)
+		game.hero1.isMoving = true;
+		game.hero1.movement_index++;
+		game.hero1.characterPosition_X += game.hero1.character_speed;
+		if (game.hero1.characterPosition_X >= SCREEN_WIDTH-70)
 		{
-			game.characterPosition_X = SCREEN_WIDTH-70;
+			game.hero1.characterPosition_X = SCREEN_WIDTH-70;
 		}
 		
-	}else if(game.leftPressed && !game.isJumping){
+	}else if(game.leftPressed && !game.hero1.isJumping){
 		game.x += game.bg_speed;
 		if (game.x >= SCREEN_WIDTH)
 		{
 			game.x = 0;
 		}
-		game.isMoving = true;
-		game.movement_index++;
-		game.characterPosition_X -= game.character_speed;
-		if (game.characterPosition_X < 0)
+		game.hero1.isMoving = true;
+		game.hero1.movement_index++;
+		game.hero1.characterPosition_X -= game.hero1.character_speed;
+		if (game.hero1.characterPosition_X < 0)
 		{
-			game.characterPosition_X = 0;
+			game.hero1.characterPosition_X = 0;
 		}
 		
-	}else if(game.isJumping){
-		game.isMoving = false;
+	}else if(game.hero1.isJumping){
+		game.hero1.isMoving = false;
 	}else{
-		game.isMoving = false;
+		game.hero1.isMoving = false;
 	}
 }
 
 void enemy_movement(){
 	if(screens.top() == "Game"){
-		game.enemy1.move_enemy(game.characterPosition_X);
+		game.enemy1.move_enemy(game.hero1.characterPosition_X);
 	}
 	
 }

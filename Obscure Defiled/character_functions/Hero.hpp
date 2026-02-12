@@ -35,6 +35,6 @@ public:
             HeroHealth = 0;
         }
     }
-}
+};
 
 #endif

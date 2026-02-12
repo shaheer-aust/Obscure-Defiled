@@ -107,7 +107,7 @@ struct GameScreen
         }
         if (hero1.isright)
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 64, 64, hero1.character_run_R_images[movement_index]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 64, 64, hero1.character_run_R_images[hero1.movement_index]);
         }
         else
         {

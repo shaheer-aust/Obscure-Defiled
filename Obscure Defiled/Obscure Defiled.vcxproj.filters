@@ -35,5 +35,8 @@
     <ClInclude Include="enemy_functions\enemy.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="character_functions\Hero.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
