@@ -123,7 +123,7 @@ struct GameScreen
 
     void resetMovement()
     {
-        isMoving = false;
+        //isMoving = false;
         movement_index = 0;
     }
 
@@ -181,6 +181,7 @@ struct GameScreen
             {
                 characterPosition_Y = groundY;
                 isJumping = false;
+                isMoving = true;
                 jumpVelocity = 0.0;
                 gravity = base_gravity;
                 jump_index = 0;
@@ -239,7 +240,7 @@ struct GameScreen
             // {
             //     characterPosition_X = 0;
             // }
-            isMoving = true;
+            //isMoving = true;
             movement_index++;
         }
         else if (key == GLUT_KEY_RIGHT)
@@ -252,7 +253,7 @@ struct GameScreen
             // {
             //     characterPosition_X = SCREEN_WIDTH;
             // }
-            isMoving = true;
+            //isMoving = true;
             movement_index++;
             
         }

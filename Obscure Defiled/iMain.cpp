@@ -233,19 +233,21 @@ int getIdleIndex(){
 void character_movement()
 {
 	if(game.rightPressed && !game.isJumping){
+		game.isMoving = true;
 		game.characterPosition_X += game.character_speed;
 		if (game.characterPosition_X > SCREEN_WIDTH)
 		{
 			game.characterPosition_X = SCREEN_WIDTH;
 		}
-		game.isMoving = true;
+		
 	}else if(game.leftPressed && !game.isJumping){
+		game.isMoving = true;
 		game.characterPosition_X -= game.character_speed;
 		if (game.characterPosition_X < 0)
 		{
 			game.characterPosition_X = 0;
 		}
-		game.isMoving = true;
+		
 	}else if(game.isJumping){
 		game.isMoving = false;
 	}else{
