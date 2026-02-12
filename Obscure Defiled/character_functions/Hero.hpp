@@ -67,18 +67,18 @@ public:
     }
         void update_attack()
     {
-        if (hero1.isAttacking)
+        if (isAttacking)
         {
-            hero1.attack_timer++;
-            if (hero1.attack_timer >= 2) // Show each frame for 8 ticks
+            attack_timer++;
+            if (attack_timer >= 2) // Show each frame for 8 ticks
             {
-                hero1.attack_index++;
-                hero1.attack_timer = 0;
-                if (hero1.attack_index >= hero1.character_attack_R_images.size())
+                attack_index++;
+                attack_timer = 0;
+                if (attack_index >= character_attack_R_images.size())
                 {
-                    hero1.isAttacking = false;
-                    hero1.attack_index = 0;
-                    hero1.isMoving = false;
+                    isAttacking = false;
+                    attack_index = 0;
+                    isMoving = false;
                 }
             }
         }
