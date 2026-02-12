@@ -230,8 +230,26 @@ void physics_update()
 int getIdleIndex(){
 	return idle_index;
 }
-
-
+void character_movement()
+{
+	if(game.rightPressed){
+		game.characterPosition_X += game.character_speed;
+		if (game.characterPosition_X > SCREEN_WIDTH)
+		{
+			game.characterPosition_X = SCREEN_WIDTH;
+		}
+		game.isMoving = true;
+	}else if(game.leftPressed){
+		game.characterPosition_X -= game.character_speed;
+		if (game.characterPosition_X < 0)
+		{
+			game.characterPosition_X = 0;
+		}
+		game.isMoving = true;
+	}else{
+		game.isMoving = false;
+	}
+}
 /* -------------------- MAIN -------------------- */
 int main()
 {
@@ -246,6 +264,7 @@ int main()
 	iSetTimer(200, idle_animation);
 	iSetTimer(1000, reset_movement);
 	iSetTimer(50, physics_update);
+	iSetTimer(50, character_movement);
 	setting.initsettingbar();
 	// initialize game assets once
 	game.initgame_screen();

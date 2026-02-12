@@ -121,10 +121,6 @@ struct GameScreen
         // movement_index++;
     }
 
-    void show_character_jump()
-    {
-    }
-
     void resetMovement()
     {
         isMoving = false;
