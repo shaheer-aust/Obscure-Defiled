@@ -103,7 +103,7 @@ struct GameScreen
         if (hero1.movement_index >= hero1.character_run_R_images.size())
         {
 
-            movement_index = 0;
+            hero1.movement_index = 0;
         }
         if (hero1.isright)
         {
@@ -111,7 +111,7 @@ struct GameScreen
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, hero1.character_run_L_images[movement_index]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 64, 64, hero1.character_run_L_images[hero1.movement_index]);
         }
         // movement_index++;
     }
@@ -119,7 +119,7 @@ struct GameScreen
     void resetMovement()
     {
         // isMoving = false;
-        movement_index = 0;
+        hero1.movement_index = 0;
     }
 
     void startJump()
@@ -133,7 +133,7 @@ struct GameScreen
             groundY = hero1.characterPosition_Y;
             jumpVelocity = 25.0; // initial jump impulse
             gravity = base_gravity;
-            jump_index = 0;
+            hero1.jump_index = 0;
         }
     }
 
@@ -149,7 +149,7 @@ struct GameScreen
                     x = 0;
                 }
                 hero1.characterPosition_X += hero1.character_speed;
-                isright = true;
+                hero1.isright = true;
             }
             else if (leftPressed)
             {
