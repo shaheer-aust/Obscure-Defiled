@@ -169,6 +169,7 @@ void iKeyboard(unsigned char key)
 		{
 			game.startJump();
 		}
+		game.handleSpecialKeyboard(key);
 	}
 	else if (screens.top() == "Intro")
 	{
