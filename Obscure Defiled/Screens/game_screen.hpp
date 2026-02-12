@@ -41,6 +41,7 @@ struct GameScreen
         groundY = hero1.characterPosition_Y;
         enemy1.initenemy();
         init_health_bar_images();
+        hero1.init_fighting_images();
         // iSetTimer(200, idle_animation);
     }
     void init_health_bar_images()
@@ -191,7 +192,6 @@ struct GameScreen
                     hero1.jump_index = 0;
                 }
             }
-
             // landing check
             if (hero1.characterPosition_Y <= groundY)
             {
@@ -201,7 +201,7 @@ struct GameScreen
                 jumpVelocity = 0.0;
                 gravity = base_gravity;
                 hero1.jump_index = 0;
-                // iKeyboard(unsigned char key);
+                
             }
         }
     }
@@ -220,58 +220,66 @@ struct GameScreen
                 iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_jump_L_images[hero1.jump_index]);
         }
     }
+    void show_character_attack()
+    {
+        if (hero1.isright)
+        {
+            if (!hero1.character_attack_R_images.empty())
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_attack_R_images[hero1.attack_index]);
+        }
+        else
+        {
+            if (!hero1.character_attack_L_images.empty())
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_attack_L_images[hero1.attack_index]);
+        }
+    }
     void handleSpecialKeyboard(unsigned char key)
     {
         // Handle special keyboard input for game controls (e.g., arrow keys for movement)
 
         if (key == GLUT_KEY_UP)
         {
-            // Move player up
-            // characterPosition_Y += character_speed;
-            // if (characterPosition_Y > SCREEN_HEIGHT)
-            // {
-            //     characterPosition_Y = SCREEN_HEIGHT;
-            // }
-            // isMoving = true;
-            // movement_index++;
+            game.startJump();
+     
         }
         else if (key == GLUT_KEY_DOWN)
         {
-            // Move player down
-            // characterPosition_Y -= character_speed;
-            // if (characterPosition_Y < 0)
-            // {
-            //     characterPosition_Y = 0;
-            // }
-            // isMoving = true;
-            // movement_index++;
+      
         }
-        else if (key == GLUT_KEY_LEFT || key == 'a')
+        else if (key == GLUT_KEY_LEFT)
         {
-            // Move player left
+         
             leftPressed = true;
             hero1.isMoving = true;
             hero1.isright = false;
-            // characterPosition_X -= character_speed;
-            //  if (characterPosition_X < 0)
-            //  {
-            //      characterPosition_X = 0;
-            //  }
-            // isMoving = true;
-            // movement_index++;
+          
         }
-        else if (key == GLUT_KEY_RIGHT || key == 'd')
+        else if (key == GLUT_KEY_RIGHT)
         {
-            // Move player right (forward)
+            
             rightPressed = true;
             hero1.isright = true;
-            // characterPosition_X += character_speed;
-            //  if (characterPosition_X > SCREEN_WIDTH)
-            //  {
-            //      characterPosition_X = SCREEN_WIDTH;
-            //  }
+      
             hero1.isMoving = true;
-            // movement_index++;
+        
+        }
+    }
+    void update_attack()
+    {
+        if (hero1.isAttacking)
+        {
+            hero1.attack_timer++;
+            if (hero1.attack_timer >= 8) // Show each frame for 8 ticks
+            {
+                hero1.attack_index++;
+                hero1.attack_timer = 0;
+                if (hero1.attack_index >= hero1.character_attack_R_images.size())
+                {
+                    hero1.isAttacking = false;
+                    hero1.attack_index = 0;
+                    hero1.isMoving = false;
+                }
+            }
         }
     }
 
@@ -283,7 +291,11 @@ struct GameScreen
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
         iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
-        if (hero1.isJumping)
+        if (hero1.isAttacking)
+        {
+            show_character_attack();
+        }
+        else if (hero1.isJumping)
         {
             show_character_jump1();
         }

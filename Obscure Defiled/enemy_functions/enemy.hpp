@@ -16,6 +16,7 @@ struct Enemy
     vector<int> enemy_idle_L_images;
     double enemyPosition_X = SCREEN_WIDTH-64;
     double enemyPosition_Y = 100.0;
+    double enemyHealth = 100.0;
     bool isright = false;
     int movement_index = 0;
     double enemy_speed = 8.0;
