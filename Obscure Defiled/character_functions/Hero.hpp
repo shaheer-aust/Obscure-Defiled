@@ -12,7 +12,7 @@ using namespace std;
 class Hero
 {
 public:
-    double HeroHealth = 100.0;
+    double HeroHealth = 50.0;
     vector<int> character_idle_R_images;
     vector<int> character_idle_L_images;
     vector<int> character_run_L_images;
