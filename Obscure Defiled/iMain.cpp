@@ -354,6 +354,7 @@ void enemy_movement()
 	if (screens.top() == "Game")
 	{
 		game.enemy1.move_enemy(game.hero1);
+		game.enemy2.move_enemy(game.hero1);
 	}
 }
 

@@ -21,29 +21,55 @@ struct Enemy
     bool isright = false;
     int movement_index = 0;
     double enemy_speed = 8.0;
-    void initenemy()
+    bool isActive = true; // Whether this enemy is currently active in the game
+    int enemyType = 1; // 1 for Small enemy 1, 2 for Small enemy 2
+    
+    void initenemy(int type = 1)
     {
+        enemyType = type;
         init_enemy_images();
     }
     void init_enemy_images()
     {
-        // Load enemy idle images
-        for (int i = 1; i <= 4; i++)
+        // Load enemy images based on type
+        if (enemyType == 1)
         {
-            char a[200];
-            sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//right view//resize_right_walking_%d.png", i,i);
-            enemy_idle_R_images.push_back(iLoadImage(a));
+            // Load Small enemy 1 walking images
+            for (int i = 1; i <= 4; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//right view//resize_right_walking_%d.png", i,i);
+                enemy_idle_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 1; i <= 4; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//left view//resize_left_walking_%d.png", i,i);
+                enemy_idle_L_images.push_back(iLoadImage(a));
+            }
         }
-        for (int i = 1; i <= 4; i++)
+        else if (enemyType == 2)
         {
-            char a[200];
-            sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//left view//resize_left_walking_%d.png", i,i);
-            enemy_idle_L_images.push_back(iLoadImage(a));
+            // Load Small enemy 2 walking images
+            for (int i = 1; i <= 3; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources//Enemy//level_1//Small enemy 2//Walking//Walking %d//right view//resize_green_walking_%d_right.png", i,i);
+                enemy_idle_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 1; i <= 3; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources//Enemy//level_1//Small enemy 2//Walking//Walking %d//left view//resize_green_walking_%d_left.png", i,i);
+                enemy_idle_L_images.push_back(iLoadImage(a));
+            }
         }
        
     }
     void show_enemy_moving()
     {
+        if (!isActive) return; // Don't show inactive enemies
+        
         int currentIdx = movement_index;
         if (isright)
         {
@@ -56,6 +82,8 @@ struct Enemy
     }
     void move_enemy(Hero& hero1)
     {
+        if (!isActive) return; // Don't move inactive enemies
+        
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
 		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){

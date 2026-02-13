@@ -21,6 +21,7 @@ struct GameScreen
     vector<int> images;
     vector<int> health_bar_images;
     Enemy enemy1;
+    Enemy enemy2;
     Hero hero1;
     bool spacePressed = false;
     bool rightPressed = false;
@@ -33,13 +34,16 @@ struct GameScreen
     double base_gravity = 5;
     double groundY = 100.0;
     double bg_speed = 4.0;
+    bool enemy2Spawned = false; // Track if enemy2 has been spawned
  
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         init_character_images();
         groundY = hero1.characterPosition_Y;
-        enemy1.initenemy();
+        enemy1.initenemy(1); // Initialize Small enemy 1
+        enemy2.initenemy(2); // Initialize Small enemy 2
+        enemy2.isActive = false; // Start with enemy2 inactive
         init_health_bar_images();
         hero1.init_fighting_images();
         hero1.init_idle_hit_images();
@@ -151,6 +155,13 @@ struct GameScreen
 
     void updatePhysics()
     {
+        // Spawn enemy2 when hero reaches halfway across the screen
+        if (!enemy2Spawned && hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+        {
+            enemy2.isActive = true;
+            enemy2Spawned = true;
+        }
+
         if (hero1.isJumping)
         {
             if (rightPressed)
@@ -286,6 +297,7 @@ struct GameScreen
             show_character_idle();
         }
 		enemy1.show_enemy_moving();
+        enemy2.show_enemy_moving();
     }
 };
 
