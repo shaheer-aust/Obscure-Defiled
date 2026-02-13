@@ -148,6 +148,8 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		if (credit.isBackButtonClicked(mx, my))
 		{
+			mciSendString("close creditbg", NULL, 0, NULL);
+			mciSendString("play bgsong repeat", NULL, 0, NULL);
 			screens.pop();
 		}
 	}
