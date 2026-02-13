@@ -42,16 +42,20 @@ struct Credit_screen
 		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 		long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
-		if (isBackButtonClicked(mx, my) && !lastFrameBackClicked)
+		if (isBackButtonClicked(mx, my))
 		{
-			if (currentTime - lastBackBlipTime > HOVER_COOLDOWN)
+			hoveredButton = 0;
+			if (!lastFrameBackClicked)
 			{
-				mciSendString("play ggsong from 0", NULL, 0, NULL);
-				lastBackBlipTime = currentTime;
+				if (currentTime - lastBackBlipTime > HOVER_COOLDOWN)
+				{
+					mciSendString("play ggsong from 0", NULL, 0, NULL);
+					lastBackBlipTime = currentTime;
+				}
+				lastFrameBackClicked = true;
 			}
-			lastFrameBackClicked = true;
 		}
-		else if (!isBackButtonClicked(mx, my))
+		else
 		{
 			lastFrameBackClicked = false;
 		}

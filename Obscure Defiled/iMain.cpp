@@ -79,6 +79,9 @@ void iPassiveMouseMove(int mx, int my)
 	else if (screens.top() == "Settings")
 	{
 		setting.checkButtonHover(mx, my);
+	}else if (screens.top() == "Credits")
+	{
+		credit.checkButtonHover(mx, my);
 	}
 	// printf("co-ordinates: %dx%d/n", mx, my);
 }
@@ -363,6 +366,7 @@ int main()
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
+	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 
@@ -388,7 +392,10 @@ int main()
 	{
 		mciSendString("play gamebg repeat", NULL, 0, NULL);
 	}
-
+	else if (screens.top() == "Credits")
+	{
+		mciSendString("play creditbg repeat", NULL, 0, NULL);
+	}
 	iStart();
 	return 0;
 }
