@@ -20,8 +20,10 @@ struct GameScreen
 {
     vector<int> images;
     vector<int> health_bar_images;
+    vector<int> boss_health_bar_images;
     Enemy enemy1;
     Enemy enemy2;
+    Boss boss;
     Hero hero1;
     bool spacePressed = false;
     bool rightPressed = false;
@@ -35,6 +37,7 @@ struct GameScreen
     double groundY = 100.0;
     double bg_speed = 4.0;
     bool enemy2Spawned = false; // Track if enemy2 has been spawned
+    bool bossSpawned = false; // Track if boss has been spawned
  
     void initgame_screen()
     {
@@ -45,11 +48,24 @@ struct GameScreen
         enemy2.initenemy(2); // Initialize Small enemy 2
         enemy2.isActive = false; // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
+        boss.initboss(); // Initialize boss
+        boss.isActive = false; // Start with boss inactive
         init_health_bar_images();
+        init_boss_health_bar_images();
         hero1.init_fighting_images();
         hero1.init_idle_hit_images();
 		hero1.HeroHealth = 100;
         // iSetTimer(200, idle_animation);
+    }
+    void init_boss_health_bar_images()
+    {
+        for (int i = 0; i <= 100; i += 20)
+        {
+            char a[200];
+            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level 1 boss enemy health bar/Enemy_health_bar_100.png
+            sprintf_s(a, "resources//Level 1 boss enemy health bar//Enemy_health_bar_%d.png", i);
+            boss_health_bar_images.push_back(iLoadImage(a));
+        }
     }
     void init_health_bar_images()
     {
@@ -161,6 +177,13 @@ struct GameScreen
         {
             enemy2.isActive = true;
             enemy2Spawned = true;
+        }
+        
+        // Spawn boss when hero reaches 75% across the screen
+        if (!bossSpawned && hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
+        {
+            boss.isActive = true;
+            bossSpawned = true;
         }
 
         if (hero1.isJumping)
@@ -277,6 +300,16 @@ struct GameScreen
         // Additional drawing code for settings can be added here
         //cout << "Hero Health: " << hero1.HeroHealth << endl;
         iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
+        
+        // Draw boss health bar if boss is active
+        if (boss.isActive && !boss_health_bar_images.empty())
+        {
+            int bossHealthPercent = (int)((boss.bossHealth / boss.maxBossHealth) * 100);
+            if (bossHealthPercent < 0) bossHealthPercent = 0;
+            if (bossHealthPercent > 100) bossHealthPercent = 100;
+            iShowImage(20, SCREEN_HEIGHT - 150, 275, 200, boss_health_bar_images[(bossHealthPercent / 20)]);
+        }
+        
         if (hero1.isAttacking)
         {
             hero1.show_character_attack();
@@ -297,8 +330,9 @@ struct GameScreen
         {
             show_character_idle();
         }
-		enemy1.show_enemy_moving();
-        enemy2.show_enemy_moving();
+		//enemy1.show_enemy_moving();
+        //enemy2.show_enemy_moving();
+        boss.show_boss_moving();
     }
 };
 

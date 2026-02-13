@@ -355,6 +355,7 @@ void enemy_movement()
 	{
 		game.enemy1.move_enemy(game.hero1);
 		game.enemy2.move_enemy(game.hero1);
+		game.boss.move_boss(game.hero1);
 	}
 }
 
@@ -374,6 +375,18 @@ void hit_loop()
 		{
 			game.hero1.hit_index = 0;
 			//game.hero1.gettingHit = false;
+		}
+	}
+}
+void boss_hit_loop()
+{
+	if (game.boss.gettingHit && game.boss.isActive)
+	{
+		game.boss.hit_index++;
+		if (game.boss.hit_index >= game.boss.boss_hit_images.size())
+		{
+			game.boss.hit_index = 0;
+			game.boss.gettingHit = false;
 		}
 	}
 }
@@ -397,6 +410,7 @@ int main()
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
 	iSetTimer(100, hit_loop);
+	iSetTimer(100, boss_hit_loop);
 	setting.initsettingbar();
 	credit.initcreditbar();
 	game.initgame_screen();

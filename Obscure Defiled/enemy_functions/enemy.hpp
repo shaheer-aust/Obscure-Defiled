@@ -10,6 +10,10 @@ extern void takeDamage();
 #include "Screens\game_screen.hpp"
 #include <vector>
 using namespace std;
+
+// Forward declarations to avoid circular dependencies
+struct Hero;
+struct GameScreen;
 // Global state
 struct Enemy
 {
@@ -114,10 +118,183 @@ struct Enemy
         //{
             // Attack logic can be implemented here
             // For example, you can reduce the hero's health when the enemy is close enough
-			//cout << hero1.characterPosition_X; // Reduce hero health by 0.5 when enemy is close
-            //mciSendString("open \"resources//Enemy//enemy_attack_sound.mp3\" alias enemyattack", NULL, 0, NULL);
-            //mciSendString("play enemyattack from 0", NULL, 0, NULL);
         //}
+    }
+};
+
+// Boss Enemy struct
+struct Boss
+{
+    vector<int> boss_walking_R_images;
+    vector<int> boss_walking_L_images;
+    vector<int> boss_attacking_images;
+    vector<int> boss_hit_R_images;
+    vector<int> boss_hit_L_images;
+    vector<int> boss_dead_L_images;
+    vector<int> boss_dead_R_images;
+    
+    double bossPosition_X = SCREEN_WIDTH - 128;
+    double bossPosition_Y = 80.0;
+    double bossHealth = 200.0;
+    double maxBossHealth = 200.0;
+    bool isright = true;
+    int movement_index = 0;
+    double boss_speed = 5.0;
+    bool isActive = false; // Boss spawns later in the game
+    bool isAttacking = false;
+    int attack_index = 0;
+    bool gettingHit = false;
+    int hit_index = 0;
+    
+    void initboss()
+    {
+        init_boss_images();
+    }
+    
+    void init_boss_images()
+    {
+        // Load boss walking images
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Level_1//Boss//Walking//Rlvl_1_boss_idle+walking_%d.png", i);
+            boss_walking_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Level_1//Boss//Walking//Llvl_1_boss_idle+walking_%d.png", i);
+            boss_walking_L_images.push_back(iLoadImage(a));
+        }
+        
+        // Load boss attacking images
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Level_1//Boss//Attacking//Rlvl_1_boss_attack_%d.png", i);
+            boss_attacking_images.push_back(iLoadImage(a));
+        }
+        
+        // Load boss getting hit images
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/L_lvl_1_idle_1.png
+            sprintf_s(a, "resources//Level_1//Boss//Getting Hit//R_lvl_1_idle_%d.png", i);
+            boss_hit_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/R_lvl_1_idle_2.png
+            sprintf_s(a, "resources//Level_1//Boss//Getting Hit//L_lvl_1_idle_%d.png", i);
+            boss_hit_L_images.push_back(iLoadImage(a));
+        }
+        
+        // Load boss dead images
+        for (int i = 1; i <= 2; i++)
+        {
+            char a[200];
+            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
+            sprintf_s(a, "resources//Level_1//Boss/Dead//Rlvl_1_boss_dead_%d.png", i);
+            boss_dead_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 2; i++)
+        {
+            char a[200];
+            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
+            sprintf_s(a, "resources//Level_1//Boss/Dead//Llvl_1_boss_dead_%d.png", i);
+            boss_dead_L_images.push_back(iLoadImage(a));
+        }
+    }
+    
+    void show_boss_moving()
+    {
+        if (!isActive) return; // Don't show inactive boss
+        
+        if (gettingHit)
+        {
+            show_boss_hit();
+            return;
+        }
+        
+        int currentIdx = movement_index % boss_walking_R_images.size();
+        if (isright)
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_walking_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_walking_L_images[currentIdx]);
+        }
+    }
+    
+    void show_boss_hit()
+    {
+        if (hit_index >= boss_hit_R_images.size())
+        {
+            hit_index = 0;
+            gettingHit = false;
+        }
+        
+        if (isright)
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_hit_R_images[hit_index]);
+        }
+        else
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_hit_L_images[hit_index]);
+        }
+    }
+    
+    void move_boss(Hero& hero1)
+    {
+        if (!isActive) return; // Don't move inactive boss
+        
+        double characterX = hero1.characterPosition_X;
+        double characterY = hero1.characterPosition_Y;
+        
+        // Boss collision check
+        if (abs(bossPosition_X - characterX) < 60 && (bossPosition_Y == characterY))
+        {
+            hero1.takeDamage(5); // Boss does more damage
+            hero1.gettingHit = true;
+        }
+        else
+        {
+            hero1.gettingHit = false;
+        }
+        
+        // Boss AI - chase the hero
+        if (bossPosition_X > characterX + 50)
+        {
+            bossPosition_X -= boss_speed;
+            isright = false;
+        }
+        else if (bossPosition_X < characterX - 50)
+        {
+            bossPosition_X += boss_speed;
+            isright = true;
+        }
+        
+        movement_index++;
+        if (movement_index >= boss_walking_R_images.size())
+        {
+            movement_index = 0;
+        }
+    }
+    
+    void takeDamage(double damage)
+    {
+        bossHealth -= damage;
+        gettingHit = true;
+        hit_index = 0;
+        
+        if (bossHealth < 0)
+        {
+            bossHealth = 0;
+            isActive = false; // Boss defeated
+        }
     }
 };
 
