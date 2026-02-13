@@ -4,6 +4,7 @@
 #include "Screens\setting_screen.hpp"
 #include "Screens\game_screen.hpp"
 #include "Screens\intro_screen.hpp"
+#include "Screens\credit_screen.hpp"
 #include "enemy_functions\enemy.hpp";
 #include <vector>
 #include <stack>
