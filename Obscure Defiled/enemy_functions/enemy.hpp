@@ -91,7 +91,7 @@ struct Enemy
 		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
 			hero1.takeDamage(2);
             hero1.gettingHit = true;
-			//cout << hero1.HeroHealth<< endl;
+			cout << hero1.HeroHealth<< endl;
 		}else{
             hero1.gettingHit = false;
         }
