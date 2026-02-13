@@ -57,5 +57,5 @@ struct Credit_screen
 	}
 }
 
-};
+;
 #endif
