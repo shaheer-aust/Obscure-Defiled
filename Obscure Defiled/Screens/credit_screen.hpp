@@ -44,7 +44,7 @@ struct Credit_screen
 
 		if (isBackButtonClicked(mx, my))
 		{
-			hoveredButton = 0;
+			//hoveredButton = 0;
 			if (!lastFrameBackClicked)
 			{
 				if (currentTime - lastBackBlipTime > HOVER_COOLDOWN)

@@ -1,4 +1,4 @@
-﻿Build started 13-02-2026 21:35:59.
+﻿Build started 13-02-2026 23:51:30.
      1>Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Rebuild target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -13,7 +13,8 @@
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(12): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
                  c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(75): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(76): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(113): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(182): warning C4018: '>=' : signed/unsigned mismatch
@@ -31,4 +32,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.29
+Time Elapsed 00:00:01.76

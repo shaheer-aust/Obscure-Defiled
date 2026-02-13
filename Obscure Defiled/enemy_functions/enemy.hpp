@@ -6,7 +6,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #include <iostream>
-
+#include "character_functions\Hero.hpp";
 #include <vector>
 using namespace std;
 // Global state
@@ -18,6 +18,7 @@ struct Enemy
     double enemyPosition_Y = 100.0;
     double enemyHealth = 100.0;
     bool isright = false;
+	Hero hero1;
     int movement_index = 0;
     double enemy_speed = 8.0;
     void initenemy()
