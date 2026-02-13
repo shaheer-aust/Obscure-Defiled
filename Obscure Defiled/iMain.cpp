@@ -372,7 +372,7 @@ void hit_loop()
 		if (game.hero1.hit_index >= game.hero1.character_idle_hit_R_images.size())
 		{
 			game.hero1.hit_index = 0;
-			game.hero1.gettingHit = false;
+			//game.hero1.gettingHit = false;
 		}
 	}
 }

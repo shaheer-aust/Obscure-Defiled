@@ -276,7 +276,11 @@ struct GameScreen
         else if (hero1.isMoving)
         {
             show_character_run();
-        }
+		}
+		else if (hero1.gettingHit){
+			
+			hero1.show_getting_hit();
+		}
         else
         {
             show_character_idle();
