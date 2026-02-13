@@ -6,7 +6,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #include <iostream>
-
+#include "enemy_functions\enemy.hpp";
 #include <vector>
 using namespace std;
 struct Hero

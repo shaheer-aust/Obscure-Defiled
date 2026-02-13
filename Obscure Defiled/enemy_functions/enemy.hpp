@@ -6,7 +6,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #include <iostream>
-
+#include "character_functions\Hero.hpp";
 #include <vector>
 using namespace std;
 // Global state
@@ -55,12 +55,6 @@ struct Enemy
     }
     void move_enemy(double characterX)
     {
-        // Simple horizontal movement logic (you can customize this)
-        // Move left at a constant speed
-        // if (enemyPosition_X < -64) // If the enemy goes off-screen, reset its position
-        // {
-        //     enemyPosition_X = SCREEN_WIDTH;
-        // }
         if (enemyPosition_X > characterX+25)
         {
             enemyPosition_X -= enemy_speed;
