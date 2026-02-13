@@ -7,6 +7,7 @@ extern void takeDamage();
 #define SCREEN_HEIGHT 720
 #include <iostream>
 #include "character_functions\Hero.hpp";
+#include "Screens\game_screen.hpp"
 #include <vector>
 using namespace std;
 // Global state
@@ -53,7 +54,7 @@ struct Enemy
             iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_L_images[currentIdx]);
         }
     }
-    void move_enemy(double characterX)
+    void move_enemy(double characterX,Hero& hero1)
     {
         if (enemyPosition_X > characterX+25)
         {
@@ -74,7 +75,7 @@ struct Enemy
         {
             // Attack logic can be implemented here
             // For example, you can reduce the hero's health when the enemy is close enough
-            Hero::takeDamage(5); // Reduce hero health by 0.5 when enemy is close
+			hero1.takeDamage(8); // Reduce hero health by 0.5 when enemy is close
             //mciSendString("open \"resources//Enemy//enemy_attack_sound.mp3\" alias enemyattack", NULL, 0, NULL);
             //mciSendString("play enemyattack from 0", NULL, 0, NULL);
         }
