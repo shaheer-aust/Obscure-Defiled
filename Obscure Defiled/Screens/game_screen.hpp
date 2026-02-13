@@ -44,6 +44,7 @@ struct GameScreen
         enemy1.initenemy(1); // Initialize Small enemy 1
         enemy2.initenemy(2); // Initialize Small enemy 2
         enemy2.isActive = false; // Start with enemy2 inactive
+        enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         init_health_bar_images();
         hero1.init_fighting_images();
         hero1.init_idle_hit_images();

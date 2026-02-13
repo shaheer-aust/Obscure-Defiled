@@ -54,13 +54,15 @@ struct Enemy
             for (int i = 1; i <= 3; i++)
             {
                 char a[200];
-                sprintf_s(a, "resources//Enemy//level_1//Small enemy 2//Walking//Walking %d//right view//resize_green_walking_%d_right.png", i,i);
+                ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/Walking/Walking 1/Right View/resize_green_walking_1_right.png
+                sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/Walking/Walking %d/Right View/resize_green_walking_%d_right.png", i,i);
                 enemy_idle_R_images.push_back(iLoadImage(a));
             }
             for (int i = 1; i <= 3; i++)
             {
                 char a[200];
-                sprintf_s(a, "resources//Enemy//level_1//Small enemy 2//Walking//Walking %d//left view//resize_green_walking_%d_left.png", i,i);
+                ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/Walking/Walking 1/Left View/resize_green_walking_1_left.png
+                sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/Walking/Walking %d/Left View/resize_green_walking_%d_left.png", i,i);
                 enemy_idle_L_images.push_back(iLoadImage(a));
             }
         }
