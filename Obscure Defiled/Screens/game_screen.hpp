@@ -42,6 +42,7 @@ struct GameScreen
         enemy1.initenemy();
         init_health_bar_images();
         hero1.init_fighting_images();
+        hero1.init_idle_hit_images();
 		hero1.HeroHealth = 100;
         // iSetTimer(200, idle_animation);
     }

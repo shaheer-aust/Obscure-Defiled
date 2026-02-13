@@ -54,12 +54,17 @@ struct Enemy
             iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_L_images[currentIdx]);
         }
     }
-    void move_enemy(double characterX,Hero& hero1)
+    void move_enemy(Hero& hero1)
     {
-		if (abs(enemyPosition_X - characterX) < 26){
+        double characterX= hero1.characterPosition_X;
+        double characterY= hero1.characterPosition_Y;
+		if (abs(enemyPosition_X - characterX) < 26 && (characterX==characterY)){
 			hero1.takeDamage(2);
-			cout << hero1.HeroHealth<< endl;
-		}
+            hero1.gettingHit = true;
+			//cout << hero1.HeroHealth<< endl;
+		}else{
+            hero1.gettingHit = false;
+        }
         if (enemyPosition_X > characterX+25)
         {
             enemyPosition_X -= enemy_speed;

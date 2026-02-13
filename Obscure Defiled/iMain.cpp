@@ -348,7 +348,7 @@ void enemy_movement()
 {
 	if (screens.top() == "Game")
 	{
-		game.enemy1.move_enemy(game.hero1.characterPosition_X,game.hero1);
+		game.enemy1.move_enemy(game.hero1);
 	}
 }
 
@@ -378,6 +378,7 @@ int main()
 	iSetTimer(16, character_movement);
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
+	iSetTimer(100, game.hero1.hit_loop);
 	setting.initsettingbar();
 	credit.initcreditbar();
 	game.initgame_screen();

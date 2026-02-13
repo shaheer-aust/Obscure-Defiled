@@ -12,6 +12,7 @@ using namespace std;
 struct Hero
 {
     double HeroHealth;
+    bool gettingHit = false;
     vector<int> character_idle_R_images;
     vector<int> character_idle_L_images;
     vector<int> character_run_L_images;
@@ -26,11 +27,14 @@ struct Hero
     bool isright = true;
     int movement_index = 0;
     int jump_index = 0;
+    int hit_index = 0;
     bool isMoving = false;
     bool isAttacking = false;
     int attack_timer = 0;
     vector<int> character_attack_R_images;
     vector<int> character_attack_L_images;
+    vector<int> character_idle_hit_R_images;
+    vector<int> character_idle_hit_L_images;
     void takeDamage(double damage)
     {
         HeroHealth -= damage;
@@ -52,6 +56,45 @@ struct Hero
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal//With Knife//Ground Hitting//hit_left_%d.png", i);
             character_attack_L_images.push_back(iLoadImage(a));
+        }
+    }
+    void init_idle_hit_images()
+    {
+        for (int i = 1; i <= 3; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Getting Hit//idle+knife//idle_right_%d.png", i);
+            character_idle_hit_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 3; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Getting Hit//idle+knife//idle_left_%d.png", i);
+            character_idle_hit_L_images.push_back(iLoadImage(a));
+        }
+    }
+    void show_getting_hit()
+    {
+        int currentIdx = hit_index;
+        if (isright)
+        {
+            iShowImage(characterPosition_X, characterPosition_Y, 96, 96, character_idle_hit_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(characterPosition_X, characterPosition_Y, 96, 96, character_idle_hit_L_images[currentIdx]);
+        }
+    }
+    void hit_loop()
+    {
+        if (gettingHit)
+        {
+            hit_index++;
+            if (hit_index >= character_idle_hit_R_images.size())
+            {
+                hit_index = 0;
+                gettingHit = false;
+            }
         }
     }
     void startAttack()
