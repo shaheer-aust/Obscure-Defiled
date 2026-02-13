@@ -127,7 +127,8 @@ struct Boss
 {
     vector<int> boss_walking_R_images;
     vector<int> boss_walking_L_images;
-    vector<int> boss_attacking_images;
+    vector<int> boss_attacking_L_images;
+	vector<int> boss_attacking_R_images;
     vector<int> boss_hit_R_images;
     vector<int> boss_hit_L_images;
     vector<int> boss_dead_L_images;
@@ -167,13 +168,7 @@ struct Boss
             boss_walking_L_images.push_back(iLoadImage(a));
         }
         
-        // Load boss attacking images
-        for (int i = 1; i <= 4; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources//Level_1//Boss//Attacking//Rlvl_1_boss_attack_%d.png", i);
-            boss_attacking_images.push_back(iLoadImage(a));
-        }
+        
         
         // Load boss getting hit images
         for (int i = 1; i <= 4; i++)
@@ -347,7 +342,7 @@ struct Boss
                 {
                     isAttacking = false;
                     attack_index = 0;
-                    isMoving = false;
+                    //isMoving = false;
                 }
             }
         }
