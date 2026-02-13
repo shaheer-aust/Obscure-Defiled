@@ -16,18 +16,19 @@
 using namespace std;
 struct Credit_screen
 {
-	vector<int> credit_image; // holds the credit picture
-	;
+	vector<int> credit_images; // holds the credit picture
+	long long lastBackBlipTime = 0;
+	bool lastFrameBackClicked = false;
 	void initcreditbar()
 	{
-		images.push_back(iLoadImage("resources//credit//credit_info.png"));
-		images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
+		credit_images.push_back(iLoadImage("resources//credit//credit_info.png"));
+		credit_images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
 		// Load images or resources needed for the credit screen
 	}
 	void drawcredit_screen()
 	{
-		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
-		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, images[1]);
+		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, credit_images[0]);
+		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[1]);
 		// Additional drawing code for credits can be added here
 	}
 	// back button hover and click detection for settings
