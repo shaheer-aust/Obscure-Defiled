@@ -1,6 +1,6 @@
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
-
+extern void takeDamage();
 #ifndef ENEMY_H
 #define ENEMY_H
 #define SCREEN_WIDTH 1280
