@@ -364,7 +364,9 @@ void update_attack_animation()
 	if (screens.top() == "Game")
 	{
 		game.hero1.update_attack();
+		game.boss.update_attack();
 	}
+	
 }
 void hit_loop()
 {

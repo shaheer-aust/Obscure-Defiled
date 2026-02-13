@@ -95,7 +95,7 @@ struct Hero
             isMoving = false;
         }
     }
-        void update_attack()
+    void update_attack()
     {
         if (isAttacking)
         {
@@ -118,11 +118,11 @@ struct Hero
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(characterPosition_X, characterPosition_Y+10, 96, 96, character_attack_R_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y + 10, 96, 96, character_attack_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y+10, 96, 96, character_attack_L_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y + 10, 96, 96, character_attack_L_images[currentIdx]);
         }
     }
 };

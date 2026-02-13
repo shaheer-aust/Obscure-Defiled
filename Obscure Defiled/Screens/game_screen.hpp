@@ -307,7 +307,7 @@ struct GameScreen
             int bossHealthPercent = (int)((boss.bossHealth / boss.maxBossHealth) * 100);
             if (bossHealthPercent < 0) bossHealthPercent = 0;
             if (bossHealthPercent > 100) bossHealthPercent = 100;
-            iShowImage(20, SCREEN_HEIGHT - 150, 275, 200, boss_health_bar_images[(bossHealthPercent / 20)]);
+            iShowImage(SCREEN_WIDTH - 320, SCREEN_HEIGHT - 150, 300, 57, boss_health_bar_images[(bossHealthPercent / 20)]);
         }
         
         if (hero1.isAttacking)

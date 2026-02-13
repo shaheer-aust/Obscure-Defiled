@@ -145,7 +145,7 @@ struct Boss
     int attack_index = 0;
     bool gettingHit = false;
     int hit_index = 0;
-    
+    int attack_timer = 0;
     void initboss()
     {
         init_boss_images();
@@ -206,6 +206,35 @@ struct Boss
             sprintf_s(a, "resources//Level_1//Boss/Dead//Llvl_1_boss_dead_%d.png", i);
             boss_dead_L_images.push_back(iLoadImage(a));
         }
+        // load attacking images
+        for(int i = 1; i <= 5; i++)
+        {
+            char a[200];
+            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/L_boss_attack_1.png
+            sprintf_s(a, "resources/Level_1/Boss/Attacking/L_boss_attack_%d.png", i);
+            boss_attacking_L_images.push_back(iLoadImage(a));
+        }
+        for(int i = 1; i <= 5; i++)
+        {
+            char a[200];
+            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/R_boss_attack_1.png
+            sprintf_s(a, "resources/Level_1/Boss/Attacking/R_boss_attack_%d.png", i);
+            boss_attacking_R_images.push_back(iLoadImage(a));
+        }
+    }
+    void show_attack()
+    {
+        if (!isActive) return; // Don't show inactive boss
+        
+        int currentIdx = attack_index;
+        if (isright)
+        {
+            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_attacking_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_attacking_L_images[currentIdx]);
+        }
     }
     
     void show_boss_moving()
@@ -216,17 +245,26 @@ struct Boss
         {
             show_boss_hit();
             return;
+        }else if(bossHealth <= 0)
+        {
+            //show_boss_dead();
+            return;
+        }else if (isAttacking)
+        {
+            show_attack();
+            return;
         }
         
         int currentIdx = movement_index % boss_walking_R_images.size();
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_walking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_walking_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_walking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_walking_L_images[currentIdx]);
         }
+
     }
     
     void show_boss_hit()
@@ -239,11 +277,11 @@ struct Boss
         
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_hit_R_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_hit_R_images[hit_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 150, 150, boss_hit_L_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_hit_L_images[hit_index]);
         }
     }
     
@@ -253,9 +291,22 @@ struct Boss
         
         double characterX = hero1.characterPosition_X;
         double characterY = hero1.characterPosition_Y;
-        
+        //boss attack check
+        if (abs(bossPosition_X - characterX) < 66 && (bossPosition_Y == characterY))
+        {
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                attack_index = 0;
+            }
+        }
+        else
+        {
+            isAttacking = false;
+            attack_index = 0;
+        }
         // Boss collision check
-        if (abs(bossPosition_X - characterX) < 60 && (bossPosition_Y == characterY))
+        if (abs(bossPosition_X - characterX) < 55 && (bossPosition_Y == characterY))
         {
             hero1.takeDamage(5); // Boss does more damage
             hero1.gettingHit = true;
@@ -283,7 +334,24 @@ struct Boss
             movement_index = 0;
         }
     }
-    
+    void update_attack()
+{
+        if (isAttacking)
+        {
+            attack_timer++;
+            if (attack_timer >= 2) // Show each frame for 8 ticks
+            {
+                attack_index++;
+                attack_timer = 0;
+                if (attack_index >= boss_attacking_R_images.size())
+                {
+                    isAttacking = false;
+                    attack_index = 0;
+                    isMoving = false;
+                }
+            }
+        }
+    }
     void takeDamage(double damage)
     {
         bossHealth -= damage;
