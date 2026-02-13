@@ -69,6 +69,7 @@
   <ItemGroup>
     <ClInclude Include="character_functions\Hero.hpp" />
     <ClInclude Include="enemy_functions\enemy.hpp" />
+    <ClInclude Include="Screens\credit_screen.hpp" />
     <ClInclude Include="Screens\game_screen.hpp" />
     <ClInclude Include="Screens\intro_screen.hpp" />
     <ClInclude Include="Screens\menu_screen.hpp" />

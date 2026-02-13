@@ -4,7 +4,9 @@
 #include "Screens\setting_screen.hpp"
 #include "Screens\game_screen.hpp"
 #include "Screens\intro_screen.hpp"
+#include "Screens\credit_screen.hpp"
 #include "enemy_functions\enemy.hpp";
+#include "Screens\credit_screen.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -21,7 +23,10 @@ stack<string> screens;
 
 MenuScreen menu;
 GameScreen game;
+
+Credit_screen credit;
 Setting_screen setting;
+
 int bgm_audio = -1;
 vector<int> menu_images;
 /* -------------------- DRAW -------------------- */
@@ -49,6 +54,9 @@ void iDraw()
 	else if (screens.top() == "Intro")
 	{
 		drawIntroScreen();
+	}else if (screens.top() == "Credits")
+	{
+		credit.drawcredit_screen();
 	}
 }
 
@@ -97,6 +105,7 @@ void iMouse(int button, int state, int mx, int my)
 		}
 		else if (menu.isCreditsButtonClicked(mx, my))
 		{
+			screens.push("Credits");
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Settings")
@@ -123,6 +132,12 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		// Handle left mouse click for attack
 		game.hero1.startAttack();
+	}else if (state == GLUT_DOWN && screens.top() == "Credits")
+	{
+		if (credit.isBackButtonClicked(mx, my))
+		{
+			screens.pop();
+		}
 	}
 }
 void iKeyboard(unsigned char key)
@@ -154,6 +169,7 @@ void iKeyboard(unsigned char key)
 		else if (buttonType == 1) // Credits
 		{
 			cout << "Credits Button Clicked (Keyboard)" << endl;
+			screens.push("Credits");
 		}
 		else if (buttonType == 2) // Settings
 		{
@@ -358,7 +374,7 @@ int main()
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
 	setting.initsettingbar();
-	// initialize game assets once
+	credit.initcreditbar();
 	game.initgame_screen();
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
