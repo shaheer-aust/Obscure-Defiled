@@ -91,7 +91,7 @@ void iMouse(int button, int state, int mx, int my)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
-
+	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
 		// Handle menu selection based on mouse position
