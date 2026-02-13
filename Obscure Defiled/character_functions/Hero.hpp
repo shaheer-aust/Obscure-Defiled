@@ -9,9 +9,8 @@
 
 #include <vector>
 using namespace std;
-class Hero
+struct Hero
 {
-public:
     double HeroHealth;
     vector<int> character_idle_R_images;
     vector<int> character_idle_L_images;

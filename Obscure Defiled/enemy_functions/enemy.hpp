@@ -6,7 +6,7 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #include <iostream>
-#include "Screens\game_screen.hpp";
+
 #include <vector>
 using namespace std;
 // Global state
@@ -18,7 +18,6 @@ struct Enemy
     double enemyPosition_Y = 100.0;
     double enemyHealth = 100.0;
     bool isright = false;
-	
     int movement_index = 0;
     double enemy_speed = 8.0;
     void initenemy()
@@ -81,7 +80,7 @@ struct Enemy
         {
             // Attack logic can be implemented here
             // For example, you can reduce the hero's health when the enemy is close enough
-            game.hero1.takeDamage(5); // Reduce hero health by 0.5 when enemy is close
+            hero1.takeDamage(5); // Reduce hero health by 0.5 when enemy is close
             //mciSendString("open \"resources//Enemy//enemy_attack_sound.mp3\" alias enemyattack", NULL, 0, NULL);
             //mciSendString("play enemyattack from 0", NULL, 0, NULL);
         }

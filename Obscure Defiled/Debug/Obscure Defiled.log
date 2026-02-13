@@ -1,4 +1,4 @@
-﻿Build started 14-02-2026 00:11:50.
+﻿Build started 14-02-2026 00:26:13.
      1>Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Rebuild target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -13,16 +13,14 @@
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(12): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
                  c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(76): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(84): error C2065: 'game' : undeclared identifier
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(84): error C2228: left of '.hero1' must have class/struct/union
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(75): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(83): error C2065: 'hero1' : undeclared identifier
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(83): error C2228: left of '.takeDamage' must have class/struct/union
                  type is 'unknown-type'
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(84): error C2228: left of '.takeDamage' must have class/struct/union
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(114): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(183): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(191): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(113): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(182): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(190): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(9): warning C4005: 'BUTTON_WIDTH' : macro redefinition
                  c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(11) : see previous definition of 'BUTTON_WIDTH'
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(10): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
@@ -33,4 +31,4 @@
 
 Build FAILED.
 
-Time Elapsed 00:00:00.92
+Time Elapsed 00:00:01.18
