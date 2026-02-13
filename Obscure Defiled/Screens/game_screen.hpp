@@ -42,7 +42,7 @@ struct GameScreen
         enemy1.initenemy();
         init_health_bar_images();
         hero1.init_fighting_images();
-        Hero.HeroHealth = 100.0; // Initialize hero health to 100 at the start of the game
+		hero1.HeroHealth = 100;// Initialize hero health to 100 at the start of the game
         // iSetTimer(200, idle_animation);
     }
     void init_health_bar_images()
@@ -262,8 +262,8 @@ struct GameScreen
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
-        cout << "Hero Health: " << Hero::HeroHealth << endl;
-        iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(int)(Hero::HeroHealth / 10)]);
+        cout << "Hero Health: " << hero1.HeroHealth << endl;
+        iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(int)(hero1.HeroHealth / 10)]);
         if (hero1.isAttacking)
         {
             hero1.show_character_attack();
