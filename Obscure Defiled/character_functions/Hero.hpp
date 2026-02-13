@@ -85,18 +85,7 @@ struct Hero
             iShowImage(characterPosition_X, characterPosition_Y, 96, 96, character_idle_hit_L_images[currentIdx]);
         }
     }
-    void hit_loop()
-    {
-        if (gettingHit)
-        {
-            hit_index++;
-            if (hit_index >= character_idle_hit_R_images.size())
-            {
-                hit_index = 0;
-                gettingHit = false;
-            }
-        }
-    }
+
     void startAttack()
     {
         if (!isAttacking && !isJumping)

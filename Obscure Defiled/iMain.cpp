@@ -55,7 +55,8 @@ void iDraw()
 	else if (screens.top() == "Intro")
 	{
 		drawIntroScreen();
-	}else if (screens.top() == "Credits")
+	}
+	else if (screens.top() == "Credits")
 	{
 		credit.drawcredit_screen();
 	}
@@ -79,7 +80,8 @@ void iPassiveMouseMove(int mx, int my)
 	else if (screens.top() == "Settings")
 	{
 		setting.checkButtonHover(mx, my);
-	}else if (screens.top() == "Credits")
+	}
+	else if (screens.top() == "Credits")
 	{
 		credit.checkButtonHover(mx, my);
 	}
@@ -136,7 +138,8 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		// Handle left mouse click for attack
 		game.hero1.startAttack();
-	}else if (state == GLUT_DOWN && screens.top() == "Credits")
+	}
+	else if (state == GLUT_DOWN && screens.top() == "Credits")
 	{
 		if (credit.isBackButtonClicked(mx, my))
 		{
@@ -246,7 +249,8 @@ void iSpecialKeyboardUp(unsigned char key)
 		else if (key == GLUT_KEY_LEFT) // Left arrow key released
 		{
 			game.leftPressed = false; // Stop moving left
-		}else if (key == GLUT_KEY_UP) // Up arrow key released
+		}
+		else if (key == GLUT_KEY_UP) // Up arrow key released
 		{
 			game.spacePressed = false; // Stop jump when up arrow key is released
 		}
@@ -354,11 +358,23 @@ void enemy_movement()
 
 void update_attack_animation()
 {
-	if(screens.top() == "Game"){
+	if (screens.top() == "Game")
+	{
 		game.hero1.update_attack();
 	}
 }
-
+void hit_loop()
+{
+	if (game.hero1.gettingHit)
+	{
+		game.hero1.hit_index++;
+		if (game.hero1.hit_index >= game.hero1.character_idle_hit_R_images.size())
+		{
+			game.hero1.hit_index = 0;
+			game.hero1.gettingHit = false;
+		}
+	}
+}
 /* -------------------- MAIN -------------------- */
 
 int main()
@@ -378,7 +394,7 @@ int main()
 	iSetTimer(16, character_movement);
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
-	iSetTimer(100, game.hero1.hit_loop);
+	iSetTimer(100, hit_loop);
 	setting.initsettingbar();
 	credit.initcreditbar();
 	game.initgame_screen();
