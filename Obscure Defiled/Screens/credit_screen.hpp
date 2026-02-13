@@ -14,56 +14,48 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
-vector<int> credit_image; // holds the credit picture
-
 struct Credit_screen
 {
-	int backButtonImage;
-	int backBtnX, backBtnY;
-	int backBtnW, backBtnH;
-
-	Credit_screen()
-		: backButtonImage(-1),
-		backBtnX(10), backBtnY(10),
-		backBtnW(50), backBtnH(50) {}
-
-	// Load credit image and back button
-	void initCreditScreen(const char* creditImgPath,
-		const char* backBtnImgPath,
-		const char* musicPath)
+	vector<int> credit_image; // holds the credit picture
+	;
+	void initcreditbar()
 	{
-		credit_image.push_back(iLoadImage(creditImgPath));
-		backButtonImage = iLoadImage(backBtnImgPath);
-
-		// play background music in loop
-		string cmd = "open \"" + string(musicPath) + "\" alias creditsong";
-		mciSendString(cmd.c_str(), NULL, 0, NULL);
-		mciSendString("play creditsong repeat", NULL, 0, NULL);
+		images.push_back(iLoadImage("resources//credit//credit_info.png"));
+		images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
+		// Load images or resources needed for the credit screen
 	}
-
-	// Draw the credit screen
-	void showCreditScreen()
+	void drawcredit_screen()
 	{
-		if (!credit_image.empty())
-		{
-			iDrawImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, credit_image[0]);
-		}
-		iDrawImage(backBtnX, backBtnY, backBtnW, backBtnH, backButtonImage);
+		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
+		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, images[1]);
+		// Additional drawing code for credits can be added here
 	}
-
-	// Handle back button click
+	// back button hover and click detection for settings
 	bool isBackButtonClicked(int mx, int my)
 	{
-		return (mx >= backBtnX && mx <= backBtnX + backBtnW &&
-			my >= backBtnY && my <= backBtnY + backBtnH);
+		return (mx >= 20 && mx <= BACK_BUTTON + 20 && my >= SCREEN_HEIGHT - (BACK_BUTTON + 20) && my <= SCREEN_HEIGHT);
 	}
-
-	// Stop music
-	void stopMusic()
+	// hover detection
+	void checkButtonHover(int mx, int my)
 	{
-		mciSendString("close creditsong", NULL, 0, NULL);
-	}
-};
+		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
+		long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
-#endif // CREDIT_SCREEN_HPP
+		if (isBackButtonClicked(mx, my) && !lastFrameBackClicked)
+		{
+			if (currentTime - lastBackBlipTime > HOVER_COOLDOWN)
+			{
+				mciSendString("play ggsong from 0", NULL, 0, NULL);
+				lastBackBlipTime = currentTime;
+			}
+			lastFrameBackClicked = true;
+		}
+		else if (!isBackButtonClicked(mx, my))
+		{
+			lastFrameBackClicked = false;
+		}
+	}
+}
+
+;
+#endif
