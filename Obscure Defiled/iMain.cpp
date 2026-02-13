@@ -55,7 +55,8 @@ void iDraw()
 	else if (screens.top() == "Intro")
 	{
 		drawIntroScreen();
-	}else if (screens.top() == "Credits")
+	}
+	else if (screens.top() == "Credits")
 	{
 		credit.drawcredit_screen();
 	}
@@ -79,7 +80,8 @@ void iPassiveMouseMove(int mx, int my)
 	else if (screens.top() == "Settings")
 	{
 		setting.checkButtonHover(mx, my);
-	}else if (screens.top() == "Credits")
+	}
+	else if (screens.top() == "Credits")
 	{
 		credit.checkButtonHover(mx, my);
 	}
@@ -88,6 +90,8 @@ void iPassiveMouseMove(int mx, int my)
 void iMouse(int button, int state, int mx, int my)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
+	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
+
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
 		// Handle menu selection based on mouse position
@@ -109,6 +113,9 @@ void iMouse(int button, int state, int mx, int my)
 		}
 		else if (menu.isCreditsButtonClicked(mx, my))
 		{
+
+			mciSendString("close bgsong", NULL, 0, NULL);
+			mciSendString("play creditbg repeat", NULL, 0, NULL);
 			screens.push("Credits");
 		}
 	}
@@ -136,7 +143,8 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		// Handle left mouse click for attack
 		game.hero1.startAttack();
-	}else if (state == GLUT_DOWN && screens.top() == "Credits")
+	}
+	else if (state == GLUT_DOWN && screens.top() == "Credits")
 	{
 		if (credit.isBackButtonClicked(mx, my))
 		{
@@ -148,6 +156,8 @@ void iKeyboard(unsigned char key)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
+	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
+
 	if (key == 27) // ESC key
 	{
 		if (screens.size() > 1)
@@ -156,6 +166,7 @@ void iKeyboard(unsigned char key)
 			if (screens.top() == "Menu")
 			{
 				mciSendString("close gamebg", NULL, 0, NULL);
+				mciSendString("close creditbg", NULL, 0, NULL);
 				mciSendString("play bgsong repeat", NULL, 0, NULL);
 			}
 		}
@@ -173,6 +184,8 @@ void iKeyboard(unsigned char key)
 		else if (buttonType == 1) // Credits
 		{
 			cout << "Credits Button Clicked (Keyboard)" << endl;
+			mciSendString("close bgsong", NULL, 0, NULL);
+			mciSendString("play creditbg repeat", NULL, 0, NULL);
 			screens.push("Credits");
 		}
 		else if (buttonType == 2) // Settings
@@ -246,7 +259,8 @@ void iSpecialKeyboardUp(unsigned char key)
 		else if (key == GLUT_KEY_LEFT) // Left arrow key released
 		{
 			game.leftPressed = false; // Stop moving left
-		}else if (key == GLUT_KEY_UP) // Up arrow key released
+		}
+		else if (key == GLUT_KEY_UP) // Up arrow key released
 		{
 			game.spacePressed = false; // Stop jump when up arrow key is released
 		}
@@ -354,7 +368,8 @@ void enemy_movement()
 
 void update_attack_animation()
 {
-	if(screens.top() == "Game"){
+	if (screens.top() == "Game")
+	{
 		game.hero1.update_attack();
 	}
 }
