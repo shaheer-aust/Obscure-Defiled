@@ -56,6 +56,10 @@ struct Enemy
     }
     void move_enemy(double characterX,Hero& hero1)
     {
+		if (abs(enemyPosition_X - characterX) < 26){
+			hero1.takeDamage(2);
+			cout << hero1.HeroHealth<< endl;
+		}
         if (enemyPosition_X > characterX+25)
         {
             enemyPosition_X -= enemy_speed;
@@ -71,14 +75,14 @@ struct Enemy
         {
             movement_index = 0;
         }
-        if(enemyPosition_X == characterX+25 || enemyPosition_X == characterX-25)
-        {
+		//if (characterX - enemyPosition_X < 30 || enemyPosition_X - characterX<30)
+        //{
             // Attack logic can be implemented here
             // For example, you can reduce the hero's health when the enemy is close enough
-			hero1.takeDamage(8); // Reduce hero health by 0.5 when enemy is close
+			//cout << hero1.characterPosition_X; // Reduce hero health by 0.5 when enemy is close
             //mciSendString("open \"resources//Enemy//enemy_attack_sound.mp3\" alias enemyattack", NULL, 0, NULL);
             //mciSendString("play enemyattack from 0", NULL, 0, NULL);
-        }
+        //}
     }
 };
 

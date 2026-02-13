@@ -262,7 +262,7 @@ struct GameScreen
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
-        cout << "Hero Health: " << hero1.HeroHealth << endl;
+        //cout << "Hero Health: " << hero1.HeroHealth << endl;
         iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
         if (hero1.isAttacking)
         {
