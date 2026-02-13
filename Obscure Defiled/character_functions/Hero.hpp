@@ -12,7 +12,7 @@ using namespace std;
 class Hero
 {
 public:
-    double HeroHealth = 100;
+    static double HeroHealth;
     vector<int> character_idle_R_images;
     vector<int> character_idle_L_images;
     vector<int> character_run_L_images;
@@ -32,7 +32,7 @@ public:
     int attack_timer = 0;
     vector<int> character_attack_R_images;
     vector<int> character_attack_L_images;
-    void takeDamage(double damage)
+    static void takeDamage(double damage)
     {
         HeroHealth -= damage;
         if (HeroHealth < 0)
