@@ -12,41 +12,46 @@ extern int getIdleIndex();
 #define BUTTON_HEIGHT 62
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
-
+#include "enemy_functions\enemy.hpp";
+#include "character_functions\Hero.hpp";
 #include <vector>
 using namespace std;
 struct GameScreen
 {
     vector<int> images;
-    vector<int> character_idle_R_images;
-    vector<int> character_idle_L_images;
-    vector<int> character_run_L_images;
-    vector<int> character_run_R_images;
-    vector<int> character_jump_R_images;
-    vector<int> character_jump_L_images;
+    vector<int> health_bar_images;
+    Enemy enemy1;
+    Hero hero1;
     bool spacePressed = false;
     bool rightPressed = false;
     bool leftPressed = false;
-    bool isright = true;
-    int movement_index = 0;
-    int jump_index = 0;
-    bool isMoving = false;
+
     int x = 0;
-    double characterPosition_X = 100.0;
-    double characterPosition_Y = 100.0;
-    bool isJumping = false;
+    
     double jumpVelocity = 0.0;
     double gravity = 2.0;
     double base_gravity = 5;
     double groundY = 100.0;
     double bg_speed = 4.0;
-    double character_speed = 6;
+ 
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         init_character_images();
-        groundY = characterPosition_Y;
+        groundY = hero1.characterPosition_Y;
+        enemy1.initenemy();
+        init_health_bar_images();
+        hero1.init_fighting_images();
         // iSetTimer(200, idle_animation);
+    }
+    void init_health_bar_images()
+    {
+        for (int i = 0; i <= 100; i += 10)
+        {
+            char a[200];
+            sprintf_s(a, "resources/Health Bar//%d Percent//resize_health_bar_%d.png", i, i);
+            health_bar_images.push_back(iLoadImage(a));
+        }
     }
     void init_character_images()
     {
@@ -55,68 +60,68 @@ struct GameScreen
         {
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_right_%d.png", i);
-            character_idle_R_images.push_back(iLoadImage(a));
+            hero1.character_idle_R_images.push_back(iLoadImage(a));
         }
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_left_%d.png", i);
-            character_idle_L_images.push_back(iLoadImage(a));
+            hero1.character_idle_L_images.push_back(iLoadImage(a));
         }
         // Load character run images
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_left_%d.png", i);
-            character_run_L_images.push_back(iLoadImage(a));
+            hero1.character_run_L_images.push_back(iLoadImage(a));
         }
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i);
-            character_run_R_images.push_back(iLoadImage(a));
+            hero1.character_run_R_images.push_back(iLoadImage(a));
         }
         // load character jump images if needed
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_right_%d.png", i);
-            character_jump_R_images.push_back(iLoadImage(a));
+            hero1.character_jump_R_images.push_back(iLoadImage(a));
         }
         for (int i = 1; i <= 4; i++)
         {
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_left_%d.png", i);
-            character_jump_L_images.push_back(iLoadImage(a));
+            hero1.character_jump_L_images.push_back(iLoadImage(a));
         }
     }
     void show_character_idle()
     {
         int currentIdx = getIdleIndex();
-        if (isright)
+        if (hero1.isright)
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_idle_R_images[currentIdx]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_idle_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_idle_L_images[currentIdx]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_idle_L_images[currentIdx]);
         }
     }
     void show_character_run()
     {
 
-        if (movement_index >= character_run_R_images.size())
+        if (hero1.movement_index >= hero1.character_run_R_images.size())
         {
 
-            movement_index = 0;
+            hero1.movement_index = 0;
         }
-        if (isright)
+        if (hero1.isright)
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_R_images[movement_index]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_run_R_images[hero1.movement_index]);
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_run_L_images[movement_index]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_run_L_images[hero1.movement_index]);
         }
         // movement_index++;
     }
@@ -124,27 +129,27 @@ struct GameScreen
     void resetMovement()
     {
         // isMoving = false;
-        movement_index = 0;
+        hero1.movement_index = 0;
     }
 
     void startJump()
     {
-        if (!isJumping)
+        if (!hero1.isJumping)
         {
 
-            isJumping = true;
-            isMoving = false;
+            hero1.isJumping = true;
+            hero1.isMoving = false;
             // record the ground position to return to
-            groundY = characterPosition_Y;
-            jumpVelocity = 25.0; // initial jump impulse
+            groundY = hero1.characterPosition_Y;
+            jumpVelocity = 35.0; // initial jump impulse
             gravity = base_gravity;
-            jump_index = 0;
+            hero1.jump_index = 0;
         }
     }
 
     void updatePhysics()
     {
-        if (isJumping)
+        if (hero1.isJumping)
         {
             if (rightPressed)
             {
@@ -153,8 +158,8 @@ struct GameScreen
                 {
                     x = 0;
                 }
-                characterPosition_X += character_speed;
-                isright = true;
+                hero1.characterPosition_X += hero1.character_speed+5;
+                hero1.isright = true;
             }
             else if (leftPressed)
             {
@@ -163,41 +168,40 @@ struct GameScreen
                 {
                     x = 0;
                 }
-                characterPosition_X -= character_speed;
-                isright = false;
+                hero1.characterPosition_X -= hero1.character_speed+5;
+                hero1.isright = false;
             }
             // apply vertical movement
-            characterPosition_Y += jumpVelocity;
+            hero1.characterPosition_Y += jumpVelocity;
             jumpVelocity -= gravity;
 
             // advance jump animation frame
-            if (isright)
+            if (hero1.isright)
             {
-                jump_index++;
-                if (jump_index >= character_jump_R_images.size())
+                hero1.jump_index++;
+                if (hero1.jump_index >= hero1.character_jump_R_images.size())
                 {
-                    jump_index = 0;
+                    hero1.jump_index = 0;
                 }
             }
             else
             {
-                jump_index++;
-                if (jump_index >= character_jump_L_images.size())
+                hero1.jump_index++;
+                if (hero1.jump_index >= hero1.character_jump_L_images.size())
                 {
-                    jump_index = 0;
+                    hero1.jump_index = 0;
                 }
             }
-
             // landing check
-            if (characterPosition_Y <= groundY)
+            if (hero1.characterPosition_Y <= groundY)
             {
-                characterPosition_Y = groundY;
-                isJumping = false;
-                isMoving = true;
+                hero1.characterPosition_Y = groundY;
+                hero1.isJumping = false;
+                hero1.isMoving = true;
                 jumpVelocity = 0.0;
                 gravity = base_gravity;
-                jump_index = 0;
-                // iKeyboard(unsigned char key);
+                hero1.jump_index = 0;
+                
             }
         }
     }
@@ -205,71 +209,50 @@ struct GameScreen
     void show_character_jump1()
     {
         // choose frame based on direction and jump_index
-        if (isright)
+        if (hero1.isright)
         {
-            if (!character_jump_R_images.empty())
-                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_R_images[jump_index]);
+            if (!hero1.character_jump_R_images.empty())
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_jump_R_images[hero1.jump_index]);
         }
         else
         {
-            if (!character_jump_L_images.empty())
-                iShowImage(characterPosition_X, characterPosition_Y, 64, 64, character_jump_L_images[jump_index]);
+            if (!hero1.character_jump_L_images.empty())
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_jump_L_images[hero1.jump_index]);
         }
     }
+
     void handleSpecialKeyboard(unsigned char key)
     {
         // Handle special keyboard input for game controls (e.g., arrow keys for movement)
 
         if (key == GLUT_KEY_UP)
         {
-            // Move player up
-            // characterPosition_Y += character_speed;
-            // if (characterPosition_Y > SCREEN_HEIGHT)
-            // {
-            //     characterPosition_Y = SCREEN_HEIGHT;
-            // }
-            // isMoving = true;
-            // movement_index++;
+            startJump();
+     
         }
         else if (key == GLUT_KEY_DOWN)
         {
-            // Move player down
-            // characterPosition_Y -= character_speed;
-            // if (characterPosition_Y < 0)
-            // {
-            //     characterPosition_Y = 0;
-            // }
-            // isMoving = true;
-            // movement_index++;
+      
         }
         else if (key == GLUT_KEY_LEFT)
         {
-            // Move player left
+         
             leftPressed = true;
-            isMoving = true;
-            isright = false;
-            // characterPosition_X -= character_speed;
-            //  if (characterPosition_X < 0)
-            //  {
-            //      characterPosition_X = 0;
-            //  }
-            // isMoving = true;
-            // movement_index++;
+            hero1.isMoving = true;
+            hero1.isright = false;
+          
         }
         else if (key == GLUT_KEY_RIGHT)
         {
-            // Move player right (forward)
+            
             rightPressed = true;
-            isright = true;
-            // characterPosition_X += character_speed;
-            //  if (characterPosition_X > SCREEN_WIDTH)
-            //  {
-            //      characterPosition_X = SCREEN_WIDTH;
-            //  }
-            isMoving = true;
-            // movement_index++;
+            hero1.isright = true;
+      
+            hero1.isMoving = true;
+        
         }
     }
+
 
     void drawgame_screen()
     {
@@ -278,11 +261,16 @@ struct GameScreen
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
-        if (isJumping)
+        iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
+        if (hero1.isAttacking)
+        {
+            hero1.show_character_attack();
+        }
+        else if (hero1.isJumping)
         {
             show_character_jump1();
         }
-        else if (isMoving)
+        else if (hero1.isMoving)
         {
             show_character_run();
         }
@@ -290,6 +278,7 @@ struct GameScreen
         {
             show_character_idle();
         }
+		enemy1.show_enemy_moving();
     }
 };
 
