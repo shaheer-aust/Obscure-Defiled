@@ -1,4 +1,5 @@
-﻿#include <stdio.h>
+﻿
+#include <stdio.h>
 #include "iGraphics.h"
 #include "Screens\menu_screen.hpp"
 #include "Screens\setting_screen.hpp"
@@ -7,6 +8,7 @@
 #include "Screens\credit_screen.hpp"
 #include "enemy_functions\enemy.hpp";
 #include "Screens\credit_screen.hpp";
+#include "character_functions\Hero.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -54,7 +56,8 @@ void iDraw()
 	else if (screens.top() == "Intro")
 	{
 		drawIntroScreen();
-	}else if (screens.top() == "Credits")
+	}
+	else if (screens.top() == "Credits")
 	{
 		credit.drawcredit_screen();
 	}
@@ -78,6 +81,10 @@ void iPassiveMouseMove(int mx, int my)
 	else if (screens.top() == "Settings")
 	{
 		setting.checkButtonHover(mx, my);
+	}
+	else if (screens.top() == "Credits")
+	{
+		credit.checkButtonHover(mx, my);
 	}
 	// printf("co-ordinates: %dx%d/n", mx, my);
 }
@@ -132,7 +139,8 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		// Handle left mouse click for attack
 		game.hero1.startAttack();
-	}else if (state == GLUT_DOWN && screens.top() == "Credits")
+	}
+	else if (state == GLUT_DOWN && screens.top() == "Credits")
 	{
 		if (credit.isBackButtonClicked(mx, my))
 		{
@@ -242,7 +250,8 @@ void iSpecialKeyboardUp(unsigned char key)
 		else if (key == GLUT_KEY_LEFT) // Left arrow key released
 		{
 			game.leftPressed = false; // Stop moving left
-		}else if (key == GLUT_KEY_UP) // Up arrow key released
+		}
+		else if (key == GLUT_KEY_UP) // Up arrow key released
 		{
 			game.spacePressed = false; // Stop jump when up arrow key is released
 		}
@@ -344,17 +353,43 @@ void enemy_movement()
 {
 	if (screens.top() == "Game")
 	{
-		game.enemy1.move_enemy(game.hero1.characterPosition_X);
+		game.enemy1.move_enemy(game.hero1);
+		game.enemy2.move_enemy(game.hero1);
+		game.boss.move_boss(game.hero1);
 	}
 }
 
 void update_attack_animation()
 {
-	if(screens.top() == "Game"){
+	if (screens.top() == "Game")
+	{
 		game.hero1.update_attack();
 	}
 }
-
+void hit_loop()
+{
+	if (game.hero1.gettingHit)
+	{
+		game.hero1.hit_index++;
+		if (game.hero1.hit_index >= game.hero1.character_idle_hit_R_images.size())
+		{
+			game.hero1.hit_index = 0;
+			//game.hero1.gettingHit = false;
+		}
+	}
+}
+void boss_hit_loop()
+{
+	if (game.boss.gettingHit && game.boss.isActive)
+	{
+		game.boss.hit_index++;
+		if (game.boss.hit_index >= game.boss.boss_hit_R_images.size())
+		{
+			game.boss.hit_index = 0;
+			game.boss.gettingHit = false;
+		}
+	}
+}
 /* -------------------- MAIN -------------------- */
 
 int main()
@@ -362,6 +397,7 @@ int main()
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
+	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 
@@ -373,6 +409,8 @@ int main()
 	iSetTimer(16, character_movement);
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
+	iSetTimer(100, hit_loop);
+	iSetTimer(100, boss_hit_loop);
 	setting.initsettingbar();
 	credit.initcreditbar();
 	game.initgame_screen();
@@ -387,7 +425,10 @@ int main()
 	{
 		mciSendString("play gamebg repeat", NULL, 0, NULL);
 	}
-
+	else if (screens.top() == "Credits")
+	{
+		mciSendString("play creditbg repeat", NULL, 0, NULL);
+	}
 	iStart();
 	return 0;
 }
