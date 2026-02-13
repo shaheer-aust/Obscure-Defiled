@@ -8,6 +8,7 @@
 #include "Screens\credit_screen.hpp"
 #include "enemy_functions\enemy.hpp";
 #include "Screens\credit_screen.hpp";
+#include "character_functions\Hero.hpp";
 #include <vector>
 #include <stack>
 #include <string>

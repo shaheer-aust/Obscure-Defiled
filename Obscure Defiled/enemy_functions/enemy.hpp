@@ -58,7 +58,7 @@ struct Enemy
     {
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
-		if (abs(enemyPosition_X - characterX) < 26 && (characterX==characterY)){
+		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
 			hero1.takeDamage(2);
             hero1.gettingHit = true;
 			//cout << hero1.HeroHealth<< endl;
