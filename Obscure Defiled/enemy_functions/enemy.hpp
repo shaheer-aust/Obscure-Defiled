@@ -74,7 +74,7 @@ struct Enemy
         {
             // Attack logic can be implemented here
             // For example, you can reduce the hero's health when the enemy is close enough
-            hero1.takeDamage(5); // Reduce hero health by 0.5 when enemy is close
+            Hero::takeDamage(5); // Reduce hero health by 0.5 when enemy is close
             //mciSendString("open \"resources//Enemy//enemy_attack_sound.mp3\" alias enemyattack", NULL, 0, NULL);
             //mciSendString("play enemyattack from 0", NULL, 0, NULL);
         }
