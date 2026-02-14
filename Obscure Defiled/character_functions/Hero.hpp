@@ -99,7 +99,7 @@ struct Hero
             isMoving = false;
         }
     }
-    /*void hero_attack_update(Enemy& enemy1, Boss& boss1)
+    void hero_attack_update(Enemy& enemy1, Boss& boss1)
     {
         if (isAttacking && !isJumping)
         {
@@ -139,7 +139,7 @@ struct Hero
                 //attack_timer = 0;
             }
         }
-    }*/
+    }
     void update_attack()
     {
         if (isAttacking)
