@@ -100,40 +100,7 @@ struct Enemy
             iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_L_images[currentIdx]);
         }
     }
-    void move_enemy(Hero& hero1)
-    {
-        if (!isActive) return; // Don't move inactive enemies
-        
-        double characterX= hero1.characterPosition_X;
-        double characterY= hero1.characterPosition_Y;
-		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
-			hero1.takeDamage(2);
-            hero1.gettingHit = true;
-			//cout << hero1.HeroHealth<< endl;
-		}else{
-            hero1.gettingHit = false;
-        }
-        if (enemyPosition_X > characterX+25)
-        {
-            enemyPosition_X -= enemy_speed;
-            isright = false;
-        }
-        else if (enemyPosition_X < characterX-25)
-        {
-            enemyPosition_X += enemy_speed;
-            isright = true;
-        }
-        movement_index++;
-        if (movement_index >= enemy_idle_R_images.size())
-        {
-            movement_index = 0;
-        }
-		//if (characterX - enemyPosition_X < 30 || enemyPosition_X - characterX<30)
-        //{
-            // Attack logic can be implemented here
-            // For example, you can reduce the hero's health when the enemy is close enough
-        //}
-    }
+    void move_enemy(Hero& hero1);
 };
 
 // Boss Enemy struct
@@ -310,56 +277,7 @@ struct Boss
             iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[currentIdx]);
         }
     }
-    void move_boss(Hero& hero1)
-    {
-        if (!isActive) return; // Don't move inactive boss
-        
-        double characterX = hero1.characterPosition_X;
-        double characterY = hero1.characterPosition_Y;
-        //boss attack check
-        if (abs(bossPosition_X - characterX) < 66 && (bossPosition_Y == characterY))
-        {
-            if (!isAttacking)
-            {
-                isAttacking = true;
-                attack_index = 0;
-            }
-        }
-        else
-        {
-            isAttacking = false;
-            attack_index = 0;
-        }
-        // Boss collision check
-        if (abs(bossPosition_X - characterX) < 55 && (bossPosition_Y == characterY))
-        {
-            hero1.takeDamage(4); // Boss does more damage
-            cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
-            hero1.gettingHit = true;
-        }
-        else
-        {
-            hero1.gettingHit = false;
-        }
-        
-        // Boss AI - chase the hero
-        if (bossPosition_X > characterX + 50)
-        {
-            bossPosition_X -= boss_speed;
-            isright = false;
-        }
-        else if (bossPosition_X < characterX - 50)
-        {
-            bossPosition_X += boss_speed;
-            isright = true;
-        }
-        
-        movement_index++;
-        if (movement_index >= boss_walking_R_images.size())
-        {
-            movement_index = 0;
-        }
-    }
+    void move_boss(Hero& hero1);
     void update_attack()
 {
         if (isAttacking)
