@@ -166,6 +166,7 @@ struct Boss
     bool bossGettingHit = false;
     int hit_index = 0;
     int attack_timer = 0;
+    int dead_index = 0;
     void initboss()
     {
         init_boss_images();
@@ -252,32 +253,22 @@ struct Boss
     }
     void show_boss_dead()
     {
-        int tik=0;
+        
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_R_images[0]);
-            tik++;
-            if(tik>8){
-                iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_R_images[1]);
-            }
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_R_images[dead_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[0]);
-            tik++;
-            if(tik>8){
-                iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[1]);
-            }
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[dead_index]);
+         
         }
     }
     
     void show_boss_moving()
     {
-        //if (!isActive) return; // Don't show inactive boss
-        if(isActive && bossHealth <= 0)
-        {
+        if(bossHealth <= 0){
             show_boss_dead();
-            isActive = false; // Ensure boss is marked as inactive after death animation
             return;
         }
         else if (bossGettingHit && isActive)

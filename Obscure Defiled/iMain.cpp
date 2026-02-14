@@ -366,7 +366,6 @@ void update_attack_animation()
 		game.hero1.update_attack();
 		game.boss.update_attack();
 	}
-	
 }
 void hit_loop()
 {
@@ -376,7 +375,7 @@ void hit_loop()
 		if (game.hero1.hit_index >= game.hero1.character_idle_hit_R_images.size())
 		{
 			game.hero1.hit_index = 0;
-			//game.hero1.gettingHit = false;
+			// game.hero1.gettingHit = false;
 		}
 	}
 }
@@ -390,6 +389,27 @@ void boss_hit_loop()
 			game.boss.hit_index = 0;
 			game.boss.bossGettingHit = false;
 		}
+	}
+}
+void boss_dead_loop()
+{
+	int tik = 0;
+	if (!game.boss.isActive && game.boss.bossHealth <= 0)
+	{
+		tik++;
+		if (tik > 16) // Reset boss after showing death animation for a while
+		{
+			game.boss.dead_index++;
+			if (game.boss.dead_index >= game.boss.boss_dead_R_images.size())
+			{
+				game.boss.dead_index = 0;
+			}
+			tik = 0;
+		}
+	}
+	else
+	{
+		tik = 0; // Reset tik if boss is alive
 	}
 }
 /* -------------------- MAIN -------------------- */
