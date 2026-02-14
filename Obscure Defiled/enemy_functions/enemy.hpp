@@ -36,6 +36,7 @@ struct Enemy
     }
     void enemy_takeDamage(double damage)
     {
+        cout << "Enemy takes damage: " << damage << endl;
         enemyHealth -= damage;
         if (enemyHealth < 0)
         {
@@ -103,8 +104,13 @@ struct Enemy
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
 		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
-			hero1.takeDamage(2);
-            hero1.gettingHit = true;
+			if(hero1.isAttacking){
+                enemy_takeDamage(20); // Hero attack does 20 damage }
+            }else{
+                hero1.takeDamage(2); // Enemy does 2 damage to hero
+            }
+            // hero1.takeDamage(2);
+            // hero1.gettingHit = true;
 			//cout << hero1.HeroHealth<< endl;
 		}else{
             hero1.gettingHit = false;
