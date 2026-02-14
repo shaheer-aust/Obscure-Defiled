@@ -38,7 +38,7 @@ struct Enemy
     {
         cout << "Enemy takes damage: " << damage << endl;
         enemyHealth -= damage;
-        if (enemyHealth < 0)
+        if (enemyHealth <= 0)
         {
             
             enemyHealth = 0;
@@ -282,11 +282,11 @@ struct Boss
         }
         
         int currentIdx = movement_index % boss_walking_R_images.size();
-        if (isright)
+        if (isright && isActive)
         {
             iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_walking_R_images[currentIdx]);
         }
-        else
+        else if(isActive)
         {
             iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_walking_L_images[currentIdx]);
         }
@@ -393,7 +393,7 @@ struct Boss
         bossGettingHit = true;
         hit_index = 0;
         
-        if (bossHealth < 0)
+        if (bossHealth <= 0)
         {
             
             bossHealth = 0;

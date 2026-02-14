@@ -393,8 +393,9 @@ void boss_hit_loop()
 }
 void boss_dead_loop()
 {
+	cout << "boss dead: " << game.boss.dead_index << endl;
 	int tik = 0;
-	if (!game.boss.isActive && game.boss.bossHealth <= 0)
+	if (game.boss.bossHealth <= 0)
 	{
 		tik++;
 		if (tik > 16) // Reset boss after showing death animation for a while
