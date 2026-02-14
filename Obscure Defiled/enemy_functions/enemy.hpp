@@ -40,6 +40,7 @@ struct Enemy
         enemyHealth -= damage;
         if (enemyHealth < 0)
         {
+            
             enemyHealth = 0;
             isActive = false; // Deactivate enemy when health reaches 0
         }
@@ -248,6 +249,26 @@ struct Boss
             iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_attacking_L_images[currentIdx]);
         }
     }
+    void show_boss_dead()
+    {
+        int tik=0;
+        if (isright)
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_R_images[0]);
+            tik++;
+            if(tik>8){
+                iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_R_images[1]);
+            }
+        }
+        else
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[0]);
+            tik++;
+            if(tik>8){
+                iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[1]);
+            }
+        }
+    }
     
     void show_boss_moving()
     {
@@ -259,7 +280,7 @@ struct Boss
             return;
         }else if(bossHealth <= 0)
         {
-            //show_boss_dead();
+            show_boss_dead();
             return;
         }else if (isAttacking)
         {
@@ -359,7 +380,7 @@ struct Boss
         if (isAttacking)
         {
             attack_timer++;
-            if (attack_timer >= 2) // Show each frame for 8 ticks
+            if (attack_timer >= 2) // Show each frame for 2 ticks
             {
                 attack_index++;
                 attack_timer = 0;
@@ -380,6 +401,7 @@ struct Boss
         
         if (bossHealth < 0)
         {
+            
             bossHealth = 0;
             isActive = false; // Boss defeated
         }

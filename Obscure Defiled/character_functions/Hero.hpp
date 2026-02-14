@@ -100,7 +100,7 @@ struct Hero
         if (isAttacking)
         {
             attack_timer++;
-            if (attack_timer >= 2) // Show each frame for 8 ticks
+            if (attack_timer >= 2) // Show each frame for 2 ticks
             {
                 attack_index++;
                 attack_timer = 0;
