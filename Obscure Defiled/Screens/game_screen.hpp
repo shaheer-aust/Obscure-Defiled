@@ -330,8 +330,8 @@ struct GameScreen
         {
             show_character_idle();
         }
-		//enemy1.show_enemy_moving();
-        //enemy2.show_enemy_moving();
+		enemy1.show_enemy_moving();
+        enemy2.show_enemy_moving();
         boss.show_boss_moving();
     }
 };

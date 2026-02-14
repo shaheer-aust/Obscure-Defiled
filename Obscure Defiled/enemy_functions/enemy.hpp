@@ -6,7 +6,7 @@ extern void takeDamage();
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #include <iostream>
-#include "character_functions\Hero.hpp";
+#include <mmsystem.h>
 #include "Screens\game_screen.hpp"
 #include <vector>
 using namespace std;
