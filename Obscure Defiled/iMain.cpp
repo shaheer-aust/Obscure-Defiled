@@ -382,13 +382,13 @@ void hit_loop()
 }
 void boss_hit_loop()
 {
-	if (game.boss.gettingHit && game.boss.isActive)
+	if (game.boss.bossGettingHit && game.boss.isActive)
 	{
 		game.boss.hit_index++;
 		if (game.boss.hit_index >= game.boss.boss_hit_R_images.size())
 		{
 			game.boss.hit_index = 0;
-			game.boss.gettingHit = false;
+			game.boss.bossGettingHit = false;
 		}
 	}
 }
