@@ -25,6 +25,7 @@ struct Enemy
     bool isright = false;
     int movement_index = 0;
     double enemy_speed = 8.0;
+    bool enemyGettingHit = false;
     bool isActive = true; // Whether this enemy is currently active in the game
     int enemyType = 1; // 1 for Small enemy 1, 2 for Small enemy 2
     
@@ -93,7 +94,7 @@ struct Enemy
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
 		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
-			//hero1.takeDamage(2);
+			hero1.takeDamage(2);
             hero1.gettingHit = true;
 			//cout << hero1.HeroHealth<< endl;
 		}else{
@@ -144,7 +145,7 @@ struct Boss
     bool isActive = false; // Boss spawns later in the game
     bool isAttacking = false;
     int attack_index = 0;
-    bool gettingHit = false;
+    bool bossGettingHit = false;
     int hit_index = 0;
     int attack_timer = 0;
     void initboss()
@@ -279,7 +280,23 @@ struct Boss
             iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_hit_L_images[hit_index]);
         }
     }
-    
+    void show_boss_dead()
+    {
+        int currentIdx = hit_index / 4; // Slow down the death animation
+        if (currentIdx >= boss_dead_R_images.size())
+        {
+            currentIdx = boss_dead_R_images.size() - 1; // Stay on the last frame
+        }
+        
+        if (isright)
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[currentIdx]);
+        }
+    }
     void move_boss(Hero& hero1)
     {
         if (!isActive) return; // Don't move inactive boss
@@ -303,7 +320,7 @@ struct Boss
         // Boss collision check
         if (abs(bossPosition_X - characterX) < 55 && (bossPosition_Y == characterY))
         {
-            hero1.takeDamage(5); // Boss does more damage
+            hero1.takeDamage(4); // Boss does more damage
             cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
             hero1.gettingHit = true;
         }

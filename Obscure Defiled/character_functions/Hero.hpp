@@ -95,6 +95,47 @@ struct Hero
             isMoving = false;
         }
     }
+    void hero_attack_update(Enemy& enemy1, Boss& boss1)
+    {
+        if (isAttacking && !isJumping)
+        {
+            double enemyX = enemy1.enemyPosition_X;
+            double enemyY = enemy1.enemyPosition_Y;
+            double bossX = boss1.bossPosition_X;
+            double bossY = boss1.bossPosition_Y;
+            
+            // Check if attack hits the enemy
+            if (abs(characterPosition_X - enemyX) < 50 && abs(characterPosition_Y - enemyY) < 50)
+            {
+                enemy1.takeDamage(20); // Damage dealt to the enemy
+                isAttacking = false;
+                enemy1.enemyGettingHit = true;
+                if (enemy1.enemyHealth <= 0)
+                {
+                    enemy1.isActive = false; // Deactivate enemy if health is 0 or less
+                }
+                //attack_index = 0;
+                //attack_timer = 0;
+            }
+            
+            // Check if attack hits the boss
+            if (abs(characterPosition_X - bossX) < 50 && abs(characterPosition_Y - bossY) < 50)
+            {
+                
+                boss1.bosstakeDamage(20); // Damage dealt to the boss
+                isAttacking = false;
+                boss1.bossGettingHit = true;
+                boss1.show_boss_hit();
+                if(boss1.bossHealth <= 0)
+                {
+                    boss1.show_boss_dead();
+                    boss1.isActive = false; // Deactivate boss if health is 0 or less
+                }
+                //attack_index = 0;
+                //attack_timer = 0;
+            }
+        }
+    }
     void update_attack()
     {
         if (isAttacking)

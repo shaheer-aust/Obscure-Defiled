@@ -382,7 +382,7 @@ void hit_loop()
 }
 void boss_hit_loop()
 {
-	if (game.boss.gettingHit && game.boss.isActive)
+	if (game.boss.bossGettingHit && game.boss.isActive)
 	{
 		game.boss.hit_index++;
 		if (game.boss.hit_index >= game.boss.boss_hit_R_images.size())
