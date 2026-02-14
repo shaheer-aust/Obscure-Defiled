@@ -273,18 +273,18 @@ struct Boss
     
     void show_boss_moving()
     {
-        if (!isActive) return; // Don't show inactive boss
+        //if (!isActive) return; // Don't show inactive boss
         if(isActive && bossHealth <= 0)
         {
             show_boss_dead();
             isActive = false; // Ensure boss is marked as inactive after death animation
             return;
         }
-        else if (bossGettingHit)
+        else if (bossGettingHit && isActive)
         {
             show_boss_hit();
             return;
-        }else if (isAttacking)
+        }else if (isAttacking && isActive)
         {
             show_attack();
             return;
@@ -345,7 +345,7 @@ struct Boss
         if (abs(bossPosition_X - characterX) < 55 && (bossPosition_Y == characterY))
         {
             if(hero1.isAttacking){
-                bosstakeDamage(20); // Hero attack does 20 damage }
+                bosstakeDamage(8); // Hero attack does 8 damage }
                 hero1.gettingHit = false;
             }else{
                 hero1.takeDamage(4); 
