@@ -414,7 +414,7 @@ int main()
 	iSetTimer(50, update_attack_animation);
 	iSetTimer(100, hit_loop);
 	iSetTimer(100, boss_hit_loop);
-	iSetTimer(100, boss_dead_loop);
+
 	setting.initsettingbar();
 	credit.initcreditbar();
 	game.initgame_screen();

@@ -167,7 +167,7 @@ struct Boss
     int hit_index = 0;
     int attack_timer = 0;
     int dead_index = 0;
-    dead_timer = 0;
+    int dead_timer = 0;
     void initboss()
     {
         init_boss_images();
