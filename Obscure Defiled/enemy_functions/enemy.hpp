@@ -167,6 +167,7 @@ struct Boss
     int hit_index = 0;
     int attack_timer = 0;
     int dead_index = 0;
+    dead_timer = 0;
     void initboss()
     {
         init_boss_images();
@@ -373,10 +374,15 @@ struct Boss
     {
         if (bossHealth <= 0)
         {
-            dead_index++;
-            if (dead_index >= boss_dead_R_images.size())
+            dead_timer++;
+            if (dead_timer > 16) // Show each frame for 16 ticks
             {
-                dead_index = boss_dead_R_images.size() - 1; // Stay on the last frame of death animation
+                dead_timer = 0;
+                dead_index++;
+                if (dead_index >= boss_dead_R_images.size())
+                {
+                    dead_index = boss_dead_R_images.size() - 1; // Stay on the last frame of death animation
+                }
             }
         }
     }
