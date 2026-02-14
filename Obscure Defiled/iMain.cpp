@@ -364,7 +364,6 @@ void update_attack_animation()
 	if (screens.top() == "Game")
 	{
 		game.hero1.update_attack();
-		game.hero1.hero_attack_update(game.enemy1, game.boss);
 		game.boss.update_attack();
 	}
 	
@@ -383,13 +382,13 @@ void hit_loop()
 }
 void boss_hit_loop()
 {
-	if (game.boss.bossGettingHit && game.boss.isActive)
+	if (game.boss.gettingHit && game.boss.isActive)
 	{
 		game.boss.hit_index++;
 		if (game.boss.hit_index >= game.boss.boss_hit_R_images.size())
 		{
 			game.boss.hit_index = 0;
-			game.boss.bossGettingHit = false;
+			game.boss.gettingHit = false;
 		}
 	}
 }
