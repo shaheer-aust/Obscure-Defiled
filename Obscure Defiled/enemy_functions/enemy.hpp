@@ -6,7 +6,7 @@ extern void takeDamage();
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #include <iostream>
-#include <mmsystem.h>
+#include "character_functions\Hero.hpp";
 #include "Screens\game_screen.hpp"
 #include <vector>
 using namespace std;
@@ -34,19 +34,15 @@ struct Enemy
         enemyType = type;
         init_enemy_images();
     }
-	void enemyTakeDamage(double damage)
-	{
-		enemyHealth -= damage;
-		enemyGettingHit = true;
-		//hit_index = 0;
-
-		if (enemyHealth < 0)
-		{
-			enemyHealth = 0;
-			isActive = false; // Boss defeated
-		}
-	}
-
+    void enemy_takeDamage(double damage)
+    {
+        enemyHealth -= damage;
+        if (enemyHealth < 0)
+        {
+            enemyHealth = 0;
+            isActive = false; // Deactivate enemy when health reaches 0
+        }
+    }    
     void init_enemy_images()
     {
         // Load enemy images based on type
@@ -100,7 +96,40 @@ struct Enemy
             iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_L_images[currentIdx]);
         }
     }
-    void move_enemy(Hero& hero1);
+    void move_enemy(Hero& hero1)
+    {
+        if (!isActive) return; // Don't move inactive enemies
+        
+        double characterX= hero1.characterPosition_X;
+        double characterY= hero1.characterPosition_Y;
+		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
+			hero1.takeDamage(2);
+            hero1.gettingHit = true;
+			//cout << hero1.HeroHealth<< endl;
+		}else{
+            hero1.gettingHit = false;
+        }
+        if (enemyPosition_X > characterX+25)
+        {
+            enemyPosition_X -= enemy_speed;
+            isright = false;
+        }
+        else if (enemyPosition_X < characterX-25)
+        {
+            enemyPosition_X += enemy_speed;
+            isright = true;
+        }
+        movement_index++;
+        if (movement_index >= enemy_idle_R_images.size())
+        {
+            movement_index = 0;
+        }
+		//if (characterX - enemyPosition_X < 30 || enemyPosition_X - characterX<30)
+        //{
+            // Attack logic can be implemented here
+            // For example, you can reduce the hero's health when the enemy is close enough
+        //}
+    }
 };
 
 // Boss Enemy struct
@@ -217,7 +246,7 @@ struct Boss
     {
         if (!isActive) return; // Don't show inactive boss
         
-        if (bossGettingHit)
+        if (gettingHit)
         {
             show_boss_hit();
             return;
@@ -248,7 +277,7 @@ struct Boss
         if (hit_index >= boss_hit_R_images.size())
         {
             hit_index = 0;
-            bossGettingHit = false;
+            gettingHit = false;
         }
         
         if (isright)
@@ -260,23 +289,7 @@ struct Boss
             iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_hit_L_images[hit_index]);
         }
     }
-    void show_boss_dead()
-    {
-        int currentIdx = hit_index / 4; // Slow down the death animation
-        if (currentIdx >= boss_dead_R_images.size())
-        {
-            currentIdx = boss_dead_R_images.size() - 1; // Stay on the last frame
-        }
-        
-        if (isright)
-        {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_R_images[currentIdx]);
-        }
-        else
-        {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_dead_L_images[currentIdx]);
-        }
-    }
+    
     void move_boss(Hero& hero1)
     {
         if (!isActive) return; // Don't move inactive boss
@@ -348,7 +361,7 @@ struct Boss
     void bosstakeDamage(double damage)
     {
         bossHealth -= damage;
-        bossGettingHit = true;
+        gettingHit = true;
         hit_index = 0;
         
         if (bossHealth < 0)
