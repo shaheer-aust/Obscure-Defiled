@@ -106,6 +106,7 @@ struct Enemy
         double characterY= hero1.characterPosition_Y;
 		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY) && isActive){
 			if(hero1.isAttacking){
+                hero1.gettingHit = false;
                 enemy_takeDamage(20); // Hero attack does 20 damage }
             }else{
                 hero1.gettingHit = true;
@@ -273,14 +274,15 @@ struct Boss
     void show_boss_moving()
     {
         if (!isActive) return; // Don't show inactive boss
-        
-        if (bossGettingHit)
-        {
-            show_boss_hit();
-            return;
-        }else if(bossHealth <= 0)
+        if(isActive && bossHealth <= 0)
         {
             show_boss_dead();
+            isActive = false; // Ensure boss is marked as inactive after death animation
+            return;
+        }
+        else if (bossGettingHit)
+        {
+            show_boss_hit();
             return;
         }else if (isAttacking)
         {
@@ -344,6 +346,7 @@ struct Boss
         {
             if(hero1.isAttacking){
                 bosstakeDamage(20); // Hero attack does 20 damage }
+                hero1.gettingHit = false;
             }else{
                 hero1.takeDamage(4); 
                 cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
