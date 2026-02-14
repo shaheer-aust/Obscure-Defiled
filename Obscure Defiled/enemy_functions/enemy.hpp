@@ -93,9 +93,9 @@ struct Enemy
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
 		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
-			hero1.takeDamage(2);
+			//hero1.takeDamage(2);
             hero1.gettingHit = true;
-			cout << hero1.HeroHealth<< endl;
+			//cout << hero1.HeroHealth<< endl;
 		}else{
             hero1.gettingHit = false;
         }
@@ -135,7 +135,7 @@ struct Boss
     vector<int> boss_dead_R_images;
     
     double bossPosition_X = SCREEN_WIDTH - 128;
-    double bossPosition_Y = 80.0;
+    double bossPosition_Y = 100;
     double bossHealth = 200.0;
     double maxBossHealth = 200.0;
     bool isright = true;
@@ -224,11 +224,11 @@ struct Boss
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_attacking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_attacking_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_attacking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_attacking_L_images[currentIdx]);
         }
     }
     
@@ -253,11 +253,11 @@ struct Boss
         int currentIdx = movement_index % boss_walking_R_images.size();
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_walking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_walking_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_walking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_walking_L_images[currentIdx]);
         }
 
     }
@@ -272,11 +272,11 @@ struct Boss
         
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_hit_R_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_hit_R_images[hit_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y+10, 108, 108, boss_hit_L_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_hit_L_images[hit_index]);
         }
     }
     
@@ -304,6 +304,7 @@ struct Boss
         if (abs(bossPosition_X - characterX) < 55 && (bossPosition_Y == characterY))
         {
             hero1.takeDamage(5); // Boss does more damage
+            cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
             hero1.gettingHit = true;
         }
         else
@@ -347,7 +348,7 @@ struct Boss
             }
         }
     }
-    void takeDamage(double damage)
+    void bosstakeDamage(double damage)
     {
         bossHealth -= damage;
         gettingHit = true;
