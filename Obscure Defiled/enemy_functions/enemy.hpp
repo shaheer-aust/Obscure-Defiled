@@ -369,6 +369,17 @@ struct Boss
             movement_index = 0;
         }
     }
+    void update_dead()
+    {
+        if (bossHealth <= 0)
+        {
+            dead_index++;
+            if (dead_index >= boss_dead_R_images.size())
+            {
+                dead_index = boss_dead_R_images.size() - 1; // Stay on the last frame of death animation
+            }
+        }
+    }
     void update_attack()
 {
         if (isAttacking)

@@ -365,6 +365,7 @@ void update_attack_animation()
 	{
 		game.hero1.update_attack();
 		game.boss.update_attack();
+		game.boss.update_dead();
 	}
 }
 void hit_loop()
@@ -391,28 +392,7 @@ void boss_hit_loop()
 		}
 	}
 }
-void boss_dead_loop()
-{
-	cout << "boss dead: " << game.boss.dead_index << endl;
-	int tik = 0;
-	if (game.boss.bossHealth <= 0)
-	{
-		tik++;
-		if (tik > 16) // Reset boss after showing death animation for a while
-		{
-			game.boss.dead_index++;
-			if (game.boss.dead_index >= game.boss.boss_dead_R_images.size())
-			{
-				game.boss.dead_index = 0;
-			}
-			tik = 0;
-		}
-	}
-	else
-	{
-		tik = 0; // Reset tik if boss is alive
-	}
-}
+
 /* -------------------- MAIN -------------------- */
 
 int main()
