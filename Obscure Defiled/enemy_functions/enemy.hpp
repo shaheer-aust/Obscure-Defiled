@@ -103,14 +103,15 @@ struct Enemy
         
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
-		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY)){
+		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY) && isActive){
 			if(hero1.isAttacking){
                 enemy_takeDamage(20); // Hero attack does 20 damage }
             }else{
+                hero1.gettingHit = true;
                 hero1.takeDamage(2); // Enemy does 2 damage to hero
             }
             // hero1.takeDamage(2);
-            // hero1.gettingHit = true;
+            // 
 			//cout << hero1.HeroHealth<< endl;
 		}else{
             hero1.gettingHit = false;
@@ -305,6 +306,7 @@ struct Boss
         //boss attack check
         if (abs(bossPosition_X - characterX) < 66 && (bossPosition_Y == characterY))
         {
+            
             if (!isAttacking)
             {
                 isAttacking = true;
@@ -319,9 +321,15 @@ struct Boss
         // Boss collision check
         if (abs(bossPosition_X - characterX) < 55 && (bossPosition_Y == characterY))
         {
-            hero1.takeDamage(4); // Boss does more damage
-            cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
+            if(hero1.isAttacking){
+                bosstakeDamage(20); // Hero attack does 20 damage }
+            }else{
+                hero1.takeDamage(4); 
+                cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
             hero1.gettingHit = true;
+            }
+            //hero1.takeDamage(4); // Boss does more damage
+            
         }
         else
         {
