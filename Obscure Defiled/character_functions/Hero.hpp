@@ -6,8 +6,12 @@
 #define SCREEN_HEIGHT 720
 #include <iostream>
 #include "enemy_functions\enemy.hpp";
+#include "Screens\game_screen.hpp";
 #include <vector>
 using namespace std;
+struct Enemy;
+struct Boss;
+struct GameScreen;
 struct Hero
 {
     double HeroHealth;
@@ -95,7 +99,7 @@ struct Hero
             isMoving = false;
         }
     }
-    void hero_attack_update(Enemy& enemy1, Boss& boss1)
+    /*void hero_attack_update(Enemy& enemy1, Boss& boss1)
     {
         if (isAttacking && !isJumping)
         {
@@ -107,7 +111,7 @@ struct Hero
             // Check if attack hits the enemy
             if (abs(characterPosition_X - enemyX) < 50 && abs(characterPosition_Y - enemyY) < 50)
             {
-                enemy1.takeDamage(20); // Damage dealt to the enemy
+                enemy1.enemyTakeDamage(20); // Damage dealt to the enemy
                 isAttacking = false;
                 enemy1.enemyGettingHit = true;
                 if (enemy1.enemyHealth <= 0)
@@ -135,7 +139,7 @@ struct Hero
                 //attack_timer = 0;
             }
         }
-    }
+    }*/
     void update_attack()
     {
         if (isAttacking)

@@ -34,6 +34,19 @@ struct Enemy
         enemyType = type;
         init_enemy_images();
     }
+	void enemyTakeDamage(double damage)
+	{
+		enemyHealth -= damage;
+		enemyGettingHit = true;
+		//hit_index = 0;
+
+		if (enemyHealth < 0)
+		{
+			enemyHealth = 0;
+			isActive = false; // Boss defeated
+		}
+	}
+
     void init_enemy_images()
     {
         // Load enemy images based on type
@@ -237,7 +250,7 @@ struct Boss
     {
         if (!isActive) return; // Don't show inactive boss
         
-        if (gettingHit)
+        if (bossGettingHit)
         {
             show_boss_hit();
             return;
@@ -268,7 +281,7 @@ struct Boss
         if (hit_index >= boss_hit_R_images.size())
         {
             hit_index = 0;
-            gettingHit = false;
+            bossGettingHit = false;
         }
         
         if (isright)
@@ -368,7 +381,7 @@ struct Boss
     void bosstakeDamage(double damage)
     {
         bossHealth -= damage;
-        gettingHit = true;
+        bossGettingHit = true;
         hit_index = 0;
         
         if (bossHealth < 0)
