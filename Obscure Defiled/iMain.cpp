@@ -342,7 +342,7 @@ void character_movement()
 		if(game.enemy2.enemyHealth > 0){
 			game.enemy2.enemyPosition_X += game.bg_speed;
 		}
-		if(game.boss.isActive){
+		if(game.boss.bossHealth > 0){
 			game.boss.bossPosition_X += game.bg_speed;
 		}
 		if (game.x >= SCREEN_WIDTH)
