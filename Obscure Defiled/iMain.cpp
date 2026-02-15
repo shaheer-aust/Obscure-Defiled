@@ -336,10 +336,10 @@ void character_movement()
 	else if (game.leftPressed && !game.hero1.isJumping)
 	{
 		game.x += game.bg_speed;
-		if(game.enemy1.isActive){
+		if(game.enemy1.enemyHealth > 0){
 			game.enemy1.enemyPosition_X += game.bg_speed;
 		}
-		if(game.enemy2.isActive){
+		if(game.enemy2.enemyHealth > 0){
 			game.enemy2.enemyPosition_X += game.bg_speed;
 		}
 		if(game.boss.isActive){
