@@ -120,11 +120,19 @@ struct Enemy
         }
         if (enemyPosition_X > characterX+25)
         {
+            if(enemyHealth <= 0){
+                //isActive = false;
+                return;
+            }
             enemyPosition_X -= enemy_speed;
             isright = false;
         }
         else if (enemyPosition_X < characterX-25)
         {
+                if(enemyHealth <= 0){
+                    //isActive = false;
+                    return;
+                }
             enemyPosition_X += enemy_speed;
             isright = true;
         }
@@ -355,11 +363,17 @@ struct Boss
         // Boss AI - chase the hero
         if (bossPosition_X > characterX + 50)
         {
+            if(bossHealth <= 0){
+                return;
+            }
             bossPosition_X -= boss_speed;
             isright = false;
         }
         else if (bossPosition_X < characterX - 50)
         {
+            if(bossHealth <= 0){
+                return;
+            }
             bossPosition_X += boss_speed;
             isright = true;
         }
