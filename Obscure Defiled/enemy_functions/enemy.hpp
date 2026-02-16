@@ -104,7 +104,7 @@ struct Enemy
         
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
-		if (abs(enemyPosition_X - characterX) < 80 && (enemyPosition_Y==characterY) && isActive){
+		if (abs(enemyPosition_X - characterX) < 50 && (enemyPosition_Y==characterY) && isActive){
 			if(hero1.isAttacking){
                 hero1.gettingHit = false;
                 enemy_takeDamage(20); // Hero attack does 20 damage }
@@ -118,7 +118,7 @@ struct Enemy
 		}else{
             hero1.gettingHit = false;
         }
-        if (enemyPosition_X > characterX+80)
+        if (enemyPosition_X > characterX+50)
         {
             if(enemyHealth <= 0){
                 //isActive = false;
@@ -127,7 +127,7 @@ struct Enemy
             enemyPosition_X -= enemy_speed;
             isright = false;
         }
-        else if (enemyPosition_X < characterX-80)
+        else if (enemyPosition_X < characterX-50)
         {
                 if(enemyHealth <= 0){
                     //isActive = false;
@@ -141,11 +141,7 @@ struct Enemy
         {
             movement_index = 0;
         }
-		//if (characterX - enemyPosition_X < 30 || enemyPosition_X - characterX<30)
-        //{
-            // Attack logic can be implemented here
-            // For example, you can reduce the hero's health when the enemy is close enough
-        //}
+		
     }
 };
 
