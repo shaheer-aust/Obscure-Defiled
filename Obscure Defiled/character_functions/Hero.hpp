@@ -87,7 +87,7 @@ struct Hero
     }
     void show_character_idle()
     {
-        int currentIdx = Idle_Index;
+        int currentIdx = idle_Index;
         if (isright)
         {
             iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_R_images[currentIdx]);
@@ -118,15 +118,15 @@ struct Hero
         void show_character_jump1()
     {
         // choose frame based on direction and jump_index
-        if (hero1.isright)
+        if (isright)
         {
-            if (!hero1.character_jump_R_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_R_images[hero1.jump_index]);
+            if (!character_jump_R_images.empty())
+                iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_jump_R_images[jump_index]);
         }
         else
         {
-            if (!hero1.character_jump_L_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_L_images[hero1.jump_index]);
+            if (!character_jump_L_images.empty())
+                iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_jump_L_images[jump_index]);
         }
     }
     void startAttack()
