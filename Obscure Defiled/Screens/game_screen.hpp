@@ -205,19 +205,19 @@ struct GameScreen
             int frameIndex = (int)floor((currentHealth / 200.0) * 15);
             iShowImage(boss.bossPosition_X-10, boss.bossPosition_Y+100 , 122, 20, boss.boss_health_bar_images[frameIndex]);
         }
-        if(enemy1.isActive && !boss.health_bar_images.empty()){
+		if (enemy1.isActive && !boss.boss_health_bar_images.empty()){
             double currentHealth = max(0.0, min(100.0, enemy1.enemyHealth)); // Clamp health between 0 and 100
 
             // Calculate index
-            int frameIndex = (int)floor((currentHealth / 100.0) * 10);
-            iShowImage(enemy1.enemyPosition_X-10, enemy1.enemyPosition_Y+100 , 50, 10, health_bar_images[frameIndex]);
+            int frameIndex = (int)floor((currentHealth / 100.0) * 15);
+			iShowImage(enemy1.enemyPosition_X - 2, enemy1.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
-        if(enemy2.isActive && !boss.health_bar_images.empty()){
+		if (enemy2.isActive && !boss.boss_health_bar_images.empty()){
             double currentHealth = max(0.0, min(100.0, enemy2.enemyHealth)); // Clamp health between 0 and 100
 
             // Calculate index
-            int frameIndex = (int)floor((currentHealth / 100.0) * 10);
-            iShowImage(enemy2.enemyPosition_X-10, enemy2.enemyPosition_Y+100 , 50, 10, health_bar_images[frameIndex]);
+            int frameIndex = (int)floor((currentHealth / 100.0) * 15);
+			iShowImage(enemy2.enemyPosition_X - 2, enemy2.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
         if (hero1.isAttacking)
         {
