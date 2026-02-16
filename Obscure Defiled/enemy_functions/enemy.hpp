@@ -317,11 +317,11 @@ struct Boss
         
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 190, 130, boss_hit_R_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y-30, 190, 130, boss_hit_R_images[hit_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 190, 130, boss_hit_L_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y-30, 190, 130, boss_hit_L_images[hit_index]);
         }
     }
     
