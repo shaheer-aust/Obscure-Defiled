@@ -286,45 +286,42 @@ void iSpecialKeyboard(unsigned char key)
 }
 
 /* -------------------- INIT -------------------- */
-int idle_index = 0;
-void idle_animation()
-{
-	idle_index++;
-	if (idle_index >= 3)
-	{
-		idle_index = 0;
-	}
-}
-void reset_movement()
-{
-	game.resetMovement();
-}
+
 void physics_update()
 {
 	game.updatePhysics();
 }
-int getIdleIndex()
-{
-	return idle_index;
-}
+
 void character_movement()
 {
+	if(screens.top() != "Game"){
+		return;
+	}
+	game.hero1.movement_index = 0;
+	game.hero1.idle_index++;
+	if (game.hero1.idle_index >= 3)
+	{
+		game.hero1.idle_index = 0;
+	}
 	if (game.rightPressed && !game.hero1.isJumping)
 	{
-		game.x -= game.bg_speed;
-		if(game.enemy1.isActive){
+		if (game.enemy1.isActive)
+		{
 			game.enemy1.enemyPosition_X -= game.bg_speed;
 		}
-		if(game.enemy2.isActive){
+		if (game.enemy2.isActive)
+		{
 			game.enemy2.enemyPosition_X -= game.bg_speed;
 		}
-		if (game.boss.isActive || game.boss.bossHealth <= 0){
+		if (game.boss.isActive || game.boss.bossHealth <= 0)
+		{
 			game.boss.bossPosition_X -= game.bg_speed;
 		}
 		if (game.x <= -SCREEN_WIDTH)
 		{
 			game.x = 0;
 		}
+		game.x -= game.bg_speed;
 		game.hero1.isMoving = true;
 		game.hero1.movement_index++;
 		game.hero1.characterPosition_X += game.hero1.character_speed;
@@ -335,20 +332,24 @@ void character_movement()
 	}
 	else if (game.leftPressed && !game.hero1.isJumping)
 	{
-		game.x += game.bg_speed;
-		if(game.enemy1.isActive){
+		
+		if (game.enemy1.isActive)
+		{
 			game.enemy1.enemyPosition_X += game.bg_speed;
 		}
-		if(game.enemy2.isActive){
+		if (game.enemy2.isActive)
+		{
 			game.enemy2.enemyPosition_X += game.bg_speed;
 		}
-		if(game.boss.isActive || game.boss.bossHealth<=0){
+		if (game.boss.isActive || game.boss.bossHealth <= 0)
+		{
 			game.boss.bossPosition_X += game.bg_speed;
 		}
 		if (game.x >= SCREEN_WIDTH)
-		{  
+		{
 			game.x = 0;
 		}
+		game.x += game.bg_speed;
 		game.hero1.isMoving = true;
 		game.hero1.movement_index++;
 		game.hero1.characterPosition_X -= game.hero1.character_speed;
@@ -360,6 +361,22 @@ void character_movement()
 	else if (game.hero1.isJumping)
 	{
 		game.hero1.isMoving = false;
+		if (game.enemy1.isActive)
+		{
+			game.enemy1.enemyPosition_X += game.bg_speed;
+		}
+		if (game.enemy2.isActive)
+		{
+			game.enemy2.enemyPosition_X += game.bg_speed;
+		}
+		if (game.boss.isActive || game.boss.bossHealth <= 0)
+		{
+			game.boss.bossPosition_X += game.bg_speed;
+		}
+		if (game.x >= SCREEN_WIDTH)
+		{
+			game.x = 0;
+		}
 	}
 	else
 	{
@@ -371,6 +388,19 @@ void enemy_movement()
 {
 	if (screens.top() == "Game")
 	{
+		// Spawn enemy2 when hero reaches halfway across the screen
+        if (!enemy2Spawned && hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+        {
+            enemy2.isActive = true;
+            enemy2Spawned = true;
+        }
+        
+        // Spawn boss when hero reaches 65% across the screen
+        if (!bossSpawned && hero1.characterPosition_X >= (SCREEN_WIDTH * 0.65))
+        {
+            boss.isActive = true;
+            bossSpawned = true;
+        }
 		game.enemy1.move_enemy(game.hero1);
 		game.enemy2.move_enemy(game.hero1);
 		game.boss.move_boss(game.hero1);
@@ -424,8 +454,8 @@ int main()
 
 	menu.initmenubar();
 	initIntroScreen();
-	iSetTimer(200, idle_animation);
-	iSetTimer(1000, reset_movement);
+	
+	//iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
 	iSetTimer(16, character_movement);
 	iSetTimer(100, enemy_movement);

@@ -32,7 +32,7 @@ struct GameScreen
     int x = 0;
     
     double jumpVelocity = 0.0;
-    double gravity = 2.0;
+    double gravity;
     double base_gravity = 5;
     double groundY = 100.0;
     double bg_speed = 4.0;
@@ -118,36 +118,8 @@ struct GameScreen
             hero1.character_jump_L_images.push_back(iLoadImage(a));
         }
     }
-    void show_character_idle()
-    {
-        int currentIdx = getIdleIndex();
-        if (hero1.isright)
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_R_images[currentIdx]);
-        }
-        else
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_L_images[currentIdx]);
-        }
-    }
-    void show_character_run()
-    {
+    
 
-        if (hero1.movement_index >= hero1.character_run_R_images.size())
-        {
-
-            hero1.movement_index = 0;
-        }
-        if (hero1.isright)
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_R_images[hero1.movement_index]);
-        }
-        else
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_L_images[hero1.movement_index]);
-        }
-        // movement_index++;
-    }
 
     void resetMovement()
     {
@@ -169,23 +141,9 @@ struct GameScreen
             hero1.jump_index = 0;
         }
     }
-
+    //physics update function for handling jump movement and gravity
     void updatePhysics()
     {
-        // Spawn enemy2 when hero reaches halfway across the screen
-        if (!enemy2Spawned && hero1.characterPosition_X >= SCREEN_WIDTH / 2)
-        {
-            enemy2.isActive = true;
-            enemy2Spawned = true;
-        }
-        
-        // Spawn boss when hero reaches 75% across the screen
-        if (!bossSpawned && hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
-        {
-            boss.isActive = true;
-            bossSpawned = true;
-        }
-
         if (hero1.isJumping)
         {
             if (rightPressed)
