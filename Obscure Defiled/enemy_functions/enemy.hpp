@@ -104,7 +104,7 @@ struct Enemy
         
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
-		if (abs(enemyPosition_X - characterX) < 50 && (enemyPosition_Y==characterY) && isActive){
+		if (abs(enemyPosition_X - characterX) <= 51 && (enemyPosition_Y==characterY) && isActive){
 			if(hero1.isAttacking){
                 hero1.gettingHit = false;
                 enemy_takeDamage(20); // Hero attack does 20 damage }
