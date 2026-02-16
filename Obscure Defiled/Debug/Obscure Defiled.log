@@ -1,43 +1,43 @@
-﻿Build started 2/15/2026 1:08:04 AM.
-     1>Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
+﻿Build started 16-02-2026 09:56:57.
+     1>Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Rebuild target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt iMain.cpp
          iMain.cpp
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(8): warning C4005: 'BUTTON_WIDTH' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\menu_screen.hpp(8) : see previous definition of 'BUTTON_WIDTH'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\menu_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(11): warning C4005: 'BUTTON_WIDTH' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(8) : see previous definition of 'BUTTON_WIDTH'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(12): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(132): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(299): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(368): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(382): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(398): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(136): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(219): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(227): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(9): warning C4005: 'BUTTON_WIDTH' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(11) : see previous definition of 'BUTTON_WIDTH'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(10): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(12) : see previous definition of 'BUTTON_HEIGHT'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(376): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(388): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(8): warning C4005: 'BUTTON_WIDTH' : macro redefinition
+                 c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\menu_screen.hpp(8) : see previous definition of 'BUTTON_WIDTH'
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
+                 c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\menu_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(11): warning C4005: 'BUTTON_WIDTH' : macro redefinition
+                 c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(8) : see previous definition of 'BUTTON_WIDTH'
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(12): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
+                 c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(140): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(307): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(382): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(396): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(412): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(136): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(219): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(227): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(9): warning C4005: 'BUTTON_WIDTH' : macro redefinition
+                 c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(11) : see previous definition of 'BUTTON_WIDTH'
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(10): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
+                 c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(12) : see previous definition of 'BUTTON_HEIGHT'
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\imain.cpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\imain.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\imain.cpp(11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\imain.cpp(394): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\imain.cpp(406): warning C4018: '>=' : signed/unsigned mismatch
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\user\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\user\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\user\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.lib" /MACHINE:X86 Debug\iMain.obj
-         Obscure Defiled.vcxproj -> C:\Users\user\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe
-     1>Done Building Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)).
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.lib" /MACHINE:X86 Debug\iMain.obj
+         Obscure Defiled.vcxproj -> C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe
+     1>Done Building Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.33
+Time Elapsed 00:00:03.12

@@ -318,7 +318,7 @@ void character_movement()
 		if(game.enemy2.isActive){
 			game.enemy2.enemyPosition_X -= game.bg_speed;
 		}
-		if(game.boss.isActive){
+		if (game.boss.isActive || game.boss.bossHealth <= 0){
 			game.boss.bossPosition_X -= game.bg_speed;
 		}
 		if (game.x <= -SCREEN_WIDTH)
@@ -336,17 +336,17 @@ void character_movement()
 	else if (game.leftPressed && !game.hero1.isJumping)
 	{
 		game.x += game.bg_speed;
-		if(game.enemy1.enemyHealth > 0){
+		if(game.enemy1.isActive){
 			game.enemy1.enemyPosition_X += game.bg_speed;
 		}
-		if(game.enemy2.enemyHealth > 0){
+		if(game.enemy2.isActive){
 			game.enemy2.enemyPosition_X += game.bg_speed;
 		}
-		if(game.boss.bossHealth > 0){
+		if(game.boss.isActive || game.boss.bossHealth<=0){
 			game.boss.bossPosition_X += game.bg_speed;
 		}
 		if (game.x >= SCREEN_WIDTH)
-		{
+		{  
 			game.x = 0;
 		}
 		game.hero1.isMoving = true;
