@@ -236,18 +236,18 @@ struct Boss
             boss_dead_L_images.push_back(iLoadImage(a));
         }
         // load attacking images
-        for(int i = 1; i <= 5; i++)
+        for(int i = 1; i <= 36; i++)
         {
             char a[200];
             ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/L_boss_attack_1.png
-            sprintf_s(a, "resources/Level_1/Boss/Attacking/L_boss_attack_%d.png", i);
+            sprintf_s(a, "resources/Level_1/Boss/Attacking/left/%d.png", i);
             boss_attacking_L_images.push_back(iLoadImage(a));
         }
-        for(int i = 1; i <= 5; i++)
+        for(int i = 1; i <= 36; i++)
         {
             char a[200];
             ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/R_boss_attack_1.png
-            sprintf_s(a, "resources/Level_1/Boss/Attacking/R_boss_attack_%d.png", i);
+            sprintf_s(a, "resources/Level_1/Boss/Attacking/right/%d.png", i);
             boss_attacking_R_images.push_back(iLoadImage(a));
         }
     }
@@ -410,7 +410,7 @@ struct Boss
         if (isAttacking)
         {
             attack_timer++;
-            if (attack_timer >= 2) // Show each frame for 2 ticks
+            if (attack_timer >= 0) // Show each frame for 2 ticks
             {
                 attack_index++;
                 attack_timer = 0;
