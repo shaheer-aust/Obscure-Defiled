@@ -192,18 +192,14 @@ struct Boss
             //sprintf_s(a, "resources//Level_1//Boss//Walking//Rlvl_1_boss_idle+walking_%d.png", i);
             sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/right/%d.png", i);
             boss_walking_R_images.push_back(iLoadImage(a));
-            if(i%5==0){
-                i+=5;
-            }
+            
         }
         for (int i = 0; i <= 55; i++)
         {
             char a[200];
             sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
             boss_walking_L_images.push_back(iLoadImage(a));
-                if(i%5==0){
-                    i+=5;
-                }
+          
         }
         
         
