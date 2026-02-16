@@ -115,11 +115,9 @@ struct Enemy
             else
             {
                 hero1.gettingHit = true;
-                hero1.takeDamage(2); // Enemy does 2 damage to hero
+                hero1.takeDamage(2); 
             }
-            // hero1.takeDamage(2);
-            //
-            // cout << hero1.HeroHealth<< endl;
+            
         }
         else
         {
@@ -255,11 +253,11 @@ struct Boss
     }
     void init_boss_health_bar_images()
     {
-        for (int i = 0; i <= 100; i += 20)
+        for (int i = 0; i <= 15; i ++)
         {
             char a[200];
             /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level 1 boss enemy health bar/Enemy_health_bar_100.png
-            sprintf_s(a, "resources//Level 1 boss enemy health bar//Enemy_health_bar_%d.png", i);
+            sprintf_s(a, "resources//Level 1 boss enemy health bar//%d.png", i);
             boss_health_bar_images.push_back(iLoadImage(a));
         }
     }
