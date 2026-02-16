@@ -9,6 +9,7 @@
 #include "enemy_functions\enemy.hpp";
 #include "Screens\credit_screen.hpp";
 #include "character_functions\Hero.hpp";
+#include "Screens\option_screen.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -27,7 +28,7 @@ MenuScreen menu;
 GameScreen game;
 
 Credit_screen credit;
-Setting_screen setting;
+Option_screen setting;
 
 int bgm_audio = -1;
 vector<int> menu_images;
@@ -431,7 +432,7 @@ int main()
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
 	iSetTimer(100, hero_hit_loop);
-	//iSetTimer(100, boss_hit_loop);
+	iSetTimer(100, boss_hit_loop);
 
 	setting.initsettingbar();
 	credit.initcreditbar();

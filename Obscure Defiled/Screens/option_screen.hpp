@@ -1,8 +1,8 @@
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 
-#ifndef OPTION_SCREEN_HPP
-#define OPTION_SCREEN_HPP
+#ifndef CREDIT_SCREEN_HPP
+#define CREDIT_SCREEN_HPP
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -19,13 +19,13 @@ struct Option_screen
 	vector<int> credit_images; // holds the credit picture
 	long long lastBackBlipTime = 0;
 	bool lastFrameBackClicked = false;
-	void initcreditbar()
+	void initsettingbar()
 	{
 		credit_images.push_back(iLoadImage("resources//option//option.png"));
 		credit_images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
 		// Load images or resources needed for the credit screen
 	}
-	void initsettingbar()
+	void drawsetting_screen()
 	{
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, credit_images[0]);
 		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[1]);
