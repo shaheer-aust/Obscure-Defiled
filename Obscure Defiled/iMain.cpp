@@ -400,7 +400,13 @@ void boss_hit_loop()
 		}
 	}
 }
-
+void character_idle_animation()
+{
+	if (screens.top() == "Game")
+	{
+		game.hero1.idle_animation();
+	}
+}
 /* -------------------- MAIN -------------------- */
 
 int main()
@@ -414,7 +420,7 @@ int main()
 
 	menu.initmenubar();
 	initIntroScreen();
-	iSetTimer(200, game.hero1.idle_animation);
+	iSetTimer(200, character_idle_animation);
 	iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
 	iSetTimer(16, character_movement);
