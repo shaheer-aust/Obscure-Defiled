@@ -21,7 +21,7 @@ struct Hero
     double characterPosition_X = 100.0;
     double characterPosition_Y = 100.0;
     double attack_index = 0;
-    double Idle_Index = 0;
+    double idle_Index = 0;
     double character_speed = 6;
     bool isJumping = false;
     bool isright = true;
@@ -114,6 +114,20 @@ struct Hero
             iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_run_L_images[movement_index]);
         }
         // movement_index++;
+    }
+        void show_character_jump1()
+    {
+        // choose frame based on direction and jump_index
+        if (hero1.isright)
+        {
+            if (!hero1.character_jump_R_images.empty())
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_R_images[hero1.jump_index]);
+        }
+        else
+        {
+            if (!hero1.character_jump_L_images.empty())
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_L_images[hero1.jump_index]);
+        }
     }
     void startAttack()
     {
