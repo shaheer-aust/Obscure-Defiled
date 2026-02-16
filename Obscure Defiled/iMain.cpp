@@ -298,10 +298,10 @@ void character_movement()
 		return;
 	}
 	game.hero1.movement_index = 0;
-	game.hero1.idle_index++;
-	if (game.hero1.idle_index >= 3)
+	game.hero1.idle_Index++;
+	if (game.hero1.idle_Index >= 3)
 	{
-		game.hero1.idle_index = 0;
+		game.hero1.idle_Index = 0;
 	}
 	if (game.rightPressed && !game.hero1.isJumping)
 	{
@@ -389,17 +389,17 @@ void enemy_movement()
 	if (screens.top() == "Game")
 	{
 		// Spawn enemy2 when hero reaches halfway across the screen
-        if (!game.enemy2.enemy2Spawned && game.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+        if (!game.enemy2Spawned && game.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
         {
             game.enemy2.isActive = true;
-            game.enemy2.enemy2Spawned = true;
+            game.enemy2Spawned = true;
         }
         
         // Spawn boss when hero reaches 65% across the screen
-        if (!game.boss.bossSpawned && game.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.65))
+        if (!game.bossSpawned && game.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.65))
         {
             game.boss.isActive = true;
-            game.boss.bossSpawned = true;
+            game.bossSpawned = true;
         }
 		game.enemy1.move_enemy(game.hero1);
 		game.enemy2.move_enemy(game.hero1);
