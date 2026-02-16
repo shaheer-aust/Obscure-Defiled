@@ -389,17 +389,17 @@ void enemy_movement()
 	if (screens.top() == "Game")
 	{
 		// Spawn enemy2 when hero reaches halfway across the screen
-        if (!game.enemy2.enemy2Spawned && game.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+        if (!enemy2Spawned && hero1.characterPosition_X >= SCREEN_WIDTH / 2)
         {
-            game.enemy2.isActive = true;
-            game.enemy2.enemy2Spawned = true;
+            enemy2.isActive = true;
+            enemy2Spawned = true;
         }
         
         // Spawn boss when hero reaches 65% across the screen
-        if (!game.boss.bossSpawned && game.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.65))
+        if (!bossSpawned && hero1.characterPosition_X >= (SCREEN_WIDTH * 0.65))
         {
-            game.boss.isActive = true;
-            game.boss.bossSpawned = true;
+            boss.isActive = true;
+            bossSpawned = true;
         }
 		game.enemy1.move_enemy(game.hero1);
 		game.enemy2.move_enemy(game.hero1);
