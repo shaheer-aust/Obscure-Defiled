@@ -77,11 +77,11 @@ struct Hero
         int currentIdx = hit_index;
         if (isright)
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 96, 96, character_idle_hit_R_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_hit_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y, 96, 96, character_idle_hit_L_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_hit_L_images[currentIdx]);
         }
     }
 
@@ -118,11 +118,11 @@ struct Hero
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(characterPosition_X, characterPosition_Y + 10, 96, 96, character_attack_R_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y + 10, 152, 152, character_attack_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y + 10, 96, 96, character_attack_L_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y + 10, 152, 152, character_attack_L_images[currentIdx]);
         }
     }
 };

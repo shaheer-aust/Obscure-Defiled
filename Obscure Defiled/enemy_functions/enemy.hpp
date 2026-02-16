@@ -253,11 +253,11 @@ struct Boss
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_attacking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_attacking_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_attacking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_attacking_L_images[currentIdx]);
         }
     }
     void show_boss_dead()
@@ -265,11 +265,11 @@ struct Boss
         
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y-10, 108, 108, boss_dead_R_images[dead_index]);
+            iShowImage(bossPosition_X, bossPosition_Y-10, 162, 162, boss_dead_R_images[dead_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y-10, 108, 108, boss_dead_L_images[dead_index]);
+            iShowImage(bossPosition_X, bossPosition_Y-10, 162, 162, boss_dead_L_images[dead_index]);
          
         }
     }
@@ -293,11 +293,11 @@ struct Boss
         int currentIdx = movement_index % boss_walking_R_images.size();
         if (isright && isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_walking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_walking_R_images[currentIdx]);
         }
         else if(isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_walking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_walking_L_images[currentIdx]);
         }
 
     }
@@ -312,11 +312,11 @@ struct Boss
         
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_hit_R_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_hit_R_images[hit_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 108, 108, boss_hit_L_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_hit_L_images[hit_index]);
         }
     }
     

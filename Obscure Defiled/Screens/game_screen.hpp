@@ -123,11 +123,11 @@ struct GameScreen
         int currentIdx = getIdleIndex();
         if (hero1.isright)
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_idle_R_images[currentIdx]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_idle_L_images[currentIdx]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_L_images[currentIdx]);
         }
     }
     void show_character_run()
@@ -140,11 +140,11 @@ struct GameScreen
         }
         if (hero1.isright)
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_run_R_images[hero1.movement_index]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_R_images[hero1.movement_index]);
         }
         else
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_run_L_images[hero1.movement_index]);
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_L_images[hero1.movement_index]);
         }
         // movement_index++;
     }
@@ -249,12 +249,12 @@ struct GameScreen
         if (hero1.isright)
         {
             if (!hero1.character_jump_R_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_jump_R_images[hero1.jump_index]);
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_R_images[hero1.jump_index]);
         }
         else
         {
             if (!hero1.character_jump_L_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 96, 96, hero1.character_jump_L_images[hero1.jump_index]);
+                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_L_images[hero1.jump_index]);
         }
     }
 
