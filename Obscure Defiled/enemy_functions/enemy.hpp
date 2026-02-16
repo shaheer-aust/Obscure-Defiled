@@ -258,11 +258,11 @@ struct Boss
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_attacking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y-30, 190, 130, boss_attacking_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_attacking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y-30, 190, 130, boss_attacking_L_images[currentIdx]);
         }
     }
     void show_boss_dead()
@@ -298,11 +298,11 @@ struct Boss
         int currentIdx = movement_index % boss_walking_R_images.size();
         if (isright && isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 81, 122, boss_walking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 122, 81, boss_walking_R_images[currentIdx]);
         }
         else if(isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 81, 122, boss_walking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 122, 81, boss_walking_L_images[currentIdx]);
         }
 
     }
@@ -332,7 +332,7 @@ struct Boss
         double characterX = hero1.characterPosition_X;
         double characterY = hero1.characterPosition_Y;
         //boss attack check
-        if (abs(bossPosition_X - characterX) < 66 && (bossPosition_Y == characterY))
+        if (abs(bossPosition_X - characterX) < 80 && (bossPosition_Y == characterY))
         {
             
             if (!isAttacking)
@@ -347,7 +347,7 @@ struct Boss
             attack_index = 0;
         }
         // Boss collision check
-        if (abs(bossPosition_X - characterX) < 55 && (bossPosition_Y == characterY))
+        if (abs(bossPosition_X - characterX) < 70 && (bossPosition_Y == characterY))
         {
             if(hero1.isAttacking){
                 bosstakeDamage(8); // Hero attack does 8 damage }
@@ -366,7 +366,7 @@ struct Boss
         }
         
         // Boss AI - chase the hero
-        if (bossPosition_X > characterX + 50)
+        if (bossPosition_X > characterX + 70)
         {
             if(bossHealth <= 0){
                 return;
@@ -374,7 +374,7 @@ struct Boss
             bossPosition_X -= boss_speed;
             isright = false;
         }
-        else if (bossPosition_X < characterX - 50)
+        else if (bossPosition_X < characterX - 70)
         {
             if(bossHealth <= 0){
                 return;
