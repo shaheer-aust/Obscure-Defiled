@@ -28,7 +28,7 @@ MenuScreen menu;
 GameScreen game;
 
 Credit_screen credit;
-Setting_screen setting;
+Option_screen setting;
 
 int bgm_audio = -1;
 vector<int> menu_images;

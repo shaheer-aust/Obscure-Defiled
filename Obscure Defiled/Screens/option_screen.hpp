@@ -25,7 +25,7 @@ struct Option_screen
 		credit_images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
 		// Load images or resources needed for the credit screen
 	}
-	void drawcredit_screen()
+	void initsettingbar()
 	{
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, credit_images[0]);
 		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[1]);

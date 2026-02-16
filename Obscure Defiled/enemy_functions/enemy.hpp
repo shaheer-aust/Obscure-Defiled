@@ -91,11 +91,11 @@ struct Enemy
         int currentIdx = movement_index;
         if (isright)
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_R_images[currentIdx]);
+            iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 80, 80, enemy_idle_L_images[currentIdx]);
+            iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_L_images[currentIdx]);
         }
     }
     void move_enemy(Hero &hero1)
@@ -338,17 +338,17 @@ struct Boss
         }
     }
     void boss_hit_loop()
-{
-	if (bossGettingHit && isActive)
-	{
-		hit_index++;
-		if (hit_index >= boss_hit_R_images.size())
-		{
-			hit_index = 0;
-			bossGettingHit = false;
-		}
-	}
-}
+    {
+        if (bossGettingHit && isActive)
+        {
+            hit_index++;
+            if (hit_index >= boss_hit_R_images.size())
+            {
+                hit_index = 0;
+                bossGettingHit = false;
+            }
+        }
+    }
     void move_boss(Hero &hero1)
     {
         if (!isActive)
