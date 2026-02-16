@@ -192,19 +192,18 @@ struct GameScreen
         iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
-    
+
         // cout << "Hero Health: " << hero1.HeroHealth << endl;
         iShowImage(SCREEN_WIDTH / 2 - (275 / 2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
 
         // Draw boss health bar if boss is active
         if (boss.isActive && !boss.boss_health_bar_images.empty())
         {
-            int bossHealthPercent = (int)((boss.bossHealth / boss.maxBossHealth) * 100);
-            if (bossHealthPercent < 0)
-                bossHealthPercent = 0;
-            if (bossHealthPercent > 100)
-                bossHealthPercent = 100;
-            iShowImage(SCREEN_WIDTH - 320, SCREEN_HEIGHT - 150, 300, 57, boss.boss_health_bar_images[(bossHealthPercent / 20)]);
+            double currentHealth = max(0.0, min(200.0, boss.bossHealth)); // Clamp health between 0 and 200
+
+            // Calculate index
+            int frameIndex = (int)floor((currentHealth / 200.0) * 15);
+            iShowImage(SCREEN_WIDTH - 320, SCREEN_HEIGHT - 150, 300, 57, boss.boss_health_bar_images[frameIndex]);
         }
 
         if (hero1.isAttacking)
