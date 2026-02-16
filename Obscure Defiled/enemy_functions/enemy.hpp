@@ -253,12 +253,15 @@ struct Boss
     }
     void init_boss_health_bar_images()
     {
-        for (int i = 0; i <= 15; i ++)
+        for (int i = 1; i <= 4; i ++)
         {
-            char a[200];
+            for(int j = 1; j <= 4; j ++)
+            {
+                char a[200];
             /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level 1 boss enemy health bar/Enemy_health_bar_100.png
-            sprintf_s(a, "resources//Level 1 boss enemy health bar//%d.png", i);
+            sprintf_s(a, "resources//Level 1 boss enemy health bar//row-%d-column-%d.png", i,j);
             boss_health_bar_images.push_back(iLoadImage(a));
+            }
         }
     }
     void show_attack()
