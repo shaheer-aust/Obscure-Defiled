@@ -388,7 +388,7 @@ struct Boss
         {
             movement_index = 0;
         }
-    }
+    }    
     void update_dead()
     {
         if (bossHealth <= 0)
