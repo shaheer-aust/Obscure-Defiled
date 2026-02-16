@@ -337,7 +337,18 @@ struct Boss
             iShowImage(bossPosition_X, bossPosition_Y - 30, 190, 130, boss_hit_L_images[hit_index]);
         }
     }
-
+    void boss_hit_loop()
+{
+	if (bossGettingHit && isActive)
+	{
+		hit_index++;
+		if (hit_index >= boss_hit_R_images.size())
+		{
+			hit_index = 0;
+			bossGettingHit = false;
+		}
+	}
+}
     void move_boss(Hero &hero1)
     {
         if (!isActive)
