@@ -298,11 +298,11 @@ struct Boss
         int currentIdx = movement_index % boss_walking_R_images.size();
         if (isright && isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_walking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 81, 122, boss_walking_R_images[currentIdx]);
         }
         else if(isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_walking_L_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, 81, 122, boss_walking_L_images[currentIdx]);
         }
 
     }
