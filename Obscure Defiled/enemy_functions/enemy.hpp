@@ -205,14 +205,14 @@ struct Boss
         
         
         // Load boss getting hit images
-        for (int i = 2; i <= 12; i++)
+        for (int i = 2; i <= 8; i++)
         {
             char a[200];
             ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/L_lvl_1_idle_1.png
             sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
             boss_hit_R_images.push_back(iLoadImage(a));
         }
-        for (int i = 2; i <= 12; i++)
+        for (int i = 2; i <= 8; i++)
         {
             char a[200];
             ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/R_lvl_1_idle_2.png
