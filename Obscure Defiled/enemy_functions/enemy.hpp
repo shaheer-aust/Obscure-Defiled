@@ -184,7 +184,7 @@ struct Boss
     void init_boss_images()
     {
         // Load boss walking images
-        for (int i = 0; i <= 55; i++)
+        for (int i = 0; i <= 35; i++)
         {
            
             char a[200];
@@ -194,7 +194,7 @@ struct Boss
             boss_walking_R_images.push_back(iLoadImage(a));
             
         }
-        for (int i = 0; i <= 55; i++)
+        for (int i = 0; i <= 35; i++)
         {
             char a[200];
             sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
