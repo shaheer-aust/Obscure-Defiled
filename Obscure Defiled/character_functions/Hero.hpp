@@ -133,32 +133,33 @@ struct Hero
     void show_character_idle()
     {
         int currentIdx = getIdleIndex();
-        if (hero1.isright)
+        if (isright)
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_R_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_L_images[currentIdx]);
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_L_images[currentIdx]);
         }
     }
     void show_character_run()
     {
 
-        if (hero1.movement_index >= hero1.character_run_R_images.size())
         {
-
-            hero1.movement_index = 0;
+            if (movement_index >= character_run_R_images.size())
+            {
+                movement_index = 0;
+            }
         }
-        if (hero1.isright)
+        if (isright)
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_R_images[hero1.movement_index]);
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_run_R_images[movement_index]);
         }
         else
         {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_L_images[hero1.movement_index]);
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_run_L_images[movement_index]);
         }
-        // movement_index++;
+       
     }
     void startAttack()
     {
