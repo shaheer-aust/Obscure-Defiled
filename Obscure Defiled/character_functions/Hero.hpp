@@ -46,7 +46,7 @@ struct Hero
     {
         init_fighting_images();
         init_idle_hit_images();
-		HeroHealth = 100;
+        HeroHealth = 100;
         // Load character idle images
         for (int i = 1; i <= 4; i++)
         {
@@ -130,7 +130,36 @@ struct Hero
             iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_hit_L_images[currentIdx]);
         }
     }
+    void show_character_idle()
+    {
+        int currentIdx = getIdleIndex();
+        if (hero1.isright)
+        {
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_L_images[currentIdx]);
+        }
+    }
+    void show_character_run()
+    {
 
+        if (hero1.movement_index >= hero1.character_run_R_images.size())
+        {
+
+            hero1.movement_index = 0;
+        }
+        if (hero1.isright)
+        {
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_R_images[hero1.movement_index]);
+        }
+        else
+        {
+            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_L_images[hero1.movement_index]);
+        }
+        // movement_index++;
+    }
     void startAttack()
     {
         if (!isAttacking && !isJumping)

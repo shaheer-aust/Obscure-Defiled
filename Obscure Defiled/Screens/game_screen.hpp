@@ -20,7 +20,7 @@ struct GameScreen
 {
     vector<int> images;
     vector<int> health_bar_images;
-    
+
     Enemy enemy1;
     Enemy enemy2;
     Boss boss;
@@ -30,26 +30,26 @@ struct GameScreen
     bool leftPressed = false;
 
     int x = 0;
-    
+
     double jumpVelocity = 0.0;
     double gravity = 2.0;
     double base_gravity = 5;
     double groundY = 100.0;
     double bg_speed = 4.0;
     bool enemy2Spawned = false; // Track if enemy2 has been spawned
-    bool bossSpawned = false; // Track if boss has been spawned
- 
+    bool bossSpawned = false;   // Track if boss has been spawned
+
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         hero1.init_character_images();
         groundY = hero1.characterPosition_Y;
-        enemy1.initenemy(1); // Initialize Small enemy 1
-        enemy2.initenemy(2); // Initialize Small enemy 2
-        enemy2.isActive = false; // Start with enemy2 inactive
+        enemy1.initenemy(1);         // Initialize Small enemy 1
+        enemy2.initenemy(2);         // Initialize Small enemy 2
+        enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
-        boss.initboss(); // Initialize boss
-        boss.isActive = false; // Start with boss inactive
+        boss.initboss();             // Initialize boss
+        boss.isActive = false;       // Start with boss inactive
         init_health_bar_images();
     }
 
@@ -61,37 +61,6 @@ struct GameScreen
             sprintf_s(a, "resources/Health Bar//%d Percent//resize_health_bar_%d.png", i, i);
             health_bar_images.push_back(iLoadImage(a));
         }
-    }
-
-    void show_character_idle()
-    {
-        int currentIdx = getIdleIndex();
-        if (hero1.isright)
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_R_images[currentIdx]);
-        }
-        else
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_idle_L_images[currentIdx]);
-        }
-    }
-    void show_character_run()
-    {
-
-        if (hero1.movement_index >= hero1.character_run_R_images.size())
-        {
-
-            hero1.movement_index = 0;
-        }
-        if (hero1.isright)
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_R_images[hero1.movement_index]);
-        }
-        else
-        {
-            iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_run_L_images[hero1.movement_index]);
-        }
-        // movement_index++;
     }
 
     void resetMovement()
@@ -123,7 +92,7 @@ struct GameScreen
             enemy2.isActive = true;
             enemy2Spawned = true;
         }
-        
+
         // Spawn boss when hero reaches 75% across the screen
         if (!bossSpawned && hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
         {
@@ -140,7 +109,7 @@ struct GameScreen
                 {
                     x = 0;
                 }
-                hero1.characterPosition_X += hero1.character_speed+5;
+                hero1.characterPosition_X += hero1.character_speed + 5;
                 hero1.isright = true;
             }
             else if (leftPressed)
@@ -150,7 +119,7 @@ struct GameScreen
                 {
                     x = 0;
                 }
-                hero1.characterPosition_X -= hero1.character_speed+5;
+                hero1.characterPosition_X -= hero1.character_speed + 5;
                 hero1.isright = false;
             }
             // apply vertical movement
@@ -183,7 +152,6 @@ struct GameScreen
                 jumpVelocity = 0.0;
                 gravity = base_gravity;
                 hero1.jump_index = 0;
-                
             }
         }
     }
@@ -210,31 +178,26 @@ struct GameScreen
         if (key == GLUT_KEY_UP)
         {
             startJump();
-     
         }
         else if (key == GLUT_KEY_DOWN)
         {
-      
         }
         else if (key == GLUT_KEY_LEFT)
         {
-         
+
             leftPressed = true;
             hero1.isMoving = true;
             hero1.isright = false;
-          
         }
         else if (key == GLUT_KEY_RIGHT)
         {
-            
+
             rightPressed = true;
             hero1.isright = true;
-      
+
             hero1.isMoving = true;
-        
         }
     }
-
 
     void drawgame_screen()
     {
@@ -243,18 +206,20 @@ struct GameScreen
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         // Additional drawing code for settings can be added here
-        //cout << "Hero Health: " << hero1.HeroHealth << endl;
-        iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
-        
+        // cout << "Hero Health: " << hero1.HeroHealth << endl;
+        iShowImage(SCREEN_WIDTH / 2 - (275 / 2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
+
         // Draw boss health bar if boss is active
         if (boss.isActive && !boss.boss_health_bar_images.empty())
         {
             int bossHealthPercent = (int)((boss.bossHealth / boss.maxBossHealth) * 100);
-            if (bossHealthPercent < 0) bossHealthPercent = 0;
-            if (bossHealthPercent > 100) bossHealthPercent = 100;
+            if (bossHealthPercent < 0)
+                bossHealthPercent = 0;
+            if (bossHealthPercent > 100)
+                bossHealthPercent = 100;
             iShowImage(SCREEN_WIDTH - 320, SCREEN_HEIGHT - 150, 300, 57, boss.boss_health_bar_images[(bossHealthPercent / 20)]);
         }
-        
+
         if (hero1.isAttacking)
         {
             hero1.show_character_attack();
@@ -265,17 +230,18 @@ struct GameScreen
         }
         else if (hero1.isMoving)
         {
-            show_character_run();
-		}
-		else if (hero1.gettingHit){
-			
-			hero1.show_getting_hit();
-		}
+            hero1.show_character_run();
+        }
+        else if (hero1.gettingHit)
+        {
+
+            hero1.show_getting_hit();
+        }
         else
         {
-            show_character_idle();
+            hero1.show_character_idle();
         }
-		enemy1.show_enemy_moving();
+        enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
         boss.show_boss_moving();
     }
