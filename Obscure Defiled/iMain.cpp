@@ -286,15 +286,8 @@ void iSpecialKeyboard(unsigned char key)
 }
 
 /* -------------------- INIT -------------------- */
-int idle_index = 0;
-void idle_animation()
-{
-	idle_index++;
-	if (idle_index >= 3)
-	{
-		idle_index = 0;
-	}
-}
+
+
 void reset_movement()
 {
 	game.resetMovement();
@@ -424,7 +417,7 @@ int main()
 
 	menu.initmenubar();
 	initIntroScreen();
-	iSetTimer(200, idle_animation);
+	iSetTimer(200, game.hero1.idle_animation);
 	iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
 	iSetTimer(16, character_movement);
