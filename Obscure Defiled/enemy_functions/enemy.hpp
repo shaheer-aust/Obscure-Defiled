@@ -104,7 +104,7 @@ struct Enemy
         
         double characterX= hero1.characterPosition_X;
         double characterY= hero1.characterPosition_Y;
-		if (abs(enemyPosition_X - characterX) < 26 && (enemyPosition_Y==characterY) && isActive){
+		if (abs(enemyPosition_X - characterX) < 50 && (enemyPosition_Y==characterY) && isActive){
 			if(hero1.isAttacking){
                 hero1.gettingHit = false;
                 enemy_takeDamage(20); // Hero attack does 20 damage }
@@ -118,7 +118,7 @@ struct Enemy
 		}else{
             hero1.gettingHit = false;
         }
-        if (enemyPosition_X > characterX+25)
+        if (enemyPosition_X > characterX+50)
         {
             if(enemyHealth <= 0){
                 //isActive = false;
@@ -127,7 +127,7 @@ struct Enemy
             enemyPosition_X -= enemy_speed;
             isright = false;
         }
-        else if (enemyPosition_X < characterX-25)
+        else if (enemyPosition_X < characterX-50)
         {
                 if(enemyHealth <= 0){
                     //isActive = false;
@@ -336,7 +336,7 @@ struct Boss
         if (abs(bossPosition_X - characterX) < 80 && (bossPosition_Y == characterY))
         {
             if(hero1.isAttacking){
-                bosstakeDamage(8); // Hero attack does 8 damage }
+                bosstakeDamage(12); // Hero attack does 12 damage }
                 hero1.gettingHit = false;
             }else{
                 hero1.takeDamage(4); 
