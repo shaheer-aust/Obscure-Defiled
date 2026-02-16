@@ -205,18 +205,18 @@ struct Boss
         
         
         // Load boss getting hit images
-        for (int i = 1; i <= 4; i++)
+        for (int i = 2; i <= 22; i++)
         {
             char a[200];
             ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/L_lvl_1_idle_1.png
-            sprintf_s(a, "resources//Level_1//Boss//Getting Hit//R_lvl_1_idle_%d.png", i);
+            sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
             boss_hit_R_images.push_back(iLoadImage(a));
         }
-        for (int i = 1; i <= 4; i++)
+        for (int i = 2; i <= 22; i++)
         {
             char a[200];
             ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/R_lvl_1_idle_2.png
-            sprintf_s(a, "resources//Level_1//Boss//Getting Hit//L_lvl_1_idle_%d.png", i);
+            sprintf_s(a, "resources/Level_1/Boss/Getting Hit/left/%d.png", i);
             boss_hit_L_images.push_back(iLoadImage(a));
         }
         
@@ -317,11 +317,11 @@ struct Boss
         
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_hit_R_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y, 190, 130, boss_hit_R_images[hit_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 162, 162, boss_hit_L_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y, 190, 130, boss_hit_L_images[hit_index]);
         }
     }
     
