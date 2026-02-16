@@ -20,7 +20,7 @@ struct GameScreen
 {
     vector<int> images;
     vector<int> health_bar_images;
-    vector<int> boss_health_bar_images;
+    
     Enemy enemy1;
     Enemy enemy2;
     Boss boss;
@@ -51,22 +51,8 @@ struct GameScreen
         boss.initboss(); // Initialize boss
         boss.isActive = false; // Start with boss inactive
         init_health_bar_images();
-        init_boss_health_bar_images();
-        hero1.init_fighting_images();
-        hero1.init_idle_hit_images();
-		hero1.HeroHealth = 100;
-        // iSetTimer(200, idle_animation);
     }
-    void init_boss_health_bar_images()
-    {
-        for (int i = 0; i <= 100; i += 20)
-        {
-            char a[200];
-            ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level 1 boss enemy health bar/Enemy_health_bar_100.png
-            sprintf_s(a, "resources//Level 1 boss enemy health bar//Enemy_health_bar_%d.png", i);
-            boss_health_bar_images.push_back(iLoadImage(a));
-        }
-    }
+
     void init_health_bar_images()
     {
         for (int i = 0; i <= 100; i += 10)
@@ -76,48 +62,7 @@ struct GameScreen
             health_bar_images.push_back(iLoadImage(a));
         }
     }
-    void init_character_images()
-    {
-        // Load character idle images
-        for (int i = 1; i <= 4; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_right_%d.png", i);
-            hero1.character_idle_R_images.push_back(iLoadImage(a));
-        }
-        for (int i = 1; i <= 4; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_left_%d.png", i);
-            hero1.character_idle_L_images.push_back(iLoadImage(a));
-        }
-        // Load character run images
-        for (int i = 1; i <= 4; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_left_%d.png", i);
-            hero1.character_run_L_images.push_back(iLoadImage(a));
-        }
-        for (int i = 1; i <= 4; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i);
-            hero1.character_run_R_images.push_back(iLoadImage(a));
-        }
-        // load character jump images if needed
-        for (int i = 1; i <= 4; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_right_%d.png", i);
-            hero1.character_jump_R_images.push_back(iLoadImage(a));
-        }
-        for (int i = 1; i <= 4; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_left_%d.png", i);
-            hero1.character_jump_L_images.push_back(iLoadImage(a));
-        }
-    }
+
     void show_character_idle()
     {
         int currentIdx = getIdleIndex();

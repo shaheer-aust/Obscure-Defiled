@@ -42,6 +42,51 @@ struct Hero
             HeroHealth = 0;
         }
     }
+    void init_character_images()
+    {
+        init_fighting_images();
+        init_idle_hit_images();
+		HeroHealth = 100;
+        // Load character idle images
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_right_%d.png", i);
+            hero1.character_idle_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_left_%d.png", i);
+            character_idle_L_images.push_back(iLoadImage(a));
+        }
+        // Load character run images
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_left_%d.png", i);
+            character_run_L_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i);
+            character_run_R_images.push_back(iLoadImage(a));
+        }
+        // load character jump images if needed
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_right_%d.png", i);
+            character_jump_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 1; i <= 4; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_left_%d.png", i);
+            character_jump_L_images.push_back(iLoadImage(a));
+        }
+    }
     void init_fighting_images()
     {
         for (int i = 1; i <= 4; i++)
@@ -57,6 +102,7 @@ struct Hero
             character_attack_L_images.push_back(iLoadImage(a));
         }
     }
+
     void init_idle_hit_images()
     {
         for (int i = 1; i <= 3; i++)
