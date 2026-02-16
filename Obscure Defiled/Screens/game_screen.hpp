@@ -203,7 +203,7 @@ struct GameScreen
 
             // Calculate index
             int frameIndex = (int)floor((currentHealth / 200.0) * 15);
-            iShowImage(boss.bossPosition_X-60, boss.bossPosition_Y+100 , 122, 50, boss.boss_health_bar_images[frameIndex]);
+            iShowImage(boss.bossPosition_X-10, boss.bossPosition_Y+100 , 122, 20, boss.boss_health_bar_images[frameIndex]);
         }
 
         if (hero1.isAttacking)
