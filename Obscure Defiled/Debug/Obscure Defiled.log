@@ -1,4 +1,4 @@
-﻿Build started 16-02-2026 22:20:14.
+﻿Build started 16-02-2026 22:36:02.
      1>Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Rebuild target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -16,10 +16,10 @@
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(140): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(312): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(386): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(400): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(416): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(308): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(382): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(396): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(412): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(136): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_screen.hpp(219): warning C4018: '>=' : signed/unsigned mismatch
@@ -40,4 +40,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.89
+Time Elapsed 00:00:03.77
