@@ -331,7 +331,25 @@ struct Boss
         
         double characterX = hero1.characterPosition_X;
         double characterY = hero1.characterPosition_Y;
-        //boss attack check
+
+        // Boss collision check
+        if (abs(bossPosition_X - characterX) < 80 && (bossPosition_Y == characterY))
+        {
+            if(hero1.isAttacking){
+                bosstakeDamage(8); // Hero attack does 8 damage }
+                hero1.gettingHit = false;
+            }else{
+                hero1.takeDamage(4); 
+                cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
+            hero1.gettingHit = true;
+            }
+            
+        }
+        else
+        {
+            hero1.gettingHit = false;
+        }
+                //boss attack check
         if (abs(bossPosition_X - characterX) < 80 && (bossPosition_Y == characterY))
         {
             
@@ -346,27 +364,8 @@ struct Boss
             isAttacking = false;
             attack_index = 0;
         }
-        // Boss collision check
-        if (abs(bossPosition_X - characterX) < 70 && (bossPosition_Y == characterY))
-        {
-            if(hero1.isAttacking){
-                bosstakeDamage(8); // Hero attack does 8 damage }
-                hero1.gettingHit = false;
-            }else{
-                hero1.takeDamage(4); 
-                cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
-            hero1.gettingHit = true;
-            }
-            //hero1.takeDamage(4); // Boss does more damage
-            
-        }
-        else
-        {
-            hero1.gettingHit = false;
-        }
-        
         // Boss AI - chase the hero
-        if (bossPosition_X > characterX + 70)
+        if (bossPosition_X > characterX + 80)
         {
             if(bossHealth <= 0){
                 return;
@@ -374,7 +373,7 @@ struct Boss
             bossPosition_X -= boss_speed;
             isright = false;
         }
-        else if (bossPosition_X < characterX - 70)
+        else if (bossPosition_X < characterX - 80)
         {
             if(bossHealth <= 0){
                 return;
