@@ -86,19 +86,6 @@ struct GameScreen
 
     void updatePhysics()
     {
-        // Spawn enemy2 when hero reaches halfway across the screen
-        if (!enemy2Spawned && hero1.characterPosition_X >= SCREEN_WIDTH / 2)
-        {
-            enemy2.isActive = true;
-            enemy2Spawned = true;
-        }
-
-        // Spawn boss when hero reaches 75% across the screen
-        if (!bossSpawned && hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
-        {
-            boss.isActive = true;
-            bossSpawned = true;
-        }
 
         if (hero1.isJumping)
         {

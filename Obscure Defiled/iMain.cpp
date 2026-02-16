@@ -361,6 +361,20 @@ void enemy_movement()
 {
 	if (screens.top() == "Game")
 	{
+		        // Spawn enemy2 when hero reaches halfway across the screen
+        if (!game.enemy2Spawned && game.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+        {
+            game.enemy2.isActive = true;
+            game.enemy2Spawned = true;
+        }
+
+        // Spawn boss when hero reaches 75% across the screen
+        if (!game.bossSpawned && game.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
+        {
+            game.boss.isActive = true;
+            game.bossSpawned = true;
+        }
+
 		game.enemy1.move_enemy(game.hero1);
 		game.enemy2.move_enemy(game.hero1);
 		game.boss.move_boss(game.hero1);
@@ -376,7 +390,7 @@ void update_attack_animation()
 		game.boss.update_dead();
 	}
 }
-void hit_loop()
+void hero_hit_loop()
 {
 	if (game.hero1.gettingHit)
 	{
@@ -426,7 +440,7 @@ int main()
 	iSetTimer(16, character_movement);
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
-	iSetTimer(100, hit_loop);
+	iSetTimer(100, hero_hit_loop);
 	iSetTimer(100, boss_hit_loop);
 
 	setting.initsettingbar();
