@@ -1,8 +1,8 @@
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 
-#ifndef CREDIT_SCREEN_HPP
-#define CREDIT_SCREEN_HPP
+#ifndef OPTION_SCREEN_HPP
+#define OPTION_SCREEN_HPP
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
