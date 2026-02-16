@@ -21,7 +21,6 @@ struct Hero
     double characterPosition_X = 100.0;
     double characterPosition_Y = 100.0;
     double attack_index = 0;
-    double Idle_Index = 0;
     double character_speed = 6;
     bool isJumping = false;
     bool isright = true;
@@ -85,36 +84,7 @@ struct Hero
             iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_hit_L_images[currentIdx]);
         }
     }
-    void show_character_idle()
-    {
-        int currentIdx = Idle_Index;
-        if (isright)
-        {
-            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_R_images[currentIdx]);
-        }
-        else
-        {
-            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_L_images[currentIdx]);
-        }
-    }
-    void show_character_run()
-    {
 
-        if (movement_index >= character_run_R_images.size())
-        {
-
-            movement_index = 0;
-        }
-        if (isright)
-        {
-            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_run_R_images[movement_index]);
-        }
-        else
-        {
-            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_run_L_images[movement_index]);
-        }
-        // movement_index++;
-    }
     void startAttack()
     {
         if (!isAttacking && !isJumping)
