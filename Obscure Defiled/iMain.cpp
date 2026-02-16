@@ -296,10 +296,7 @@ void physics_update()
 {
 	game.updatePhysics();
 }
-int getIdleIndex()
-{
-	return idle_index;
-}
+
 void character_movement()
 {
 	if (game.rightPressed && !game.hero1.isJumping)
