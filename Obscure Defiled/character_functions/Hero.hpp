@@ -52,7 +52,7 @@ struct Hero
         {
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal/With Knife//Idle//idle_right_%d.png", i);
-            hero1.character_idle_R_images.push_back(iLoadImage(a));
+            character_idle_R_images.push_back(iLoadImage(a));
         }
         for (int i = 1; i <= 4; i++)
         {

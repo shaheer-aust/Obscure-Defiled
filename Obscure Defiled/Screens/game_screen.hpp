@@ -42,7 +42,7 @@ struct GameScreen
     void initgame_screen()
     {
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
-        init_character_images();
+        hero1.init_character_images();
         groundY = hero1.characterPosition_Y;
         enemy1.initenemy(1); // Initialize Small enemy 1
         enemy2.initenemy(2); // Initialize Small enemy 2
@@ -247,12 +247,12 @@ struct GameScreen
         iShowImage(SCREEN_WIDTH/2-(275/2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
         
         // Draw boss health bar if boss is active
-        if (boss.isActive && !boss_health_bar_images.empty())
+        if (boss.isActive && !boss.boss_health_bar_images.empty())
         {
             int bossHealthPercent = (int)((boss.bossHealth / boss.maxBossHealth) * 100);
             if (bossHealthPercent < 0) bossHealthPercent = 0;
             if (bossHealthPercent > 100) bossHealthPercent = 100;
-            iShowImage(SCREEN_WIDTH - 320, SCREEN_HEIGHT - 150, 300, 57, boss_health_bar_images[(bossHealthPercent / 20)]);
+            iShowImage(SCREEN_WIDTH - 320, SCREEN_HEIGHT - 150, 300, 57, boss.boss_health_bar_images[(bossHealthPercent / 20)]);
         }
         
         if (hero1.isAttacking)
