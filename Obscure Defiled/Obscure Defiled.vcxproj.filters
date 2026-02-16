@@ -41,5 +41,8 @@
     <ClInclude Include="Screens\credit_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\option_screen.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

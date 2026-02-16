@@ -432,7 +432,7 @@ int main()
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
 	iSetTimer(100, hero_hit_loop);
-	iSetTimer(100, boss_hit_loop);
+	//iSetTimer(100, boss_hit_loop);
 
 	setting.initsettingbar();
 	credit.initcreditbar();
