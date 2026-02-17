@@ -290,10 +290,10 @@ void iSpecialKeyboard(unsigned char key)
 /* -------------------- INIT -------------------- */
 
 
-void reset_movement()
-{
-	game.resetMovement();
-}
+// void reset_movement()
+// {
+// 	game.resetMovement();
+// }
 void physics_update()
 {
 	game.updatePhysics();
