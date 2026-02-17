@@ -197,7 +197,7 @@ struct Hero
         if (HeroHealth <= 0)
         {
             dead_timer++;
-            if (dead_timer > 8) // Show each frame for 16 ticks
+            if (dead_timer > 1) // Show each frame for 16 ticks
             {
                 dead_timer = 0;
                 dead_index++;
