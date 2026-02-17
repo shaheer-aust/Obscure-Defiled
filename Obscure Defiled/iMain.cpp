@@ -168,7 +168,7 @@ void iKeyboard(unsigned char key)
 	}
 	else if (key == 13 && screens.top() == "Menu") // Enter key
 	{
-		// Handle selection based on currently selected button
+		
 		int buttonType = menu.getSelectedButtonType();
 
 		if (buttonType == 0) // Quit
@@ -290,13 +290,9 @@ void iSpecialKeyboard(unsigned char key)
 /* -------------------- INIT -------------------- */
 
 
-// void reset_movement()
-// {
-// 	game.resetMovement();
-// }
 void physics_update()
 {
-	game.updatePhysics();
+	game.updateJumpPhysics();
 }
 
 void character_movement()
@@ -430,7 +426,7 @@ int main()
 	iSetTimer(200, character_idle_animation);
 	//iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
-	iSetTimer(16, character_movement);
+	iSetTimer(100, character_movement);
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
 	iSetTimer(100, hero_hit_loop);

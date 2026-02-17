@@ -63,11 +63,6 @@ struct GameScreen
         }
     }
 
-    void resetMovement()
-    {
-        // isMoving = false;
-        hero1.movement_index = 0;
-    }
 
     void startJump()
     {
@@ -84,7 +79,7 @@ struct GameScreen
         }
     }
 
-    void updatePhysics()
+    void updateJumpPhysics()
     {
 
         if (hero1.isJumping)
