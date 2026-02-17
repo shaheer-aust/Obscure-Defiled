@@ -115,7 +115,7 @@ struct Game_over_screen
 	{
 		// stop game over music and go to main menu
 		stopBackgroundMusic();
-		currentScreen = MAIN_MENU_SCREEN; // assume you have a global or manager variable
+		//currentScreen = MAIN_MENU_SCREEN; // assume you have a global or manager variable
 	}
 
 	// Keyboard handling: call this from your keyboard callback
@@ -125,7 +125,7 @@ struct Game_over_screen
 		{
 			// Enter returns to main menu
 			stopBackgroundMusic();
-			currentScreen = MAIN_MENU_SCREEN;
+			//currentScreen = MAIN_MENU_SCREEN;
 		}
 		else if (key == 'm' || key == 'M') // toggle music with M
 		{
@@ -136,7 +136,7 @@ struct Game_over_screen
 	// Call this to transition into the game over screen (e.g., when health <= 0)
 	void transitionToGameOver()
 	{
-		currentScreen = GAME_OVER_SCREEN; // set the current screen
+		//currentScreen = GAME_OVER_SCREEN; // set the current screen
 		if (musicOn) playBackgroundMusic();
 		// any other initialization for game over state
 	}

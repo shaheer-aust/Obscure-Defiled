@@ -428,7 +428,7 @@ int main()
 	menu.initmenubar();
 	initIntroScreen();
 	iSetTimer(200, character_idle_animation);
-	iSetTimer(1000, reset_movement);
+	//iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
 	iSetTimer(16, character_movement);
 	iSetTimer(100, enemy_movement);
