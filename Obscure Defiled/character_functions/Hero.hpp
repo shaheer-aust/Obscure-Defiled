@@ -141,7 +141,32 @@ struct Hero
             character_idle_hit_L_images.push_back(iLoadImage(a));
         }
     }
-    
+    void show_chracter_moving()
+    {
+         if (isAttacking)
+        {
+            show_character_attack();
+        }else if(HeroHealth <= 0){
+            show_character_dead();
+        }
+        else if (isJumping)
+        {
+            show_character_jump1();
+        }
+        else if (isMoving)
+        {
+            show_character_run();
+        }
+        else if (gettingHit)
+        {
+
+            show_getting_hit();
+        }
+        else
+        {
+            show_character_idle();
+        }
+    }
     void show_character_dead()
     {
         int currentIdx = dead_index;
@@ -178,6 +203,7 @@ struct Hero
             iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_L_images[currentIdx]);
         }
     }
+    
     void show_character_run()
     {
 

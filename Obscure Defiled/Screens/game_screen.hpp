@@ -211,29 +211,7 @@ struct GameScreen
             int frameIndex = (int)floor((currentHealth / 100.0) * 15);
 			iShowImage(enemy2.enemyPosition_X - 2, enemy2.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
-        if (hero1.isAttacking)
-        {
-            hero1.show_character_attack();
-        }else if(hero1.HeroHealth <= 0){
-            hero1.show_character_dead();
-        }
-        else if (hero1.isJumping)
-        {
-            show_character_jump1();
-        }
-        else if (hero1.isMoving)
-        {
-            hero1.show_character_run();
-        }
-        else if (hero1.gettingHit)
-        {
-
-            hero1.show_getting_hit();
-        }
-        else
-        {
-            hero1.show_character_idle();
-        }
+        hero1.show_character_moving();
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
         boss.show_boss_moving();
