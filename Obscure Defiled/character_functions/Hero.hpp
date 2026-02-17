@@ -51,7 +51,7 @@ struct Hero
     {
         init_fighting_images();
         init_idle_hit_images();
-        init_character_dead_images
+        init_character_dead_images();
         HeroHealth = 100;
         // Load character idle images
         for (int i = 1; i <= 4; i++)
