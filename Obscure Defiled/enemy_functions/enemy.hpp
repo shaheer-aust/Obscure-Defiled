@@ -115,7 +115,7 @@ struct Enemy
             else
             {
                 hero1.gettingHit = true;
-                hero1.takeDamage(2); 
+                hero1.takeDamage(2); //hero takes 2 damage when hit by enemy
             }
             
         }

@@ -20,7 +20,6 @@ struct GameScreen
 {
     vector<int> images;
     vector<int> health_bar_images;
-
     Enemy enemy1;
     Enemy enemy2;
     Boss boss;
@@ -28,9 +27,7 @@ struct GameScreen
     bool spacePressed = false;
     bool rightPressed = false;
     bool leftPressed = false;
-
     int x = 0;
-
     double jumpVelocity = 0.0;
     double gravity = 2.0;
     double base_gravity = 5;
@@ -81,7 +78,6 @@ struct GameScreen
 
     void updateJumpPhysics()
     {
-
         if (hero1.isJumping)
         {
             if (rightPressed)
@@ -183,7 +179,7 @@ struct GameScreen
 
     void drawgame_screen()
     {
-
+        //...
         iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
@@ -194,6 +190,7 @@ struct GameScreen
         // Draw boss health bar if boss is active
         if (boss.isActive && !boss.boss_health_bar_images.empty())
         {
+            
             double currentHealth = max(0.0, min(200.0, boss.bossHealth)); // Clamp health between 0 and 200
 
             // Calculate index

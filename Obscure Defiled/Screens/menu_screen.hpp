@@ -30,7 +30,7 @@ struct MenuScreen
 	void initmenubar()
 	{
 		
-		images.push_back(iLoadImage("resources//menu_screen//menu.jpg"));
+		images.push_back(iLoadImage("resources//menu_screen//menu.jpg"));//0
 		images.push_back(iLoadImage("resources//menu_screen//title.png"));
 		// Regular button images
 		images.push_back(iLoadImage("resources//menu_screen//Buttons//exit.png"));
@@ -41,7 +41,7 @@ struct MenuScreen
 		images.push_back(iLoadImage("resources//menu_screen//Buttons//exit_active.png"));
 		images.push_back(iLoadImage("resources//menu_screen//Buttons//option_active.png"));
 		images.push_back(iLoadImage("resources//menu_screen//Buttons//play_active.png"));
-		images.push_back(iLoadImage("resources//menu_screen//Buttons//credits_active.png"));
+		images.push_back(iLoadImage("resources//menu_screen//Buttons//credits_active.png"));//9
 		
 	}
 
@@ -75,7 +75,7 @@ struct MenuScreen
 		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 		long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
-		if (isQuitButtonClicked(mx, my))
+		if (isQuitButtonClicked(mx, my))//eita holo quit button er upore mouse hover er condition
 		{
 			hoveredButton = 0;
 			if (!lastFrameQuitClicked)

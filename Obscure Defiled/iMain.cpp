@@ -1,11 +1,11 @@
 ﻿
 #include <stdio.h>
-#include "iGraphics.h"
-#include "Screens\menu_screen.hpp"
-#include "Screens\setting_screen.hpp"
-#include "Screens\game_screen.hpp"
-#include "Screens\intro_screen.hpp"
-#include "Screens\credit_screen.hpp"
+#include "iGraphics.h";
+#include "Screens\menu_screen.hpp";
+#include "Screens\setting_screen.hpp";
+#include "Screens\game_screen.hpp";
+#include "Screens\intro_screen.hpp";
+#include "Screens\credit_screen.hpp";
 #include "enemy_functions\enemy.hpp";
 #include "Screens\credit_screen.hpp";
 #include "character_functions\Hero.hpp";
@@ -19,11 +19,10 @@ using namespace std;
 /* -------------------- CONSTANTS -------------------- */
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-#define SCROLL_SPEED 20
 
 /* -------------------- GLOBALS -------------------- */
 // vector<int> menu_images;
-stack<string> screens;
+stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
 GameScreen game;
@@ -38,7 +37,7 @@ void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-
+	
 	if (screens.top() == "Menu")
 	{
 		//
@@ -161,6 +160,7 @@ void iKeyboard(unsigned char key)
 			screens.pop();
 			if (screens.top() == "Menu")
 			{
+				//stop credit bgm if going back to menu from credits
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play bgsong repeat", NULL, 0, NULL);
 			}
@@ -436,6 +436,9 @@ int main()
 
 	menu.initmenubar();
 	initIntroScreen();
+	setting.initsettingbar();
+	credit.initcreditbar();
+	game.initgame_screen();
 	iSetTimer(200, character_idle_animation);
 	// iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
@@ -445,9 +448,7 @@ int main()
 	iSetTimer(100, hero_hit_loop);
 	// iSetTimer(100, boss_hit_loop);
 
-	setting.initsettingbar();
-	credit.initcreditbar();
-	game.initgame_screen();
+	
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
