@@ -426,7 +426,7 @@ int main()
 	iSetTimer(200, character_idle_animation);
 	//iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
-	iSetTimer(100, character_movement);
+	iSetTimer(80, character_movement);
 	iSetTimer(100, enemy_movement);
 	iSetTimer(50, update_attack_animation);
 	iSetTimer(100, hero_hit_loop);

@@ -24,7 +24,7 @@ struct Hero
     double characterPosition_Y = 100.0;
     double attack_index = 0;
     int dead_index = 0;
-    double character_speed = 6;
+    double character_speed = 20;
     bool isJumping = false;
     bool isright = true;
     int movement_index = 0;
