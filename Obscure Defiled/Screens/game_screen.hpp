@@ -134,20 +134,7 @@ struct GameScreen
         }
     }
 
-    void show_character_jump1()
-    {
-        // choose frame based on direction and jump_index
-        if (hero1.isright)
-        {
-            if (!hero1.character_jump_R_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_R_images[hero1.jump_index]);
-        }
-        else
-        {
-            if (!hero1.character_jump_L_images.empty())
-                iShowImage(hero1.characterPosition_X, hero1.characterPosition_Y, 152, 152, hero1.character_jump_L_images[hero1.jump_index]);
-        }
-    }
+
 
     void handleSpecialKeyboard(unsigned char key)
     {
@@ -211,7 +198,7 @@ struct GameScreen
             int frameIndex = (int)floor((currentHealth / 100.0) * 15);
 			iShowImage(enemy2.enemyPosition_X - 2, enemy2.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
-        hero1.show_character_moving();
+		hero1.show_chracter_moving();
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
         boss.show_boss_moving();

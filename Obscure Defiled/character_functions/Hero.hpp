@@ -141,6 +141,20 @@ struct Hero
             character_idle_hit_L_images.push_back(iLoadImage(a));
         }
     }
+	void show_character_jump1()
+	{
+		// choose frame based on direction and jump_index
+		if (isright)
+		{
+			if (!character_jump_R_images.empty())
+				iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_jump_R_images[jump_index]);
+		}
+		else
+		{
+			if (!character_jump_L_images.empty())
+				iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_jump_L_images[jump_index]);
+		}
+	}
     void show_chracter_moving()
     {
          if (isAttacking)
