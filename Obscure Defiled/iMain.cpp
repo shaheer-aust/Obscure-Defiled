@@ -387,6 +387,7 @@ void update_attack_animation()
 	if (screens.top() == "Game")
 	{
 		game.hero1.update_attack();
+		game.hero1.update_dead();
 		game.boss.update_attack();
 		game.boss.update_dead();
 		game.boss.boss_hit_loop();

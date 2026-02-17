@@ -18,9 +18,12 @@ struct Hero
     vector<int> character_run_R_images;
     vector<int> character_jump_R_images;
     vector<int> character_jump_L_images;
+    vector<int> character_dead_R_images;
+    vector<int> character_dead_L_images;
     double characterPosition_X = 100.0;
     double characterPosition_Y = 100.0;
     double attack_index = 0;
+    int dead_index = 0;
     double character_speed = 6;
     bool isJumping = false;
     bool isright = true;
@@ -31,6 +34,7 @@ struct Hero
     bool isMoving = false;
     bool isAttacking = false;
     int attack_timer = 0;
+    int dead_timer = 0;
     vector<int> character_attack_R_images;
     vector<int> character_attack_L_images;
     vector<int> character_idle_hit_R_images;
@@ -47,6 +51,7 @@ struct Hero
     {
         init_fighting_images();
         init_idle_hit_images();
+        init_character_dead_images
         HeroHealth = 100;
         // Load character idle images
         for (int i = 1; i <= 4; i++)
@@ -88,6 +93,21 @@ struct Hero
             character_jump_L_images.push_back(iLoadImage(a));
         }
     }
+    void init_character_dead_images()
+    {
+       for (int i = 1; i <= 8; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Dead from above//L_jump_dead_%d.png", i);
+            character_dead_L_images.push_back(iLoadImage(a));
+        }
+       for (int i = 1; i <= 8; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources//Main_Character//Normal//With Knife//Dead from above//R_jump_dead_%d.png", i);
+            character_dead_R_images.push_back(iLoadImage(a));
+        }
+    }
     void init_fighting_images()
     {
         for (int i = 1; i <= 4; i++)
@@ -117,6 +137,17 @@ struct Hero
             char a[200];
             sprintf_s(a, "resources//Main_Character//Normal//With Knife//Getting Hit//idle+knife//idle_left_%d.png", i);
             character_idle_hit_L_images.push_back(iLoadImage(a));
+        }
+    }
+    void show_character_dead(){
+        int currentIdx = dead_index;
+        if (isright)
+        {
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_dead_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_dead_L_images[currentIdx]);
         }
     }
     void show_getting_hit()
@@ -159,6 +190,22 @@ struct Hero
         else
         {
             iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_run_L_images[movement_index]);
+        }
+    }
+        void update_dead()
+    {
+        if (HeroHealth <= 0)
+        {
+            dead_timer++;
+            if (dead_timer > 8) // Show each frame for 16 ticks
+            {
+                dead_timer = 0;
+                dead_index++;
+                if (dead_index >= character_dead_R_images.size())
+                {
+                    dead_index = character_dead_R_images.size() - 1; // Stay on the last frame of death animation
+                }
+            }
         }
     }
     void idle_animation()

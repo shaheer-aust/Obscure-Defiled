@@ -222,6 +222,8 @@ struct GameScreen
         if (hero1.isAttacking)
         {
             hero1.show_character_attack();
+        }else if(hero1.HeroHealth <= 0){
+            hero1.show_character_dead();
         }
         else if (hero1.isJumping)
         {
