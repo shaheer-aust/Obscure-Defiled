@@ -10,6 +10,7 @@
 #include "Screens\credit_screen.hpp";
 #include "character_functions\Hero.hpp";
 #include "Screens\option_screen.hpp";
+#include "Screens\game_over_screen.hpp";
 #include <vector>
 #include <stack>
 #include <string>
