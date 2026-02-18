@@ -217,7 +217,18 @@ struct Hero
             iShowImage(characterPosition_X, characterPosition_Y, 152, 152, character_idle_L_images[currentIdx]);
         }
     }
-    
+    void show_character_attack()
+    {
+        int currentIdx = attack_index;
+        if (isright)
+        {
+            iShowImage(characterPosition_X, characterPosition_Y + 10, 152, 152, character_attack_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(characterPosition_X, characterPosition_Y + 10, 152, 152, character_attack_L_images[currentIdx]);
+        }
+    }
     void show_character_run()
     {
 
@@ -288,18 +299,7 @@ struct Hero
             }
         }
     }
-    void show_character_attack()
-    {
-        int currentIdx = attack_index;
-        if (isright)
-        {
-            iShowImage(characterPosition_X, characterPosition_Y + 10, 152, 152, character_attack_R_images[currentIdx]);
-        }
-        else
-        {
-            iShowImage(characterPosition_X, characterPosition_Y + 10, 152, 152, character_attack_L_images[currentIdx]);
-        }
-    }
+    
 };
 
 #endif

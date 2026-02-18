@@ -350,6 +350,7 @@ struct Boss
 		}
 	}
 }
+    //timer calls this to move the boss and check for collisions with the hero
     void move_boss(Hero &hero1)
     {
         if (!isActive)
