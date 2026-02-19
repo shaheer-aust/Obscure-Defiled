@@ -25,7 +25,7 @@ using namespace std;
 stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
-GameScreen game;
+Lvl_1_GameScreen game;
 
 Credit_screen credit;
 Option_screen setting;

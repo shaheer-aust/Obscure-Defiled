@@ -16,7 +16,7 @@ extern int getIdleIndex();
 #include "character_functions\Hero.hpp";
 #include <vector>
 using namespace std;
-struct GameScreen
+struct Lvl_1_GameScreen
 {
     vector<int> images;
     vector<int> health_bar_images;
