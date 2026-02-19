@@ -3,7 +3,7 @@
 #include "iGraphics.h";
 #include "Screens\menu_screen.hpp";
 #include "Screens\setting_screen.hpp";
-#include "Screens\game_screen.hpp";
+#include "Screens\Level_1_game_screen.hpp";
 #include "Screens\intro_screen.hpp";
 #include "Screens\credit_screen.hpp";
 #include "enemy_functions\enemy.hpp";
@@ -32,6 +32,13 @@ Option_screen setting;
 
 int bgm_audio = -1;
 vector<int> menu_images;
+
+// Track which screens have been initialized
+bool menuInitialized = false;
+bool gameInitialized = false;
+bool settingsInitialized = false;
+bool introInitialized = false;
+bool creditsInitialized = false;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -40,26 +47,47 @@ void iDraw()
 	
 	if (screens.top() == "Menu")
 	{
-		//
+		if (!menuInitialized)
+		{
+			menu.initmenubar();
+			menuInitialized = true;
+		}
 		menu.drawMenuScreen();
 	}
 	else if (screens.top() == "Game")
 	{
-		// Draw game screen
-
+		if (!gameInitialized)
+		{
+			game.initgame_screen();
+			gameInitialized = true;
+		}
 		game.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
-		// Draw settings screen
+		if (!settingsInitialized)
+		{
+			setting.initsettingbar();
+			settingsInitialized = true;
+		}
 		setting.drawsetting_screen();
 	}
 	else if (screens.top() == "Intro")
 	{
+		if (!introInitialized)
+		{
+			initIntroScreen();
+			introInitialized = true;
+		}
 		drawIntroScreen();
 	}
 	else if (screens.top() == "Credits")
 	{
+		if (!creditsInitialized)
+		{
+			credit.initcreditbar();
+			creditsInitialized = true;
+		}
 		credit.drawcredit_screen();
 	}
 }
@@ -293,7 +321,15 @@ void physics_update()
 {
 	game.updateJumpPhysics();
 }
-
+void all_50_ms_ticks(){
+	if(screens.top() == "Game")
+	{
+		character_movement();
+		enemy_movement();
+		update_attack_animation();
+		hero_hit_loop();
+	}
+}
 void character_movement()
 {
 	if (game.rightPressed && !game.hero1.isJumping)
@@ -434,18 +470,18 @@ int main()
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 
+	// Only initialize menu screen at startup - others load on-demand
 	menu.initmenubar();
-	initIntroScreen();
-	setting.initsettingbar();
-	credit.initcreditbar();
-	game.initgame_screen();
+	menuInitialized = true;
+	
 	iSetTimer(200, character_idle_animation);
+	iSetTimer(50, all_50_ms_ticks);
 	// iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
-	iSetTimer(80, character_movement);
-	iSetTimer(100, enemy_movement);
-	iSetTimer(50, update_attack_animation);
-	iSetTimer(100, hero_hit_loop);
+	//iSetTimer(80, character_movement);
+	//iSetTimer(100, enemy_movement);
+	//iSetTimer(50, update_attack_animation);
+	//iSetTimer(100, hero_hit_loop);
 	// iSetTimer(100, boss_hit_loop);
 
 	

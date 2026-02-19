@@ -7,13 +7,13 @@ extern void takeDamage();
 #define SCREEN_HEIGHT 720
 #include <iostream>
 #include "character_functions\Hero.hpp";
-#include "Screens\game_screen.hpp"
+#include "Screens\Level_1_game_screen.hpp"
 #include <vector>
 using namespace std;
 
 // Forward declarations to avoid circular dependencies
 struct Hero;
-struct GameScreen;
+struct Lvl_1_GameScreen;
 // Global state
 struct Enemy
 {
