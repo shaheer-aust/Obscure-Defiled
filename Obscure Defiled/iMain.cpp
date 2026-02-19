@@ -450,7 +450,7 @@ void hero_hit_loop()
 	}
 }
 void all_50_ms_ticks(){
-	if(screens.top() == "Game")
+	if(screens.top() == "level_1_screen")
 	{
 		character_movement();
 		enemy_movement();
