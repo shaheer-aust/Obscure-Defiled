@@ -87,7 +87,7 @@ struct GameScreen
                 {
                     x = 0;
                 }
-                hero1.characterPosition_X += hero1.character_speed-5;
+                hero1.characterPosition_X += hero1.character_speed-15;
                 hero1.isright = true;
             }
             else if (leftPressed)
@@ -97,7 +97,7 @@ struct GameScreen
                 {
                     x = 0;
                 }
-                hero1.characterPosition_X -= hero1.character_speed-5;
+                hero1.characterPosition_X -= hero1.character_speed-15;
                 hero1.isright = false;
             }
             // apply vertical movement
