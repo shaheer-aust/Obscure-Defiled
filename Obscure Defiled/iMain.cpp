@@ -36,7 +36,8 @@ int bgm_audio = -1;
 vector<int> menu_images;
 
 // Track which screens have been initialized
-bool isLoading=false;
+bool isLoading = false;
+
 bool menuInitialized = false;
 bool gameInitialized = false;
 bool settingsInitialized = false;
@@ -47,11 +48,14 @@ void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-	if(isLoading)
+
+	// Display loading screen while initializing
+	if (isLoading)
 	{
 		drawLoadingScreen();
 		return;
 	}
+
 	if (screens.top() == "Menu")
 	{
 		if (!menuInitialized)
@@ -65,44 +69,36 @@ void iDraw()
 	{
 		if (!gameInitialized)
 		{
-			isLoading=true;
 			level_1_screen.initgame_screen();
 			gameInitialized = true;
 		}
-		isLoading=false;
 		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
 		if (!settingsInitialized)
 		{
-			isLoading=true;
 			setting.initsettingbar();
 			settingsInitialized = true;
 		}
-		isLoading=false;
 		setting.drawsetting_screen();
 	}
 	else if (screens.top() == "Intro")
 	{
 		if (!introInitialized)
 		{
-			isLoading=true;
 			initIntroScreen();
 			introInitialized = true;
 		}
-		isLoading=false;
 		drawIntroScreen();
 	}
 	else if (screens.top() == "Credits")
 	{
 		if (!creditsInitialized)
 		{
-			isLoading=true;
 			credit.initcreditbar();
 			creditsInitialized = true;
 		}
-		isLoading=false;
 		credit.drawcredit_screen();
 	}
 }
@@ -142,11 +138,13 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
+			isLoading = true;
 			screens.push("level_1_screen");
 			screens.push("Intro");
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
 		{
+			isLoading = true;
 			screens.push("Settings");
 		}
 		else if (menu.isQuitButtonClicked(mx, my))
@@ -165,6 +163,7 @@ void iMouse(int button, int state, int mx, int my)
 		if (setting.isBackButtonClicked(mx, my))
 		{
 			screens.pop();
+			isLoading = false;
 			// if (screens.top() == "Menu")
 			// {
 			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
@@ -189,6 +188,7 @@ void iMouse(int button, int state, int mx, int my)
 		if (credit.isBackButtonClicked(mx, my))
 		{
 			screens.pop();
+			isLoading = false;
 		}
 	}
 }
@@ -201,6 +201,7 @@ void iKeyboard(unsigned char key)
 		if (screens.size() > 1)
 		{
 			screens.pop();
+			isLoading = false;
 			if (screens.top() == "Menu")
 			{
 				//stop credit bgm if going back to menu from credits
@@ -222,17 +223,19 @@ void iKeyboard(unsigned char key)
 		else if (buttonType == 1) // Credits
 		{
 			cout << "Credits Button Clicked (Keyboard)" << endl;
+			isLoading = true;
 			screens.push("Credits");
 		}
 		else if (buttonType == 2) // Settings
 		{
-
+			isLoading = true;
 			screens.push("Settings");
 		}
 		else if (buttonType == 3) // Play
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
+			isLoading = true;
 			screens.push("level_1_screen");
 			screens.push("Intro");
 		}
