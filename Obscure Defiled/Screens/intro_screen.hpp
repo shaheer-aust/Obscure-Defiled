@@ -5,7 +5,7 @@
 #define INTRO_SCREEN_H
 #define TOTAL_PICS 4
 #include <iostream>
-
+#include "Screens\Loading_Screen.hpp";
 #include <vector>
 using namespace std;
 // Global state
