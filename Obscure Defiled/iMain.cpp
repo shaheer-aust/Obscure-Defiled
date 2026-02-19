@@ -25,7 +25,7 @@ using namespace std;
 stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
-Lvl_1_GameScreen game;
+Lvl_1_GameScreen level_1_screen;
 
 Credit_screen credit;
 Option_screen setting;
@@ -54,14 +54,14 @@ void iDraw()
 		}
 		menu.drawMenuScreen();
 	}
-	else if (screens.top() == "Game")
+	else if (screens.top() == "level_1_screen")
 	{
 		if (!gameInitialized)
 		{
-			game.initgame_screen();
+			level_1_screen.initgame_screen();
 			gameInitialized = true;
 		}
-		game.drawgame_screen();
+		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
@@ -127,7 +127,7 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
-			screens.push("Game");
+			screens.push("level_1_screen");
 			screens.push("Intro");
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
@@ -164,10 +164,10 @@ void iMouse(int button, int state, int mx, int my)
 			screens.pop(); // Exit intro screen
 		}
 	}
-	else if (state == GLUT_DOWN && screens.top() == "Game" && button == GLUT_LEFT_BUTTON)
+	else if (state == GLUT_DOWN && screens.top() == "level_1_screen" && button == GLUT_LEFT_BUTTON)
 	{
 		// Handle left mouse click for attack
-		game.hero1.startAttack();
+		level_1_screen.hero1.startAttack();
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Credits")
 	{
@@ -218,72 +218,72 @@ void iKeyboard(unsigned char key)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
-			screens.push("Game");
+			screens.push("level_1_screen");
 			screens.push("Intro");
 		}
 	}
-	else if (key == 32 && screens.top() == "Game")
+	else if (key == 32 && screens.top() == "level_1_screen")
 	{ // SPACE key to jump
-		game.startJump();
+		level_1_screen.startJump();
 	}
-	else if (screens.top() == "Game")
+	else if (screens.top() == "level_1_screen")
 	{
 		// Handle WASD keys for game movement
 		if (key == 'w' || key == 'W')
 		{
-			game.startJump(); // W key to jump
+			level_1_screen.startJump(); // W key to jump
 		}
 		else if (key == 'a' || key == 'A')
 		{
-			game.leftPressed = true;
-			game.hero1.isMoving = true;
-			game.hero1.isright = false;
+			level_1_screen.leftPressed = true;
+			level_1_screen.hero1.isMoving = true;
+			level_1_screen.hero1.isright = false;
 		}
 		else if (key == 'd' || key == 'D')
 		{
-			game.rightPressed = true;
-			game.hero1.isright = true;
-			game.hero1.isMoving = true;
+			level_1_screen.rightPressed = true;
+			level_1_screen.hero1.isright = true;
+			level_1_screen.hero1.isMoving = true;
 		}
 	}
 }
 void iKeyboardUp(unsigned char key)
 {
-	if (screens.top() == "Game")
+	if (screens.top() == "level_1_screen")
 	{
 		if (key == 32) // Space key released
 		{
-			game.spacePressed = false; // Stop jump when space key is released
+			level_1_screen.spacePressed = false; // Stop jump when space key is released
 		}
 		else if (key == 'a' || key == 'A') // A key released
 		{
-			game.leftPressed = false; // Stop moving left
+			level_1_screen.leftPressed = false; // Stop moving left
 		}
 		else if (key == 'd' || key == 'D') // D key released
 		{
-			game.rightPressed = false; // Stop moving right
+			level_1_screen.rightPressed = false; // Stop moving right
 		}
 		else if (key == 'w' || key == 'W') // W key released
 		{
-			game.spacePressed = false; // Stop jump when W key is released
+			level_1_screen.spacePressed = false; // Stop jump when W key is released
 		}
 	}
 }
 void iSpecialKeyboardUp(unsigned char key)
 {
-	if (screens.top() == "Game")
+	if (screens.top() == "level_1_screen")
 	{
 		if (key == GLUT_KEY_RIGHT) // Right arrow key released
 		{
-			game.rightPressed = false; // Stop moving right
+			level_1_screen.rightPressed = false; // Stop moving right
 		}
 		else if (key == GLUT_KEY_LEFT) // Left arrow key released
 		{
-			game.leftPressed = false; // Stop moving left
+			level_1_screen.leftPressed = false; // Stop moving left
 		}
 		else if (key == GLUT_KEY_UP) // Up arrow key released
 		{
-			game.spacePressed = false; // Stop jump when up arrow key is released
+			level_1_screen.spacePressed = false; // Stop jump when up arrow key is released
 		}
 	}
 }
@@ -297,10 +297,10 @@ void iSpecialKeyboard(unsigned char key)
 			menu.handleKeyboardNavigation(key);
 		}
 	}
-	else if (screens.top() == "Game")
+	else if (screens.top() == "level_1_screen")
 	{
 		// Handle game-specific special keys (e.g., arrow keys for movement)
-		game.handleSpecialKeyboard(key);
+		level_1_screen.handleSpecialKeyboard(key);
 	}
 	else if (screens.top() == "Intro")
 	{
@@ -319,10 +319,10 @@ void iSpecialKeyboard(unsigned char key)
 
 void physics_update()
 {
-	game.updateJumpPhysics();
+	level_1_screen.updateJumpPhysics();
 }
 void all_50_ms_ticks(){
-	if(screens.top() == "Game")
+	if(screens.top() == "level_1_screen")
 	{
 		character_movement();
 		enemy_movement();
@@ -332,131 +332,131 @@ void all_50_ms_ticks(){
 }
 void character_movement()
 {
-	if (game.rightPressed && !game.hero1.isJumping)
+	if (level_1_screen.rightPressed && !level_1_screen.hero1.isJumping)
 	{
-		game.x -= game.bg_speed;
+		level_1_screen.x -= level_1_screen.bg_speed;
 
-		if (game.x <= -SCREEN_WIDTH)
+		if (level_1_screen.x <= -SCREEN_WIDTH)
 		{
-			game.x = 0;
+			level_1_screen.x = 0;
 		}
-		game.hero1.isMoving = true;
-		game.hero1.movement_index++;
-		game.hero1.characterPosition_X += game.hero1.character_speed;
-		if (game.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
+		level_1_screen.hero1.isMoving = true;
+		level_1_screen.hero1.movement_index++;
+		level_1_screen.hero1.characterPosition_X += level_1_screen.hero1.character_speed;
+		if (level_1_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
 		{
-			game.hero1.characterPosition_X = SCREEN_WIDTH - 70;
+			level_1_screen.hero1.characterPosition_X = SCREEN_WIDTH - 70;
 		}
 	}
-	else if (game.leftPressed && !game.hero1.isJumping)
+	else if (level_1_screen.leftPressed && !level_1_screen.hero1.isJumping)
 	{
-		game.x += game.bg_speed;
+		level_1_screen.x += level_1_screen.bg_speed;
 
-		if (game.x >= SCREEN_WIDTH)
+		if (level_1_screen.x >= SCREEN_WIDTH)
 		{
-			game.x = 0;
+			level_1_screen.x = 0;
 		}
-		game.hero1.isMoving = true;
-		game.hero1.movement_index++;
-		game.hero1.characterPosition_X -= game.hero1.character_speed;
-		if (game.hero1.characterPosition_X < 0)
+		level_1_screen.hero1.isMoving = true;
+		level_1_screen.hero1.movement_index++;
+		level_1_screen.hero1.characterPosition_X -= level_1_screen.hero1.character_speed;
+		if (level_1_screen.hero1.characterPosition_X < 0)
 		{
-			game.hero1.characterPosition_X = 0;
+			level_1_screen.hero1.characterPosition_X = 0;
 		}
 	}
-	else if (game.hero1.isJumping)
+	else if (level_1_screen.hero1.isJumping)
 	{
-		game.hero1.isMoving = false;
+		level_1_screen.hero1.isMoving = false;
 	}
 	else
 	{
-		game.hero1.isMoving = false;
+		level_1_screen.hero1.isMoving = false;
 	}
 }
 
 void enemy_movement()
 {
-	if (screens.top() == "Game")
+	if (screens.top() == "level_1_screen")
 	{
-		if (game.rightPressed && !game.hero1.isJumping)
+		if (level_1_screen.rightPressed && !level_1_screen.hero1.isJumping)
 		{
-			if (game.enemy1.isActive)
+			if (level_1_screen.enemy1.isActive)
 			{
-				game.enemy1.enemyPosition_X -= game.bg_speed;
+				level_1_screen.enemy1.enemyPosition_X -= level_1_screen.bg_speed;
 			}
-			if (game.enemy2.isActive)
+			if (level_1_screen.enemy2.isActive)
 			{
-				game.enemy2.enemyPosition_X -= game.bg_speed;
+				level_1_screen.enemy2.enemyPosition_X -= level_1_screen.bg_speed;
 			}
-			if (game.boss.isActive || game.boss.bossHealth <= 0)
+			if (level_1_screen.boss.isActive || level_1_screen.boss.bossHealth <= 0)
 			{
-				game.boss.bossPosition_X -= game.bg_speed;
+				level_1_screen.boss.bossPosition_X -= level_1_screen.bg_speed;
 			}
 		}
-		if (game.leftPressed && !game.hero1.isJumping)
+		if (level_1_screen.leftPressed && !level_1_screen.hero1.isJumping)
 		{
-			if (game.enemy1.isActive)
+			if (level_1_screen.enemy1.isActive)
 			{
-				game.enemy1.enemyPosition_X += game.bg_speed;
+				level_1_screen.enemy1.enemyPosition_X += level_1_screen.bg_speed;
 			}
-			if (game.enemy2.isActive)
+			if (level_1_screen.enemy2.isActive)
 			{
-				game.enemy2.enemyPosition_X += game.bg_speed;
+				level_1_screen.enemy2.enemyPosition_X += level_1_screen.bg_speed;
 			}
-			if (game.boss.isActive || game.boss.bossHealth <= 0)
+			if (level_1_screen.boss.isActive || level_1_screen.boss.bossHealth <= 0)
 			{
-				game.boss.bossPosition_X += game.bg_speed;
+				level_1_screen.boss.bossPosition_X += level_1_screen.bg_speed;
 			}
 		}
 		// Spawn enemy2 when hero reaches halfway across the screen
-		if (!game.enemy2Spawned && game.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+		if (!level_1_screen.enemy2Spawned && level_1_screen.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
 		{
-			game.enemy2.isActive = true;
-			game.enemy2Spawned = true;
+			level_1_screen.enemy2.isActive = true;
+			level_1_screen.enemy2Spawned = true;
 		}
 
 		// Spawn boss when hero reaches 75% across the screen
-		if (!game.bossSpawned && game.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
+		if (!level_1_screen.bossSpawned && level_1_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
 		{
-			game.boss.isActive = true;
-			game.bossSpawned = true;
+			level_1_screen.boss.isActive = true;
+			level_1_screen.bossSpawned = true;
 		}
 
-		game.enemy1.move_enemy(game.hero1);
-		game.enemy2.move_enemy(game.hero1);
-		game.boss.move_boss(game.hero1);
+		level_1_screen.enemy1.move_enemy(level_1_screen.hero1);
+		level_1_screen.enemy2.move_enemy(level_1_screen.hero1);
+		level_1_screen.boss.move_boss(level_1_screen.hero1);
 	}
 }
 
 void update_attack_animation()
 {
-	if (screens.top() == "Game")
+	if (screens.top() == "level_1_screen")
 	{
-		game.hero1.update_attack();
-		game.hero1.update_dead();
-		game.boss.update_attack();
-		game.boss.update_dead();
-		game.boss.boss_hit_loop();
+		level_1_screen.hero1.update_attack();
+		level_1_screen.hero1.update_dead();
+		level_1_screen.boss.update_attack();
+		level_1_screen.boss.update_dead();
+		level_1_screen.boss.boss_hit_loop();
 	}
 }
 void hero_hit_loop()
 {
-	if (game.hero1.gettingHit)
+	if (level_1_screen.hero1.gettingHit)
 	{
-		game.hero1.hit_index++;
-		if (game.hero1.hit_index >= game.hero1.character_idle_hit_R_images.size())
+		level_1_screen.hero1.hit_index++;
+		if (level_1_screen.hero1.hit_index >= level_1_screen.hero1.character_idle_hit_R_images.size())
 		{
-			game.hero1.hit_index = 0;
-			// game.hero1.gettingHit = false;
+			level_1_screen.hero1.hit_index = 0;
+			// level_1_screen.hero1.gettingHit = false;
 		}
 	}
 }
 
 void character_idle_animation()
 {
-	if (screens.top() == "Game")
+	if (screens.top() == "level_1_screen")
 	{
-		game.hero1.idle_animation();
+		level_1_screen.hero1.idle_animation();
 	}
 }
 /* -------------------- MAIN -------------------- */
@@ -492,7 +492,7 @@ int main()
 
 		mciSendString("play bgsong repeat", NULL, 0, NULL);
 	}
-	else if (screens.top() == "Game")
+	else if (screens.top() == "level_1_screen")
 	{
 		mciSendString("play gamebg repeat", NULL, 0, NULL);
 	}
