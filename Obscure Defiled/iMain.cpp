@@ -373,7 +373,6 @@ void character_movement()
 		level_1_screen.hero1.isMoving = false;
 	}
 }
-
 void enemy_movement()
 {
 	if (screens.top() == "level_1_screen")
@@ -427,7 +426,6 @@ void enemy_movement()
 		level_1_screen.boss.move_boss(level_1_screen.hero1);
 	}
 }
-
 void update_attack_animation()
 {
 	if (screens.top() == "level_1_screen")
@@ -451,6 +449,21 @@ void hero_hit_loop()
 		}
 	}
 }
+void all_50_ms_ticks(){
+	if(screens.top() == "Game")
+	{
+		character_movement();
+		enemy_movement();
+		update_attack_animation();
+		hero_hit_loop();
+	}
+}
+
+
+
+
+
+
 
 void character_idle_animation()
 {
