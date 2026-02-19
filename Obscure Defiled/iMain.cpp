@@ -11,6 +11,7 @@
 #include "character_functions\Hero.hpp";
 #include "Screens\option_screen.hpp";
 #include "Screens\game_over_screen.hpp";
+#include "Screens\Loading_Screen.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -35,6 +36,7 @@ int bgm_audio = -1;
 vector<int> menu_images;
 
 // Track which screens have been initialized
+bool isLoading=false;
 bool menuInitialized = false;
 bool gameInitialized = false;
 bool settingsInitialized = false;
@@ -45,7 +47,11 @@ void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-	
+	if(isLoading)
+	{
+		drawLoadingScreen();
+		return;
+	}
 	if (screens.top() == "Menu")
 	{
 		if (!menuInitialized)
@@ -59,36 +65,44 @@ void iDraw()
 	{
 		if (!gameInitialized)
 		{
+			isLoading=true;
 			level_1_screen.initgame_screen();
 			gameInitialized = true;
 		}
+		isLoading=false;
 		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
 		if (!settingsInitialized)
 		{
+			isLoading=true;
 			setting.initsettingbar();
 			settingsInitialized = true;
 		}
+		isLoading=false;
 		setting.drawsetting_screen();
 	}
 	else if (screens.top() == "Intro")
 	{
 		if (!introInitialized)
 		{
+			isLoading=true;
 			initIntroScreen();
 			introInitialized = true;
 		}
+		isLoading=false;
 		drawIntroScreen();
 	}
 	else if (screens.top() == "Credits")
 	{
 		if (!creditsInitialized)
 		{
+			isLoading=true;
 			credit.initcreditbar();
 			creditsInitialized = true;
 		}
+		isLoading=false;
 		credit.drawcredit_screen();
 	}
 }
@@ -468,6 +482,7 @@ int main()
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
+	initLoadingScreen();
 
 	// Only initialize menu screen at startup - others load on-demand
 	menu.initmenubar();
