@@ -16,6 +16,7 @@
 #include <string>
 #include <iostream>
 using namespace std;
+
 /* -------------------- CONSTANTS -------------------- */
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -321,15 +322,7 @@ void physics_update()
 {
 	level_1_screen.updateJumpPhysics();
 }
-void all_50_ms_ticks(){
-	if(screens.top() == "level_1_screen")
-	{
-		character_movement();
-		enemy_movement();
-		update_attack_animation();
-		hero_hit_loop();
-	}
-}
+
 void character_movement()
 {
 	if (level_1_screen.rightPressed && !level_1_screen.hero1.isJumping)
@@ -458,13 +451,6 @@ void all_50_ms_ticks(){
 		hero_hit_loop();
 	}
 }
-
-
-
-
-
-
-
 void character_idle_animation()
 {
 	if (screens.top() == "level_1_screen")

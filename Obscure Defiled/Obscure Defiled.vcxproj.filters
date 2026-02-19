@@ -26,9 +26,6 @@
     <ClInclude Include="Screens\setting_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Screens\game_screen.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Screens\intro_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -45,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Screens\game_over_screen.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Screens\Level_1_game_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
