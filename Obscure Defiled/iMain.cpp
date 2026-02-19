@@ -321,15 +321,6 @@ void physics_update()
 {
 	game.updateJumpPhysics();
 }
-void all_50_ms_ticks(){
-	if(screens.top() == "Game")
-	{
-		character_movement();
-		enemy_movement();
-		update_attack_animation();
-		hero_hit_loop();
-	}
-}
 void character_movement()
 {
 	if (game.rightPressed && !game.hero1.isJumping)
@@ -373,7 +364,6 @@ void character_movement()
 		game.hero1.isMoving = false;
 	}
 }
-
 void enemy_movement()
 {
 	if (screens.top() == "Game")
@@ -427,7 +417,6 @@ void enemy_movement()
 		game.boss.move_boss(game.hero1);
 	}
 }
-
 void update_attack_animation()
 {
 	if (screens.top() == "Game")
@@ -451,6 +440,21 @@ void hero_hit_loop()
 		}
 	}
 }
+void all_50_ms_ticks(){
+	if(screens.top() == "Game")
+	{
+		character_movement();
+		enemy_movement();
+		update_attack_animation();
+		hero_hit_loop();
+	}
+}
+
+
+
+
+
+
 
 void character_idle_animation()
 {
