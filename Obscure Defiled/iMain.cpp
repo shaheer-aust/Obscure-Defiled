@@ -36,6 +36,8 @@ int bgm_audio = -1;
 vector<int> menu_images;
 
 // Track which screens have been initialized
+bool isLoading = false;
+
 bool menuInitialized = false;
 bool gameInitialized = false;
 bool settingsInitialized = false;
@@ -44,7 +46,6 @@ bool creditsInitialized = false;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
-	cout << "is Loading: " << isLoading << endl;
 	iClear();
 	iSetColor(255, 255, 255);
 

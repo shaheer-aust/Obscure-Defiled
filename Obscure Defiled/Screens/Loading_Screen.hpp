@@ -14,7 +14,6 @@ vector<int> loading_bar_images;
 int loading_bg=1;
 
 int loading_index = 0;
-bool isLoading = false;
 void initLoadingScreen()
 {
     for (int i = 1; i <= 9; i++)
