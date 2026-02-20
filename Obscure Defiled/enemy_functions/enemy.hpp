@@ -115,9 +115,8 @@ struct Enemy
             else
             {
                 hero1.gettingHit = true;
-                hero1.takeDamage(2); //hero takes 2 damage when hit by enemy
+                hero1.takeDamage(2); // hero takes 2 damage when hit by enemy
             }
-            
         }
         else
         {
@@ -253,14 +252,14 @@ struct Boss
     }
     void init_boss_health_bar_images()
     {
-        for (int i = 1; i <= 4; i ++)
+        for (int i = 1; i <= 4; i++)
         {
-            for(int j = 1; j <= 4; j ++)
+            for (int j = 1; j <= 4; j++)
             {
                 char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level 1 boss enemy health bar/Enemy_health_bar_100.png
-            sprintf_s(a, "resources//Level 1 boss enemy health bar//row-%d-column-%d.png", i,j);
-            boss_health_bar_images.push_back(iLoadImage(a));
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level 1 boss enemy health bar/Enemy_health_bar_100.png
+                sprintf_s(a, "resources//Level 1 boss enemy health bar//row-%d-column-%d.png", i, j);
+                boss_health_bar_images.push_back(iLoadImage(a));
             }
         }
     }
@@ -339,18 +338,18 @@ struct Boss
         }
     }
     void boss_hit_loop()
-{
-	if (bossGettingHit && isActive)
-	{
-		hit_index++;
-		if (hit_index >= boss_hit_R_images.size())
-		{
-			hit_index = 0;
-			bossGettingHit = false;
-		}
-	}
-}
-    //timer calls this to move the boss and check for collisions with the hero
+    {
+        if (bossGettingHit && isActive)
+        {
+            hit_index++;
+            if (hit_index >= boss_hit_R_images.size())
+            {
+                hit_index = 0;
+                bossGettingHit = false;
+            }
+        }
+    }
+    // timer calls this to move the boss and check for collisions with the hero
     void move_boss(Hero &hero1)
     {
         if (!isActive)
@@ -439,17 +438,12 @@ struct Boss
     {
         if (isAttacking)
         {
-            attack_timer++;
-            if (attack_timer >= 0) // Show each frame for 2 ticks
+            attack_index++;
+            if (attack_index >= boss_attacking_R_images.size())
             {
-                attack_index++;
-                attack_timer = 0;
-                if (attack_index >= boss_attacking_R_images.size())
-                {
-                    isAttacking = false;
-                    attack_index = 0;
-                    // isMoving = false;
-                }
+                isAttacking = false;
+                attack_index = 0;
+               
             }
         }
     }

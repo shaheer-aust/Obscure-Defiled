@@ -48,47 +48,25 @@ void iDraw()
 	
 	if (screens.top() == "Menu")
 	{
-		if (!menuInitialized)
-		{
-			menu.initmenubar();
-			menuInitialized = true;
-		}
 		menu.drawMenuScreen();
 	}
 	else if (screens.top() == "level_1_screen")
 	{
-		if (!gameInitialized)
-		{
-			level_1_screen.initgame_screen();
-			gameInitialized = true;
-		}
+
 		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
-		if (!settingsInitialized)
-		{
-			setting.initsettingbar();
-			settingsInitialized = true;
-		}
+
 		setting.drawsetting_screen();
 	}
 	else if (screens.top() == "Intro")
 	{
-		if (!introInitialized)
-		{
-			initIntroScreen();
-			introInitialized = true;
-		}
 		drawIntroScreen();
 	}
 	else if (screens.top() == "Credits")
 	{
-		if (!creditsInitialized)
-		{
-			credit.initcreditbar();
-			creditsInitialized = true;
-		}
+
 		credit.drawcredit_screen();
 	}
 }
@@ -471,6 +449,9 @@ int main()
 
 	// Only initialize menu screen at startup - others load on-demand
 	menu.initmenubar();
+	setting.initsettingbar();
+	initIntroScreen();
+	credit.initcreditbar();
 	menuInitialized = true;
 	
 	iSetTimer(200, character_idle_animation);
