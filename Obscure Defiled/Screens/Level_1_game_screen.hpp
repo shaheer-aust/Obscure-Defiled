@@ -14,7 +14,6 @@ extern int getIdleIndex();
 #include <iostream>
 #include "enemy_functions\enemy.hpp";
 #include "character_functions\Hero.hpp";
-#include "Screens\Loading_Screen.hpp";
 #include <vector>
 using namespace std;
 struct Lvl_1_GameScreen
@@ -39,31 +38,16 @@ struct Lvl_1_GameScreen
 
     void initgame_screen()
     {
-        loading_index = 0; 
-        
         images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
-        loading_index = 1;
-        
         hero1.init_character_images();
-        loading_index = 3;
-        
         groundY = hero1.characterPosition_Y;
-        loading_index = 4;
-        
         enemy1.initenemy(1);         // Initialize Small enemy 1
-        loading_index = 5;
-        
         enemy2.initenemy(2);         // Initialize Small enemy 2
         enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
-        loading_index = 6;
-        
         boss.initboss();             // Initialize boss
         boss.isActive = false;       // Start with boss inactive
-        loading_index = 7;
-        
         init_health_bar_images();
-        loading_index = 8;
     }
 
     void init_health_bar_images()

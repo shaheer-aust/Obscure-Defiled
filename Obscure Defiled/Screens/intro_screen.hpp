@@ -13,16 +13,12 @@ int currentPic = 0;
 vector<int> intro_images;
 void initIntroScreen()
 {
-	loading_index = 0; // Reset loading index for intro screen
 	for (int i = 1; i <= TOTAL_PICS; i++)
 	{
 		char a[200];
 		sprintf_s(a, "resources//Level_1//Panels//Intro//intro_%d.png", i);
 		intro_images.push_back(iLoadImage(a));
-		loading_index+=2; // Update loading index to reflect progress
 	}
-	loading_index = 8; // Set to near completion after loading intro images
-	
 }
 
 // Button dimensions
