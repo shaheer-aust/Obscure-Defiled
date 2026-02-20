@@ -77,6 +77,27 @@
     <ClInclude Include="Screens\option_screen.hpp" />
     <ClInclude Include="Screens\setting_screen.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\.DS_Store" />
+    <None Include="resources\._.DS_Store" />
+    <None Include="resources\._credit" />
+    <None Include="resources\._Enemy" />
+    <None Include="resources\._Enemy Count Icon" />
+    <None Include="resources\._game over" />
+    <None Include="resources\._game_screen" />
+    <None Include="resources\._Health Bar" />
+    <None Include="resources\._Level 1 boss enemy health bar" />
+    <None Include="resources\._Level_1" />
+    <None Include="resources\._Main_Character" />
+    <None Include="resources\._menu_screen" />
+    <None Include="resources\._obstacles" />
+    <None Include="resources\._option" />
+    <None Include="resources\._Point Count Icon" />
+    <None Include="resources\._power_up_icon" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="score.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

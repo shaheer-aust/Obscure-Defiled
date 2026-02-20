@@ -48,4 +48,59 @@
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\._.DS_Store">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._credit">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._Enemy">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._Enemy Count Icon">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._game over">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._game_screen">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._Health Bar">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._Level 1 boss enemy health bar">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._Level_1">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._Main_Character">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._menu_screen">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._obstacles">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._option">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._Point Count Icon">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\._power_up_icon">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="resources\.DS_Store">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="score.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

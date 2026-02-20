@@ -11,6 +11,7 @@
 #include "character_functions\Hero.hpp";
 #include "Screens\option_screen.hpp";
 #include "Screens\game_over_screen.hpp";
+#include "Screens\Score_Screen.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -30,6 +31,7 @@ Lvl_1_GameScreen level_1_screen;
 GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
+ScoreScreen scoreScreen;
 
 int bgm_audio = -1;
 vector<int> menu_images;
@@ -38,6 +40,7 @@ vector<int> menu_images;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
+	
 	iClear();
 	iSetColor(255, 255, 255);
 	
@@ -57,6 +60,11 @@ void iDraw()
 	{
 
 		setting.drawsetting_screen();
+	}
+	else if (screens.top() == "Score")
+	{
+		cout << screens.top() << endl;
+		scoreScreen.draw_score_board();
 	}
 	else if (screens.top() == "Intro")
 	{
@@ -131,6 +139,10 @@ void iMouse(int button, int state, int mx, int my)
 			// {
 			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
 			// }
+		}
+		else if (setting.isScoreButtonClicked(mx, my))
+		{
+			screens.push("Score");
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Intro")
@@ -458,7 +470,7 @@ int main()
 	level_1_screen.initgame_screen();
 	
 	gameOverScreen.initGameOverScreen();
-	
+	scoreScreen.init_score_screen();
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);
 	// iSetTimer(1000, reset_movement);
