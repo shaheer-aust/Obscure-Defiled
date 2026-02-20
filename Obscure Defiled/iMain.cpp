@@ -24,7 +24,7 @@ using namespace std;
 
 /* -------------------- GLOBALS -------------------- */
 // vector<int> menu_images;
-stack<string> screens; // standard template library stack for screen management
+stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
 Lvl_1_GameScreen level_1_screen;
@@ -57,26 +57,47 @@ void iDraw()
 
 	if (screens.top() == "Menu")
 	{
-
+		if (!menuInitialized)
+		{
+			menu.initmenubar();
+			menuInitialized = true;
+		}
 		menu.drawMenuScreen();
 	}
 	else if (screens.top() == "level_1_screen")
 	{
-
+		if (!gameInitialized)
+		{
+			level_1_screen.initgame_screen();
+			gameInitialized = true;
+		}
 		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
-
+		if (!settingsInitialized)
+		{
+			setting.initsettingbar();
+			settingsInitialized = true;
+		}
 		setting.drawsetting_screen();
 	}
 	else if (screens.top() == "Intro")
 	{
-
+		if (!introInitialized)
+		{
+			initIntroScreen();
+			introInitialized = true;
+		}
 		drawIntroScreen();
 	}
 	else if (screens.top() == "Credits")
 	{
+		if (!creditsInitialized)
+		{
+			credit.initcreditbar();
+			creditsInitialized = true;
+		}
 		credit.drawcredit_screen();
 	}
 }
@@ -117,22 +138,12 @@ void iMouse(int button, int state, int mx, int my)
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			isLoading = true;
-			if (!gameInitialized)
-			{
-				level_1_screen.initgame_screen();
-				gameInitialized = true;
-			}
 			screens.push("level_1_screen");
 			screens.push("Intro");
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
 		{
 			isLoading = true;
-			if (!settingsInitialized)
-			{
-				setting.initsetting_screen();
-				settingsInitialized = true;
-			}
 			screens.push("Settings");
 		}
 		else if (menu.isQuitButtonClicked(mx, my))
@@ -142,12 +153,6 @@ void iMouse(int button, int state, int mx, int my)
 		}
 		else if (menu.isCreditsButtonClicked(mx, my))
 		{
-			isLoading = true;
-			if (!creditsInitialized)
-			{
-				credit.initcredit_screen();
-				creditsInitialized = true;
-			}
 			screens.push("Credits");
 		}
 	}
@@ -157,7 +162,11 @@ void iMouse(int button, int state, int mx, int my)
 		if (setting.isBackButtonClicked(mx, my))
 		{
 			screens.pop();
-		
+			isLoading = false;
+			// if (screens.top() == "Menu")
+			// {
+			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
+			// }
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Intro")
@@ -191,10 +200,10 @@ void iKeyboard(unsigned char key)
 		if (screens.size() > 1)
 		{
 			screens.pop();
-		
+			isLoading = false;
 			if (screens.top() == "Menu")
 			{
-				// stop credit bgm if going back to menu from credits
+				//stop credit bgm if going back to menu from credits
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play bgsong repeat", NULL, 0, NULL);
 			}
@@ -214,21 +223,11 @@ void iKeyboard(unsigned char key)
 		{
 			cout << "Credits Button Clicked (Keyboard)" << endl;
 			isLoading = true;
-			if (!creditsInitialized)
-			{
-				credit.initcredit_screen();
-				creditsInitialized = true;
-			}
 			screens.push("Credits");
 		}
 		else if (buttonType == 2) // Settings
 		{
 			isLoading = true;
-			if (!settingsInitialized)
-			{
-				setting.initsetting_screen();
-				settingsInitialized = true;
-			}
 			screens.push("Settings");
 		}
 		else if (buttonType == 3) // Play
@@ -236,11 +235,6 @@ void iKeyboard(unsigned char key)
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			isLoading = true;
-			if (!gameInitialized)
-			{
-				level_1_screen.initgame_screen();
-				gameInitialized = true;
-			}
 			screens.push("level_1_screen");
 			screens.push("Intro");
 		}
@@ -464,9 +458,8 @@ void hero_hit_loop()
 		}
 	}
 }
-void all_50_ms_ticks()
-{
-	if (screens.top() == "level_1_screen")
+void all_50_ms_ticks(){
+	if(screens.top() == "level_1_screen")
 	{
 		character_movement();
 		enemy_movement();
@@ -496,17 +489,18 @@ int main()
 	// Only initialize menu screen at startup - others load on-demand
 	menu.initmenubar();
 	menuInitialized = true;
-
+	
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);
 	// iSetTimer(1000, reset_movement);
 	iSetTimer(20, physics_update);
-	// iSetTimer(80, character_movement);
-	// iSetTimer(100, enemy_movement);
-	// iSetTimer(50, update_attack_animation);
-	// iSetTimer(100, hero_hit_loop);
-	//  iSetTimer(100, boss_hit_loop);
+	//iSetTimer(80, character_movement);
+	//iSetTimer(100, enemy_movement);
+	//iSetTimer(50, update_attack_animation);
+	//iSetTimer(100, hero_hit_loop);
+	// iSetTimer(100, boss_hit_loop);
 
+	
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
