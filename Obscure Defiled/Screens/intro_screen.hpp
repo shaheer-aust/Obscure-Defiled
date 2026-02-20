@@ -22,7 +22,6 @@ void initIntroScreen()
 		loading_index+=2; // Update loading index to reflect progress
 	}
 	loading_index = 8; // Set to near completion after loading intro images
-	isLoading = false; // Finished loading
 	
 }
 

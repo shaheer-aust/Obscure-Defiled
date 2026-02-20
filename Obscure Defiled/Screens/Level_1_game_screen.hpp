@@ -64,7 +64,6 @@ struct Lvl_1_GameScreen
         
         init_health_bar_images();
         loading_index = 8;
-        isLoading = false; // Finished loading
     }
 
     void init_health_bar_images()
