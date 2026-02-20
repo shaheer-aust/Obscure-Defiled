@@ -27,7 +27,7 @@ stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
 Lvl_1_GameScreen level_1_screen;
-
+GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
 
@@ -45,8 +45,12 @@ void iDraw()
 	{
 		menu.drawMenuScreen();
 	}
+	else if (screens.top() == "gameOver"){
+		gameOverScreen.draw_game_over_screen();
+	}
 	else if (screens.top() == "level_1_screen")
 	{
+
 		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
@@ -417,6 +421,10 @@ void hero_hit_loop()
 void all_50_ms_ticks(){
 	if(screens.top() == "level_1_screen")
 	{
+		if (level_1_screen.hero1.isDead){
+			screens.pop();
+			screens.push("gameOver");
+		}
 		character_movement();
 		enemy_movement();
 		update_attack_animation();
@@ -449,6 +457,7 @@ int main()
 	initIntroScreen();
 	level_1_screen.initgame_screen();
 	
+	gameOverScreen.initGameOverScreen();
 	
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);

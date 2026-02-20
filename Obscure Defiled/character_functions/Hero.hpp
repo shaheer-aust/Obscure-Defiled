@@ -6,6 +6,7 @@
 #define SCREEN_HEIGHT 720
 #include <iostream>
 #include "enemy_functions\enemy.hpp";
+#include "Screens\game_over_screen.hpp";
 #include <vector>
 using namespace std;
 struct Hero
@@ -24,6 +25,7 @@ struct Hero
     vector<int> character_attack_L_images;
     vector<int> character_idle_hit_R_images;
     vector<int> character_idle_hit_L_images;
+	GameOverScreen gameOverScreen;
     double characterPosition_X = 100.0;
     double characterPosition_Y = 100.0;
     double attack_index = 0;
@@ -40,6 +42,7 @@ struct Hero
     bool isAttacking = false;
     int attack_timer = 0;
     int dead_timer = 0;
+    bool isDead = false;
 
     void takeDamage(double damage)
     {
@@ -160,7 +163,8 @@ struct Hero
          if (isAttacking)
         {
             show_character_attack();
-        }else if(HeroHealth <= 0){
+        }
+        else if(HeroHealth <= 0){
             show_character_dead();
         }
         else if (isJumping)
@@ -259,6 +263,8 @@ struct Hero
                 if (dead_index >= character_dead_R_images.size())
                 {
                     dead_index = character_dead_R_images.size() - 1; // Stay on the last frame of death animation
+                    isDead = true;
+
                 }
             }
         }
