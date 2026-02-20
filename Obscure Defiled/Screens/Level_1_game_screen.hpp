@@ -18,7 +18,7 @@ extern int getIdleIndex();
 using namespace std;
 struct Lvl_1_GameScreen
 {
-    vector<int> images;
+    int bg_image;
     vector<int> health_bar_images;
     Enemy enemy1;
     Enemy enemy2;
@@ -38,7 +38,7 @@ struct Lvl_1_GameScreen
 
     void initgame_screen()
     {
-        images.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
+        bg_image=(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         hero1.init_character_images();
         groundY = hero1.characterPosition_Y;
         enemy1.initenemy(1);         // Initialize Small enemy 1
@@ -167,12 +167,13 @@ struct Lvl_1_GameScreen
     void drawgame_screen()
     {
         //...
-        iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
-        iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
-        iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, images[0]);
+        iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_image);
+		iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_image);
+		iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_image);
 
-        // cout << "Hero Health: " << hero1.HeroHealth << endl;
-        iShowImage(SCREEN_WIDTH / 2 - (275 / 2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
+       
+			iShowImage(SCREEN_WIDTH / 2 - (275 / 2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
+	   
 
         // Draw boss health bar if boss is active
         if (boss.isActive && !boss.boss_health_bar_images.empty())

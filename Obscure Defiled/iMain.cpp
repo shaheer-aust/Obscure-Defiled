@@ -34,12 +34,7 @@ Option_screen setting;
 int bgm_audio = -1;
 vector<int> menu_images;
 
-// Track which screens have been initialized
-bool menuInitialized = false;
-bool gameInitialized = false;
-bool settingsInitialized = false;
-bool introInitialized = false;
-bool creditsInitialized = false;
+
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
@@ -52,7 +47,6 @@ void iDraw()
 	}
 	else if (screens.top() == "level_1_screen")
 	{
-
 		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
@@ -452,7 +446,9 @@ int main()
 	setting.initsettingbar();
 	initIntroScreen();
 	credit.initcreditbar();
-	menuInitialized = true;
+	initIntroScreen();
+	level_1_screen.initgame_screen();
+	
 	
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);
