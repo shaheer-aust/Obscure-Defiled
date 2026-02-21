@@ -69,10 +69,12 @@
   <ItemGroup>
     <ClInclude Include="character_functions\Hero.hpp" />
     <ClInclude Include="enemy_functions\enemy.hpp" />
+    <ClInclude Include="Screens\after_lvl_1_screen.hpp" />
     <ClInclude Include="Screens\credit_screen.hpp" />
     <ClInclude Include="Screens\game_over_screen.hpp" />
     <ClInclude Include="Screens\intro_screen.hpp" />
     <ClInclude Include="Screens\Level_1_game_screen.hpp" />
+    <ClInclude Include="Screens\Level_2_game_screen.hpp" />
     <ClInclude Include="Screens\menu_screen.hpp" />
     <ClInclude Include="Screens\option_screen.hpp" />
     <ClInclude Include="Screens\setting_screen.hpp" />
