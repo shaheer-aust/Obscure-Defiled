@@ -4,15 +4,14 @@
 #include "Screens\menu_screen.hpp";
 #include "Screens\setting_screen.hpp";
 #include "Screens\Level_1_game_screen.hpp";
-#include "Screens\Level_2_game_screen.hpp";
 #include "Screens\intro_screen.hpp";
-#include "Screens\after_lvl_1_screen.hpp";
 #include "Screens\credit_screen.hpp";
 #include "enemy_functions\enemy.hpp";
 #include "Screens\credit_screen.hpp";
 #include "character_functions\Hero.hpp";
 #include "Screens\option_screen.hpp";
 #include "Screens\game_over_screen.hpp";
+#include "Screens\Score_Screen.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -29,70 +28,50 @@ stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
 Lvl_1_GameScreen level_1_screen;
-Lvl_2_GameScreen level_2_screen;
-
-
+GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
+ScoreScreen scoreScreen;
 
 int bgm_audio = -1;
 vector<int> menu_images;
 
-// Track which screens have been initialized
-bool menuInitialized = false;
-bool gameInitialized = false;
-bool settingsInitialized = false;
-bool introInitialized = false;
-bool creditsInitialized = false;
+
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-	
+
 	if (screens.top() == "Menu")
 	{
-		if (!menuInitialized)
-		{
-			menu.initmenubar();
-			menuInitialized = true;
-		}
 		menu.drawMenuScreen();
+	}
+	else if (screens.top() == "gameOver"){
+		gameOverScreen.draw_game_over_screen();
 	}
 	else if (screens.top() == "level_1_screen")
 	{
-		if (!gameInitialized)
-		{
-			level_1_screen.initgame_screen();
-			gameInitialized = true;
-		}
+
 		level_1_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
-		if (!settingsInitialized)
-		{
-			setting.initsettingbar();
-			settingsInitialized = true;
-		}
+
 		setting.drawsetting_screen();
+	}
+	else if (screens.top() == "Score")
+	{
+
+		scoreScreen.draw_score_board();
 	}
 	else if (screens.top() == "Intro")
 	{
-		if (!introInitialized)
-		{
-			initIntroScreen();
-			introInitialized = true;
-		}
 		drawIntroScreen();
 	}
 	else if (screens.top() == "Credits")
 	{
-		if (!creditsInitialized)
-		{
-			credit.initcreditbar();
-			creditsInitialized = true;
-		}
+
 		credit.drawcredit_screen();
 	}
 }
@@ -159,6 +138,10 @@ void iMouse(int button, int state, int mx, int my)
 			// {
 			// 	mciSendString("play bgsong repeat", NULL, 0, NULL);
 			// }
+		}
+		else if (setting.isScoreButtonClicked(mx, my))
+		{
+			screens.push("Score");
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Intro")
@@ -447,8 +430,12 @@ void hero_hit_loop()
 	}
 }
 void all_50_ms_ticks(){
-	if(screens.top() == "level_1_screen")
+	if (screens.top() == "level_1_screen")
 	{
+		if (level_1_screen.hero1.isDead){
+			screens.pop();
+			screens.push("gameOver");
+		}
 		character_movement();
 		enemy_movement();
 		update_attack_animation();
@@ -475,8 +462,14 @@ int main()
 
 	// Only initialize menu screen at startup - others load on-demand
 	menu.initmenubar();
-	menuInitialized = true;
-	
+	setting.initsettingbar();
+	initIntroScreen();
+	credit.initcreditbar();
+	initIntroScreen();
+	level_1_screen.initgame_screen();
+
+	gameOverScreen.initGameOverScreen();
+
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);
 	// iSetTimer(1000, reset_movement);
@@ -487,7 +480,7 @@ int main()
 	//iSetTimer(100, hero_hit_loop);
 	// iSetTimer(100, boss_hit_loop);
 
-	
+
 	screens.push("Menu");
 	// menu_images[1] = menu.initmenubar1();
 	if (screens.top() == "Menu")
