@@ -1,4 +1,4 @@
-﻿Build started 2/21/2026 1:53:42 PM.
+﻿Build started 2/21/2026 2:38:22 PM.
      1>Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -19,14 +19,19 @@
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(236): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(259): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(147): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(326): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(346): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(417): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(431): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(447): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_over_screen.hpp(8): warning C4005: 'BUTTON_WIDTH' : macro redefinition
+                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(11) : see previous definition of 'BUTTON_WIDTH'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\game_over_screen.hpp(9): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
+                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(12) : see previous definition of 'BUTTON_HEIGHT'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(240): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(263): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(146): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(325): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(345): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(416): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(430): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(442): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(111): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(119): warning C4018: '>=' : signed/unsigned mismatch
@@ -34,20 +39,37 @@
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(9): warning C4005: 'BUTTON_WIDTH' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(11) : see previous definition of 'BUTTON_WIDTH'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(10): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(12) : see previous definition of 'BUTTON_HEIGHT'
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(12): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(13): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(14): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(32): error C2146: syntax error : missing ';' before identifier 'level_2_screen'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(442): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(33): error C2059: syntax error : '<<'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(35): error C2059: syntax error : '=='
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(39): error C2059: syntax error : '>>'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(39): error C2059: syntax error : 'bad suffix on number'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(60): error C2065: 'gameOverScreen' : undeclared identifier
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(60): error C2228: left of '.draw_game_over_screen' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(84): error C2065: 'credit' : undeclared identifier
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(84): error C2228: left of '.drawcredit_screen' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(109): error C2065: 'credit' : undeclared identifier
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(109): error C2228: left of '.checkButtonHover' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(171): error C2065: 'credit' : undeclared identifier
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(171): error C2228: left of '.isBackButtonClicked' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(434): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(476): error C2065: 'credit' : undeclared identifier
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(476): error C2228: left of '.initcreditbar' must have class/struct/union
+                 type is 'unknown-type'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(480): error C2065: 'gameOverScreen' : undeclared identifier
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(480): error C2228: left of '.initGameOverScreen' must have class/struct/union
+                 type is 'unknown-type'
      1>Done Building Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.59
+Time Elapsed 00:00:00.70
