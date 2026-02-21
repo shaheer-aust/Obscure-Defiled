@@ -4,6 +4,7 @@
 #include "Screens\menu_screen.hpp";
 #include "Screens\setting_screen.hpp";
 #include "Screens\Level_1_game_screen.hpp";
+#include "Screens\Level_2_game_screen.hpp";
 #include "Screens\intro_screen.hpp";
 #include "Screens\credit_screen.hpp";
 #include "enemy_functions\enemy.hpp";
@@ -27,6 +28,8 @@ stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
 Lvl_1_GameScreen level_1_screen;
+Lvl_2_GameScreen level_2_screen;
+
 
 Credit_screen credit;
 Option_screen setting;

@@ -47,5 +47,8 @@
     <ClInclude Include="Screens\Level_1_game_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\Level_2_game_screen.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
