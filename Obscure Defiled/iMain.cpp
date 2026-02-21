@@ -6,6 +6,7 @@
 #include "Screens\Level_1_game_screen.hpp";
 #include "Screens\Level_2_game_screen.hpp";
 #include "Screens\intro_screen.hpp";
+#include "Screens\after_lvl_1_screen.hpp";
 #include "Screens\credit_screen.hpp";
 #include "enemy_functions\enemy.hpp";
 #include "Screens\credit_screen.hpp";
