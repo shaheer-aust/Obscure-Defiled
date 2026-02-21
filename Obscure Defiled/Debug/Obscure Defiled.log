@@ -1,4 +1,4 @@
-﻿Build started 2/20/2026 7:42:01 PM.
+﻿Build started 2/21/2026 1:27:13 PM.
      1>Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -33,20 +33,21 @@
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(9): warning C4005: 'BUTTON_WIDTH' : macro redefinition
                  c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(11) : see previous definition of 'BUTTON_WIDTH'
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\credit_screen.hpp(10): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
                  c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(12) : see previous definition of 'BUTTON_HEIGHT'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(12): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(13): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(14): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(31): error C2146: syntax error : missing ';' before identifier 'level_2_screen'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(441): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(32): error C2146: syntax error : missing ';' before identifier 'level_2_screen'
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(32): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(442): warning C4018: '>=' : signed/unsigned mismatch
      1>Done Building Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.99
+Time Elapsed 00:00:02.21
