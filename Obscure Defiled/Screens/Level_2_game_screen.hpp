@@ -2,7 +2,7 @@
 #pragma comment(lib, "winmm.lib")
 
 #ifndef Level_2_GAME_SCREEN_H
-#define Level__GAME_SCREEN_H
+#define Level_2_GAME_SCREEN_H
 
 // Forward declaration of idle index getter
 extern int getIdleIndex();
@@ -16,7 +16,7 @@ extern int getIdleIndex();
 #include "character_functions\Hero.hpp";
 #include <vector>
 using namespace std;
-struct Lvl_1_GameScreen
+struct Lvl_2_GameScreen
 {
 	vector<int> images;
 	vector<int> health_bar_images;

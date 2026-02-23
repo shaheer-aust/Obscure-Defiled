@@ -13,6 +13,7 @@
 #include "Screens\game_over_screen.hpp";
 #include "Screens\Score_Screen.hpp";
 #include "Screens\after_lvl_1_screen.hpp"
+#include "Screens\Level_2_game_screen.hpp";
 #include <vector>
 #include <stack>
 #include <string>
@@ -29,6 +30,8 @@ stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
 Lvl_1_GameScreen level_1_screen;
+Lvl_2_GameScreen level_2_screen;
+After_level_1_screen after_level_1_intro_screen;
 GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
@@ -83,7 +86,7 @@ void iDraw()
 	else if (screens.top() == "After_lvl_1")
 	{
 
-		drawAfterLvl1Screen();
+		after_level_1_intro_screen.drawAfterLvl1Screen();
 	}
 
 
@@ -478,7 +481,7 @@ int main()
 	setting.initsettingbar();
 	initIntroScreen();
 	credit.initcreditbar();
-	initIntroScreen();
+	after_level_1_intro_screen.initIntroScreen();
 	level_1_screen.initgame_screen();
 
 	gameOverScreen.initGameOverScreen();
