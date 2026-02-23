@@ -32,9 +32,10 @@ void drawIntroScreen()
 	iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, intro_images[currentPic]);
 
 	// Draw skip button
-	iSetColor(200, 0, 0);
-	iRectangle(skipBtnX, skipBtnY, skipBtnW, skipBtnH);
-	iText(skipBtnX + 20, skipBtnY + 15, "Skip", GLUT_BITMAP_HELVETICA_18);
+	iSetColor(142, 142, 142);
+	iFilledRectangle(skipBtnX, skipBtnY, skipBtnW, skipBtnH);
+	iSetColor(0,0,0);
+	iText(skipBtnX + 28, skipBtnY + 15, "Skip", GLUT_BITMAP_TIMES_ROMAN_24 );
 }
 
 bool introKeyboardHandler(unsigned char key)
@@ -56,9 +57,9 @@ bool introKeyboardHandler(unsigned char key)
 		return true;
 	}
 	return false;
-
-	
 }
+
+//'a' and 'd' dont work in introKeyboardHandler
 
 bool introMouseHandler(int button, int state, int mx, int my)
 {

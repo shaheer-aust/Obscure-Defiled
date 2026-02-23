@@ -1,8 +1,8 @@
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 
-#ifndef Level_1_GAME_SCREEN_H
-#define Level_1_GAME_SCREEN_H
+#ifndef Level_2_GAME_SCREEN_H
+#define Level__GAME_SCREEN_H
 
 // Forward declaration of idle index getter
 extern int getIdleIndex();

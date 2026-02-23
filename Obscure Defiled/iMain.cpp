@@ -12,6 +12,7 @@
 #include "Screens\option_screen.hpp";
 #include "Screens\game_over_screen.hpp";
 #include "Screens\Score_Screen.hpp";
+#include "Screens\after_lvl_1_screen.hpp"
 #include <vector>
 #include <stack>
 #include <string>
@@ -55,6 +56,11 @@ void iDraw()
 
 		level_1_screen.drawgame_screen();
 	}
+	else if (screens.top() == "level_2_screen")
+	{
+
+		level_2_screen.drawgame_screen();
+	}
 	else if (screens.top() == "Settings")
 	{
 
@@ -74,6 +80,13 @@ void iDraw()
 
 		credit.drawcredit_screen();
 	}
+	else if (screens.top() == "After_lvl_1")
+	{
+
+		drawAfterLvl1Screen();
+	}
+
+
 }
 
 /* -------------------- INPUT -------------------- */
