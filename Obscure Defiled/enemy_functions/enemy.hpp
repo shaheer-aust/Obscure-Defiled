@@ -23,7 +23,7 @@ struct Enemy
     double enemyPosition_Y = 100.0;
     double enemyHealth = 100.0;
     bool isright = false;
-    int movement_index = 0;
+    int enemy_movement_index = 0;
     double enemy_speed = 8.0;
     bool enemyGettingHit = false;
     bool isActive = true; // Whether this enemy is currently active in the game
@@ -35,7 +35,7 @@ struct Enemy
         enemyPosition_Y = 100.0;
         enemyHealth = 100.0;
         isright = false;
-        movement_index = 0;
+		enemy_movement_index = 0;
         enemy_speed = 8.0;
         enemyGettingHit = false;
         isActive = true; // Whether this enemy is currently active in the game
@@ -62,6 +62,8 @@ struct Enemy
             if (level == 1)
             {
                 // Load Small enemy 1 walking images
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
                 for (int i = 1; i <= 4; i++)
                 {
                     char a[200];
@@ -78,18 +80,21 @@ struct Enemy
             else if (level == 2)
             {
                 // Load Small enemy 1 walking images for level 2 (can be different if desired)
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
                 for (int i = 0; i <= 15; i++)
                 {
                     char a[200];
                     sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Walking/frame_%03d.png", i);
                     enemy_idle_R_images.push_back(iLoadImage(a));
                 }
-                for (int i = 1; i <= 4; i++)
+                for (int i = 1; i <= 15; i++)
                 {
                     char a[200];
                     sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Walking/frame_%03d.png", i);
                     enemy_idle_L_images.push_back(iLoadImage(a));
                 }
+				
             }
         }
         else if (enemyType == 2)
@@ -97,6 +102,8 @@ struct Enemy
             // Load Small enemy 2 walking images
             if (level == 1)
             {
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
                 for (int i = 1; i <= 3; i++)
                 {
                     char a[200];
@@ -114,6 +121,8 @@ struct Enemy
             }
             else if (level == 2)
             {
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
                 for (int i = 0; i <= 35; i++)
                 {
 
@@ -137,14 +146,15 @@ struct Enemy
         if (!isActive)
             return; // Don't show inactive enemies
 
-        int currentIdx = movement_index;
+		int currentIdx = enemy_movement_index;
+		cout << " index: " << currentIdx << endl;
         if (isright)
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_R_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_L_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_L_images[currentIdx]);
         }
     }
     void move_enemy(Hero &hero1)
@@ -191,10 +201,10 @@ struct Enemy
             enemyPosition_X += enemy_speed;
             isright = true;
         }
-        movement_index++;
-        if (movement_index >= enemy_idle_R_images.size())
+		enemy_movement_index++;
+		if (enemy_movement_index >= enemy_idle_R_images.size()-1)
         {
-            movement_index = 0;
+			enemy_movement_index = 0;
         }
     }
 };
@@ -250,6 +260,14 @@ struct Boss
     void init_boss_images(int level = 1)
     {
         // Load boss walking images
+		boss_walking_R_images.clear();
+		boss_walking_L_images.clear();
+		boss_hit_R_images.clear();
+		boss_hit_L_images.clear();
+		boss_dead_R_images.clear();
+		boss_dead_L_images.clear();
+		boss_attacking_L_images.clear();
+		boss_attacking_R_images.clear();
         init_boss_health_bar_images();
         if (level == 1)
         {

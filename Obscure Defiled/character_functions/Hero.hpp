@@ -25,7 +25,7 @@ struct Hero
     vector<int> character_attack_L_images;
     vector<int> character_idle_hit_R_images;
     vector<int> character_idle_hit_L_images;
-
+	int level = 1;
     double characterPosition_X;
     double characterPosition_Y;
     double attack_index = 0;
@@ -54,6 +54,18 @@ struct Hero
     }
     void init_character_images(int level = 1)
     {
+		character_idle_R_images.clear();
+		character_idle_L_images.clear();
+		character_run_L_images.clear();
+		character_run_R_images.clear();
+		character_jump_R_images.clear();
+		character_jump_L_images.clear();
+		character_dead_R_images.clear();
+		character_dead_L_images.clear();
+		character_attack_R_images.clear();
+		 character_attack_L_images.clear();
+		 character_idle_hit_R_images.clear();
+		 character_idle_hit_L_images.clear();
 		characterPosition_X = 100.0;
 		characterPosition_Y = 100.0;
 		attack_index = 0;
@@ -71,7 +83,7 @@ struct Hero
 		attack_timer = 0;
 		dead_timer = 0;
 		isDead = false;
-
+		this->level = level;
         init_fighting_images(level);
         init_idle_hit_images(level);
         init_character_dead_images(level);
@@ -123,28 +135,28 @@ struct Hero
             for (int i = 0; i <= 15; i++)
             {
                 char a[200];
-                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Idle/Left/frame_%d.png", i);
-                character_idle_R_images.push_back(iLoadImage(a));
-            }
-            for (int i = 1; i <= 4; i++)
-            {
-                char a[200];
-                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Idle/Right/frame_%d.png", i);
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Idle/Left/frame_%03d.png", i);
                 character_idle_L_images.push_back(iLoadImage(a));
             }
+            for (int i = 1; i <= 4; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Idle/Right/frame_%03d.png", i);
+                character_idle_R_images.push_back(iLoadImage(a));
+            }
             // Load character run images
-            for (int i = 1; i <= 4; i++)
-            {
-                char a[200];
-                sprintf_s(a, "resources//Main_Character//Armored//Walking//walking_left_%d.png", i);
-                character_run_L_images.push_back(iLoadImage(a));
-            }
-            for (int i = 1; i <= 4; i++)
-            {
-                char a[200];
-                sprintf_s(a, "resources//Main_Character//Armored//Walking//walking_right_%d.png", i);
-                character_run_R_images.push_back(iLoadImage(a));
-            }
+			for (int i = 1; i <= 4; i++)
+			{
+				char a[200];
+				sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_left_%d.png", i);
+				character_run_L_images.push_back(iLoadImage(a));
+			}
+			for (int i = 1; i <= 4; i++)
+			{
+				char a[200];
+				sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i);
+				character_run_R_images.push_back(iLoadImage(a));
+			}
         }
     }
     void init_character_dead_images(int level = 1)
@@ -185,13 +197,13 @@ struct Hero
             for (int i = 0; i <= 35; i++)
             {
                 char a[200];
-                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Shooting/Right/frame_%d.png", i);
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Shooting/Right/frame_%03d.png", i);
                 character_attack_R_images.push_back(iLoadImage(a));
             }
             for (int i = 0; i <= 35; i++)
             {
                 char a[200];
-                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Shooting/Left/frame_%d.png", i);
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Shooting/Left/frame_%03d.png", i);
                 character_attack_L_images.push_back(iLoadImage(a));
             }
         }
@@ -218,13 +230,13 @@ struct Hero
             {
                 char a[200];
                 ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Main_Character/Normal/With Handgun/Getting Hit/Left/frame_000.png
-                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Getting Hit/Right/frame_%d.png", i);
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Getting Hit/Right/frame_%03d.png", i);
                 character_idle_hit_R_images.push_back(iLoadImage(a));
             }
             for (int i = 0; i <= 35; i++)
             {
                 char a[200];
-                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Getting Hit/Left/frame_%d.png", i);
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Getting Hit/Left/frame_%03d.png", i);
                 character_idle_hit_L_images.push_back(iLoadImage(a));
             }
         }
@@ -377,7 +389,7 @@ struct Hero
         if (isAttacking)
         {
             attack_timer++;
-            if (attack_timer >= 2) // Show each frame for 2 ticks
+            if (attack_timer >= level==1?2:-1) // Show each frame for 2 ticks
             {
                 attack_index++;
                 attack_timer = 0;
