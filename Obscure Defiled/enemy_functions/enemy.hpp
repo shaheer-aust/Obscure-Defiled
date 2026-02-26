@@ -343,13 +343,13 @@ struct Boss
                 /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/right/00.png
                 // sprintf_s(a, "resources//Level_1//Boss//Walking//Rlvl_1_boss_idle+walking_%d.png", i);
                 sprintf_s(a, "resources/Level_2/Boss/Left/Walking/frame_%03d.png", i);
-                boss_walking_R_images.push_back(iLoadImage(a));
+                boss_walking_L_images.push_back(iLoadImage(a));
             }
             for (int i = 0; i <= 26; i++)
             {
                 char a[200];
                 sprintf_s(a, "resources/Level_2/Boss/Right/Walking/frame_%03d.png", i);
-                boss_walking_L_images.push_back(iLoadImage(a));
+                boss_walking_R_images.push_back(iLoadImage(a));
             }
             // load attacking images
             for (int i = 0; i <= 35; i++)
