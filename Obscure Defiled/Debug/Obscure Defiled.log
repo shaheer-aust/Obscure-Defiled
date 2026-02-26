@@ -1,4 +1,4 @@
-﻿Build started 27-02-2026 02:36:27.
+﻿Build started 27-02-2026 02:50:21.
      1>Project "C:\Users\imsha\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Rebuild target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (._demo.vcxproj, demo.vcxproj, ._Obscure Defiled.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -24,8 +24,8 @@
                  c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(11) : see previous definition of 'BUTTON_WIDTH'
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\game_over_screen.hpp(9): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
                  c:\users\imsha\documents\github\obscure-defiled\obscure defiled\screens\level_1_game_screen.hpp(12) : see previous definition of 'BUTTON_HEIGHT'
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(338): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(361): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(337): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(360): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(205): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(459): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\imsha\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(479): warning C4018: '>=' : signed/unsigned mismatch
@@ -62,4 +62,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.09
+Time Elapsed 00:00:02.61

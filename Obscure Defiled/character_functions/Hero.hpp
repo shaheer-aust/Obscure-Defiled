@@ -60,8 +60,7 @@ struct Hero
 		character_run_R_images.clear();
 		character_jump_R_images.clear();
 		character_jump_L_images.clear();
-		character_dead_R_images.clear();
-		character_dead_L_images.clear();
+		
 		character_attack_R_images.clear();
 		 character_attack_L_images.clear();
 		 character_idle_hit_R_images.clear();
