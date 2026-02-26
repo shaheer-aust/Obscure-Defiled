@@ -250,6 +250,18 @@ void iKeyboard(unsigned char key)
 			level_1_screen.hero1.isMoving = true;
 		}
 	}
+	else if (screens.top() == "After_lvl_1")
+	{
+		// Pass the pressed key to the after level 1 screen
+		bool isend = after_level_1_intro_screen.introKeyboardHandler(key);
+		if (isend)
+		{
+			// Reset the picture index for next time
+			after_level_1_intro_screen.after_level_1_pic_index = 0;
+			screens.pop(); // Remove "After_lvl_1" from top of stack
+		}
+	}
+
 }
 void iKeyboardUp(unsigned char key)
 {
@@ -317,6 +329,17 @@ void iSpecialKeyboard(unsigned char key)
 			screens.pop();
 		}
 	}
+	else if (screens.top() == "After_lvl_1")
+	{
+		// Pass the arrow keys to the intro handler
+		bool isend = after_level_1_intro_screen.introKeyboardHandler(key);
+		if (isend)
+		{
+			after_level_1_intro_screen.after_level_1_pic_index = 0;
+			screens.pop(); // Remove "After_lvl_1" from top of stack
+		}
+	}
+
 }
 
 /* -------------------- INIT -------------------- */
@@ -452,12 +475,25 @@ void all_50_ms_ticks(){
 			screens.pop();
 			screens.push("gameOver");
 		}
+		// --- ADD YOUR LEVEL TRANSITION CONDITION HERE ---
+		else if (level_1_screen.enemy1.enemyHealth == 0 && level_1_screen.enemy2.enemyHealth == 0 && level_1_screen.boss.bossHealth == 00)
+		{
+			// Note: Replace `.isDead` with however you actually track their deaths
+			// e.g., `.enemyHealth <= 0`, `!isActive`, etc.
+
+			screens.pop();                 // Remove level_1_screen
+			screens.push("level_2_screen");  // Push level 2 (it will be under the intro screen)
+			screens.push("After_lvl_1");     // Push intro screen on top
+		}
+		// ------------------------------------------------
+
 		character_movement();
 		enemy_movement();
 		update_attack_animation();
 		hero_hit_loop();
 	}
 }
+
 void character_idle_animation()
 {
 	if (screens.top() == "level_1_screen")
@@ -483,6 +519,7 @@ int main()
 	credit.initcreditbar();
 	after_level_1_intro_screen.initIntroScreen();
 	level_1_screen.initgame_screen();
+	level_2_screen.initgame_screen(); // Prevents vector out of range crash
 
 	gameOverScreen.initGameOverScreen();
 

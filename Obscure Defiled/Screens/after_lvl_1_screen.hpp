@@ -17,7 +17,7 @@ struct After_level_1_screen{
 		for (int i = 1; i <= TOTAL_PICS; i++)
 		{
 			char a[200];
-			sprintf_s(a, "resources//Level_2//after_lvl_1//frame0%d", i + 1);
+			sprintf_s(a, "resources//Level_2//after_lvl_1//frame0%d.png", i);
 			after_lvl_1_images.push_back(iLoadImage(a));
 		}
 	}
@@ -27,7 +27,7 @@ struct After_level_1_screen{
 	{
 		// Draw current picture
 		//iShowBMP(645, 533, storyPics[after_level_1_pic_index]);
-		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, intro_images[after_level_1_pic_index]);
+		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, after_lvl_1_images[after_level_1_pic_index]);
 	}
 
 	bool introKeyboardHandler(unsigned char key)
@@ -51,11 +51,10 @@ struct After_level_1_screen{
 		if (after_level_1_pic_index > 1){
 			return true;
 		}
-
 		return false;
-
-
 	}
 
-}
+
+
+};
 #endif // AFTER_LVL_1_SCREEN_HPP
