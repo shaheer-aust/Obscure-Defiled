@@ -28,7 +28,7 @@ struct Enemy
     bool enemyGettingHit = false;
     bool isActive = true; // Whether this enemy is currently active in the game
     int enemyType = 1;    // 1 for Small enemy 1, 2 for Small enemy 2
-
+	int level = 1;
     void initenemy(int type = 1, int level = 1)
     {
         enemyPosition_X = SCREEN_WIDTH - 64;
@@ -39,7 +39,7 @@ struct Enemy
         enemy_speed = 8.0;
         enemyGettingHit = false;
         isActive = true; // Whether this enemy is currently active in the game
-
+		this->level = level;
         enemyType = type;
         init_enemy_images(level);
     }
@@ -56,14 +56,17 @@ struct Enemy
     }
     void init_enemy_images(int level = 1)
     {
+		enemy_idle_L_images.clear();
+		enemy_idle_R_images.clear();
+		
+		
         // Load enemy images based on type
         if (enemyType == 1)
         {
             if (level == 1)
             {
                 // Load Small enemy 1 walking images
-				enemy_idle_L_images.clear();
-				enemy_idle_R_images.clear();
+				
                 for (int i = 1; i <= 4; i++)
                 {
                     char a[200];
@@ -80,8 +83,7 @@ struct Enemy
             else if (level == 2)
             {
                 // Load Small enemy 1 walking images for level 2 (can be different if desired)
-				enemy_idle_L_images.clear();
-				enemy_idle_R_images.clear();
+				
                 for (int i = 0; i <= 15; i++)
                 {
                     char a[200];
@@ -102,8 +104,7 @@ struct Enemy
             // Load Small enemy 2 walking images
             if (level == 1)
             {
-				enemy_idle_L_images.clear();
-				enemy_idle_R_images.clear();
+				
                 for (int i = 1; i <= 3; i++)
                 {
                     char a[200];
@@ -121,8 +122,7 @@ struct Enemy
             }
             else if (level == 2)
             {
-				enemy_idle_L_images.clear();
-				enemy_idle_R_images.clear();
+			
                 for (int i = 0; i <= 35; i++)
                 {
 
