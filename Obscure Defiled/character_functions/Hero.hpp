@@ -156,6 +156,19 @@ struct Hero
 				sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Walking/Right/frame_%03d.png", i);
 				character_run_R_images.push_back(iLoadImage(a));
 			}
+                    // load character jump images if needed
+            for (int i = 1; i <= 4; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Jumping/Right/frame_%03d.png", i);
+                character_jump_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 35; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Jumping/Left/frame_%03d.png", i);
+                character_jump_L_images.push_back(iLoadImage(a));
+            }
         }
     }
     void init_character_dead_images(int level = 1)
