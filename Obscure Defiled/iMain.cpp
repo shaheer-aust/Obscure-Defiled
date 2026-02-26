@@ -450,6 +450,19 @@ void enemy_movement()
 		game_screen.enemy1.move_enemy(game_screen.hero1);
 		game_screen.enemy2.move_enemy(game_screen.hero1);
 		game_screen.boss.move_boss(game_screen.hero1);
+
+		// Handle Trap movement for Level 2
+		if (game_screen.level == 2 && game_screen.level2Trap.isActive)
+		{
+			if (game_screen.rightPressed && !game_screen.hero1.isJumping)
+			{
+				game_screen.level2Trap.trapPosition_X -= game_screen.bg_speed;
+			}
+			else if (game_screen.leftPressed && !game_screen.hero1.isJumping)
+			{
+				game_screen.level2Trap.trapPosition_X += game_screen.bg_speed;
+			}
+		}
 	}
 }
 void update_attack_animation()
@@ -502,6 +515,12 @@ void all_50_ms_ticks(){
 		enemy_movement();
 		update_attack_animation();
 		hero_hit_loop();
+
+		// Handle Trap Collision for Level 2
+		if (game_screen.level == 2)
+		{
+			game_screen.level2Trap.checkCollision(game_screen.hero1);
+		}
 	}
 }
 

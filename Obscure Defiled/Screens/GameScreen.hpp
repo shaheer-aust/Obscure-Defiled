@@ -17,6 +17,7 @@ extern int getIdleIndex();
 //#include "Screens\Level_2_game_screen.hpp";
 //#include "Screens\Level_1_game_screen.hpp";
 #include <vector>
+#include "trap.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -29,6 +30,7 @@ struct GameScreen
     Enemy enemy2;
     Boss boss;
     Hero hero1;
+    Trap level2Trap;
     bool spacePressed = false;
     bool rightPressed = false;
     bool leftPressed = false;
@@ -67,6 +69,20 @@ struct GameScreen
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         boss.initboss(level);             // Initialize boss
         boss.isActive = false;       // Start with boss inactive
+        
+        // Trap Initialization for Level 2
+        if (level == 2)
+        {
+            // Initializes the trap ahead of the hero on the ground
+            // Ground is at 100, so we can place it somewhere ahead like x=800
+            // Image size may vary but a width of 100 and height of 50 works for collisions
+            level2Trap.initTrap(800, 100, 100, 50); 
+        }
+        else 
+        {
+            level2Trap.isActive = false;
+        }
+
         init_health_bar_images();
     }
 
@@ -221,6 +237,12 @@ struct GameScreen
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
         boss.show_boss_moving();
+
+        // Draw trap for level 2
+        if (level == 2 && level2Trap.isActive)
+        {
+            level2Trap.drawTrap();
+        }
     }
 };
 
