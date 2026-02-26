@@ -200,7 +200,7 @@ struct Hero
                 sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Shooting/Right/frame_%03d.png", i);
                 character_attack_R_images.push_back(iLoadImage(a));
             }
-            for (int i = 1; i <= 12; i++)
+            for (int i = 0; i <= 12; i++)
             {
                 char a[200];
                 sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Shooting/Left/frame_%03d.png", i);
@@ -226,14 +226,14 @@ struct Hero
                 character_idle_hit_L_images.push_back(iLoadImage(a));
             }
         }else if(level == 2){
-            for (int i = 0; i <= 35; i++)
+            for (int i = 0; i <= 34; i++)
             {
                 char a[200];
                 ///Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Main_Character/Normal/With Handgun/Getting Hit/Left/frame_000.png
                 sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Getting Hit/Right/frame_%03d.png", i);
                 character_idle_hit_R_images.push_back(iLoadImage(a));
             }
-            for (int i = 0; i <= 35; i++)
+            for (int i = 0; i <= 34; i++)
             {
                 char a[200];
                 sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Getting Hit/Left/frame_%03d.png", i);

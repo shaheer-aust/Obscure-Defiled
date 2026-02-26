@@ -466,7 +466,7 @@ void hero_hit_loop()
 	if (game_screen.hero1.gettingHit)
 	{
 		game_screen.hero1.hit_index++;
-		if (game_screen.hero1.hit_index >= game_screen.hero1.character_idle_hit_R_images.size())
+		if (game_screen.hero1.hit_index >= game_screen.hero1.character_idle_hit_R_images.size()-1)
 		{
 			game_screen.hero1.hit_index = 0;
 			// game_screen.hero1.gettingHit = false;
