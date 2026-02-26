@@ -23,7 +23,9 @@ struct Lvl_2_GameScreen
     vector<int> health_bar_images;
     Enemy enemy1;
     Enemy enemy2;
+    Enemy enemy3;
     Boss boss;
+    Boss boss2;
     Hero hero1;
     bool spacePressed = false;
     bool rightPressed = false;
@@ -35,19 +37,27 @@ struct Lvl_2_GameScreen
     double groundY = 100.0;
     double bg_speed = 4.0;
     bool enemy2Spawned = false; // Track if enemy2 has been spawned
+    bool enemy3Spawned = false; // Track if enemy3 has been spawned
     bool bossSpawned = false;   // Track if boss has been spawned
+    bool boss2Spawned = false;  // Track if boss2 has been spawned
 
     void initgame_screen()
     {
         bg_image = (iLoadImage("resources//game_screen//level_2//bg_2//Screen_bg_for_2nd_round.png"));
         hero1.init_character_images();
         groundY = hero1.characterPosition_Y;
-        enemy1.initenemy(1);         // Initialize Small enemy 1
-        enemy2.initenemy(2);         // Initialize Small enemy 2
-        enemy2.isActive = false;     // Start with enemy2 inactive
-        enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
-        boss.initboss();             // Initialize boss
-        boss.isActive = false;       // Start with boss inactive
+        enemy1.initenemy(1);          // Initialize Small enemy 1
+        enemy2.initenemy(2);          // Initialize Small enemy 2
+        enemy2.isActive = false;      // Start with enemy2 inactive
+        enemy2.enemyPosition_X = 64;  // Position enemy2 on the right side
+        enemy3.initenemy(1);          // Initialize enemy3 (type 1)
+        enemy3.isActive = false;      // Start with enemy3 inactive
+        enemy3.enemyPosition_X = 128; // Position enemy3 further right
+        boss.initboss();              // Initialize boss
+        boss.isActive = false;        // Start with boss inactive
+        boss2.initboss();             // Initialize boss2
+        boss2.isActive = false;       // Start with boss2 inactive
+        boss2.bossPosition_X = SCREEN_WIDTH - 256; // Offset boss2 position
         init_health_bar_images();
     }
 
@@ -171,6 +181,12 @@ struct Lvl_2_GameScreen
             int frameIndex = (int)floor((currentHealth / 200.0) * 15);
             iShowImage(boss.bossPosition_X - 10, boss.bossPosition_Y + 100, 122, 20, boss.boss_health_bar_images[frameIndex]);
         }
+        if (boss2.isActive && !boss2.boss_health_bar_images.empty())
+        {
+            double currentHealth = max(0.0, min(200.0, boss2.bossHealth));
+            int frameIndex = (int)floor((currentHealth / 200.0) * 15);
+            iShowImage(boss2.bossPosition_X - 10, boss2.bossPosition_Y + 100, 122, 20, boss2.boss_health_bar_images[frameIndex]);
+        }
         if (enemy1.isActive && !boss.boss_health_bar_images.empty())
         {
             double currentHealth = max(0.0, min(100.0, enemy1.enemyHealth));
@@ -183,10 +199,18 @@ struct Lvl_2_GameScreen
             int frameIndex = (int)floor((currentHealth / 100.0) * 15);
             iShowImage(enemy2.enemyPosition_X - 2, enemy2.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
+        if (enemy3.isActive && !boss.boss_health_bar_images.empty())
+        {
+            double currentHealth = max(0.0, min(100.0, enemy3.enemyHealth));
+            int frameIndex = (int)floor((currentHealth / 100.0) * 15);
+            iShowImage(enemy3.enemyPosition_X - 2, enemy3.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
+        }
         hero1.show_chracter_moving();
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
+        enemy3.show_enemy_moving();
         boss.show_boss_moving();
+        boss2.show_boss_moving();
     }
 };
 

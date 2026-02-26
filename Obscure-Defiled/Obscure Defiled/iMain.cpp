@@ -549,8 +549,12 @@ void enemy_movement_lvl2()
 			level_2_screen.enemy1.enemyPosition_X -= level_2_screen.bg_speed;
 		if (level_2_screen.enemy2.isActive)
 			level_2_screen.enemy2.enemyPosition_X -= level_2_screen.bg_speed;
+		if (level_2_screen.enemy3.isActive)
+			level_2_screen.enemy3.enemyPosition_X -= level_2_screen.bg_speed;
 		if (level_2_screen.boss.isActive || level_2_screen.boss.bossHealth <= 0)
 			level_2_screen.boss.bossPosition_X -= level_2_screen.bg_speed;
+		if (level_2_screen.boss2.isActive || level_2_screen.boss2.bossHealth <= 0)
+			level_2_screen.boss2.bossPosition_X -= level_2_screen.bg_speed;
 	}
 	if (level_2_screen.leftPressed && !level_2_screen.hero1.isJumping)
 	{
@@ -558,14 +562,24 @@ void enemy_movement_lvl2()
 			level_2_screen.enemy1.enemyPosition_X += level_2_screen.bg_speed;
 		if (level_2_screen.enemy2.isActive)
 			level_2_screen.enemy2.enemyPosition_X += level_2_screen.bg_speed;
+		if (level_2_screen.enemy3.isActive)
+			level_2_screen.enemy3.enemyPosition_X += level_2_screen.bg_speed;
 		if (level_2_screen.boss.isActive || level_2_screen.boss.bossHealth <= 0)
 			level_2_screen.boss.bossPosition_X += level_2_screen.bg_speed;
+		if (level_2_screen.boss2.isActive || level_2_screen.boss2.bossHealth <= 0)
+			level_2_screen.boss2.bossPosition_X += level_2_screen.bg_speed;
 	}
-	// Spawn enemy2 when hero reaches halfway across the screen
+	// Spawn enemy2 when hero reaches 50% across the screen
 	if (!level_2_screen.enemy2Spawned && level_2_screen.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
 	{
 		level_2_screen.enemy2.isActive = true;
 		level_2_screen.enemy2Spawned = true;
+	}
+	// Spawn enemy3 when hero reaches 60% across the screen
+	if (!level_2_screen.enemy3Spawned && level_2_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.60))
+	{
+		level_2_screen.enemy3.isActive = true;
+		level_2_screen.enemy3Spawned = true;
 	}
 	// Spawn boss when hero reaches 75% across the screen
 	if (!level_2_screen.bossSpawned && level_2_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
@@ -573,9 +587,17 @@ void enemy_movement_lvl2()
 		level_2_screen.boss.isActive = true;
 		level_2_screen.bossSpawned = true;
 	}
+	// Spawn boss2 when hero reaches 90% across the screen
+	if (!level_2_screen.boss2Spawned && level_2_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.90))
+	{
+		level_2_screen.boss2.isActive = true;
+		level_2_screen.boss2Spawned = true;
+	}
 	level_2_screen.enemy1.move_enemy(level_2_screen.hero1);
 	level_2_screen.enemy2.move_enemy(level_2_screen.hero1);
+	level_2_screen.enemy3.move_enemy(level_2_screen.hero1);
 	level_2_screen.boss.move_boss(level_2_screen.hero1);
+	level_2_screen.boss2.move_boss(level_2_screen.hero1);
 }
 void update_attack_animation_lvl2()
 {
@@ -584,6 +606,9 @@ void update_attack_animation_lvl2()
 	level_2_screen.boss.update_attack();
 	level_2_screen.boss.update_dead();
 	level_2_screen.boss.boss_hit_loop();
+	level_2_screen.boss2.update_attack();
+	level_2_screen.boss2.update_dead();
+	level_2_screen.boss2.boss_hit_loop();
 }
 void hero_hit_loop_lvl2()
 {
