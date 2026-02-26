@@ -7,14 +7,14 @@ extern void takeDamage();
 #define SCREEN_HEIGHT 720
 #include <iostream>
 #include "character_functions\Hero.hpp";
-#include "Screens\Level_1_game_screen.hpp"
+// #include "Screens\Level_1_game_screen.hpp"
 #include <vector>
 using namespace std;
 
 // Forward declarations to avoid circular dependencies
 struct Hero;
-struct Lvl_1_GameScreen;
-// Global state
+// struct Lvl_1_GameScreen;
+//  Global state
 struct Enemy
 {
     vector<int> enemy_idle_R_images;
@@ -23,16 +23,25 @@ struct Enemy
     double enemyPosition_Y = 100.0;
     double enemyHealth = 100.0;
     bool isright = false;
-    int movement_index = 0;
+    int enemy_movement_index = 0;
     double enemy_speed = 8.0;
     bool enemyGettingHit = false;
     bool isActive = true; // Whether this enemy is currently active in the game
     int enemyType = 1;    // 1 for Small enemy 1, 2 for Small enemy 2
 
-    void initenemy(int type = 1)
+    void initenemy(int type = 1, int level = 1)
     {
+        enemyPosition_X = SCREEN_WIDTH - 64;
+        enemyPosition_Y = 100.0;
+        enemyHealth = 100.0;
+        isright = false;
+		enemy_movement_index = 0;
+        enemy_speed = 8.0;
+        enemyGettingHit = false;
+        isActive = true; // Whether this enemy is currently active in the game
+
         enemyType = type;
-        init_enemy_images();
+        init_enemy_images(level);
     }
     void enemy_takeDamage(double damage)
     {
@@ -45,41 +54,90 @@ struct Enemy
             isActive = false; // Deactivate enemy when health reaches 0
         }
     }
-    void init_enemy_images()
+    void init_enemy_images(int level = 1)
     {
         // Load enemy images based on type
         if (enemyType == 1)
         {
-            // Load Small enemy 1 walking images
-            for (int i = 1; i <= 4; i++)
+            if (level == 1)
             {
-                char a[200];
-                sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//right view//resize_right_walking_%d.png", i, i);
-                enemy_idle_R_images.push_back(iLoadImage(a));
+                // Load Small enemy 1 walking images
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
+                for (int i = 1; i <= 4; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//right view//resize_right_walking_%d.png", i, i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 1; i <= 4; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//left view//resize_left_walking_%d.png", i, i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
             }
-            for (int i = 1; i <= 4; i++)
+            else if (level == 2)
             {
-                char a[200];
-                sprintf_s(a, "resources//Enemy//level_1//Small enemy 1//Walking//Walking %d//left view//resize_left_walking_%d.png", i, i);
-                enemy_idle_L_images.push_back(iLoadImage(a));
+                // Load Small enemy 1 walking images for level 2 (can be different if desired)
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
+                for (int i = 0; i <= 15; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 1; i <= 15; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+				
             }
         }
         else if (enemyType == 2)
         {
             // Load Small enemy 2 walking images
-            for (int i = 1; i <= 3; i++)
+            if (level == 1)
             {
-                char a[200];
-                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/Walking/Walking 1/Right View/resize_green_walking_1_right.png
-                sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/Walking/Walking %d/Right View/resize_green_walking_%d_right.png", i, i);
-                enemy_idle_R_images.push_back(iLoadImage(a));
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
+                for (int i = 1; i <= 3; i++)
+                {
+                    char a[200];
+                    /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/Walking/Walking 1/Right View/resize_green_walking_1_right.png
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/Walking/Walking %d/Right View/resize_green_walking_%d_right.png", i, i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 1; i <= 3; i++)
+                {
+                    char a[200];
+                    /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/Walking/Walking 1/Left View/resize_green_walking_1_left.png
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/Walking/Walking %d/Left View/resize_green_walking_%d_left.png", i, i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
             }
-            for (int i = 1; i <= 3; i++)
+            else if (level == 2)
             {
-                char a[200];
-                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/Walking/Walking 1/Left View/resize_green_walking_1_left.png
-                sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/Walking/Walking %d/Left View/resize_green_walking_%d_left.png", i, i);
-                enemy_idle_L_images.push_back(iLoadImage(a));
+				enemy_idle_L_images.clear();
+				enemy_idle_R_images.clear();
+                for (int i = 0; i <= 35; i++)
+                {
+
+                    char a[200];
+                    /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/right/00.png
+                    // sprintf_s(a, "resources//Level_1//Boss//Walking//Rlvl_1_boss_idle+walking_%d.png", i);
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/right/%d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
             }
         }
     }
@@ -88,14 +146,15 @@ struct Enemy
         if (!isActive)
             return; // Don't show inactive enemies
 
-        int currentIdx = movement_index;
+		int currentIdx = enemy_movement_index;
+		cout << " index: " << currentIdx << endl;
         if (isright)
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_R_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_L_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_L_images[currentIdx]);
         }
     }
     void move_enemy(Hero &hero1)
@@ -142,10 +201,10 @@ struct Enemy
             enemyPosition_X += enemy_speed;
             isright = true;
         }
-        movement_index++;
-        if (movement_index >= enemy_idle_R_images.size())
+		enemy_movement_index++;
+		if (enemy_movement_index >= enemy_idle_R_images.size()-1)
         {
-            movement_index = 0;
+			enemy_movement_index = 0;
         }
     }
 };
@@ -178,76 +237,151 @@ struct Boss
     int attack_timer = 0;
     int dead_index = 0;
     int dead_timer = 0;
-    void initboss()
+    void initboss(int level = 1)
     {
-        init_boss_images();
+        bossPosition_X = SCREEN_WIDTH - 128;
+        bossPosition_Y = 100;
+        bossHealth = 200.0;
+        maxBossHealth = 200.0;
+        isright = true;
+        movement_index = 0;
+        boss_speed = 5.0;
+        isActive = false; // Boss spawns later in the game
+        isAttacking = false;
+        attack_index = 0;
+        bossGettingHit = false;
+        hit_index = 0;
+        attack_timer = 0;
+        dead_index = 0;
+        dead_timer = 0;
+        init_boss_images(level);
     }
 
-    void init_boss_images()
+    void init_boss_images(int level = 1)
     {
         // Load boss walking images
+		boss_walking_R_images.clear();
+		boss_walking_L_images.clear();
+		boss_hit_R_images.clear();
+		boss_hit_L_images.clear();
+		boss_dead_R_images.clear();
+		boss_dead_L_images.clear();
+		boss_attacking_L_images.clear();
+		boss_attacking_R_images.clear();
         init_boss_health_bar_images();
-        for (int i = 0; i <= 35; i++)
+        if (level == 1)
         {
+            for (int i = 0; i <= 35; i++)
+            {
 
-            char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/right/00.png
-            // sprintf_s(a, "resources//Level_1//Boss//Walking//Rlvl_1_boss_idle+walking_%d.png", i);
-            sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/right/%d.png", i);
-            boss_walking_R_images.push_back(iLoadImage(a));
-        }
-        for (int i = 0; i <= 35; i++)
-        {
-            char a[200];
-            sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
-            boss_walking_L_images.push_back(iLoadImage(a));
-        }
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/right/00.png
+                // sprintf_s(a, "resources//Level_1//Boss//Walking//Rlvl_1_boss_idle+walking_%d.png", i);
+                sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/right/%d.png", i);
+                boss_walking_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 35; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
+                boss_walking_L_images.push_back(iLoadImage(a));
+            }
 
-        // Load boss getting hit images
-        for (int i = 2; i <= 8; i++)
-        {
-            char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/L_lvl_1_idle_1.png
-            sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
-            boss_hit_R_images.push_back(iLoadImage(a));
-        }
-        for (int i = 2; i <= 8; i++)
-        {
-            char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/R_lvl_1_idle_2.png
-            sprintf_s(a, "resources/Level_1/Boss/Getting Hit/left/%d.png", i);
-            boss_hit_L_images.push_back(iLoadImage(a));
-        }
+            // Load boss getting hit images
+            for (int i = 2; i <= 8; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/L_lvl_1_idle_1.png
+                sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
+                boss_hit_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 2; i <= 8; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Getting Hit/R_lvl_1_idle_2.png
+                sprintf_s(a, "resources/Level_1/Boss/Getting Hit/left/%d.png", i);
+                boss_hit_L_images.push_back(iLoadImage(a));
+            }
 
-        // Load boss dead images
-        for (int i = 1; i <= 2; i++)
-        {
-            char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
-            sprintf_s(a, "resources//Level_1//Boss/Dead//Rlvl_1_boss_dead_%d.png", i);
-            boss_dead_R_images.push_back(iLoadImage(a));
+            // Load boss dead images
+            for (int i = 1; i <= 2; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
+                sprintf_s(a, "resources//Level_1//Boss/Dead//Rlvl_1_boss_dead_%d.png", i);
+                boss_dead_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 1; i <= 2; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
+                sprintf_s(a, "resources//Level_1//Boss/Dead//Llvl_1_boss_dead_%d.png", i);
+                boss_dead_L_images.push_back(iLoadImage(a));
+            }
+            // load attacking images
+            for (int i = 1; i <= 36; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/L_boss_attack_1.png
+                sprintf_s(a, "resources/Level_1/Boss/Attacking/left/%d.png", i);
+                boss_attacking_L_images.push_back(iLoadImage(a));
+            }
+            for (int i = 1; i <= 36; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/R_boss_attack_1.png
+                sprintf_s(a, "resources/Level_1/Boss/Attacking/right/%d.png", i);
+                boss_attacking_R_images.push_back(iLoadImage(a));
+            }
         }
-        for (int i = 1; i <= 2; i++)
+        else if (level == 2)
         {
-            char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
-            sprintf_s(a, "resources//Level_1//Boss/Dead//Llvl_1_boss_dead_%d.png", i);
-            boss_dead_L_images.push_back(iLoadImage(a));
-        }
-        // load attacking images
-        for (int i = 1; i <= 36; i++)
-        {
-            char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/L_boss_attack_1.png
-            sprintf_s(a, "resources/Level_1/Boss/Attacking/left/%d.png", i);
-            boss_attacking_L_images.push_back(iLoadImage(a));
-        }
-        for (int i = 1; i <= 36; i++)
-        {
-            char a[200];
-            /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/R_boss_attack_1.png
-            sprintf_s(a, "resources/Level_1/Boss/Attacking/right/%d.png", i);
-            boss_attacking_R_images.push_back(iLoadImage(a));
+            for (int i = 0; i <= 26; i++)
+            {
+
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Enemy/level_1/Small enemy 2/right/00.png
+                // sprintf_s(a, "resources//Level_1//Boss//Walking//Rlvl_1_boss_idle+walking_%d.png", i);
+                sprintf_s(a, "resources/Level_2/Boss/Left/Walking/frame_%03d.png", i);
+                boss_walking_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 26; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Level_2/Boss/Right/Walking/frame_%03d.png", i);
+                boss_walking_L_images.push_back(iLoadImage(a));
+            }
+            // load attacking images
+            for (int i = 0; i <= 35; i++)
+            {
+                char a[200];
+                /// /Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_2/Boss/Left/Attacking/frame_000.png
+                sprintf_s(a, "resources/Level_2/Boss/Left/Attacking/frame_%03d.png", i);
+                boss_attacking_L_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 35; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Attacking/R_boss_attack_1.png
+                sprintf_s(a, "resources/Level_2/Boss/Right/Attacking/frame_%03d.png", i);
+                boss_attacking_R_images.push_back(iLoadImage(a));
+            }
+
+            // Load boss dead images
+            for (int i = 0; i <= 35; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
+                sprintf_s(a, "resources/Level_2/Boss/Right/Dying/frame_%03d.png", i);
+                boss_dead_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 35; i++)
+            {
+                char a[200];
+                /// Users/shaheerimam/Documents/GitHub/Obscure-Defiled/Obscure Defiled/resources/Level_1/Boss/Dead/Llvl_1_boss_dead_1.png
+                sprintf_s(a, "resources/Level_2/Boss/Left/Dying/frame_%03d.png", i);
+                boss_dead_L_images.push_back(iLoadImage(a));
+            }
         }
     }
     void init_boss_health_bar_images()
@@ -443,7 +577,6 @@ struct Boss
             {
                 isAttacking = false;
                 attack_index = 0;
-               
             }
         }
     }
