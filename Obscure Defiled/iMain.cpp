@@ -44,6 +44,7 @@ vector<int> menu_images;
 /* -------------------- DRAW -------------------- */
 void iDraw()
 {
+	cout
 	iClear();
 	iSetColor(255, 255, 255);
 
@@ -349,134 +350,134 @@ void physics_update()
 	level_1_screen.updateJumpPhysics();
 }
 
-void character_movement()
+void character_movement(struct level)
 {
-	if (level_1_screen.rightPressed && !level_1_screen.hero1.isJumping)
+	if (level.rightPressed && !level.hero1.isJumping)
 	{
-		level_1_screen.x -= level_1_screen.bg_speed;
+		level.x -= level_1_screen.bg_speed;
 
-		if (level_1_screen.x <= -SCREEN_WIDTH)
+		if (level.x <= -SCREEN_WIDTH)
 		{
-			level_1_screen.x = 0;
+			level.x = 0;
 		}
-		level_1_screen.hero1.isMoving = true;
-		level_1_screen.hero1.movement_index++;
-		level_1_screen.hero1.characterPosition_X += level_1_screen.hero1.character_speed;
-		if (level_1_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
+		level.hero1.isMoving = true;
+		level.hero1.movement_index++;
+		level.hero1.characterPosition_X += level.hero1.character_speed;
+		if (level.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
 		{
-			level_1_screen.hero1.characterPosition_X = SCREEN_WIDTH - 70;
+			level.hero1.characterPosition_X = SCREEN_WIDTH - 70;
 		}
 	}
-	else if (level_1_screen.leftPressed && !level_1_screen.hero1.isJumping)
+	else if (level.leftPressed && !level.hero1.isJumping)
 	{
-		level_1_screen.x += level_1_screen.bg_speed;
+		level.x += level.bg_speed;
 
-		if (level_1_screen.x >= SCREEN_WIDTH)
+		if (level.x >= SCREEN_WIDTH)
 		{
-			level_1_screen.x = 0;
+			level.x = 0;
 		}
-		level_1_screen.hero1.isMoving = true;
-		level_1_screen.hero1.movement_index++;
-		level_1_screen.hero1.characterPosition_X -= level_1_screen.hero1.character_speed;
-		if (level_1_screen.hero1.characterPosition_X < 0)
+		level.hero1.isMoving = true;
+		level.hero1.movement_index++;
+		level.hero1.characterPosition_X -= level.hero1.character_speed;
+		if (level.hero1.characterPosition_X < 0)
 		{
-			level_1_screen.hero1.characterPosition_X = 0;
+			level.hero1.characterPosition_X = 0;
 		}
 	}
-	else if (level_1_screen.hero1.isJumping)
+	else if (level.hero1.isJumping)
 	{
-		level_1_screen.hero1.isMoving = false;
+		level.hero1.isMoving = false;
 	}
 	else
 	{
-		level_1_screen.hero1.isMoving = false;
+		level.hero1.isMoving = false;
 	}
 }
-void enemy_movement()
+void enemy_movement(struct level)
 {
-	if (screens.top() == "level_1_screen")
+	if (screens.top() == "level_1_screen" || screens.top()=="level_2_screen")
 	{
-		if (level_1_screen.rightPressed && !level_1_screen.hero1.isJumping)
+		if (level.rightPressed && !level.hero1.isJumping)
 		{
-			if (level_1_screen.enemy1.isActive)
+			if (level.enemy1.isActive)
 			{
-				level_1_screen.enemy1.enemyPosition_X -= level_1_screen.bg_speed;
+				level.enemy1.enemyPosition_X -= level.bg_speed;
 			}
-			if (level_1_screen.enemy2.isActive)
+			if (level.enemy2.isActive)
 			{
-				level_1_screen.enemy2.enemyPosition_X -= level_1_screen.bg_speed;
+				level.enemy2.enemyPosition_X -= level.bg_speed;
 			}
-			if (level_1_screen.boss.isActive || level_1_screen.boss.bossHealth <= 0)
+			if (level.boss.isActive || level.boss.bossHealth <= 0)
 			{
-				level_1_screen.boss.bossPosition_X -= level_1_screen.bg_speed;
+				level.boss.bossPosition_X -= level.bg_speed;
 			}
 		}
-		if (level_1_screen.leftPressed && !level_1_screen.hero1.isJumping)
+		if (level.leftPressed && !level.hero1.isJumping)
 		{
-			if (level_1_screen.enemy1.isActive)
+			if (level.enemy1.isActive)
 			{
-				level_1_screen.enemy1.enemyPosition_X += level_1_screen.bg_speed;
+				level.enemy1.enemyPosition_X += level.bg_speed;
 			}
-			if (level_1_screen.enemy2.isActive)
+			if (level.enemy2.isActive)
 			{
-				level_1_screen.enemy2.enemyPosition_X += level_1_screen.bg_speed;
+				level.enemy2.enemyPosition_X += level.bg_speed;
 			}
-			if (level_1_screen.boss.isActive || level_1_screen.boss.bossHealth <= 0)
+			if (level.boss.isActive || level.boss.bossHealth <= 0)
 			{
-				level_1_screen.boss.bossPosition_X += level_1_screen.bg_speed;
+				level.boss.bossPosition_X += level.bg_speed;
 			}
 		}
 		// Spawn enemy2 when hero reaches halfway across the screen
-		if (!level_1_screen.enemy2Spawned && level_1_screen.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+		if (!level.enemy2Spawned && level.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
 		{
-			level_1_screen.enemy2.isActive = true;
-			level_1_screen.enemy2Spawned = true;
+			level.enemy2.isActive = true;
+			level.enemy2Spawned = true;
 		}
 
 		// Spawn boss when hero reaches 75% across the screen
-		if (!level_1_screen.bossSpawned && level_1_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
+		if (!level.bossSpawned && level.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
 		{
-			level_1_screen.boss.isActive = true;
-			level_1_screen.bossSpawned = true;
+			level.boss.isActive = true;
+			level.bossSpawned = true;
 		}
 
-		level_1_screen.enemy1.move_enemy(level_1_screen.hero1);
-		level_1_screen.enemy2.move_enemy(level_1_screen.hero1);
-		level_1_screen.boss.move_boss(level_1_screen.hero1);
+		level.enemy1.move_enemy(level.hero1);
+		level.enemy2.move_enemy(level.hero1);
+		level.boss.move_boss(level.hero1);
 	}
 }
-void update_attack_animation()
+void update_attack_animation(struct level)
 {
-	if (screens.top() == "level_1_screen")
+	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
 	{
-		level_1_screen.hero1.update_attack();
-		level_1_screen.hero1.update_dead();
-		level_1_screen.boss.update_attack();
-		level_1_screen.boss.update_dead();
-		level_1_screen.boss.boss_hit_loop();
+		level.hero1.update_attack();
+		level.hero1.update_dead();
+		level.boss.update_attack();
+		level.boss.update_dead();
+		level.boss.boss_hit_loop();
 	}
 }
 void hero_hit_loop()
 {
-	if (level_1_screen.hero1.gettingHit)
+	if (level.hero1.gettingHit)
 	{
-		level_1_screen.hero1.hit_index++;
-		if (level_1_screen.hero1.hit_index >= level_1_screen.hero1.character_idle_hit_R_images.size())
+		level.hero1.hit_index++;
+		if (level.hero1.hit_index >= level.hero1.character_idle_hit_R_images.size())
 		{
-			level_1_screen.hero1.hit_index = 0;
+			level.hero1.hit_index = 0;
 			// level_1_screen.hero1.gettingHit = false;
 		}
 	}
 }
 void all_50_ms_ticks(){
-	if (screens.top() == "level_1_screen")
+	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
 	{
-		if (level_1_screen.hero1.isDead){
+		if (level.hero1.isDead){
 			screens.pop();
 			screens.push("gameOver");
 		}
 		// --- ADD YOUR LEVEL TRANSITION CONDITION HERE ---
-		else if (level_1_screen.enemy1.enemyHealth == 0 && level_1_screen.enemy2.enemyHealth == 0 && level_1_screen.boss.bossHealth == 00)
+		else if (level.enemy1.enemyHealth <= 0 && level.enemy2.enemyHealth <= 0 && level.boss.bossHealth <= 00)
 		{
 			// Note: Replace `.isDead` with however you actually track their deaths
 			// e.g., `.enemyHealth <= 0`, `!isActive`, etc.
@@ -496,9 +497,9 @@ void all_50_ms_ticks(){
 
 void character_idle_animation()
 {
-	if (screens.top() == "level_1_screen")
+	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
 	{
-		level_1_screen.hero1.idle_animation();
+		level.hero1.idle_animation();
 	}
 }
 /* -------------------- MAIN -------------------- */
