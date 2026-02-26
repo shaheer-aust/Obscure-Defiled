@@ -144,16 +144,16 @@ struct Hero
                 character_idle_R_images.push_back(iLoadImage(a));
             }
             // Load character run images
-			for (int i = 1; i <= 4; i++)
+			for (int i = 1; i <= 35; i++)
 			{
 				char a[200];
-				sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_left_%d.png", i);
+				sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Walking/Left/frame_%03d.png", i);
 				character_run_L_images.push_back(iLoadImage(a));
 			}
-			for (int i = 1; i <= 4; i++)
+			for (int i = 1; i <= 35; i++)
 			{
 				char a[200];
-				sprintf_s(a, "resources//Main_Character//Normal/With Knife//Walking//walking_right_%d.png", i);
+				sprintf_s(a, "resources/Main_Character/Normal/With Handgun/Walking/Right/frame_%03d.png", i);
 				character_run_R_images.push_back(iLoadImage(a));
 			}
         }
