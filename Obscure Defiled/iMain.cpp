@@ -188,6 +188,7 @@ void iKeyboard(unsigned char key)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
+	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
 	if (key == 27) // ESC key
 	{
 		if (screens.size() > 1)
@@ -197,6 +198,7 @@ void iKeyboard(unsigned char key)
 			{
 				//stop credit bgm if going back to menu from credits
 				mciSendString("close gamebg", NULL, 0, NULL);
+				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("play bgsong repeat", NULL, 0, NULL);
 			}
 		}
@@ -490,6 +492,9 @@ void all_50_ms_ticks(){
 			screens.push("level_2_screen");  // Push level 2 (it will be under the intro screen)
 			screens.push("After_lvl_1");     // Push intro screen on top
 			game_screen.initgame_screen(2);
+			
+			mciSendString("close gamebg", NULL, 0, NULL);
+			mciSendString("play gamebg2 repeat", NULL, 0, NULL);
 		}
 		// ------------------------------------------------
 
@@ -514,6 +519,7 @@ int main()
 	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
 	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
+	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");

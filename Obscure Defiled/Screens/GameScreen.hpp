@@ -58,7 +58,7 @@ struct GameScreen
 
         this->level=level;
         BgImages.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
-        BgImages.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
+        BgImages.push_back(iLoadImage("resources//game_screen//level_2//bg_2//pic.jpg"));
         hero1.init_character_images(level);
         groundY = hero1.characterPosition_Y;
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
