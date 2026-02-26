@@ -150,11 +150,11 @@ struct Enemy
 		cout << " index: " << currentIdx << endl;
         if (isright)
         {
-			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_R_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, level==1?100:150, 100, enemy_idle_R_images[currentIdx]);
         }
         else
         {
-			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_L_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, level==1?100:150, 100, enemy_idle_L_images[currentIdx]);
         }
     }
     void move_enemy(Hero &hero1)
