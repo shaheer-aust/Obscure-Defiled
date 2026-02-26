@@ -4,6 +4,7 @@
 #include "Screens\menu_screen.hpp";
 #include "Screens\setting_screen.hpp";
 #include "Screens\Level_1_game_screen.hpp";
+#include "Screens\Level_2_game_screen.hpp";
 #include "Screens\intro_screen.hpp";
 #include "Screens\credit_screen.hpp";
 #include "enemy_functions\enemy.hpp";
@@ -28,6 +29,7 @@ stack<string> screens; //standard template library stack for screen management
 
 MenuScreen menu;
 Lvl_1_GameScreen level_1_screen;
+Lvl_2_GameScreen level_2_screen;
 GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
@@ -54,6 +56,11 @@ void iDraw()
 	{
 
 		level_1_screen.drawgame_screen();
+	}
+	else if (screens.top() == "level_2_screen")
+	{
+
+		level_2_screen.drawgame_screen();
 	}
 	else if (screens.top() == "Settings")
 	{
@@ -157,6 +164,11 @@ void iMouse(int button, int state, int mx, int my)
 		// Handle left mouse click for attack
 		level_1_screen.hero1.startAttack();
 	}
+	else if (state == GLUT_DOWN && screens.top() == "level_2_screen" && button == GLUT_LEFT_BUTTON)
+	{
+		// Handle left mouse click for attack in level 2
+		level_2_screen.hero1.startAttack();
+	}
 	else if (state == GLUT_DOWN && screens.top() == "Credits")
 	{
 		if (credit.isBackButtonClicked(mx, my))
@@ -234,6 +246,30 @@ void iKeyboard(unsigned char key)
 			level_1_screen.hero1.isMoving = true;
 		}
 	}
+	else if (key == 32 && screens.top() == "level_2_screen")
+	{ // SPACE key to jump in level 2
+		level_2_screen.startJump();
+	}
+	else if (screens.top() == "level_2_screen")
+	{
+		// Handle WASD keys for game movement in level 2
+		if (key == 'w' || key == 'W')
+		{
+			level_2_screen.startJump();
+		}
+		else if (key == 'a' || key == 'A')
+		{
+			level_2_screen.leftPressed = true;
+			level_2_screen.hero1.isMoving = true;
+			level_2_screen.hero1.isright = false;
+		}
+		else if (key == 'd' || key == 'D')
+		{
+			level_2_screen.rightPressed = true;
+			level_2_screen.hero1.isright = true;
+			level_2_screen.hero1.isMoving = true;
+		}
+	}
 }
 void iKeyboardUp(unsigned char key)
 {
@@ -256,6 +292,25 @@ void iKeyboardUp(unsigned char key)
 			level_1_screen.spacePressed = false; // Stop jump when W key is released
 		}
 	}
+	else if (screens.top() == "level_2_screen")
+	{
+		if (key == 32) // Space key released
+		{
+			level_2_screen.spacePressed = false;
+		}
+		else if (key == 'a' || key == 'A')
+		{
+			level_2_screen.leftPressed = false;
+		}
+		else if (key == 'd' || key == 'D')
+		{
+			level_2_screen.rightPressed = false;
+		}
+		else if (key == 'w' || key == 'W')
+		{
+			level_2_screen.spacePressed = false;
+		}
+	}
 }
 void iSpecialKeyboardUp(unsigned char key)
 {
@@ -274,6 +329,21 @@ void iSpecialKeyboardUp(unsigned char key)
 			level_1_screen.spacePressed = false; // Stop jump when up arrow key is released
 		}
 	}
+	else if (screens.top() == "level_2_screen")
+	{
+		if (key == GLUT_KEY_RIGHT)
+		{
+			level_2_screen.rightPressed = false;
+		}
+		else if (key == GLUT_KEY_LEFT)
+		{
+			level_2_screen.leftPressed = false;
+		}
+		else if (key == GLUT_KEY_UP)
+		{
+			level_2_screen.spacePressed = false;
+		}
+	}
 }
 void iSpecialKeyboard(unsigned char key)
 {
@@ -289,6 +359,11 @@ void iSpecialKeyboard(unsigned char key)
 	{
 		// Handle game-specific special keys (e.g., arrow keys for movement)
 		level_1_screen.handleSpecialKeyboard(key);
+	}
+	else if (screens.top() == "level_2_screen")
+	{
+		// Handle game-specific special keys for level 2
+		level_2_screen.handleSpecialKeyboard(key);
 	}
 	else if (screens.top() == "Intro")
 	{
@@ -307,7 +382,10 @@ void iSpecialKeyboard(unsigned char key)
 
 void physics_update()
 {
-	level_1_screen.updateJumpPhysics();
+	if (screens.top() == "level_1_screen")
+		level_1_screen.updateJumpPhysics();
+	else if (screens.top() == "level_2_screen")
+		level_2_screen.updateJumpPhysics();
 }
 
 void character_movement()
@@ -429,6 +507,95 @@ void hero_hit_loop()
 		}
 	}
 }
+// -------- Level 2 helpers (mirror of level 1) --------
+void character_movement_lvl2()
+{
+	if (level_2_screen.rightPressed && !level_2_screen.hero1.isJumping)
+	{
+		level_2_screen.x -= level_2_screen.bg_speed;
+		if (level_2_screen.x <= -SCREEN_WIDTH)
+			level_2_screen.x = 0;
+		level_2_screen.hero1.isMoving = true;
+		level_2_screen.hero1.movement_index++;
+		level_2_screen.hero1.characterPosition_X += level_2_screen.hero1.character_speed;
+		if (level_2_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
+			level_2_screen.hero1.characterPosition_X = SCREEN_WIDTH - 70;
+	}
+	else if (level_2_screen.leftPressed && !level_2_screen.hero1.isJumping)
+	{
+		level_2_screen.x += level_2_screen.bg_speed;
+		if (level_2_screen.x >= SCREEN_WIDTH)
+			level_2_screen.x = 0;
+		level_2_screen.hero1.isMoving = true;
+		level_2_screen.hero1.movement_index++;
+		level_2_screen.hero1.characterPosition_X -= level_2_screen.hero1.character_speed;
+		if (level_2_screen.hero1.characterPosition_X < 0)
+			level_2_screen.hero1.characterPosition_X = 0;
+	}
+	else if (level_2_screen.hero1.isJumping)
+	{
+		level_2_screen.hero1.isMoving = false;
+	}
+	else
+	{
+		level_2_screen.hero1.isMoving = false;
+	}
+}
+void enemy_movement_lvl2()
+{
+	if (level_2_screen.rightPressed && !level_2_screen.hero1.isJumping)
+	{
+		if (level_2_screen.enemy1.isActive)
+			level_2_screen.enemy1.enemyPosition_X -= level_2_screen.bg_speed;
+		if (level_2_screen.enemy2.isActive)
+			level_2_screen.enemy2.enemyPosition_X -= level_2_screen.bg_speed;
+		if (level_2_screen.boss.isActive || level_2_screen.boss.bossHealth <= 0)
+			level_2_screen.boss.bossPosition_X -= level_2_screen.bg_speed;
+	}
+	if (level_2_screen.leftPressed && !level_2_screen.hero1.isJumping)
+	{
+		if (level_2_screen.enemy1.isActive)
+			level_2_screen.enemy1.enemyPosition_X += level_2_screen.bg_speed;
+		if (level_2_screen.enemy2.isActive)
+			level_2_screen.enemy2.enemyPosition_X += level_2_screen.bg_speed;
+		if (level_2_screen.boss.isActive || level_2_screen.boss.bossHealth <= 0)
+			level_2_screen.boss.bossPosition_X += level_2_screen.bg_speed;
+	}
+	// Spawn enemy2 when hero reaches halfway across the screen
+	if (!level_2_screen.enemy2Spawned && level_2_screen.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+	{
+		level_2_screen.enemy2.isActive = true;
+		level_2_screen.enemy2Spawned = true;
+	}
+	// Spawn boss when hero reaches 75% across the screen
+	if (!level_2_screen.bossSpawned && level_2_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
+	{
+		level_2_screen.boss.isActive = true;
+		level_2_screen.bossSpawned = true;
+	}
+	level_2_screen.enemy1.move_enemy(level_2_screen.hero1);
+	level_2_screen.enemy2.move_enemy(level_2_screen.hero1);
+	level_2_screen.boss.move_boss(level_2_screen.hero1);
+}
+void update_attack_animation_lvl2()
+{
+	level_2_screen.hero1.update_attack();
+	level_2_screen.hero1.update_dead();
+	level_2_screen.boss.update_attack();
+	level_2_screen.boss.update_dead();
+	level_2_screen.boss.boss_hit_loop();
+}
+void hero_hit_loop_lvl2()
+{
+	if (level_2_screen.hero1.gettingHit)
+	{
+		level_2_screen.hero1.hit_index++;
+		if (level_2_screen.hero1.hit_index >= (int)level_2_screen.hero1.character_idle_hit_R_images.size())
+			level_2_screen.hero1.hit_index = 0;
+	}
+}
+// -------- End level 2 helpers --------
+
 void all_50_ms_ticks(){
 	if(screens.top() == "level_1_screen")
 	{
@@ -436,10 +603,31 @@ void all_50_ms_ticks(){
 			screens.pop();
 			screens.push("gameOver");
 		}
+		// Transition to level 2 when level 1 boss is defeated
+		if (level_1_screen.bossSpawned && level_1_screen.boss.bossHealth <= 0
+		    && !level_1_screen.enemy1.isActive && !level_1_screen.enemy2.isActive)
+		{
+			mciSendString("close gamebg", NULL, 0, NULL);
+			mciSendString("open \"resources//game_screen//level_2//bg_2//bgm_for_2nd_round.mp3\" alias gamebg2", NULL, 0, NULL);
+			mciSendString("play gamebg2 repeat", NULL, 0, NULL);
+			screens.pop();
+			screens.push("level_2_screen");
+		}
 		character_movement();
 		enemy_movement();
 		update_attack_animation();
 		hero_hit_loop();
+	}
+	else if (screens.top() == "level_2_screen")
+	{
+		if (level_2_screen.hero1.isDead){
+			screens.pop();
+			screens.push("gameOver");
+		}
+		character_movement_lvl2();
+		enemy_movement_lvl2();
+		update_attack_animation_lvl2();
+		hero_hit_loop_lvl2();
 	}
 }
 void character_idle_animation()
@@ -447,6 +635,10 @@ void character_idle_animation()
 	if (screens.top() == "level_1_screen")
 	{
 		level_1_screen.hero1.idle_animation();
+	}
+	else if (screens.top() == "level_2_screen")
+	{
+		level_2_screen.hero1.idle_animation();
 	}
 }
 /* -------------------- MAIN -------------------- */
@@ -467,6 +659,7 @@ int main()
 	credit.initcreditbar();
 	initIntroScreen();
 	level_1_screen.initgame_screen();
+	level_2_screen.initgame_screen();
 	
 	gameOverScreen.initGameOverScreen();
 	
