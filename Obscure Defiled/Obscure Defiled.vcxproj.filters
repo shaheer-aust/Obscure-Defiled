@@ -59,9 +59,6 @@
     <ClInclude Include="Screens\GameScreen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="level_handler.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\._.DS_Store">
@@ -115,9 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="score.txt">
-      <Filter>Source Files</Filter>
-    </Text>
-    <Text Include="player.txt">
       <Filter>Source Files</Filter>
     </Text>
   </ItemGroup>
