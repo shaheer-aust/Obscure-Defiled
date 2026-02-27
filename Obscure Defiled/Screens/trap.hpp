@@ -3,88 +3,145 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 #include "character_functions/Hero.hpp"
 
 using namespace std;
 
+struct FallingTrap
+{
+    double x;
+    double y;
+    double speed;
+    int imageIndex;
+    bool active;
+    bool hasHitHero;
+};
+
 struct Trap
 {
-    int trapPosition_X;
-    int trapPosition_Y;
+    vector<FallingTrap> traps;
+    int trapImages[3];
     int trapWidth;
     int trapHeight;
     bool isActive;
-    int trapImage; // or a vector if animated, but let's stick to one static image for now
-    bool hasHitHero; 
 
     void initTrap(int startX, int startY, int width, int height)
     {
-        trapPosition_X = startX;
-        trapPosition_Y = startY;
         trapWidth = width;
         trapHeight = height;
         isActive = true;
-        hasHitHero = false;
         
-        // Load the first obstacle image
-        trapImage = iLoadImage("resources//obstacles//obstacles_resize//obstacle_1.png"); 
+        trapImages[0] = iLoadImage("resources//obstacles//obstacles_resize//1.png"); 
+        trapImages[1] = iLoadImage("resources//obstacles//obstacles_resize//2.png"); 
+        trapImages[2] = iLoadImage("resources//obstacles//obstacles_resize//3.png"); 
+        
+        traps.clear();
+        spawnTrap(); 
+    }
+
+    void shiftTraps(double dx)
+    {
+        for (int i = 0; i < (int)traps.size(); i++)
+        {
+            if (traps[i].active) traps[i].x += dx;
+        }
+    }
+
+void spawnTrap()
+    {
+        if (!isActive) return;
+        
+        // Clear previous trap data to keep the vector size at 1
+        traps.clear();
+
+        FallingTrap t;
+        t.x = (rand() % (1280 - trapWidth)); 
+        t.y = 720; 
+        // Speed increased 2x from 0.05 to 0.1
+        t.speed = 0.1; 
+        t.imageIndex = rand() % 3;
+        t.active = true;
+        t.hasHitHero = false;
+        traps.push_back(t);
     }
 
     void drawTrap()
     {
-        if (isActive)
+        if (!isActive) return;
+
+        bool currentTrapStillActive = false;
+
+        for (int i = 0; i < (int)traps.size(); i++)
         {
-            if (trapImage != -1) {
-                iShowImage(trapPosition_X, trapPosition_Y, trapWidth, trapHeight, trapImage);
-            } else {
-                // Fallback draw a red rectangle if the image failed to load
-                iSetColor(255, 0, 0); 
-                iFilledRectangle(trapPosition_X, trapPosition_Y, trapWidth, trapHeight);
+            if (traps[i].active)
+            {
+                currentTrapStillActive = true;
+
+                if (trapImages[traps[i].imageIndex] != -1) {
+                    iShowImage(traps[i].x, traps[i].y, trapWidth, trapHeight, trapImages[traps[i].imageIndex]);
+                } else {
+                    iSetColor(255, 0, 0); 
+                    iFilledRectangle(traps[i].x, traps[i].y, trapWidth, trapHeight);
+                }
+
+                traps[i].y -= traps[i].speed;
+
+                // If it falls off screen, deactivate
+                if (traps[i].y + trapHeight < 0)
+                {
+                    traps[i].active = false;
+                }
             }
+        }
+
+        // If the current trap is gone (hit hero or hit floor), spawn the next one
+        if (!currentTrapStillActive)
+        {
+            spawnTrap();
         }
     }
 
     void checkCollision(Hero& hero)
     {
-        if (isActive)
+        if (!isActive) return;
+
+        double heroCenterX = hero.characterPosition_X + (152.0 / 2.0);
+        double heroCenterY = hero.characterPosition_Y + (152.0 / 2.0);
+        double heroHalfW = 152.0 / 4.0; 
+        double heroHalfH = 152.0 / 2.0;
+
+        for (int i = 0; i < (int)traps.size(); i++)
         {
-            // Calculate center points and half-sizes for AABB collision
-            // Hero images are drawn using 152x152
-            double heroCenterX = hero.characterPosition_X + (152.0 / 2.0);
-            double heroCenterY = hero.characterPosition_Y + (152.0 / 2.0);
-            double heroHalfW = 152.0 / 2.0;
-            double heroHalfH = 152.0 / 2.0;
-
-            double trapCenterX = trapPosition_X + (trapWidth / 2.0);
-            double trapCenterY = trapPosition_Y + (trapHeight / 2.0);
-            double trapHalfW = trapWidth / 2.0;
-            double trapHalfH = trapHeight / 2.0;
-
-            // Simple box collision
-            if (abs(heroCenterX - trapCenterX) < (heroHalfW + trapHalfW) &&
-                abs(heroCenterY - trapCenterY) < (heroHalfH + trapHalfH))
+            if (traps[i].active)
             {
-                if (!hasHitHero && !hero.isDead) // Only hit once per continuous touch
+                double trapCenterX = traps[i].x + (trapWidth / 2.0);
+                double trapCenterY = traps[i].y + (trapHeight / 2.0);
+                double trapHalfW = trapWidth / 2.0;
+                double trapHalfH = trapHeight / 2.0;
+
+                if (abs(heroCenterX - trapCenterX) < (heroHalfW + trapHalfW) &&
+                    abs(heroCenterY - trapCenterY) < (heroHalfH + trapHalfH))
                 {
-                    hero.HeroHealth -= 10;
-                    if (hero.HeroHealth <= 0)
+                    if (!hero.isDead) 
                     {
-                        hero.HeroHealth = 0;
-                        hero.isDead = true;
-                        hero.dead_index = 0;
+                        hero.HeroHealth -= 5;
+                        if (hero.HeroHealth <= 0)
+                        {
+                            hero.HeroHealth = 0;
+                            hero.isDead = true;
+                            hero.dead_index = 0;
+                        }
+                        else
+                        {
+                            hero.gettingHit = true;
+                            hero.hit_index = 0;
+                        }
+                        
+                        // Set to inactive so drawTrap() spawns a new one
+                        traps[i].active = false; 
                     }
-                    else
-                    {
-                        hero.gettingHit = true;
-                        hero.hit_index = 0;
-                    }
-                    hasHitHero = true;
                 }
-            }
-            else
-            {
-                // Reset hit flag when hero is no longer touching the trap
-                hasHitHero = false;
             }
         }
     }

@@ -475,11 +475,11 @@ void enemy_movement()
 		{
 			if (game_screen.rightPressed && !game_screen.hero1.isJumping)
 			{
-				game_screen.level2Trap.trapPosition_X -= game_screen.bg_speed;
+				game_screen.level2Trap.shiftTraps(-game_screen.bg_speed);
 			}
 			else if (game_screen.leftPressed && !game_screen.hero1.isJumping)
 			{
-				game_screen.level2Trap.trapPosition_X += game_screen.bg_speed;
+				game_screen.level2Trap.shiftTraps(game_screen.bg_speed);
 			}
 		}
 	}
