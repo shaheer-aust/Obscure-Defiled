@@ -13,11 +13,12 @@
 #define FRAME_COUNT 4 // number of vertical frames to draw
 
 #include <iostream>
+#include <sstream>
 #include <vector>
 using namespace std;
 struct Option_screen
 {
-	list<string> menu_items={"Create Profile","ScoreBoard","Controls","Back"} 
+	string menu_items = "Create-Profile ScoreBoard Controls Back";
 	vector<int> credit_images; // holds the credit picture
 	int bgImg;
 	int button_button_frame;
@@ -41,19 +42,21 @@ struct Option_screen
 		iShowImage(SCREEN_WIDTH - BACK_BUTTON - 20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[0]);
 		// draw four button frames vertically centered
 		{ // scoped block for calculations
-		
+			string word;
+			stringstream ss(menu_items);
 			int frameW = BUTTON_WIDTH;
 			int frameH = BUTTON_HEIGHT;
 			int centerX = SCREEN_WIDTH / 2 - frameW / 2;
 			int totalHeight = FRAME_COUNT * frameH;
 			int startY = SCREEN_HEIGHT / 2 + totalHeight / 2 - frameH; // y coordinate of top frame
 			for (int i = 0; i < FRAME_COUNT; ++i) {
+				ss >> word;
 				int y = startY - i * frameH;
 				char a[30];
-				sprintf_s(a,"%s",menu_items[i]);
+				sprintf_s(a,"%s",word.c_str(),GLUT_BITMAP_HELVETICA_18);
 
 				iShowImage(centerX, y, frameW, frameH, button_button_frame);
-				iText(centerX+10,y+10,a);
+				iText(centerX+80+i*15,y+40,a);
 			}
 		}
 		// Additional drawing code for credits can be added here
