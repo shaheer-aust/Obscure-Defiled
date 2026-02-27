@@ -13,6 +13,7 @@
 #include "Screens\game_over_screen.hpp";
 #include "Screens\Score_Screen.hpp";
 #include "Screens\after_lvl_1_screen.hpp"
+#include "level_handler.hpp"
 //#include "Screens\Level_2_game_screen.hpp";
 #include "Screens\GameScreen.hpp";
 #include <vector>
@@ -36,6 +37,7 @@ GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
 ScoreScreen scoreScreen;
+playerInfo playerProfile;
 
 int bgm_audio = -1;
 vector<int> menu_images;
@@ -46,7 +48,10 @@ void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-
+	char playerName[100];
+	s_printf(playerName, "Player: %s", playerProfile.playerName.c_str());
+	iText(100, 100, "Obscure Defiled", GLUT_BITMAP_HELVETICA_18);
+	iText(100, 75, playerName, GLUT_BITMAP_HELVETICA_18);
 	if (screens.top() == "Menu")
 	{
 		menu.drawMenuScreen();
@@ -129,8 +134,14 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
-			screens.push("level_1_screen");
-			screens.push("Intro");
+			if(playerProfile.levelReached == 1){
+				screens.push("level_1_screen");
+				screens.push("Intro");
+
+			}else if(playerProfile.levelReached == 2){
+				screens.push("level_2_screen");
+				screens.push("after_lvl_1_screen");
+			}
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
 		{
@@ -227,8 +238,14 @@ void iKeyboard(unsigned char key)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
-			screens.push("level_1_screen");
-			screens.push("Intro");
+			if(playerProfile.levelReached == 1){
+				screens.push("level_1_screen");
+				screens.push("Intro");
+
+			}else if(playerProfile.levelReached == 2){
+				screens.push("level_2_screen");
+				screens.push("after_lvl_1_screen");
+			}
 		}
 	}
 	else if (key == 32 && (screens.top() == "level_1_screen" || screens.top() == "level_2_screen"))
@@ -544,16 +561,17 @@ int main()
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 
 	// Only initialize menu screen at startup - others load on-demand
+	initPlayerProfile(playerProfile);
 	menu.initmenubar();
 	setting.initsettingbar();
 	initIntroScreen();
 	credit.initcreditbar();
 	after_level_1_intro_screen.initIntroScreen();
-	game_screen.initgame_screen(1);
+	game_screen.initgame_screen(playerProfile.levelReached);
 	//level_2_screen.initgame_screen(); // Prevents vector out of range crash
-
+	
 	gameOverScreen.initGameOverScreen();
-
+	
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);
 	// iSetTimer(1000, reset_movement);
