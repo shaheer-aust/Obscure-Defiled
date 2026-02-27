@@ -284,7 +284,7 @@ void iKeyboard(unsigned char key)
 		{
 			// Reset the picture index for next time
 			after_level_1_intro_screen.after_level_1_pic_index = 0;
-			screens.pop(); // Remove "After_lvl_1" from top of stack
+			//screens.pop(); // Remove "After_lvl_1" from top of stack
 		}
 	}
 
@@ -362,7 +362,7 @@ void iSpecialKeyboard(unsigned char key)
 		if (isend)
 		{
 			after_level_1_intro_screen.after_level_1_pic_index = 0;
-			screens.pop(); // Remove "After_lvl_1" from top of stack
+			//screens.pop(); // Remove "After_lvl_1" from top of stack
 		}
 	}
 
@@ -520,7 +520,7 @@ void all_50_ms_ticks(){
 			// Note: Replace `.isDead` with however you actually track their deaths
 			// e.g., `.enemyHealth <= 0`, `!isActive`, etc.
 
-			screens.pop();                 // Remove level_1_screen
+			//screens.pop();                 // Remove level_1_screen
 			//screens.push("level_2_screen");  // Push level 2 (it will be under the intro screen)
 			screens.push("After_lvl_1");     // Push intro screen on top
 			game_screen.initgame_screen(2);
