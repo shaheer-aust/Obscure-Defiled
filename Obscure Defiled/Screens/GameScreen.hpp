@@ -45,6 +45,7 @@ struct GameScreen
 
     void initgame_screen(int level)
     {
+		cout << "initializing level : " << level << endl;
 		spacePressed = false;
 		rightPressed = false;
 		leftPressed = false;

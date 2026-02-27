@@ -69,6 +69,7 @@
   <ItemGroup>
     <ClInclude Include="character_functions\Hero.hpp" />
     <ClInclude Include="enemy_functions\enemy.hpp" />
+    <ClInclude Include="level_handler.hpp" />
     <ClInclude Include="Screens\after_lvl_1_screen.hpp" />
     <ClInclude Include="Screens\credit_screen.hpp" />
     <ClInclude Include="Screens\GameScreen.hpp" />
@@ -100,6 +101,7 @@
     <None Include="resources\._power_up_icon" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="player.txt" />
     <Text Include="score.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

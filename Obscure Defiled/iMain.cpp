@@ -13,6 +13,7 @@
 #include "Screens\game_over_screen.hpp";
 #include "Screens\Score_Screen.hpp";
 #include "Screens\after_lvl_1_screen.hpp"
+#include "level_handler.hpp"
 //#include "Screens\Level_2_game_screen.hpp";
 #include "Screens\GameScreen.hpp";
 #include <vector>
@@ -36,6 +37,7 @@ GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
 ScoreScreen scoreScreen;
+playerInfo playerProfile;
 
 int bgm_audio = -1;
 vector<int> menu_images;
@@ -46,26 +48,29 @@ void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-
+	cout << screens.top() << endl;
 	if (screens.top() == "Menu")
 	{
 		menu.drawMenuScreen();
+		char playerName[100];
+		sprintf_s(playerName, "hello, %s",playerProfile.playerName.c_str());
+		iText(100, 75, playerName, GLUT_BITMAP_HELVETICA_18);
 	}
 	else if (screens.top() == "gameOver"){
 		gameOverScreen.draw_game_over_screen();
 	}
-	else if (screens.top() == "level_1_screen")
+	else if (screens.top() == "game_screen")
 	{
 
 		//level_1_screen.drawgame_screen();
 		game_screen.drawgame_screen();
 	}
-	else if (screens.top() == "level_2_screen")
-	{
+	// else if (screens.top() == "level_2_screen")
+	// {
 
-		//level_2_screen.drawgame_screen();
-		game_screen.drawgame_screen();
-	}
+	// 	//level_2_screen.drawgame_screen();
+	// 	game_screen.drawgame_screen();
+	// }
 	else if (screens.top() == "Settings")
 	{
 
@@ -129,8 +134,15 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
-			screens.push("level_1_screen");
-			screens.push("Intro");
+			screens.push("game_screen");
+			if(playerProfile.levelReached == 1){
+				
+				screens.push("Intro");
+
+			}else if(playerProfile.levelReached == 2){
+			
+				screens.push("After_lvl_1");
+			}
 		}
 		else if (menu.isSettingsButtonClicked(mx, my))
 		{
@@ -170,7 +182,7 @@ void iMouse(int button, int state, int mx, int my)
 			screens.pop(); // Exit intro screen
 		}
 	}
-	else if (state == GLUT_DOWN && (screens.top() == "level_1_screen" || screens.top() == "level_2_screen") && button == GLUT_LEFT_BUTTON)
+	else if (state == GLUT_DOWN && (screens.top() == "game_screen") && button == GLUT_LEFT_BUTTON)
 	{
 		// Handle left mouse click for attack
 		//level_1_screen.hero1.startAttack();
@@ -227,16 +239,23 @@ void iKeyboard(unsigned char key)
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
-			screens.push("level_1_screen");
-			screens.push("Intro");
+			screens.push("game_screen");
+			if(playerProfile.levelReached == 1){
+				
+				screens.push("Intro");
+
+			}else if(playerProfile.levelReached == 2){
+		
+				screens.push("after_lvl_1_screen");
+			}
 		}
 	}
-	else if (key == 32 && (screens.top() == "level_1_screen" || screens.top() == "level_2_screen"))
+	else if (key == 32 && (screens.top() == "game_screen"))
 	{ // SPACE key to jump
 		//level_1_screen.startJump();
 		game_screen.startJump();
 	}
-	else if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	else if (screens.top() == "game_screen")
 	{
 		// Handle WASD keys for game movement
 		if (key == 'w' || key == 'W')
@@ -265,14 +284,14 @@ void iKeyboard(unsigned char key)
 		{
 			// Reset the picture index for next time
 			after_level_1_intro_screen.after_level_1_pic_index = 0;
-			screens.pop(); // Remove "After_lvl_1" from top of stack
+			//screens.pop(); // Remove "After_lvl_1" from top of stack
 		}
 	}
 
 }
 void iKeyboardUp(unsigned char key)
 {
-	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	if (screens.top() == "game_screen")
 	{
 		if (key == 32) // Space key released
 		{
@@ -294,7 +313,7 @@ void iKeyboardUp(unsigned char key)
 }
 void iSpecialKeyboardUp(unsigned char key)
 {
-	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	if (screens.top() == "game_screen")
 	{
 		if (key == GLUT_KEY_RIGHT) // Right arrow key released
 		{
@@ -320,7 +339,7 @@ void iSpecialKeyboard(unsigned char key)
 			menu.handleKeyboardNavigation(key);
 		}
 	}
-	else if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	else if (screens.top() == "game_screen")
 	{
 		// Handle game-specific special keys (e.g., arrow keys for movement)
 		game_screen.handleSpecialKeyboard(key);
@@ -343,7 +362,7 @@ void iSpecialKeyboard(unsigned char key)
 		if (isend)
 		{
 			after_level_1_intro_screen.after_level_1_pic_index = 0;
-			screens.pop(); // Remove "After_lvl_1" from top of stack
+			//screens.pop(); // Remove "After_lvl_1" from top of stack
 		}
 	}
 
@@ -401,7 +420,7 @@ void character_movement()
 }
 void enemy_movement()
 {
-	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	if (screens.top() == "game_screen")
 	{
 		if (game_screen.rightPressed && !game_screen.hero1.isJumping)
 		{
@@ -467,7 +486,7 @@ void enemy_movement()
 }
 void update_attack_animation()
 {
-	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	if (screens.top() == "game_screen")
 	{
 		game_screen.hero1.update_attack();
 		game_screen.hero1.update_dead();
@@ -489,7 +508,7 @@ void hero_hit_loop()
 	}
 }
 void all_50_ms_ticks(){
-	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	if (screens.top() == "game_screen")
 	{
 		if (game_screen.hero1.isDead){
 			screens.pop();
@@ -501,8 +520,8 @@ void all_50_ms_ticks(){
 			// Note: Replace `.isDead` with however you actually track their deaths
 			// e.g., `.enemyHealth <= 0`, `!isActive`, etc.
 
-			screens.pop();                 // Remove level_1_screen
-			screens.push("level_2_screen");  // Push level 2 (it will be under the intro screen)
+			//screens.pop();                 // Remove level_1_screen
+			//screens.push("level_2_screen");  // Push level 2 (it will be under the intro screen)
 			screens.push("After_lvl_1");     // Push intro screen on top
 			game_screen.initgame_screen(2);
 			
@@ -526,7 +545,7 @@ void all_50_ms_ticks(){
 
 void character_idle_animation()
 {
-	if (screens.top() == "level_1_screen" || screens.top() == "level_2_screen")
+	if (screens.top() == "game_screen")
 	{
 		game_screen.hero1.idle_animation();
 	}
@@ -544,16 +563,18 @@ int main()
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 
 	// Only initialize menu screen at startup - others load on-demand
+	initPlayerProfile(playerProfile);
+	
 	menu.initmenubar();
 	setting.initsettingbar();
 	initIntroScreen();
 	credit.initcreditbar();
 	after_level_1_intro_screen.initIntroScreen();
-	game_screen.initgame_screen(1);
+	game_screen.initgame_screen(playerProfile.levelReached);
 	//level_2_screen.initgame_screen(); // Prevents vector out of range crash
-
+	
 	gameOverScreen.initGameOverScreen();
-
+	
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);
 	// iSetTimer(1000, reset_movement);
@@ -572,7 +593,7 @@ int main()
 
 		mciSendString("play bgsong repeat", NULL, 0, NULL);
 	}
-	else if (screens.top() == "level_1_screen")
+	else if (playerProfile.levelReached==1)
 	{
 		mciSendString("play gamebg repeat", NULL, 0, NULL);
 	}
