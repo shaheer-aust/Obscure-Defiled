@@ -237,8 +237,10 @@ struct Boss
     int attack_timer = 0;
     int dead_index = 0;
     int dead_timer = 0;
+	int level = 1;
     void initboss(int level = 1)
     {
+		this->level = level;
         bossPosition_X = SCREEN_WIDTH - 128;
         bossPosition_Y = 100;
         bossHealth = 200.0;
@@ -557,7 +559,7 @@ struct Boss
         if (bossHealth <= 0)
         {
             dead_timer++;
-            if (dead_timer > 16) // Show each frame for 16 ticks
+            if (dead_timer > level==1?16:-1) // Show each frame for 16 ticks
             {
                 dead_timer = 0;
                 dead_index++;
