@@ -10,6 +10,7 @@
 #define BUTTON_HEIGHT 90
 #define BACK_BUTTON 81
 #define HOVER_COOLDOWN 300 // milliseconds
+#define FRAME_COUNT 4 // number of vertical frames to draw
 
 #include <iostream>
 #include <vector>
@@ -17,23 +18,41 @@ using namespace std;
 struct Option_screen
 {
 	vector<int> credit_images; // holds the credit picture
+	int bgImg;
+	int button_button_frame;
 	long long lastBackBlipTime = 0;
 	bool lastFrameBackClicked = false;
-	void initsettingbar()
+	void initsettingbar(int & bg)
 	{
-		credit_images.push_back(iLoadImage("resources//option//option.png"));
+		bgImg=bg;
+		//credit_images.push_back(iLoadImage("resources//option//option.png"));
 		credit_images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
 		// score button (top-right)
-		credit_images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
+		//credit_images.push_back(iLoadImage("resources//menu_screen//Buttons//back.png"));
 		// Load images or resources needed for the credit screen
+		button_button_frame=iLoadImage("resources/option/button_frame.png");
 	}
 	void drawsetting_screen()
 	{
-		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, credit_images[0]);
-		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[1]);
+		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bgImg);
+		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[0]);
 		// draw score button at top-right
-		iShowImage(SCREEN_WIDTH - BACK_BUTTON - 20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[2]);
+		iShowImage(SCREEN_WIDTH - BACK_BUTTON - 20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[0]);
+		// draw four button frames vertically centered
+		{ // scoped block for calculations
+			const int FRAME_COUNT = 4;
+			int frameW = BUTTON_WIDTH;
+			int frameH = BUTTON_HEIGHT;
+			int centerX = SCREEN_WIDTH / 2 - frameW / 2;
+			int totalHeight = FRAME_COUNT * frameH;
+			int startY = SCREEN_HEIGHT / 2 + totalHeight / 2 - frameH; // y coordinate of top frame
+			for (int i = 0; i < FRAME_COUNT; ++i) {
+				int y = startY - i * frameH;
+				iShowImage(centerX, y, frameW, frameH, button_button_frame);
+			}
+		}
 		// Additional drawing code for credits can be added here
+		
 	}
 	// back button hover and click detection for settings
 	bool isBackButtonClicked(int mx, int my)
