@@ -48,13 +48,13 @@ void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-	char playerName[100];
-	s_printf(playerName, "Player: %s", playerProfile.playerName.c_str());
-	iText(100, 100, "Obscure Defiled", GLUT_BITMAP_HELVETICA_18);
-	iText(100, 75, playerName, GLUT_BITMAP_HELVETICA_18);
+	cout << screens.top() << endl;
 	if (screens.top() == "Menu")
 	{
 		menu.drawMenuScreen();
+		char playerName[100];
+		sprintf_s(playerName, "hello, %s",playerProfile.playerName.c_str());
+		iText(100, 75, playerName, GLUT_BITMAP_HELVETICA_18);
 	}
 	else if (screens.top() == "gameOver"){
 		gameOverScreen.draw_game_over_screen();
@@ -562,6 +562,7 @@ int main()
 
 	// Only initialize menu screen at startup - others load on-demand
 	initPlayerProfile(playerProfile);
+	
 	menu.initmenubar();
 	setting.initsettingbar();
 	initIntroScreen();

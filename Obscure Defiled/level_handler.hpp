@@ -16,6 +16,9 @@ struct playerInfo {
 };
 void initPlayerProfile(playerInfo& info){
     ifstream file("player.txt");
+	if (file.is_open()){
+		cout << "open file"<< endl;
+	}
     if (file.is_open()) {
         file >> info.playerName >> info.levelReached >> info.kills >> info.totalScore;
         file.close();
