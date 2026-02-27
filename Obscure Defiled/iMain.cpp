@@ -545,7 +545,7 @@ int main()
 
 	// Only initialize menu screen at startup - others load on-demand
 	menu.initmenubar();
-	setting.initsettingbar();
+	setting.initsettingbar(menu.images[0]);
 	initIntroScreen();
 	credit.initcreditbar();
 	after_level_1_intro_screen.initIntroScreen();
