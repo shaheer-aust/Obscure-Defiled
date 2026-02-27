@@ -284,7 +284,7 @@ void iKeyboard(unsigned char key)
 		{
 			// Reset the picture index for next time
 			after_level_1_intro_screen.after_level_1_pic_index = 0;
-			//screens.pop(); // Remove "After_lvl_1" from top of stack
+			screens.pop(); // Remove "After_lvl_1" from top of stack
 		}
 	}
 
@@ -362,7 +362,7 @@ void iSpecialKeyboard(unsigned char key)
 		if (isend)
 		{
 			after_level_1_intro_screen.after_level_1_pic_index = 0;
-			//screens.pop(); // Remove "After_lvl_1" from top of stack
+			screens.pop(); // Remove "After_lvl_1" from top of stack
 		}
 	}
 
