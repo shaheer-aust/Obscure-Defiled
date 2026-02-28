@@ -18,7 +18,7 @@
 using namespace std;
 struct Option_screen
 {
-	string menu_items = "Create-Profile ScoreBoard Controls Back";
+	string menu_items = "Profile Create-New ScoreBoard Controls";
 	vector<int> credit_images; // holds the credit picture
 	int bgImg;
 	int button_button_frame;
@@ -67,14 +67,49 @@ struct Option_screen
 	{
 		return (mx >= 20 && mx <= BACK_BUTTON + 20 && my >= SCREEN_HEIGHT - (BACK_BUTTON + 20) && my <= SCREEN_HEIGHT);
 	}
-	// score button click detection (top-right)
+	// profile button click detection (1st from top in menu)
+	bool isProfileButtonClicked(int mx, int my)
+	{
+		int centerX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
+		int totalHeight = FRAME_COUNT * BUTTON_HEIGHT;
+		int startY = SCREEN_HEIGHT / 2 + totalHeight / 2 - BUTTON_HEIGHT;
+		int profileY = startY - 0 * BUTTON_HEIGHT; // 1st button from top
+		
+		return (mx >= centerX && mx <= centerX + BUTTON_WIDTH && 
+		        my >= profileY && my <= profileY + BUTTON_HEIGHT);
+	}
+	// create new button click detection (2nd from top in menu)
+	bool isCreateNewButtonClicked(int mx, int my)
+	{
+		int centerX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
+		int totalHeight = FRAME_COUNT * BUTTON_HEIGHT;
+		int startY = SCREEN_HEIGHT / 2 + totalHeight / 2 - BUTTON_HEIGHT;
+		int createNewY = startY - 1 * BUTTON_HEIGHT; // 2nd button from top
+		
+		return (mx >= centerX && mx <= centerX + BUTTON_WIDTH && 
+		        my >= createNewY && my <= createNewY + BUTTON_HEIGHT);
+	}
+	// scoreboard button click detection (3rd from top in menu)
 	bool isScoreButtonClicked(int mx, int my)
 	{
-		int left = SCREEN_WIDTH - BACK_BUTTON - 20;
-		int right = SCREEN_WIDTH - 20;
-		int top = SCREEN_HEIGHT;
-		int bottom = SCREEN_HEIGHT - (BACK_BUTTON + 20);
-		return (mx >= left && mx <= right && my >= bottom && my <= top);
+		int centerX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
+		int totalHeight = FRAME_COUNT * BUTTON_HEIGHT;
+		int startY = SCREEN_HEIGHT / 2 + totalHeight / 2 - BUTTON_HEIGHT;
+		int scoreboardY = startY - 2 * BUTTON_HEIGHT; // 3rd button from top
+		
+		return (mx >= centerX && mx <= centerX + BUTTON_WIDTH && 
+		        my >= scoreboardY && my <= scoreboardY + BUTTON_HEIGHT);
+	}
+	// controls button click detection (4th from top in menu)
+	bool isControlsButtonClicked(int mx, int my)
+	{
+		int centerX = SCREEN_WIDTH / 2 - BUTTON_WIDTH / 2;
+		int totalHeight = FRAME_COUNT * BUTTON_HEIGHT;
+		int startY = SCREEN_HEIGHT / 2 + totalHeight / 2 - BUTTON_HEIGHT;
+		int controlsY = startY - 3 * BUTTON_HEIGHT; // 4th button from top
+		
+		return (mx >= centerX && mx <= centerX + BUTTON_WIDTH && 
+		        my >= controlsY && my <= controlsY + BUTTON_HEIGHT);
 	}
 	// hover detection
 	void checkButtonHover(int mx, int my)
@@ -82,9 +117,10 @@ struct Option_screen
 		mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
 		long long currentTime = glutGet(GLUT_ELAPSED_TIME);
 
-		if (isBackButtonClicked(mx, my) || isScoreButtonClicked(mx, my))
+		if (isBackButtonClicked(mx, my) || isProfileButtonClicked(mx, my) || 
+		    isCreateNewButtonClicked(mx, my) || isScoreButtonClicked(mx, my) || 
+		    isControlsButtonClicked(mx, my))
 		{
-			//hoveredButton = 0;
 			if (!lastFrameBackClicked)
 			{
 				if (currentTime - lastBackBlipTime > HOVER_COOLDOWN)
