@@ -411,7 +411,7 @@ struct Boss
         }
         else
         {
-			iShowImage(bossPosition_X, bossPosition_Y - 30, level == 1 ? 190 : 200, level == 1 ? 130 : 200, boss_attacking_L_images[currentIdx]);
+			iShowImage(bossPosition_X, bossPosition_Y -30, level == 1 ? 190 : 200, level == 1 ? 130 : 200, boss_attacking_L_images[currentIdx]);
         }
     }
     void show_boss_dead()
@@ -466,11 +466,11 @@ struct Boss
 
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y - level==1?30:0, level==1?190:200, level==1?130:200, boss_hit_R_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y - (level==1?30:0), level==1?190:200, level==1?130:200, boss_hit_R_images[hit_index]);
         }
         else
         {
-			iShowImage(bossPosition_X, bossPosition_Y - level == 1 ? 30 : 0, level == 1 ? 190 : 200, level == 1 ? 130 : 200, boss_hit_L_images[hit_index]);
+			iShowImage(bossPosition_X, bossPosition_Y - (level == 1 ? 30 : 0), level == 1 ? 190 : 200, level == 1 ? 130 : 200, boss_hit_L_images[hit_index]);
         }
     }
     void boss_hit_loop()

@@ -333,14 +333,14 @@ struct Hero
     }
     void show_character_attack()
     {
-        int currentIdx = attack_index;
+        int currentIdx = attack_index;  
         if (isright)
         {
-			iShowImage(characterPosition_X-50, characterPosition_Y + (level == 1 ? 10 : 0), level == 1 ? 152 : 250, 152, character_attack_R_images[currentIdx]);
+			iShowImage(characterPosition_X-(level==1?0:50), characterPosition_Y + (level == 1 ? 10 : 0), level == 1 ? 152 : 250, 152, character_attack_R_images[currentIdx]);
         }
         else
         {
-			iShowImage(characterPosition_X-50, characterPosition_Y + (level == 1 ? 10 : 0), level == 1 ? 152 : 250, 152, character_attack_L_images[currentIdx]);
+			iShowImage(characterPosition_X - (level == 1 ? 0 : 50), characterPosition_Y + (level == 1 ? 10 : 0), level == 1 ? 152 : 250, 152, character_attack_L_images[currentIdx]);
         }
     }
     void show_character_run()
