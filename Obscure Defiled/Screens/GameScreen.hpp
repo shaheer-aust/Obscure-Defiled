@@ -49,6 +49,7 @@ struct GameScreen
 		rightPressed = false;
 		leftPressed = false;
 		x = 0;
+		
 		jumpVelocity = 0.0;
 		gravity = 2.0;
 		base_gravity = 5;
@@ -199,6 +200,7 @@ struct GameScreen
 
     void drawgame_screen()
     {
+		//cout << hero1.dead_index << " --- " << hero1.character_dead_R_images.size() << endl;
         //...
         iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);

@@ -62,9 +62,9 @@ struct Hero
 		character_jump_L_images.clear();
 		
 		character_attack_R_images.clear();
-		 character_attack_L_images.clear();
-		 character_idle_hit_R_images.clear();
-		 character_idle_hit_L_images.clear();
+		character_attack_L_images.clear();
+		character_idle_hit_R_images.clear();
+		character_idle_hit_L_images.clear();
 		characterPosition_X = 100.0;
 		characterPosition_Y = 100.0;
 		attack_index = 0;
@@ -173,8 +173,8 @@ struct Hero
     }
     void init_character_dead_images(int level = 1)
     {
-        if (level == 1)
-        {
+    
+        
             for (int i = 1; i <= 8; i++)
             {
                 char a[200];
@@ -187,7 +187,7 @@ struct Hero
                 sprintf_s(a, "resources//Main_Character//Normal//With Knife//Dead from above//R_jump_dead_%d.png", i);
                 character_dead_R_images.push_back(iLoadImage(a));
             }
-        }
+        
     }
     void init_fighting_images(int level = 1)
     {
@@ -336,11 +336,11 @@ struct Hero
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(characterPosition_X, characterPosition_Y + (level == 1 ? 10 : 0), 152, 152, character_attack_R_images[currentIdx]);
+			iShowImage(characterPosition_X-50, characterPosition_Y + (level == 1 ? 10 : 0), level == 1 ? 152 : 250, 152, character_attack_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(characterPosition_X, characterPosition_Y + (level == 1 ? 10 : 0), 152, 152, character_attack_L_images[currentIdx]);
+			iShowImage(characterPosition_X-50, characterPosition_Y + (level == 1 ? 10 : 0), level == 1 ? 152 : 250, 152, character_attack_L_images[currentIdx]);
         }
     }
     void show_character_run()

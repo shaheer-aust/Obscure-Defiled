@@ -48,7 +48,7 @@ void iDraw()
 {
 	iClear();
 	iSetColor(255, 255, 255);
-	cout << screens.top() << endl;
+	//cout << screens.top() << endl;
 	if (screens.top() == "Menu")
 	{
 		menu.drawMenuScreen();

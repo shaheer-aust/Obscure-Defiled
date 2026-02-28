@@ -407,11 +407,11 @@ struct Boss
         int currentIdx = attack_index;
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y - 30, 190, 130, boss_attacking_R_images[currentIdx]);
+			iShowImage(bossPosition_X, bossPosition_Y -30, level == 1 ? 190 : 200, level == 1 ? 130 : 200, boss_attacking_R_images[currentIdx]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y - 30, 190, 130, boss_attacking_L_images[currentIdx]);
+			iShowImage(bossPosition_X, bossPosition_Y - 30, level == 1 ? 190 : 200, level == 1 ? 130 : 200, boss_attacking_L_images[currentIdx]);
         }
     }
     void show_boss_dead()
@@ -448,17 +448,17 @@ struct Boss
         int currentIdx = movement_index % boss_walking_R_images.size();
         if (isright && isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 122, 81, boss_walking_R_images[currentIdx]);
+            iShowImage(bossPosition_X, bossPosition_Y, level==1?122:130, level==1?81:170, boss_walking_R_images[currentIdx]);
         }
         else if (isActive)
         {
-            iShowImage(bossPosition_X, bossPosition_Y, 122, 81, boss_walking_L_images[currentIdx]);
+			iShowImage(bossPosition_X, bossPosition_Y, level == 1 ? 122 : 130, level == 1 ? 81 : 170, boss_walking_L_images[currentIdx]);
         }
     }
 
     void show_boss_hit()
     {
-        if (hit_index >= boss_hit_R_images.size())
+        if (hit_index >= boss_hit_R_images.size()-1)
         {
             hit_index = 0;
             bossGettingHit = false;
@@ -466,11 +466,11 @@ struct Boss
 
         if (isright)
         {
-            iShowImage(bossPosition_X, bossPosition_Y - 30, 190, 130, boss_hit_R_images[hit_index]);
+            iShowImage(bossPosition_X, bossPosition_Y - level==1?30:0, level==1?190:200, level==1?130:200, boss_hit_R_images[hit_index]);
         }
         else
         {
-            iShowImage(bossPosition_X, bossPosition_Y - 30, 190, 130, boss_hit_L_images[hit_index]);
+			iShowImage(bossPosition_X, bossPosition_Y - level == 1 ? 30 : 0, level == 1 ? 190 : 200, level == 1 ? 130 : 200, boss_hit_L_images[hit_index]);
         }
     }
     void boss_hit_loop()
@@ -504,7 +504,7 @@ struct Boss
             }
             else
             {
-                hero1.takeDamage(4);
+                hero1.takeDamage(0.8);
                 cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
                 hero1.gettingHit = true;
             }
@@ -575,7 +575,8 @@ struct Boss
         if (isAttacking)
         {
             attack_index++;
-            if (attack_index >= boss_attacking_R_images.size())
+			
+            if (attack_index >= boss_attacking_R_images.size()-1)
             {
                 isAttacking = false;
                 attack_index = 0;
