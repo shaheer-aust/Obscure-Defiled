@@ -1,1 +1,4 @@
-Shaheer 1 3 200
+shaheer Imam,
+level: 1,
+Kills: 3,
+Score: 500

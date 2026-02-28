@@ -18,7 +18,7 @@
 using namespace std;
 struct Option_screen
 {
-	string menu_items = "Profile Create-New ScoreBoard Controls";
+	string menu_items = "Current-Profile Create-New ScoreBoard Controls";
 	vector<int> credit_images; // holds the credit picture
 	int bgImg;
 	int button_button_frame;
@@ -38,8 +38,7 @@ struct Option_screen
 	{
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bgImg);
 		iShowImage(20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[0]);
-		// draw score button at top-right
-		iShowImage(SCREEN_WIDTH - BACK_BUTTON - 20, SCREEN_HEIGHT - BACK_BUTTON - 20, BACK_BUTTON, BACK_BUTTON, credit_images[0]);
+		
 		// draw four button frames vertically centered
 		{ // scoped block for calculations
 			string word;
@@ -53,10 +52,10 @@ struct Option_screen
 				ss >> word;
 				int y = startY - i * frameH;
 				char a[30];
-				sprintf_s(a,"%s",word.c_str(),GLUT_BITMAP_HELVETICA_18);
+				sprintf_s(a,"%s",word.c_str());
 
 				iShowImage(centerX, y, frameW, frameH, button_button_frame);
-				iText(centerX+80+i*15,y+40,a);
+				iText(centerX+80+i*10,y+40,a,GLUT_BITMAP_HELVETICA_18);
 			}
 		}
 		// Additional drawing code for credits can be added here
