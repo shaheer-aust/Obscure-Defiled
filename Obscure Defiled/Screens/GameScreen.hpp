@@ -72,14 +72,14 @@ struct GameScreen
         enemy1.enemyGettingHit = false;
         enemy1.isActive = true; // Whether this enemy is currently active in the game
         enemy1.enemyType = 1;
-        enemy2.enemyPosition_X = SCREEN_WIDTH - 64;
-        enemy2.enemyPosition_Y = 100.0;
+        //enemy2.enemyPosition_X = SCREEN_WIDTH - 64;
+        //enemy2.enemyPosition_Y = 100.0;
         enemy2.enemyHealth = 100.0;
         enemy2.isright = false;
 		enemy2.enemy_movement_index = 0;
         enemy2.enemy_speed = 8.0;
         enemy2.enemyGettingHit = false;
-        enemy2.isActive = true; // Whether this enemy is currently active in the game
+        //enemy2.isActive = true; // Whether this enemy is currently active in the game
         enemy2.enemyType = 2;
         //boss
         boss.bossPosition_X = SCREEN_WIDTH - 128;
@@ -97,6 +97,36 @@ struct GameScreen
         boss.attack_timer = 0;
         boss.dead_index = 0;
         boss.dead_timer = 0;
+		//hero
+		hero1.characterPosition_X = 100;
+		hero1.attack_index = 0;
+		hero1.dead_index = 0;
+		hero1.character_speed = 20;
+		hero1.isJumping = false;
+		hero1.gettingHit = false;
+		hero1.isright = true;
+		hero1.movement_index = 0;
+		hero1.idle_Index = 0;
+		hero1.jump_index = 0;
+		hero1.hit_index = 0;
+		hero1.isMoving = false;
+		hero1.isAttacking = false;
+		hero1.attack_timer = 0;
+		hero1.dead_timer = 0;
+		hero1.isDead = false;
+		powerUp.revert(hero1);
+		if (level == 1){
+
+			powerUp.init(600.0, 100.0);
+		}
+		if (level == 2)
+		{
+			level2Trap.initTrap(800, 100, 100, 50);
+		}
+		else
+		{
+			level2Trap.isActive = false;
+		}
 
     }
     void initgame_screen(int level)
@@ -111,7 +141,7 @@ struct GameScreen
         
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
-<<<<<<< HEAD
+
         enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         boss.initboss(level);             // Initialize boss
@@ -121,12 +151,11 @@ struct GameScreen
             powerUp.init(600.0, 100.0);
         }
         
-        // Trap Initialization for Level 2
-=======
+
+
        
         boss.initboss(level);             
-           
->>>>>>> c88b61a9bea4c0685e0a60360789456090c202f6
+
         if (level == 2)
         {
             // Initializes the trap ahead of the hero on the ground
