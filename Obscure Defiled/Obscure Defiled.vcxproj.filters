@@ -59,6 +59,9 @@
     <ClInclude Include="Screens\GameScreen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\trap.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\._.DS_Store">
