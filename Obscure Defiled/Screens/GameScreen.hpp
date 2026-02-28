@@ -18,6 +18,7 @@ extern int getIdleIndex();
 //#include "Screens\Level_1_game_screen.hpp";
 #include <vector>
 #include "trap.hpp"
+#include "power.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -31,6 +32,7 @@ struct GameScreen
     Boss boss;
     Hero hero1;
     Trap level2Trap;
+    PowerUpSystem powerUp;
     bool spacePressed = false;
     bool rightPressed = false;
     bool leftPressed = false;
@@ -70,6 +72,10 @@ struct GameScreen
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         boss.initboss(level);             // Initialize boss
         boss.isActive = false;       // Start with boss inactive
+        if(level == 1){
+
+            powerUp.init(600.0, 100.0);
+        }
         
         // Trap Initialization for Level 2
         if (level == 2)
@@ -245,6 +251,10 @@ struct GameScreen
         {
             level2Trap.drawTrap();
         }
+        if(level == 1 ){
+            powerUp.draw();    
+        }
+
     }
 };
 

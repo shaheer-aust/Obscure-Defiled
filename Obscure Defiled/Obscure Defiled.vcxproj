@@ -79,6 +79,7 @@
     <ClInclude Include="Screens\Level_2_game_screen.hpp" />
     <ClInclude Include="Screens\menu_screen.hpp" />
     <ClInclude Include="Screens\option_screen.hpp" />
+    <ClInclude Include="Screens\power.hpp" />
     <ClInclude Include="Screens\Score_Screen.hpp" />
     <ClInclude Include="Screens\setting_screen.hpp" />
     <ClInclude Include="Screens\trap.hpp" />
