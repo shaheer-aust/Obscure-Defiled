@@ -260,6 +260,9 @@ struct Hero
     void show_character_jump1()
     {
         // choose frame based on direction and jump_index
+		if (jump_index >= character_jump_R_images.size() - 1){
+			jump_index = 0;
+		}
         if (isright)
         {
             if (!character_jump_R_images.empty())

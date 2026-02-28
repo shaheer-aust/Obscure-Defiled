@@ -255,6 +255,11 @@ void iKeyboard(unsigned char key)
 			}
 		}
 	}
+	else if (key == 13 && screens.top() == "victory"){
+		screens.pop();
+		screens.push("After_lvl_1");
+
+	}
 	else if (key == 13 && screens.top() == "Menu") // Enter key
 	{
 
@@ -563,32 +568,34 @@ void hero_hit_loop()
 		}
 	}
 }
+int counter = 0;
 void all_50_ms_ticks()
 {
-	if (screens.top() == "game_screen")
+	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
+		
 		if (game_screen.hero1.isDead)
 		{
 			screens.pop();
 			screens.push("gameOver");
 		}
 		// --- ADD YOUR LEVEL TRANSITION CONDITION HERE ---
-		int counter = 0;
+		
 		else if (game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.boss.bossHealth == 0)
 		{
-
-			// Push intro screen on top
-			screens.push("victory");
-
-			if (counter == 1)
-			{
-				screens.push("After_lvl_1");
+		
+			if (counter == 0) {
+				screens.push("victory");
+				counter++;
+			}
+			else{
+				cout << "init called" << endl;
 				game_screen.initgame_screen(2);
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play gamebg2 repeat", NULL, 0, NULL);
-				counter = 0; // reset counter to prevent multiple pushes
+				
 			}
-			counter++;
+			
 		}
 		// ------------------------------------------------
 
