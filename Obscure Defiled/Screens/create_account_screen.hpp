@@ -132,10 +132,10 @@ struct CreateAccount_screen
 			isInputActive = false;
 		}
 		
-		if (isCreateButtonClicked(mx, my) && !playerNameInput.empty()) {
+		if (isCreateButtonClicked(mx, my)) {
 			// Create new player profile with default values
 			playerInfo newPlayer;
-			newPlayer.playerName = playerNameInput;
+			newPlayer.playerName = playerNameInput.empty()?"Unknown Player":playerNameInput;
 			newPlayer.levelReached = 1;
 			newPlayer.kills = 0;
 			newPlayer.totalScore = 0;
@@ -160,10 +160,10 @@ struct CreateAccount_screen
 			}
 		}
 		else if (key == '\r' || key == '\n') { // Enter key
-			if (!playerNameInput.empty()) {
+		
 				// Create profile on Enter
 				playerInfo newPlayer;
-				newPlayer.playerName = playerNameInput;
+				newPlayer.playerName = playerNameInput.empty()?"Unknown Player": playerNameInput;
 				newPlayer.levelReached = 1;
 				newPlayer.kills = 0;
 				newPlayer.totalScore = 0;
@@ -172,7 +172,7 @@ struct CreateAccount_screen
 				
 				playerNameInput = "";
 				isInputActive = false;
-			}
+			
 		}
 		else if (playerNameInput.length() < MAX_NAME_LENGTH && 
 		         ((key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z') || 

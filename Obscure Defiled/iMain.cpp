@@ -204,10 +204,10 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			createAccountScreen.handleMouseClick(mx, my);
 			// Check if profile was created and go back
-			if (!createAccountScreen.playerNameInput.empty() && 
-			    createAccountScreen.isCreateButtonClicked(mx, my))
+			if (createAccountScreen.isCreateButtonClicked(mx, my))
 			{
 				// Reload player profile after creation
+				cout << "accounty created!";
 				initPlayerProfile(playerProfile);
 				screens.pop(); // Go back to settings
 			}
@@ -339,7 +339,7 @@ void iKeyboard(unsigned char key)
 		// Handle keyboard input for create account screen
 		createAccountScreen.handleKeyInput(key);
 		// Check if Enter was pressed and profile was created
-		if ((key == '\r' || key == '\n') && !createAccountScreen.playerNameInput.empty())
+		if ((key == '\r' || key == '\n'))
 		{
 			// Reload player profile after creation
 			initPlayerProfile(playerProfile);

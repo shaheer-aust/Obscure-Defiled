@@ -1,4 +1,4 @@
-shaheer Imam,
+Unknown Player,
 level: 1,
-Kills: 3,
-Score: 500
+Kills: 0,
+Score: 0
