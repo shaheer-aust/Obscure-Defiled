@@ -79,7 +79,7 @@ struct CreateAccount_screen
 		
 		// Draw cursor if input is active
 		if (isInputActive) {
-			int cursorX = inputX + 10 + playerNameInput.length() * 9;
+			int cursorX = inputX + 10 + playerNameInput.length() * 18;
 			iSetColor(255, 255, 255);
 			iLine(cursorX, inputY + 10, cursorX, inputY + 40);
 		}

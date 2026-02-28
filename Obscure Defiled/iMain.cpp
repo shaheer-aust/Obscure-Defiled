@@ -15,6 +15,8 @@
 #include "Screens\after_lvl_1_screen.hpp"
 #include "level_handler.hpp"
 #include "Screens\create_account_screen.hpp"
+#include "Screens\profile_screen.hpp"
+#include "Screens\controls_screen.hpp"
 // #include "Screens\Level_2_game_screen.hpp";
 #include "Screens\GameScreen.hpp";
 #include <vector>
@@ -39,6 +41,8 @@ Credit_screen credit;
 Option_screen setting;
 ScoreScreen scoreScreen;
 CreateAccount_screen createAccountScreen;
+ProfileScreen profileScreen;
+ControlsScreen controlsScreen;
 playerInfo playerProfile;
 
 int bgm_audio = -1;
@@ -91,6 +95,14 @@ void iDraw()
 	{
 		createAccountScreen.drawCreateAccountScreen();
 	}
+	else if (screens.top() == "Profile")
+	{
+		profileScreen.drawProfileScreen(playerProfile);
+	}
+	else if (screens.top() == "Controls")
+	{
+		controlsScreen.drawControlsScreen();
+	}
 	else if (screens.top() == "Intro")
 	{
 		drawIntroScreen();
@@ -133,6 +145,10 @@ void iPassiveMouseMove(int mx, int my)
 	else if (screens.top() == "CreateAccount")
 	{
 		createAccountScreen.checkButtonHover(mx, my);
+	}
+	else if (screens.top() == "Profile")
+	{
+		profileScreen.checkButtonHover(mx, my);
 	}
 	// printf("co-ordinates: %dx%d/n", mx, my);
 }
@@ -187,10 +203,17 @@ void iMouse(int button, int state, int mx, int my)
 		else if (setting.isScoreButtonClicked(mx, my))
 		{
 			screens.push("Score");
+		}else if()(setting.isControlsButtonClicked(mx, my))
+		{
+			screens.push("Controls");
 		}
 		else if (setting.isCreateNewButtonClicked(mx, my))
 		{
 			screens.push("CreateAccount");
+		}
+		else if (setting.isProfileButtonClicked(mx, my))
+		{
+			screens.push("Profile");
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "CreateAccount")
@@ -233,8 +256,14 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			screens.pop();
 		}
-	}
-}
+	}	else if (state == GLUT_DOWN && screens.top() == "Profile")
+	{
+		// Handle profile screen click
+		if (profileScreen.isBackButtonClicked(mx, my))
+		{
+			screens.pop(); // Go back to settings
+		}
+	}}
 void iKeyboard(unsigned char key)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
@@ -648,6 +677,8 @@ int main()
 	game_screen.initgame_screen(playerProfile.levelReached);
 	// level_2_screen.initgame_screen(); // Prevents vector out of range crash
 	createAccountScreen.initCreateAccountScreen(menu.images[0]);
+	profileScreen.initProfileScreen(menu.images[0]);
+	controlsScreen.initControlsScreen();
 	gameOverScreen.initGameOverScreen();
 
 	iSetTimer(200, character_idle_animation);
