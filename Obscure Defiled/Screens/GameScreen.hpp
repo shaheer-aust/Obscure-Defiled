@@ -114,9 +114,9 @@ struct GameScreen
 		hero1.attack_timer = 0;
 		hero1.dead_timer = 0;
 		hero1.isDead = false;
-		powerUp.revert(hero1);
+		
 		if (level == 1){
-
+            powerUp.revert(hero1);
 			powerUp.init(600.0, 100.0);
 		}
 		if (level == 2)
