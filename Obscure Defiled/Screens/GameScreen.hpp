@@ -45,9 +45,8 @@ struct GameScreen
     bool enemy2Spawned = false;
     bool bossSpawned = false;
 
-    void initgame_screen(int level)
-    {
-		spacePressed = false;
+    void resetgame (){
+        spacePressed = false;
 		rightPressed = false;
 		leftPressed = false;
 		x = 0;
@@ -59,15 +58,60 @@ struct GameScreen
 		bg_speed = 4.0;
 		enemy2Spawned = false;
 		bossSpawned = false;
+        groundY = hero1.characterPosition_Y;
+        enemy2.isActive = false; 
+        enemy2.enemyPosition_X = 64;
+        boss.isActive = false; 
+        //enemy
+        enemy1.enemyPosition_X = SCREEN_WIDTH - 64;
+        enemy1.enemyPosition_Y = 100.0;
+        enemy1.enemyHealth = 100.0;
+        enemy1.isright = false;
+		enemy1.enemy_movement_index = 0;
+        enemy1.enemy_speed = 8.0;
+        enemy1.enemyGettingHit = false;
+        enemy1.isActive = true; // Whether this enemy is currently active in the game
+        enemy1.enemyType = 1;
+        enemy2.enemyPosition_X = SCREEN_WIDTH - 64;
+        enemy2.enemyPosition_Y = 100.0;
+        enemy2.enemyHealth = 100.0;
+        enemy2.isright = false;
+		enemy2.enemy_movement_index = 0;
+        enemy2.enemy_speed = 8.0;
+        enemy2.enemyGettingHit = false;
+        enemy2.isActive = true; // Whether this enemy is currently active in the game
+        enemy2.enemyType = 2;
+        //boss
+        boss.bossPosition_X = SCREEN_WIDTH - 128;
+        boss.bossPosition_Y = 100;
+        boss.bossHealth = 200.0;
+        boss.maxBossHealth = 200.0;
+        boss.isright = true;
+        boss.movement_index = 0;
+        boss.boss_speed = 5.0;
+        boss.isActive = false; // Boss spawns later in the game
+        boss.isAttacking = false;
+        boss.attack_index = 0;
+        boss.bossGettingHit = false;
+        boss.hit_index = 0;
+        boss.attack_timer = 0;
+        boss.dead_index = 0;
+        boss.dead_timer = 0;
 
+    }
+    void initgame_screen(int level)
+    {
+		
 
+        resetgame();
         this->level=level;
         BgImages.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         BgImages.push_back(iLoadImage("resources//game_screen//level_2//bg_2//pic.jpg"));
         hero1.init_character_images(level);
-        groundY = hero1.characterPosition_Y;
+        
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
+<<<<<<< HEAD
         enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         boss.initboss(level);             // Initialize boss
@@ -78,6 +122,11 @@ struct GameScreen
         }
         
         // Trap Initialization for Level 2
+=======
+       
+        boss.initboss(level);             
+           
+>>>>>>> c88b61a9bea4c0685e0a60360789456090c202f6
         if (level == 2)
         {
             // Initializes the trap ahead of the hero on the ground
