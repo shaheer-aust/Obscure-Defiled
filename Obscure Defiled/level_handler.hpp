@@ -16,18 +16,46 @@ struct playerInfo {
 };
 void initPlayerProfile(playerInfo& info){
     ifstream file("player.txt");
-	if (file.is_open()){
-		cout << "open file"<< endl;
-	}
-    if (file.is_open()) {
-        file >> info.playerName >> info.levelReached >> info.kills >> info.totalScore;
+    if (file.is_open()){
+        string line;
+        // expected format:
+        // Player Name,
+        // level: 1,
+        // Kills: 3,
+        // Score: 500
+        if (getline(file, line)) {
+            // remove trailing comma
+            if (!line.empty() && line.back() == ',') line.pop_back();
+            info.playerName = line;
+        }
+        if (getline(file, line)) {
+            size_t pos = line.find(":");
+            if (pos != string::npos) {
+                info.levelReached = stoi(line.substr(pos+1));
+            }
+        }
+        if (getline(file, line)) {
+            size_t pos = line.find(":");
+            if (pos != string::npos) {
+                info.kills = stoi(line.substr(pos+1));
+            }
+        }
+        if (getline(file, line)) {
+            size_t pos = line.find(":");
+            if (pos != string::npos) {
+                info.totalScore = stoi(line.substr(pos+1));
+            }
+        }
         file.close();
     }
 }
 void savePlayerProfile(const playerInfo& info) {
     ofstream file("player.txt");
     if (file.is_open()) {
-        file << info.playerName << " " << info.levelReached << " " << info.kills << " " << info.totalScore;
+        file << info.playerName << ",\n"
+             << "level: " << info.levelReached << ",\n"
+             << "Kills: " << info.kills << ",\n"
+             << "Score: " << info.totalScore;
         file.close();
     }
 }
