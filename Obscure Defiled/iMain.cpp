@@ -436,6 +436,8 @@ void enemy_movement()
 			{
 				game_screen.boss.bossPosition_X -= game_screen.bg_speed;
 			}
+			// Scroll power-up icon left with background
+			game_screen.powerUp.shiftIcon(-game_screen.bg_speed);
 		}
 		if (game_screen.leftPressed && !game_screen.hero1.isJumping)
 		{
@@ -451,6 +453,8 @@ void enemy_movement()
 			{
 				game_screen.boss.bossPosition_X += game_screen.bg_speed;
 			}
+			// Scroll power-up icon right with background
+			game_screen.powerUp.shiftIcon(game_screen.bg_speed);
 		}
 		// Spawn enemy2 when hero reaches halfway across the screen
 		if (!game_screen.enemy2Spawned && game_screen.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
@@ -534,6 +538,17 @@ void all_50_ms_ticks(){
 		enemy_movement();
 		update_attack_animation();
 		hero_hit_loop();
+
+		// Power-up: check icon pickup & auto-revert when Level 1 enemies all dead
+		if (game_screen.level == 1)
+		{
+			game_screen.powerUp.update(game_screen.hero1);
+			game_screen.powerUp.checkRevert(
+				game_screen.enemy1,
+				game_screen.enemy2,
+				game_screen.boss,
+				game_screen.hero1);
+		}
 
 		// Handle Trap Collision for Level 2
 		if (game_screen.level == 2)
