@@ -127,6 +127,7 @@ void iPassiveMouseMove(int mx, int my)
 void iMouse(int button, int state, int mx, int my)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
+	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
 		// Handle menu selection based on mouse position
@@ -136,11 +137,11 @@ void iMouse(int button, int state, int mx, int my)
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			screens.push("game_screen");
 			if(playerProfile.levelReached == 1){
-				
+				mciSendString("play gamebg repeat", NULL, 0, NULL);
 				screens.push("Intro");
 
 			}else if(playerProfile.levelReached == 2){
-			
+				mciSendString("play gamebg repeat", NULL, 0, NULL);
 				screens.push("After_lvl_1");
 			}
 		}
@@ -239,14 +240,14 @@ void iKeyboard(unsigned char key)
 		else if (buttonType == 3) // Play
 		{
 			mciSendString("close bgsong", NULL, 0, NULL);
-			mciSendString("play gamebg repeat", NULL, 0, NULL);
+			
 			screens.push("game_screen");
 			if(playerProfile.levelReached == 1){
-				
+				mciSendString("play gamebg repeat", NULL, 0, NULL);
 				screens.push("Intro");
 
 			}else if(playerProfile.levelReached == 2){
-		
+				mciSendString("play gamebg2 repeat", NULL, 0, NULL);
 				screens.push("After_lvl_1");
 			}
 		}
