@@ -142,6 +142,7 @@ struct GameScreen
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
 
+
         enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         boss.initboss(level);             // Initialize boss
@@ -151,6 +152,8 @@ struct GameScreen
             powerUp.init(600.0, 100.0);
         }
         
+        // Trap Initialization for Level 2
+
 
 
        
