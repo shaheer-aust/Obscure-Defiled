@@ -70,7 +70,6 @@
     <ClInclude Include="character_functions\Hero.hpp" />
     <ClInclude Include="enemy_functions\enemy.hpp" />
     <ClInclude Include="level_handler.hpp" />
-    <ClInclude Include="power.hpp" />
     <ClInclude Include="Screens\after_lvl_1_screen.hpp" />
     <ClInclude Include="Screens\credit_screen.hpp" />
     <ClInclude Include="Screens\GameScreen.hpp" />

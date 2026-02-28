@@ -65,9 +65,6 @@
     <ClInclude Include="level_handler.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="power.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\._.DS_Store">
