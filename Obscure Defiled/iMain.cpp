@@ -206,6 +206,7 @@ void iKeyboard(unsigned char key)
 		if (screens.size() > 1)
 		{
 			screens.pop();
+			game_screen.resetgame();
 			if (screens.top() == "Menu")
 			{
 				//stop credit bgm if going back to menu from credits
@@ -246,7 +247,7 @@ void iKeyboard(unsigned char key)
 
 			}else if(playerProfile.levelReached == 2){
 		
-				screens.push("after_lvl_1_screen");
+				screens.push("After_lvl_1");
 			}
 		}
 	}
