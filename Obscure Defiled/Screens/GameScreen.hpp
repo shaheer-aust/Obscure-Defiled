@@ -111,7 +111,7 @@ struct GameScreen
         
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
-<<<<<<< HEAD
+
         enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         boss.initboss(level);             // Initialize boss
@@ -122,11 +122,10 @@ struct GameScreen
         }
         
         // Trap Initialization for Level 2
-=======
-       
+
         boss.initboss(level);             
            
->>>>>>> c88b61a9bea4c0685e0a60360789456090c202f6
+
         if (level == 2)
         {
             // Initializes the trap ahead of the hero on the ground
