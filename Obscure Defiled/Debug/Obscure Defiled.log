@@ -1,4 +1,4 @@
-﻿Build started 28-Feb-26 9:46:05 PM.
+﻿Build started 28-Feb-26 9:19:36 PM.
      1>Project "C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -54,174 +54,14 @@
                  c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\game_over_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
      1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(623): error C2084: function 'int stbi__cpuid3(void)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(622) : see previous definition of 'stbi__cpuid3'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(644): error C2084: function 'int stbi__sse2_available(void)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(643) : see previous definition of 'stbi__sse2_available'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(645): error C3861: 'stbi__cpuid3': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(645): error C2440: 'initializing' : cannot convert from 'int (__cdecl *)(void)' to 'int'
-                 There is no context in which this conversion is possible
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(696): error C2371: 'stbi__context' : redefinition; different basic types
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(696) : see declaration of 'stbi__context'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(703): error C2084: function 'void stbi__start_mem(stbi__context *,const stbi_uc *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(702) : see previous definition of 'stbi__start_mem'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(712): error C2084: function 'void stbi__start_callbacks(stbi__context *,stbi_io_callbacks *,void *)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(711) : see previous definition of 'stbi__start_callbacks'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(725): error C2084: function 'int stbi__stdio_read(void *,char *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(724) : see previous definition of 'stbi__stdio_read'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(730): error C2084: function 'void stbi__stdio_skip(void *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(729) : see previous definition of 'stbi__stdio_skip'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(735): error C2084: function 'int stbi__stdio_eof(void *)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(734) : see previous definition of 'stbi__stdio_eof'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(740): error C2370: 'stbi__stdio_callbacks' : redefinition; different storage class
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(739) : see declaration of 'stbi__stdio_callbacks'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(747): error C2084: function 'void stbi__start_file(stbi__context *,FILE *)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(746) : see previous definition of 'stbi__start_file'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(748): error C3861: 'stbi__start_callbacks': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(756): error C2084: function 'void stbi__rewind(stbi__context *)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(755) : see previous definition of 'stbi__rewind'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(766): error C2365: 'STBI_ORDER_RGB' : redefinition; previous definition was 'enumerator'
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(766) : see declaration of 'STBI_ORDER_RGB'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(768): error C2365: 'STBI_ORDER_BGR' : redefinition; previous definition was 'enumerator'
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(768) : see declaration of 'STBI_ORDER_BGR'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(775): error C2371: 'stbi__result_info' : redefinition; different basic types
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(775) : see declaration of 'stbi__result_info'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(832): error C2086: 'const char *stbi__g_failure_reason' : redefinition
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(832) : see declaration of 'stbi__g_failure_reason'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(835): error C2084: function 'const char *stbi_failure_reason(void)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(411) : see previous definition of 'stbi_failure_reason'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(839): warning C4003: not enough actual parameters for macro 'stbi__err'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(840): error C2084: function 'int stbi__err(const char *)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(839) : see previous definition of 'stbi__err'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(846): error C2084: function 'void *stbi__malloc(size_t)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(845) : see previous definition of 'stbi__malloc'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(863): error C2084: function 'int stbi__addsizes_valid(int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(862) : see previous definition of 'stbi__addsizes_valid'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(875): error C2084: function 'int stbi__mul2sizes_valid(int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(874) : see previous definition of 'stbi__mul2sizes_valid'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(884): error C2084: function 'int stbi__mad2sizes_valid(int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(883) : see previous definition of 'stbi__mad2sizes_valid'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(885): warning C4551: function call missing argument list
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(885): error C2568: '&&' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(862): could be 'int stbi__addsizes_valid(int,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(885): error C3861: 'stbi__mul2sizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(885): error C3861: 'stbi__addsizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(890): error C2084: function 'int stbi__mad3sizes_valid(int,int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(889) : see previous definition of 'stbi__mad3sizes_valid'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(891): warning C4551: function call missing argument list
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(891): error C2568: '&&' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(874): could be 'int stbi__mul2sizes_valid(int,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(891): error C3861: 'stbi__mul2sizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(892): error C3861: 'stbi__addsizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(897): error C2084: function 'int stbi__mad4sizes_valid(int,int,int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(896) : see previous definition of 'stbi__mad4sizes_valid'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(898): warning C4551: function call missing argument list
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(898): error C2568: '&&' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(874): could be 'int stbi__mul2sizes_valid(int,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(898): error C3861: 'stbi__mul2sizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(899): error C3861: 'stbi__mul2sizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(899): error C3861: 'stbi__addsizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(904): error C2084: function 'void *stbi__malloc_mad2(int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(903) : see previous definition of 'stbi__malloc_mad2'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(905): warning C4551: function call missing argument list
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(905): error C3861: 'stbi__mad2sizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(906): error C3861: 'stbi__malloc': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(910): error C2084: function 'void *stbi__malloc_mad3(int,int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(909) : see previous definition of 'stbi__malloc_mad3'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(911): warning C4551: function call missing argument list
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(911): error C3861: 'stbi__mad3sizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(912): error C3861: 'stbi__malloc': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(916): error C2084: function 'void *stbi__malloc_mad4(int,int,int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(915) : see previous definition of 'stbi__malloc_mad4'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(917): warning C4551: function call missing argument list
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(917): error C3861: 'stbi__mad4sizes_valid': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(918): error C3861: 'stbi__malloc': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(937): error C2084: function 'void stbi_image_free(void *)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(414) : see previous definition of 'stbi_image_free'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(949): error C2370: 'stbi__vertically_flip_on_load' : redefinition; different storage class
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(949) : see declaration of 'stbi__vertically_flip_on_load'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(952): error C2084: function 'void stbi_set_flip_vertically_on_load(int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(438) : see previous definition of 'stbi_set_flip_vertically_on_load'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(957): error C2084: function 'void *stbi__load_main(stbi__context *,int *,int *,int *,int,stbi__result_info *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(956) : see previous definition of 'stbi__load_main'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(998): error C3861: 'stbi__err': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1002): error C2084: function 'stbi_uc *stbi__convert_16_to_8(stbi__uint16 *,int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1001) : see previous definition of 'stbi__convert_16_to_8'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1007): error C3861: 'stbi__malloc': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1008): error C3861: 'stbi__err': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1018): error C2084: function 'stbi__uint16 *stbi__convert_8_to_16(stbi_uc *,int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1017) : see previous definition of 'stbi__convert_8_to_16'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1023): error C3861: 'stbi__malloc': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1024): error C3861: 'stbi__err': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1034): error C2084: function 'void stbi__vertical_flip(void *,int,int,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1033) : see previous definition of 'stbi__vertical_flip'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1058): error C2084: function 'unsigned char *stbi__load_and_postprocess_8bit(stbi__context *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1057) : see previous definition of 'stbi__load_and_postprocess_8bit'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1060): error C3861: 'stbi__load_main': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1067): error C2568: '=' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1001): could be 'stbi_uc *stbi__convert_16_to_8(stbi__uint16 *,int,int,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1067): error C3861: 'stbi__convert_16_to_8': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1075): error C3861: 'stbi__vertical_flip': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1082): error C2084: function 'stbi__uint16 *stbi__load_and_postprocess_16bit(stbi__context *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1081) : see previous definition of 'stbi__load_and_postprocess_16bit'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1084): error C3861: 'stbi__load_main': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1091): error C2568: '=' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1017): could be 'stbi__uint16 *stbi__convert_8_to_16(stbi_uc *,int,int,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1091): error C3861: 'stbi__convert_8_to_16': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1100): error C3861: 'stbi__vertical_flip': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1108): error C2084: function 'void stbi__float_postprocess(float *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1107) : see previous definition of 'stbi__float_postprocess'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1111): error C3861: 'stbi__vertical_flip': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1119): error C2084: function 'FILE *stbi__fopen(const char *,const char *)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1118) : see previous definition of 'stbi__fopen'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1132): error C2084: function 'stbi_uc *stbi_load(const char *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(358) : see previous definition of 'stbi_load'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1133): error C3861: 'stbi__fopen': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1133): error C2440: 'initializing' : cannot convert from 'FILE *(__cdecl *)(const char *,const char *)' to 'FILE *'
-                 There is no context in which this conversion is possible
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1135): error C3861: 'stbi__err': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1142): error C2084: function 'stbi_uc *stbi_load_from_file(FILE *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(359) : see previous definition of 'stbi_load_from_file'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1145): error C3861: 'stbi__start_file': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1146): error C2568: '=' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1057): could be 'unsigned char *stbi__load_and_postprocess_8bit(stbi__context *,int *,int *,int *,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1146): error C3861: 'stbi__load_and_postprocess_8bit': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1155): error C2084: function 'stbi_us *stbi_load_from_file_16(FILE *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(373) : see previous definition of 'stbi_load_from_file_16'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1158): error C3861: 'stbi__start_file': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1159): error C2568: '=' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1081): could be 'stbi__uint16 *stbi__load_and_postprocess_16bit(stbi__context *,int *,int *,int *,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1159): error C3861: 'stbi__load_and_postprocess_16bit': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1168): error C2084: function 'stbi_us *stbi_load_16(const char *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(372) : see previous definition of 'stbi_load_16'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1169): error C3861: 'stbi__fopen': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1169): error C2440: 'initializing' : cannot convert from 'FILE *(__cdecl *)(const char *,const char *)' to 'FILE *'
-                 There is no context in which this conversion is possible
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1171): error C3861: 'stbi__err': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1172): error C2568: '=' : unable to resolve function overload
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(373): could be 'stbi_us *stbi_load_from_file_16(FILE *,int *,int *,int *,int)'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1172): error C3861: 'stbi_load_from_file_16': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1181): error C2084: function 'stbi_us *stbi_load_16_from_memory(const stbi_uc *,int,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(368) : see previous definition of 'stbi_load_16_from_memory'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1183): error C3861: 'stbi__start_mem': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1184): error C3861: 'stbi__load_and_postprocess_16bit': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1188): error C2084: function 'stbi_us *stbi_load_16_from_callbacks(const stbi_io_callbacks *,void *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(369) : see previous definition of 'stbi_load_16_from_callbacks'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1190): error C3861: 'stbi__start_callbacks': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1191): error C3861: 'stbi__load_and_postprocess_16bit': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1195): error C2084: function 'stbi_uc *stbi_load_from_memory(const stbi_uc *,int,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(354) : see previous definition of 'stbi_load_from_memory'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1197): error C3861: 'stbi__start_mem': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1198): error C3861: 'stbi__load_and_postprocess_8bit': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1202): error C2084: function 'stbi_uc *stbi_load_from_callbacks(const stbi_io_callbacks *,void *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(355) : see previous definition of 'stbi_load_from_callbacks'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1204): error C3861: 'stbi__start_callbacks': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1205): error C3861: 'stbi__load_and_postprocess_8bit': identifier not found
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1210): error C2084: function 'float *stbi__loadf_main(stbi__context *,int *,int *,int *,int)' already has a body
-                 c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1209) : see previous definition of 'stbi__loadf_main'
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\stb_image.h(1210): fatal error C1003: error count exceeds 100; stopping compilation
-     1>Done Building Project "C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)) -- FAILED.
+     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(147): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(155): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\imain.cpp(503): warning C4018: '>=' : signed/unsigned mismatch
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.lib" /MACHINE:X86 Debug\iMain.obj
+         Obscure Defiled.vcxproj -> C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe
+     1>Done Building Project "C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:07.71
+Time Elapsed 00:00:04.33
