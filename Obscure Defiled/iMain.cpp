@@ -14,6 +14,7 @@
 #include "Screens\Score_Screen.hpp";
 #include "Screens\after_lvl_1_screen.hpp"
 #include "level_handler.hpp"
+#include "Screens\create_account_screen.hpp"
 // #include "Screens\Level_2_game_screen.hpp";
 #include "Screens\GameScreen.hpp";
 #include <vector>
@@ -37,6 +38,7 @@ GameOverScreen gameOverScreen;
 Credit_screen credit;
 Option_screen setting;
 ScoreScreen scoreScreen;
+CreateAccount_screen createAccountScreen;
 playerInfo playerProfile;
 
 int bgm_audio = -1;
@@ -85,6 +87,10 @@ void iDraw()
 
 		scoreScreen.draw_score_board();
 	}
+	else if (screens.top() == "CreateAccount")
+	{
+		createAccountScreen.drawCreateAccountScreen();
+	}
 	else if (screens.top() == "Intro")
 	{
 		drawIntroScreen();
@@ -123,6 +129,10 @@ void iPassiveMouseMove(int mx, int my)
 	else if (screens.top() == "Credits")
 	{
 		credit.checkButtonHover(mx, my);
+	}
+	else if (screens.top() == "CreateAccount")
+	{
+		createAccountScreen.checkButtonHover(mx, my);
 	}
 	// printf("co-ordinates: %dx%d/n", mx, my);
 }
@@ -177,6 +187,30 @@ void iMouse(int button, int state, int mx, int my)
 		else if (setting.isScoreButtonClicked(mx, my))
 		{
 			screens.push("Score");
+		}
+		else if (setting.isCreateNewButtonClicked(mx, my))
+		{
+			screens.push("CreateAccount");
+		}
+	}
+	else if (state == GLUT_DOWN && screens.top() == "CreateAccount")
+	{
+		// Handle create account screen mouse clicks
+		if (createAccountScreen.isBackButtonClicked(mx, my))
+		{
+			screens.pop();
+		}
+		else
+		{
+			createAccountScreen.handleMouseClick(mx, my);
+			// Check if profile was created and go back
+			if (!createAccountScreen.playerNameInput.empty() && 
+			    createAccountScreen.isCreateButtonClicked(mx, my))
+			{
+				// Reload player profile after creation
+				initPlayerProfile(playerProfile);
+				screens.pop(); // Go back to settings
+			}
 		}
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Intro")
@@ -293,6 +327,18 @@ void iKeyboard(unsigned char key)
 			// Reset the picture index for next time
 			after_level_1_intro_screen.after_level_1_pic_index = 0;
 			screens.pop(); // Remove "After_lvl_1" from top of stack
+		}
+	}
+	else if (screens.top() == "CreateAccount")
+	{
+		// Handle keyboard input for create account screen
+		createAccountScreen.handleKeyInput(key);
+		// Check if Enter was pressed and profile was created
+		if ((key == '\r' || key == '\n') && !createAccountScreen.playerNameInput.empty())
+		{
+			// Reload player profile after creation
+			initPlayerProfile(playerProfile);
+			screens.pop(); // Go back to settings
 		}
 	}
 }
@@ -594,7 +640,7 @@ int main()
 	after_level_1_intro_screen.initIntroScreen();
 	game_screen.initgame_screen(playerProfile.levelReached);
 	// level_2_screen.initgame_screen(); // Prevents vector out of range crash
-
+	createAccountScreen.initCreateAccountScreen(menu.images[0]);
 	gameOverScreen.initGameOverScreen();
 
 	iSetTimer(200, character_idle_animation);
