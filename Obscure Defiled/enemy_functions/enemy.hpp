@@ -169,7 +169,7 @@ struct Enemy
             if (hero1.isAttacking)
             {
                 hero1.gettingHit = false;
-                enemy_takeDamage(20); // Hero attack does 20 damage }
+                enemy_takeDamage(hero1.attack_damage); // Hero attack damage (boosted by power-up)
             }
             else
             {
@@ -499,7 +499,7 @@ struct Boss
         {
             if (hero1.isAttacking)
             {
-                bosstakeDamage(12); // Hero attack does 12 damage }
+                bosstakeDamage(hero1.attack_damage * 0.6); // Hero attack damage on boss (60% of hero attack_damage, boosted by power-up)
                 hero1.gettingHit = false;
             }
             else

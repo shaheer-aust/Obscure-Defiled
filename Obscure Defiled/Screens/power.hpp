@@ -56,6 +56,10 @@
 			PowerUpIcon icon;
 			bool isPoweredUp = false;
 
+			// Saved primary stats (restored when power-up ends)
+			double sv_speed = 20.0;
+			double sv_attack_damage = 20.0;
+
 			// Power-Up sprite vectors (loaded once in init)
 			vector<int> pu_idle_R, pu_idle_L;
 			vector<int> pu_run_R, pu_run_L;
@@ -158,7 +162,7 @@
 					activate(hero);
 			}
 
-			// ── Activate: swap hero sprites to Power-Up set ──
+			// ── Activate: swap hero sprites to Power-Up set and boost stats ──
 			void activate(Hero& hero)
 			{
 				isPoweredUp = true;
@@ -177,6 +181,14 @@
 				sv_hit_L = hero.character_idle_hit_L_images;
 				sv_dead_R = hero.character_dead_R_images;
 				sv_dead_L = hero.character_dead_L_images;
+
+				// Save primary stats before boosting
+				sv_speed = hero.base_speed;
+				sv_attack_damage = hero.attack_damage;
+
+				// Boost: speed +5%, hit damage +10%
+				hero.character_speed = hero.base_speed * 1.05;
+				hero.attack_damage   = hero.attack_damage * 1.10;
 
 				// Swap in Power-Up sprites
 				hero.character_idle_R_images = pu_idle_R;
@@ -202,7 +214,7 @@
 					revert(hero);
 			}
 
-			// ── Restore Normal sprite vectors ──
+			// ── Restore Normal sprite vectors and primary stats ──
 			void revert(Hero& hero)
 			{
 				isPoweredUp = false;
@@ -218,6 +230,10 @@
 				hero.character_idle_hit_L_images = sv_hit_L;
 				hero.character_dead_R_images = sv_dead_R;
 				hero.character_dead_L_images = sv_dead_L;
+
+				// Restore primary speed and attack damage
+				hero.character_speed = sv_speed;
+				hero.attack_damage   = sv_attack_damage;
 			}
 		};
 
