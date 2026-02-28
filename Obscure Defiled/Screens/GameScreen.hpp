@@ -18,7 +18,6 @@ extern int getIdleIndex();
 //#include "Screens\Level_1_game_screen.hpp";
 #include <vector>
 #include "trap.hpp"
-#include "../power.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -43,7 +42,6 @@ struct GameScreen
     double bg_speed = 4.0;
     bool enemy2Spawned = false;
     bool bossSpawned = false;
-    PowerUpSystem powerUp;
 
     void initgame_screen(int level)
     {
@@ -84,15 +82,6 @@ struct GameScreen
         else 
         {
             level2Trap.isActive = false;
-        }
-
-        // Initialise the power-up icon (Level 1 only)
-        if (level == 1)
-            powerUp.init(600.0, 100.0);
-        else
-        {
-            powerUp.icon.isVisible = false;
-            powerUp.isPoweredUp    = false;
         }
 
         init_health_bar_images();
@@ -246,9 +235,6 @@ struct GameScreen
             int frameIndex = (int)floor((currentHealth / 100.0) * 15);
             iShowImage(enemy2.enemyPosition_X - 2, enemy2.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
-        // Draw power-up icon (visible until hero collects it)
-        powerUp.draw();
-
         hero1.show_chracter_moving();
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
