@@ -71,6 +71,12 @@
     <ClInclude Include="Screens\create_account_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\controls_screen.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Screens\profile_screen.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\._.DS_Store">

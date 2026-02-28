@@ -71,6 +71,7 @@
     <ClInclude Include="enemy_functions\enemy.hpp" />
     <ClInclude Include="level_handler.hpp" />
     <ClInclude Include="Screens\after_lvl_1_screen.hpp" />
+    <ClInclude Include="Screens\controls_screen.hpp" />
     <ClInclude Include="Screens\create_account_screen.hpp" />
     <ClInclude Include="Screens\credit_screen.hpp" />
     <ClInclude Include="Screens\GameScreen.hpp" />
@@ -81,6 +82,7 @@
     <ClInclude Include="Screens\menu_screen.hpp" />
     <ClInclude Include="Screens\option_screen.hpp" />
     <ClInclude Include="Screens\power.hpp" />
+    <ClInclude Include="Screens\profile_screen.hpp" />
     <ClInclude Include="Screens\Score_Screen.hpp" />
     <ClInclude Include="Screens\setting_screen.hpp" />
     <ClInclude Include="Screens\trap.hpp" />

@@ -203,7 +203,7 @@ void iMouse(int button, int state, int mx, int my)
 		else if (setting.isScoreButtonClicked(mx, my))
 		{
 			screens.push("Score");
-		}else if()(setting.isControlsButtonClicked(mx, my))
+		}else if(setting.isControlsButtonClicked(mx, my))
 		{
 			screens.push("Controls");
 		}
