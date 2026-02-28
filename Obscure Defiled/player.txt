@@ -1,4 +1,4 @@
 Shaheer Imam,
-level: 1,
+level: 2,
 Kills: 0,
 Score: 0

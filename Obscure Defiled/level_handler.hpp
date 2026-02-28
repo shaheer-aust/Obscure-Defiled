@@ -29,22 +29,26 @@ void initPlayerProfile(playerInfo& info){
             info.playerName = line;
         }
         if (getline(file, line)) {
-            size_t pos = line.find(":");
-            if (pos != string::npos) {
-                info.levelReached = stoi(line.substr(pos+1));
-            }
+			string to_remove = "level: ";
+			line.erase(0, to_remove.length());
+			line.pop_back();
+           
+			info.levelReached = stoi(line);
+            
         }
         if (getline(file, line)) {
-            size_t pos = line.find(":");
-            if (pos != string::npos) {
-                info.kills = stoi(line.substr(pos+1));
-            }
+			string to_remove = "Kills: ";
+			line.erase(0, to_remove.length());
+			line.pop_back();
+
+			info.kills = stoi(line);
         }
         if (getline(file, line)) {
-            size_t pos = line.find(":");
-            if (pos != string::npos) {
-                info.totalScore = stoi(line.substr(pos+1));
-            }
+			string to_remove = "Score: ";
+			line.erase(0, to_remove.length());
+			//line.pop_back();
+
+			info.kills = stoi(line);
         }
         file.close();
     }

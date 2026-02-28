@@ -680,7 +680,7 @@ int main()
 	profileScreen.initProfileScreen(menu.images[0]);
 	controlsScreen.initControlsScreen();
 	gameOverScreen.initGameOverScreen();
-
+	cout << "level: " << playerProfile.levelReached;
 	iSetTimer(200, character_idle_animation);
 	iSetTimer(50, all_50_ms_ticks);
 	// iSetTimer(1000, reset_movement);
