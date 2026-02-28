@@ -27,6 +27,7 @@ struct GameScreen
     //Lvl_2_GameScreen level_2_screen;
     vector<int> BgImages;
     vector<int> health_bar_images;
+    int victoryImage;
     Enemy enemy1;
     Enemy enemy2;
     Boss boss;
@@ -140,7 +141,7 @@ struct GameScreen
         BgImages.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         BgImages.push_back(iLoadImage("resources//game_screen//level_2//bg_2//pic.jpg"));
         hero1.init_character_images(level);
-        
+        victoryImage= iLoadImage("resources/victory_screen/victory_image.png");
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
 
