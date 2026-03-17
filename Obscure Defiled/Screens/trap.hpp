@@ -144,7 +144,10 @@ struct Trap
 
 						traps[i].active = false;
 					}
-				}
+				}else{
+                    hero.gettingHit = false;
+                    hero.hit_index = 0;
+                }
 			}
 		}
 	}

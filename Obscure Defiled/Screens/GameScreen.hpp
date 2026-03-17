@@ -59,6 +59,119 @@ struct GameScreen
     int animatedObstacleFrameIndex = 0;
     int animatedObstacleFrameTimer = 0;
     int animatedObstacleDamageCooldown = 0;
+    int projectileImage = 0;
+    bool projectileActive = false;
+    bool projectileRight = true;
+    double projectileX = 0.0;
+    double projectileY = 0.0;
+    double projectileSpeed = 28.0;
+    int projectileWidth = 40;
+    int projectileHeight = 20;
+
+    void init_projectile()
+    {
+        projectileImage = iLoadImage("resources/projectile/4.png");
+        projectileActive = false;
+        projectileRight = true;
+        projectileX = 0.0;
+        projectileY = 0.0;
+        projectileSpeed = 28.0;
+        projectileWidth = 40;
+        projectileHeight = 20;
+    }
+
+    void spawnProjectile()
+    {
+        if (level != 2 || projectileImage == 0)
+            return;
+
+        projectileActive = true;
+        projectileRight = hero1.isright;
+        projectileX = hero1.characterPosition_X + (projectileRight ? 118.0 : -20.0);
+        projectileY = hero1.characterPosition_Y + 70.0;
+    }
+
+    void startHeroAttack()
+    {
+        bool wasAttacking = hero1.isAttacking;
+        hero1.startAttack();
+        if (level == 2 && !wasAttacking && hero1.isAttacking)
+        {
+            spawnProjectile();
+        }
+    }
+
+    bool hitEnemyWithProjectile(Enemy &enemy)
+    {
+        if (!projectileActive || !enemy.isActive || enemy.enemyHealth <= 0)
+            return false;
+
+        double projectileLeft = projectileX;
+        double projectileRightEdge = projectileX + projectileWidth;
+        double projectileBottom = projectileY;
+        double projectileTop = projectileY + projectileHeight;
+
+        double enemyWidth = (enemy.level == 1 ? 100.0 : 150.0);
+        double enemyHeight = 100.0;
+        double enemyLeft = enemy.enemyPosition_X;
+        double enemyRightEdge = enemy.enemyPosition_X + enemyWidth;
+        double enemyBottom = enemy.enemyPosition_Y;
+        double enemyTop = enemy.enemyPosition_Y + enemyHeight;
+
+        bool overlap = (projectileRightEdge > enemyLeft) && (projectileLeft < enemyRightEdge) && (projectileTop > enemyBottom) && (projectileBottom < enemyTop);
+        if (!overlap)
+            return false;
+
+        enemy.enemy_takeDamage(hero1.attack_damage);
+        projectileActive = false;
+        return true;
+    }
+
+    bool hitBossWithProjectile()
+    {
+        if (!projectileActive || !boss.isActive || boss.bossHealth <= 0)
+            return false;
+
+        double projectileLeft = projectileX;
+        double projectileRightEdge = projectileX + projectileWidth;
+        double projectileBottom = projectileY;
+        double projectileTop = projectileY + projectileHeight;
+
+        double bossWidth = 200.0;
+        double bossHeight = 220.0;
+        double bossLeft = boss.bossPosition_X;
+        double bossRightEdge = boss.bossPosition_X + bossWidth;
+        double bossBottom = boss.bossPosition_Y;
+        double bossTop = boss.bossPosition_Y + bossHeight;
+
+        bool overlap = (projectileRightEdge > bossLeft) && (projectileLeft < bossRightEdge) && (projectileTop > bossBottom) && (projectileBottom < bossTop);
+        if (!overlap)
+            return false;
+
+        boss.bosstakeDamage(hero1.attack_damage);
+        projectileActive = false;
+        return true;
+    }
+
+    void updateProjectile()
+    {
+        if (level != 2 || !projectileActive)
+            return;
+
+        projectileX += (projectileRight ? projectileSpeed : -projectileSpeed);
+
+        if (projectileX > SCREEN_WIDTH || projectileX + projectileWidth < 0)
+        {
+            projectileActive = false;
+            return;
+        }
+
+        if (hitEnemyWithProjectile(enemy1)) return;
+        if (hitEnemyWithProjectile(enemy2)) return;
+        if (hitEnemyWithProjectile(enemy3)) return;
+        if (hitEnemyWithProjectile(enemy4)) return;
+        hitBossWithProjectile();
+    }
 
     void init_animated_obstacle()
     {
@@ -154,6 +267,10 @@ struct GameScreen
         animatedObstacleFrameIndex = 0;
         animatedObstacleFrameTimer = 0;
         animatedObstacleDamageCooldown = 0;
+        projectileActive = false;
+        projectileRight = true;
+        projectileX = 0.0;
+        projectileY = 0.0;
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
         groundY = hero1.characterPosition_Y;
@@ -274,6 +391,7 @@ struct GameScreen
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
         init_animated_obstacle();
+        init_projectile();
 
         if (level == 1)
         {
@@ -348,7 +466,7 @@ struct GameScreen
         {
             if (rightPressed)
             {
-                shiftAnimatedObstacle(-bg_speed)
+                shiftAnimatedObstacle(-bg_speed);
                 x -= bg_speed;
                 if (x <= -SCREEN_WIDTH)
                 {
@@ -482,6 +600,10 @@ struct GameScreen
             iShowImage(enemy4.enemyPosition_X - 2, enemy4.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
         hero1.show_chracter_moving();
+        if (level == 2 && projectileActive && projectileImage != 0)
+        {
+            iShowImage(projectileX, projectileY, projectileWidth, projectileHeight, projectileImage);
+        }
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
         enemy3.show_enemy_moving();
@@ -504,7 +626,6 @@ struct GameScreen
         if (hero1.gettingHit && hitOverlayImage != 0)
         {
             iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
-            iShowBMP
         }
 
     }

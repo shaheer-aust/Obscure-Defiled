@@ -248,7 +248,7 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		// Handle left mouse click for attack
 		// level_1_screen.hero1.startAttack();
-		game_screen.hero1.startAttack();
+		game_screen.startHeroAttack();
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Credits")
 	{
@@ -673,6 +673,7 @@ void all_50_ms_ticks()
 		character_movement();
 		game_screen.updateAnimatedObstacle(game_screen.hero1);
 		enemy_movement();
+		game_screen.updateProjectile();
 		update_attack_animation();
 		hero_hit_loop();
 		// Step 5 & 6: update power-up collision and revert check
