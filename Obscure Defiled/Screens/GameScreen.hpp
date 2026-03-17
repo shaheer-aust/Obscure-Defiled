@@ -123,7 +123,7 @@ struct GameScreen
         double obstacleTop = animatedObstacleY + animatedObstacleHeight;
 
         bool horizontalOverlap = (heroRight > obstacleLeft) && (heroLeft < obstacleRight);
-        bool standingOnObstacle = (heroBottom >= obstacleTop - 12) && (heroBottom <= obstacleTop + 10);
+        bool standingOnObstacle = heroBottom ==100;
 
         if (horizontalOverlap && standingOnObstacle && animatedObstacleDamageCooldown == 0)
         {
@@ -484,7 +484,7 @@ struct GameScreen
         enemy4.show_enemy_moving();
         if (animatedObstacleVisible && !animatedObstacleFrames.empty())
         {
-            iShowImage(animatedObstacleX, animatedObstacleY, animatedObstacleWidth, animatedObstacleHeight, animatedObstacleFrames[animatedObstacleFrameIndex]);
+            iShowImage(animatedObstacleX, animatedObstacleY-20, animatedObstacleWidth, animatedObstacleHeight, animatedObstacleFrames[animatedObstacleFrameIndex]);
         }
         boss.show_boss_moving();
 
