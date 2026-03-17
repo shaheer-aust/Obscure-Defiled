@@ -73,7 +73,7 @@ struct Hero
 		dead_index = 0;
 		character_speed = 20;
 		base_speed = 20;
-		attack_damage = 4;
+		attack_damage = 8;
 		isJumping = false;
 		gettingHit = false;
 		 isright = true;

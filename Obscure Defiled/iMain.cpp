@@ -575,7 +575,7 @@ void enemy_movement()
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
-			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH ;
+			game_screen.enemy4.enemyPosition_X = -15; // Spawn enemy4 from the left side for level 1;
 		}
 
 		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy1.enemyHealth <= 0)
