@@ -140,7 +140,7 @@ struct GameScreen
 		hero1.dead_index = 0;
 		hero1.character_speed = 20;
 		hero1.base_speed = 20;
-		hero1.attack_damage = 20;
+		hero1.attack_damage = 4;
 		hero1.isJumping = false;
 		hero1.gettingHit = false;
 		hero1.isright = true;
