@@ -58,7 +58,7 @@ struct Option_screen
 				iText(centerX+80+i*10,y+40,a,GLUT_BITMAP_HELVETICA_18);
 			}
 		}
-	
+		// Additional drawing code for credits can be added here
 		
 	}
 	// back button hover and click detection for settings
