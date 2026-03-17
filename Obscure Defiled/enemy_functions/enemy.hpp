@@ -19,6 +19,10 @@ struct Enemy
 {
     vector<int> enemy_idle_R_images;
     vector<int> enemy_idle_L_images;
+    vector<int> enemy_attacking_R_images;
+    vector<int> enemy_attacking_L_images;
+    vector<int> enemy_hit_R_images;
+    vector<int> enemy_hit_L_images;
     double enemyPosition_X = SCREEN_WIDTH - 64;
     double enemyPosition_Y = 100.0;
     double enemyHealth = 100.0;
@@ -26,6 +30,9 @@ struct Enemy
     int enemy_movement_index = 0;
     double enemy_speed = 8.0;
     bool enemyGettingHit = false;
+    bool isAttacking = false;
+    int attack_index = 0;
+    int hit_index = 0;
     bool isActive = true; // Whether this enemy is currently active in the game
     int enemyType = 1;    // 1 for Small enemy 1, 2 for Small enemy 2
 	int level = 1;
@@ -38,6 +45,9 @@ struct Enemy
 		enemy_movement_index = 0;
         enemy_speed = 8.0;
         enemyGettingHit = false;
+        isAttacking = false;
+        attack_index = 0;
+        hit_index = 0;
         isActive = true; // Whether this enemy is currently active in the game
 		this->level = level;
         enemyType = type;
@@ -47,6 +57,10 @@ struct Enemy
     {
         cout << "Enemy takes damage: " << damage << endl;
         enemyHealth -= damage;
+        enemyGettingHit = true;
+        hit_index = 0;
+        isAttacking = false;
+        attack_index = 0;
         if (enemyHealth <= 0)
         {
 
@@ -58,6 +72,10 @@ struct Enemy
     {
 		enemy_idle_L_images.clear();
 		enemy_idle_R_images.clear();
+		enemy_attacking_L_images.clear();
+		enemy_attacking_R_images.clear();
+		enemy_hit_L_images.clear();
+		enemy_hit_R_images.clear();
 		
 		
         // Load enemy images based on type
@@ -138,6 +156,30 @@ struct Enemy
                     sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
                     enemy_idle_L_images.push_back(iLoadImage(a));
                 }
+                for (int i = 1; i <= 36; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_1/Boss/Attacking/right/%d.png", i);
+                    enemy_attacking_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 1; i <= 36; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_1/Boss/Attacking/left/%d.png", i);
+                    enemy_attacking_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 2; i <= 22; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
+                    enemy_hit_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 2; i <= 22; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_1/Boss/Getting Hit/left/%d.png", i);
+                    enemy_hit_L_images.push_back(iLoadImage(a));
+                }
             }
         }
         else if (enemyType == 3)
@@ -159,6 +201,36 @@ struct Enemy
             }
         }
     }
+    void show_enemy_attack()
+    {
+        if (enemy_attacking_R_images.empty() || enemy_attacking_L_images.empty())
+            return;
+
+        int currentIdx = attack_index % enemy_attacking_R_images.size();
+        if (isright)
+        {
+            iShowImage(enemyPosition_X, enemyPosition_Y - 30, 190, 130, enemy_attacking_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(enemyPosition_X, enemyPosition_Y - 30, 190, 130, enemy_attacking_L_images[currentIdx]);
+        }
+    }
+    void show_enemy_hit()
+    {
+        if (enemy_hit_R_images.empty() || enemy_hit_L_images.empty())
+            return;
+
+        int currentIdx = hit_index % enemy_hit_R_images.size();
+        if (isright)
+        {
+            iShowImage(enemyPosition_X, enemyPosition_Y - 30, 190, 130, enemy_hit_R_images[currentIdx]);
+        }
+        else
+        {
+            iShowImage(enemyPosition_X, enemyPosition_Y - 30, 190, 130, enemy_hit_L_images[currentIdx]);
+        }
+    }
     void show_enemy_moving()
     {
         if (!isActive)
@@ -167,7 +239,19 @@ struct Enemy
 		if (enemy_idle_R_images.empty() || enemy_idle_L_images.empty())
 			return;
 
-		int currentIdx = enemy_movement_index;
+		if (enemyGettingHit && !enemy_hit_R_images.empty() && !enemy_hit_L_images.empty())
+		{
+			show_enemy_hit();
+			return;
+		}
+
+		if (isAttacking && !enemy_attacking_R_images.empty() && !enemy_attacking_L_images.empty())
+		{
+			show_enemy_attack();
+			return;
+		}
+
+		int currentIdx = enemy_movement_index % enemy_idle_R_images.size();
 		cout << " index: " << currentIdx << endl;
         if (isright)
         {
@@ -198,13 +282,40 @@ struct Enemy
             else
             {
                 hero1.gettingHit = true;
+                if (!enemy_attacking_R_images.empty() && !enemy_attacking_L_images.empty())
+                {
+                    isAttacking = true;
+                }
                 hero1.takeDamage(2); // hero takes 2 damage when hit by enemy
             }
         }
         else
         {
             hero1.gettingHit = false;
+            isAttacking = false;
+            attack_index = 0;
         }
+
+		if (enemyGettingHit && !enemy_hit_R_images.empty() && !enemy_hit_L_images.empty())
+		{
+			hit_index++;
+			if (hit_index >= enemy_hit_R_images.size())
+			{
+				hit_index = 0;
+				enemyGettingHit = false;
+			}
+			return;
+		}
+
+		if (isAttacking && !enemy_attacking_R_images.empty() && !enemy_attacking_L_images.empty())
+		{
+			attack_index++;
+			if (attack_index >= enemy_attacking_R_images.size())
+			{
+				attack_index = 0;
+			}
+			return;
+		}
         if (enemyPosition_X > characterX + 50)
         {
             if (enemyHealth <= 0)

@@ -76,6 +76,9 @@ struct GameScreen
 		enemy1.enemy_movement_index = 0;
         enemy1.enemy_speed = 8.0;
         enemy1.enemyGettingHit = false;
+        enemy1.isAttacking = false;
+        enemy1.attack_index = 0;
+        enemy1.hit_index = 0;
         enemy1.isActive = true; // Whether this enemy is currently active in the game
         enemy1.enemyType = 1;
         //enemy2.enemyPosition_X = SCREEN_WIDTH - 64;
@@ -85,6 +88,9 @@ struct GameScreen
 		enemy2.enemy_movement_index = 0;
         enemy2.enemy_speed = 8.0;
         enemy2.enemyGettingHit = false;
+        enemy2.isAttacking = false;
+        enemy2.attack_index = 0;
+        enemy2.hit_index = 0;
         //enemy2.isActive = true; // Whether this enemy is currently active in the game
         enemy2.enemyType = 2;
         enemy3.enemyPosition_Y = 100.0;
@@ -93,6 +99,9 @@ struct GameScreen
 		enemy3.enemy_movement_index = 0;
         enemy3.enemy_speed = 8.0;
         enemy3.enemyGettingHit = false;
+        enemy3.isAttacking = false;
+        enemy3.attack_index = 0;
+        enemy3.hit_index = 0;
         enemy3.enemyType = 3;
         //boss
         boss.bossPosition_X = SCREEN_WIDTH - 128;
