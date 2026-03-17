@@ -575,12 +575,14 @@ void enemy_movement()
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
+			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH ;
 		}
 
 		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy1.enemyHealth <= 0)
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
+			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH+12;	
 		}
 
 		// Spawn boss when hero reaches 75% across the screen
