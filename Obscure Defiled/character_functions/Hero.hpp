@@ -32,7 +32,7 @@ struct Hero
     int dead_index = 0;
     double character_speed = 20;
     double base_speed = 20;       // Primary speed (restored when power-up ends)
-    double attack_damage = 20;    // Damage dealt per hit (boosted by power-up)
+    double attack_damage = 8;    // Damage dealt per hit (boosted by power-up)
     bool isJumping = false;
     bool gettingHit = false;
     bool isright = true;

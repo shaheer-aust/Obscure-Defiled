@@ -1,7 +1,8 @@
+#ifndef ENEMY_H
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 extern void takeDamage();
-#ifndef ENEMY_H
+
 #define ENEMY_H
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -197,6 +198,75 @@ struct Enemy
                     char a[200];
                     sprintf_s(a, "resources/Enemy/level_1/Small enemy 3/Left/Walking/frame_%03d.png", i);
                     enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+            }
+        }
+        else if (enemyType == 4)
+        {
+            if (level == 1)
+            {
+                for (int i = 0; i <= 8; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 4/Right/Walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 8; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 4/Left/Walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 8; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 4/Right/Attacking/frame_%03d.png", i);
+                    enemy_attacking_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 8; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 4/Left/Attacking/frame_%03d.png", i);
+                    enemy_attacking_L_images.push_back(iLoadImage(a));
+                }
+            }
+            else if (level == 2)
+            {
+                for (int i = 0; i <= 15; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 15; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Attaking/frame_%03d.png", i);
+                    enemy_attacking_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Attaking/frame_%03d.png", i);
+                    enemy_attacking_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Get_hit/frame_%03d.png", i);
+                    enemy_hit_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Get_hit/frame_%03d.png", i);
+                    enemy_hit_L_images.push_back(iLoadImage(a));
                 }
             }
         }
