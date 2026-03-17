@@ -330,7 +330,7 @@ struct Enemy
 
         double characterX = hero1.characterPosition_X;
         double characterY = hero1.characterPosition_Y;
-        if (abs(enemyPosition_X - characterX) <= 51 && (enemyPosition_Y == characterY) && isActive)
+        if (abs(enemyPosition_X - characterX) <= 51 && abs(enemyPosition_Y - characterY) <= 50 && isActive)
         {
             if (hero1.isAttacking)
             {
@@ -689,7 +689,7 @@ struct Boss
         double characterY = hero1.characterPosition_Y;
 
         // Boss collision check
-        if (abs(bossPosition_X - characterX) < 81 && (bossPosition_Y == characterY))
+        if (abs(bossPosition_X - characterX) < 81 && abs(bossPosition_Y - characterY) < 50)
         {
             if (hero1.isAttacking)
             {
@@ -708,7 +708,7 @@ struct Boss
             hero1.gettingHit = false;
         }
         // boss attack check
-        if (abs(bossPosition_X - characterX) < 81 && (bossPosition_Y == characterY))
+        if (abs(bossPosition_X - characterX) < 81 && abs(bossPosition_Y - characterY) < 50)
         {
 
             if (!isAttacking)
