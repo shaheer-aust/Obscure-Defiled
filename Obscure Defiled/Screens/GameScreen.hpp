@@ -348,6 +348,7 @@ struct GameScreen
         {
             if (rightPressed)
             {
+                shiftAnimatedObstacle(-bg_speed)
                 x -= bg_speed;
                 if (x <= -SCREEN_WIDTH)
                 {
@@ -359,6 +360,7 @@ struct GameScreen
             else if (leftPressed)
             {
                 x += bg_speed;
+                shiftAnimatedObstacle(bg_speed);
                 if (x >= SCREEN_WIDTH)
                 {
                     x = 0;
