@@ -472,7 +472,7 @@ void character_movement()
 			game_screen.x = 0;
 		}
 		game_screen.hero1.isMoving = true;
-		game_screen.hero1.gettingHit = false;
+		//game_screen.hero1.gettingHit = false;
 		game_screen.hero1.movement_index++;
 		game_screen.hero1.characterPosition_X += game_screen.hero1.character_speed;
 		if (game_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)

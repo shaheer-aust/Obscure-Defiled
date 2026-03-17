@@ -502,6 +502,7 @@ struct GameScreen
         if (hero1.gettingHit && hitOverlayImage != 0)
         {
             iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
+            iShowBMP
         }
 
     }
