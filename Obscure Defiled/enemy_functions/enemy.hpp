@@ -344,7 +344,7 @@ struct Enemy
                 {
                     isAttacking = true;
                 }
-                hero1.takeDamage(4); // hero takes 4 damage when hit by enemy
+                hero1.takeDamage(2); // hero takes 2 damage when hit by enemy
             }
         }
         else
@@ -698,7 +698,7 @@ struct Boss
             }
             else
             {
-                hero1.takeDamage(4);
+                hero1.takeDamage(2);
                 cout << "Boss hit! Hero health: " << hero1.HeroHealth << endl;
                 hero1.gettingHit = true;
             }

@@ -49,6 +49,7 @@ struct GameScreen
     bool enemy3Spawned = false;
     bool enemy4Spawned = false;
     bool bossSpawned = false;
+    int hitOverlayImage = 0;
     vector<int> animatedObstacleFrames;
     double animatedObstacleX = 980.0;
     double animatedObstacleY = 100.0;
@@ -268,6 +269,7 @@ struct GameScreen
         BgImages.push_back(iLoadImage("resources//game_screen//level_2//bg_2//pic.jpg"));
         hero1.init_character_images(level);
         victoryImage= iLoadImage("resources/victory_screen/victory_image.png");
+        hitOverlayImage = iLoadImage("resources/game_screen/getting hit frame.png");
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
@@ -495,6 +497,11 @@ struct GameScreen
         }
         if(level == 1 ){
             powerUp.draw();    
+        }
+        // Full-screen hit overlay — drawn last so it appears on top of everything
+        if (hero1.gettingHit && hitOverlayImage != 0)
+        {
+            iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
         }
 
     }
