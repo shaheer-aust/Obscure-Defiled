@@ -49,6 +49,90 @@ struct GameScreen
     bool enemy3Spawned = false;
     bool enemy4Spawned = false;
     bool bossSpawned = false;
+    vector<int> animatedObstacleFrames;
+    double animatedObstacleX = 980.0;
+    double animatedObstacleY = 100.0;
+    int animatedObstacleWidth = 110;
+    int animatedObstacleHeight = 90;
+    bool animatedObstacleVisible = false;
+    int animatedObstacleFrameIndex = 0;
+    int animatedObstacleFrameTimer = 0;
+    int animatedObstacleDamageCooldown = 0;
+
+    void init_animated_obstacle()
+    {
+        animatedObstacleFrames.clear();
+        for (int i = 0; i <= 3; i++)
+        {
+            char a[200];
+            sprintf_s(a, "resources/obstacles/level 1 obstacles animated/frame_%03d.png", i);
+            animatedObstacleFrames.push_back(iLoadImage(a));
+        }
+        animatedObstacleX = 980.0;
+        animatedObstacleY = 100.0;
+        animatedObstacleWidth = 110;
+        animatedObstacleHeight = 90;
+        animatedObstacleVisible = false;
+        animatedObstacleFrameIndex = 0;
+        animatedObstacleFrameTimer = 0;
+        animatedObstacleDamageCooldown = 0;
+    }
+
+    void shiftAnimatedObstacle(double dx)
+    {
+        animatedObstacleX += dx;
+    }
+
+    void updateAnimatedObstacle(Hero &hero)
+    {
+        if (animatedObstacleFrames.empty())
+            return;
+
+        if (!animatedObstacleVisible && hero.characterPosition_X >= animatedObstacleX - 260)
+        {
+            animatedObstacleVisible = true;
+        }
+
+        if (!animatedObstacleVisible)
+            return;
+
+        animatedObstacleFrameTimer++;
+        if (animatedObstacleFrameTimer >= 5)
+        {
+            animatedObstacleFrameTimer = 0;
+            animatedObstacleFrameIndex++;
+            if (animatedObstacleFrameIndex >= animatedObstacleFrames.size())
+            {
+                animatedObstacleFrameIndex = 0;
+            }
+        }
+
+        if (animatedObstacleDamageCooldown > 0)
+        {
+            animatedObstacleDamageCooldown--;
+        }
+
+        if (hero.isJumping)
+            return;
+
+        double heroLeft = hero.characterPosition_X + 20;
+        double heroRight = hero.characterPosition_X + 132;
+        double heroBottom = hero.characterPosition_Y;
+        double obstacleLeft = animatedObstacleX;
+        double obstacleRight = animatedObstacleX + animatedObstacleWidth;
+        double obstacleTop = animatedObstacleY + animatedObstacleHeight;
+
+        bool horizontalOverlap = (heroRight > obstacleLeft) && (heroLeft < obstacleRight);
+        bool standingOnObstacle = (heroBottom >= obstacleTop - 12) && (heroBottom <= obstacleTop + 10);
+
+        if (horizontalOverlap && standingOnObstacle && animatedObstacleDamageCooldown == 0)
+        {
+            hero.takeDamage(2);
+            hero.gettingHit = true;
+            hero.hit_index = 0;
+            animatedObstacleDamageCooldown = 6;
+        }
+    }
 
     void resetgame (){
         spacePressed = false;
@@ -65,6 +149,12 @@ struct GameScreen
 		enemy3Spawned = false;
 		enemy4Spawned = false;
 		bossSpawned = false;
+        animatedObstacleVisible = false;
+        animatedObstacleFrameIndex = 0;
+        animatedObstacleFrameTimer = 0;
+        animatedObstacleDamageCooldown = 0;
+        animatedObstacleX = 980.0;
+        animatedObstacleY = 100.0;
         groundY = hero1.characterPosition_Y;
         enemy2.isActive = false; 
         enemy2.enemyPosition_X = 64;
@@ -181,6 +271,7 @@ struct GameScreen
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
+        init_animated_obstacle();
 
         if (level == 1)
         {
@@ -391,6 +482,10 @@ struct GameScreen
         enemy2.show_enemy_moving();
         enemy3.show_enemy_moving();
         enemy4.show_enemy_moving();
+        if (animatedObstacleVisible && !animatedObstacleFrames.empty())
+        {
+            iShowImage(animatedObstacleX, animatedObstacleY, animatedObstacleWidth, animatedObstacleHeight, animatedObstacleFrames[animatedObstacleFrameIndex]);
+        }
         boss.show_boss_moving();
 
         // Draw trap for level 2

@@ -526,6 +526,7 @@ void enemy_movement()
 			{
 				game_screen.enemy4.enemyPosition_X -= game_screen.bg_speed;
 			}
+			game_screen.shiftAnimatedObstacle(-game_screen.bg_speed);
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X -= game_screen.bg_speed;
@@ -551,6 +552,7 @@ void enemy_movement()
 			{
 				game_screen.enemy4.enemyPosition_X += game_screen.bg_speed;
 			}
+			game_screen.shiftAnimatedObstacle(game_screen.bg_speed);
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X += game_screen.bg_speed;
@@ -668,6 +670,7 @@ void all_50_ms_ticks()
 		// ------------------------------------------------
 
 		character_movement();
+		game_screen.updateAnimatedObstacle(game_screen.hero1);
 		enemy_movement();
 		update_attack_animation();
 		hero_hit_loop();
