@@ -206,11 +206,11 @@
 			}
 
 			// ── Called every 50 ms – reverts when all Level-1 enemies die ──
-			void checkRevert(const Enemy& e1, const Enemy& e2,
+			void checkRevert(const Enemy& e1, const Enemy& e2, const Enemy& e3,
 				const Boss& boss, Hero& hero)
 			{
 				if (!isPoweredUp) return;
-				if (e1.enemyHealth <= 0 && e2.enemyHealth <= 0 && boss.bossHealth <= 0)
+				if (e1.enemyHealth <= 0 && e2.enemyHealth <= 0 && e3.enemyHealth <= 0 && boss.bossHealth <= 0)
 					revert(hero);
 			}
 

@@ -30,6 +30,7 @@ struct GameScreen
     int victoryImage;
     Enemy enemy1;
     Enemy enemy2;
+    Enemy enemy3;
     Boss boss;
     Hero hero1;
     Trap level2Trap;
@@ -44,6 +45,7 @@ struct GameScreen
     double groundY = 100.0;
     double bg_speed = 4.0;
     bool enemy2Spawned = false;
+    bool enemy3Spawned = false;
     bool bossSpawned = false;
 
     void resetgame (){
@@ -58,10 +60,13 @@ struct GameScreen
 		groundY = 100.0;
 		bg_speed = 4.0;
 		enemy2Spawned = false;
+		enemy3Spawned = false;
 		bossSpawned = false;
         groundY = hero1.characterPosition_Y;
         enemy2.isActive = false; 
         enemy2.enemyPosition_X = 64;
+        enemy3.isActive = false;
+        enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
         boss.isActive = false; 
         //enemy
         enemy1.enemyPosition_X = SCREEN_WIDTH - 64;
@@ -82,6 +87,13 @@ struct GameScreen
         enemy2.enemyGettingHit = false;
         //enemy2.isActive = true; // Whether this enemy is currently active in the game
         enemy2.enemyType = 2;
+        enemy3.enemyPosition_Y = 100.0;
+        enemy3.enemyHealth = 100.0;
+        enemy3.isright = false;
+		enemy3.enemy_movement_index = 0;
+        enemy3.enemy_speed = 8.0;
+        enemy3.enemyGettingHit = false;
+        enemy3.enemyType = 3;
         //boss
         boss.bossPosition_X = SCREEN_WIDTH - 128;
         boss.bossPosition_Y = 100;
@@ -134,10 +146,10 @@ struct GameScreen
     }
     void initgame_screen(int level)
     {
-		
-
+        this->level = level;
         resetgame();
-        this->level=level;
+        BgImages.clear();
+        health_bar_images.clear();
         BgImages.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         BgImages.push_back(iLoadImage("resources//game_screen//level_2//bg_2//pic.jpg"));
         hero1.init_character_images(level);
@@ -145,6 +157,17 @@ struct GameScreen
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
 
+        if (level == 1)
+        {
+            enemy3.initenemy(3, level);
+            enemy3.isActive = false;
+            enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
+        }
+        else
+        {
+            enemy3.enemyHealth = 0;
+            enemy3.isActive = false;
+        }
 
         enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
@@ -156,11 +179,6 @@ struct GameScreen
         }
         
         // Trap Initialization for Level 2
-
-
-
-       
-        boss.initboss(level);             
 
         if (level == 2)
         {
@@ -325,9 +343,17 @@ struct GameScreen
             int frameIndex = (int)floor((currentHealth / 100.0) * 15);
             iShowImage(enemy2.enemyPosition_X - 2, enemy2.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
+        if (enemy3.isActive && !boss.boss_health_bar_images.empty())
+        {
+            double currentHealth = max(0.0, min(100.0, enemy3.enemyHealth));
+
+            int frameIndex = (int)floor((currentHealth / 100.0) * 15);
+            iShowImage(enemy3.enemyPosition_X - 2, enemy3.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
+        }
         hero1.show_chracter_moving();
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
+        enemy3.show_enemy_moving();
         boss.show_boss_moving();
 
         // Draw trap for level 2

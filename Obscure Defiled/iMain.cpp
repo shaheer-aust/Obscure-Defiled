@@ -518,6 +518,10 @@ void enemy_movement()
 			{
 				game_screen.enemy2.enemyPosition_X -= game_screen.bg_speed;
 			}
+			if (game_screen.enemy3.isActive)
+			{
+				game_screen.enemy3.enemyPosition_X -= game_screen.bg_speed;
+			}
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X -= game_screen.bg_speed;
@@ -535,6 +539,10 @@ void enemy_movement()
 			{
 				game_screen.enemy2.enemyPosition_X += game_screen.bg_speed;
 			}
+			if (game_screen.enemy3.isActive)
+			{
+				game_screen.enemy3.enemyPosition_X += game_screen.bg_speed;
+			}
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X += game_screen.bg_speed;
@@ -549,6 +557,12 @@ void enemy_movement()
 			game_screen.enemy2Spawned = true;
 		}
 
+		if (game_screen.level == 1 && !game_screen.enemy3Spawned && game_screen.enemy1.enemyHealth <= 0)
+		{
+			game_screen.enemy3.isActive = true;
+			game_screen.enemy3Spawned = true;
+		}
+
 		// Spawn boss when hero reaches 75% across the screen
 		if (!game_screen.bossSpawned && game_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
 		{
@@ -558,6 +572,7 @@ void enemy_movement()
 
 		game_screen.enemy1.move_enemy(game_screen.hero1);
 		game_screen.enemy2.move_enemy(game_screen.hero1);
+		game_screen.enemy3.move_enemy(game_screen.hero1);
 		game_screen.boss.move_boss(game_screen.hero1);
 
 		// Handle Trap movement for Level 2
@@ -610,7 +625,8 @@ void all_50_ms_ticks()
 		}
 		// --- ADD YOUR LEVEL TRANSITION CONDITION HERE ---
 		
-		else if (game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.boss.bossHealth == 0)
+		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.boss.bossHealth == 0) ||
+			(game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
 		
 			if (counter == 0) {
@@ -636,7 +652,7 @@ void all_50_ms_ticks()
 		if (game_screen.level == 1)
 		{
 			game_screen.powerUp.update(game_screen.hero1);
-			game_screen.powerUp.checkRevert(game_screen.enemy1, game_screen.enemy2, game_screen.boss, game_screen.hero1);
+			game_screen.powerUp.checkRevert(game_screen.enemy1, game_screen.enemy2, game_screen.enemy3, game_screen.boss, game_screen.hero1);
 		}
 
 		// Handle Trap Collision for Level 2

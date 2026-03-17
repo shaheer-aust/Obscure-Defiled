@@ -140,11 +140,32 @@ struct Enemy
                 }
             }
         }
+        else if (enemyType == 3)
+        {
+            if (level == 1)
+            {
+                for (int i = 0; i <= 8; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 3/Right/Walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 8; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Enemy/level_1/Small enemy 3/Left/Walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+            }
+        }
     }
     void show_enemy_moving()
     {
         if (!isActive)
             return; // Don't show inactive enemies
+
+		if (enemy_idle_R_images.empty() || enemy_idle_L_images.empty())
+			return;
 
 		int currentIdx = enemy_movement_index;
 		cout << " index: " << currentIdx << endl;
@@ -161,6 +182,9 @@ struct Enemy
     {
         if (!isActive)
             return; // Don't move inactive enemies
+
+		if (enemy_idle_R_images.empty() || enemy_idle_L_images.empty())
+			return;
 
         double characterX = hero1.characterPosition_X;
         double characterY = hero1.characterPosition_Y;
@@ -388,6 +412,7 @@ struct Boss
     }
     void init_boss_health_bar_images()
     {
+		boss_health_bar_images.clear();
         for (int i = 1; i <= 4; i++)
         {
             for (int j = 1; j <= 4; j++)
