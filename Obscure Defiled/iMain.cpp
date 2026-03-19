@@ -203,7 +203,8 @@ void iMouse(int button, int state, int mx, int my)
 		else if (setting.isScoreButtonClicked(mx, my))
 		{
 			screens.push("Score");
-		}else if(setting.isControlsButtonClicked(mx, my))
+		}
+		else if (setting.isControlsButtonClicked(mx, my))
 		{
 			screens.push("Controls");
 		}
@@ -256,14 +257,16 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			screens.pop();
 		}
-	}	else if (state == GLUT_DOWN && screens.top() == "Profile")
+	}
+	else if (state == GLUT_DOWN && screens.top() == "Profile")
 	{
 		// Handle profile screen click
 		if (profileScreen.isBackButtonClicked(mx, my))
 		{
 			screens.pop(); // Go back to settings
 		}
-	}}
+	}
+}
 void iKeyboard(unsigned char key)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
@@ -284,10 +287,10 @@ void iKeyboard(unsigned char key)
 			}
 		}
 	}
-	else if (key == 13 && screens.top() == "victory"){
+	else if (key == 13 && screens.top() == "victory")
+	{
 		screens.pop();
 		screens.push("After_lvl_1");
-
 	}
 	else if (key == 13 && screens.top() == "Menu") // Enter key
 	{
@@ -472,7 +475,7 @@ void character_movement()
 			game_screen.x = 0;
 		}
 		game_screen.hero1.isMoving = true;
-		//game_screen.hero1.gettingHit = false;
+		// game_screen.hero1.gettingHit = false;
 		game_screen.hero1.movement_index++;
 		game_screen.hero1.characterPosition_X += game_screen.hero1.character_speed;
 		if (game_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
@@ -585,7 +588,7 @@ void enemy_movement()
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
-			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH+12;	
+			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH + 12;
 		}
 
 		// Spawn boss when hero reaches 75% across the screen
@@ -642,57 +645,74 @@ bool isreset = false;
 int counter = 0;
 void all_50_ms_ticks()
 {
-	if(screens.top() == "gameOver" && isreset){
+	if (screens.top() == "gameOver" && !isreset)
+	{
 		game_screen.resetgame();
-		isreset=true;
+		isreset = true;
+		return;
 	}
+	isreset = false;
 	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
-		
-		if (game_screen.hero1.isDead)
+
+		if (game_screen.hero1.isDead || game_screen.hero1.HeroHealth <= 0)
 		{
 			screens.pop();
 			screens.push("gameOver");
 		}
 		// --- ADD YOUR LEVEL TRANSITION CONDITION HERE ---
-		
-		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0) ||
-			(game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
+
+		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
-		
-			if (counter == 0) {
+			if (counter == 0)
+			{
 				screens.push("victory");
 				counter++;
 			}
-			else{
+			else
+			{
 				cout << "init called" << endl;
 				game_screen.initgame_screen(2);
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play gamebg2 repeat", NULL, 0, NULL);
-				
 			}
-			
 		}
-		// ------------------------------------------------
-
-		character_movement();
-		game_screen.updateAnimatedObstacle(game_screen.hero1);
-		enemy_movement();
-		game_screen.updateProjectile();
-		update_attack_animation();
-		hero_hit_loop();
-		// Step 5 & 6: update power-up collision and revert check
-		if (game_screen.level == 1)
+		else if (game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0)
 		{
-			game_screen.powerUp.update(game_screen.hero1);
-			game_screen.powerUp.checkRevert(game_screen.enemy1, game_screen.enemy2, game_screen.enemy3, game_screen.enemy4, game_screen.boss, game_screen.hero1);
+			if (counter == 1)
+			{
+				screens.push("victory");
+				counter++;
+			}
+			else
+			{
+				// for level 03;
+				// cout << "init called" << endl;
+				// game_screen.initgame_screen(2);
+				// mciSendString("close gamebg", NULL, 0, NULL);
+				// mciSendString("play gamebg2 repeat", NULL, 0, NULL);
+			}
 		}
+	}
+	// ------------------------------------------------
 
-		// Handle Trap Collision for Level 2
-		if (game_screen.level == 2)
-		{
-			game_screen.level2Trap.checkCollision(game_screen.hero1);
-		}
+	character_movement();
+	game_screen.updateAnimatedObstacle(game_screen.hero1);
+	enemy_movement();
+	game_screen.updateProjectile();
+	update_attack_animation();
+	hero_hit_loop();
+	// Step 5 & 6: update power-up collision and revert check
+	if (game_screen.level == 1)
+	{
+		game_screen.powerUp.update(game_screen.hero1);
+		game_screen.powerUp.checkRevert(game_screen.enemy1, game_screen.enemy2, game_screen.enemy3, game_screen.enemy4, game_screen.boss, game_screen.hero1);
+	}
+
+	// Handle Trap Collision for Level 2
+	if (game_screen.level == 2)
+	{
+		game_screen.level2Trap.checkCollision(game_screen.hero1);
 	}
 }
 
