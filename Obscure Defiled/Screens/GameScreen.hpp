@@ -248,7 +248,7 @@ struct GameScreen
         }
     }
 
-    void resetgame (){
+    void resetgame (int level = 1){
         spacePressed = false;
 		rightPressed = false;
 		leftPressed = false;
