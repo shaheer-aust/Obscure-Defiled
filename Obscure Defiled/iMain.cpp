@@ -637,11 +637,19 @@ void hero_hit_loop()
 {
 	if (game_screen.hero1.gettingHit)
 	{
+		int hitFrameCount = game_screen.hero1.isright ? (int)game_screen.hero1.character_idle_hit_R_images.size() : (int)game_screen.hero1.character_idle_hit_L_images.size();
+		if (hitFrameCount <= 0)
+		{
+			game_screen.hero1.gettingHit = false;
+			game_screen.hero1.hit_index = 0;
+			return;
+		}
+
 		game_screen.hero1.hit_index++;
-		if (game_screen.hero1.hit_index >= game_screen.hero1.character_idle_hit_R_images.size() - 1)
+		if (game_screen.hero1.hit_index >= hitFrameCount - 1)
 		{
 			game_screen.hero1.hit_index = 0;
-			// game_screen.hero1.gettingHit = false;
+			game_screen.hero1.gettingHit = false;
 		}
 	}
 }
@@ -658,6 +666,7 @@ void all_50_ms_ticks()
 		if (screens.top() == "game_screen")
 		{
 			game_screen.updateScoreSystem(0.05);
+			game_screen.updateHitOverlayTimer();
 		}
 		
 		if (game_screen.hero1.isDead)
@@ -723,7 +732,12 @@ void all_50_ms_ticks()
 		// ------------------------------------------------
 
 		character_movement();
+		double healthBeforeObstacle = game_screen.hero1.HeroHealth;
 		game_screen.updateAnimatedObstacle(game_screen.hero1);
+		if (game_screen.hero1.HeroHealth < healthBefore)
+		{
+			game_screen.triggerHitOverlay();
+		}
 		enemy_movement();
 		game_screen.updateProjectile();
 		update_attack_animation();
@@ -738,7 +752,12 @@ void all_50_ms_ticks()
 		// Handle Trap Collision for Level 2
 		if (game_screen.level == 2)
 		{
+			double healthBeforeTrap = game_screen.hero1.HeroHealth;
 			game_screen.level2Trap.checkCollision(game_screen.hero1);
+			if (game_screen.hero1.HeroHealth < healthBeforeTrap)
+			{
+				game_screen.triggerHitOverlay();
+			}
 		}
 	}
 }

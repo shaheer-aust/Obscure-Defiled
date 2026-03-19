@@ -80,6 +80,7 @@ struct GameScreen
     double bossSpawnTime = 0.0;
     bool bossSpawnTracked = false;
     bool bossKillScored = false;
+    int hitOverlayTimerTicks = 0;
 
     int calculateKillScore(double elapsedSeconds, int maxScore) const
     {
@@ -193,6 +194,27 @@ struct GameScreen
         char scoreText[64];
         sprintf_s(scoreText, "Score: %d", levelScore);
         iText(SCREEN_WIDTH - 190, SCREEN_HEIGHT - 30, scoreText, GLUT_BITMAP_HELVETICA_18);
+    }
+
+    void triggerHitOverlay(int durationTicks = 6)
+    {
+        if (durationTicks > hitOverlayTimerTicks)
+        {
+            hitOverlayTimerTicks = durationTicks;
+        }
+    }
+
+    void updateHitOverlayTimer()
+    {
+        if (hitOverlayTimerTicks > 0)
+        {
+            hitOverlayTimerTicks--;
+        }
+    }
+
+    bool shouldShowHitOverlay() const
+    {
+        return (hitOverlayImage != 0 && (hero1.gettingHit || hitOverlayTimerTicks > 0));
     }
 
     bool canShowHealthRecoverPrompt() const
@@ -401,7 +423,7 @@ struct GameScreen
         double obstacleTop = animatedObstacleY + animatedObstacleHeight;
 
         bool horizontalOverlap = (heroRight > obstacleLeft) && (heroLeft < obstacleRight);
-        bool standingOnObstacle = heroBottom ==100;
+        bool standingOnObstacle = heroBottom <=150;
 
         if (horizontalOverlap && standingOnObstacle && animatedObstacleDamageCooldown == 0)
         {
@@ -436,6 +458,7 @@ struct GameScreen
         projectileX = 0.0;
         projectileY = 0.0;
         healthRecoverUsed = false;
+        hitOverlayTimerTicks = 0;
         beginLevelScoreTracking();
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
@@ -794,7 +817,7 @@ struct GameScreen
             powerUp.draw();    
         }
         // Full-screen hit overlay — drawn last so it appears on top of everything
-        if (hero1.gettingHit && hitOverlayImage != 0)
+        if (shouldShowHitOverlay())
         {
             iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
         }
