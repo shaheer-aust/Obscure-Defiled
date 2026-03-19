@@ -361,6 +361,7 @@ struct GameScreen
 		hero1.attack_timer = 0;
 		hero1.dead_timer = 0;
 		hero1.isDead = false;
+        hero1.HeroHealth = 100.0;
 		
 		if (level == 1){
             powerUp.revert(hero1);
