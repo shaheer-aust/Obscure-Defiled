@@ -121,7 +121,7 @@ void appendScoreEntry(const playerInfo &info)
 
     int rank = nextScoreRank();
 
-    file <<"\n"<< rank << " " << info.playerName << " " << info.kills << " " << info.totalScore;
+	file << rank << " " << info.playerName << " " << info.kills << " " << info.totalScore << "\n";
     file.close();
 }
 
