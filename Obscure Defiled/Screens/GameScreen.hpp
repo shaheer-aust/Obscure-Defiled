@@ -85,6 +85,7 @@ struct GameScreen
     {
         int earned = maxScore - (int)elapsedSeconds;
         return max(0, min(maxScore, earned));
+    int collisionHitOverlayTimer = 0;
     }
 
     void beginLevelScoreTracking()
@@ -104,6 +105,26 @@ struct GameScreen
         if (deltaSeconds > 0.0)
         {
             levelElapsedSeconds += deltaSeconds;
+    void triggerCollisionHitOverlay(int frames = 8)
+    {
+        if (frames > collisionHitOverlayTimer)
+        {
+            collisionHitOverlayTimer = frames;
+        }
+    }
+
+    void updateCollisionHitOverlayTimer()
+    {
+        if (collisionHitOverlayTimer > 0)
+        {
+            collisionHitOverlayTimer--;
+        }
+    }
+
+    bool shouldDrawHitOverlay() const
+    {
+        return ((hero1.gettingHit || collisionHitOverlayTimer > 0) && hitOverlayImage != 0);
+    }
         }
     }
 
@@ -165,6 +186,7 @@ struct GameScreen
         int kills = 0;
         for (int i = 0; i < 4; i++)
         {
+            triggerCollisionHitOverlay();
             if (enemyKillScored[i])
             {
                 kills++;
@@ -401,7 +423,7 @@ struct GameScreen
         double obstacleTop = animatedObstacleY + animatedObstacleHeight;
 
         bool horizontalOverlap = (heroRight > obstacleLeft) && (heroLeft < obstacleRight);
-        bool standingOnObstacle = heroBottom ==100;
+        bool standingOnObstacle = heroBottom <=150;
 
         if (horizontalOverlap && standingOnObstacle && animatedObstacleDamageCooldown == 0)
         {
@@ -436,6 +458,7 @@ struct GameScreen
         projectileX = 0.0;
         projectileY = 0.0;
         healthRecoverUsed = false;
+        collisionHitOverlayTimer = 0;
         beginLevelScoreTracking();
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
@@ -794,7 +817,7 @@ struct GameScreen
             powerUp.draw();    
         }
         // Full-screen hit overlay — drawn last so it appears on top of everything
-        if (hero1.gettingHit && hitOverlayImage != 0)
+        if (shouldDrawHitOverlay())
         {
             iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
         }
