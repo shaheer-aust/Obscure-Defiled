@@ -17,6 +17,7 @@ extern int getIdleIndex();
 //#include "Screens\Level_2_game_screen.hpp";
 //#include "Screens\Level_1_game_screen.hpp";
 #include <vector>
+#include <array>
 #include "trap.hpp"
 #include "power.hpp"
 using namespace std;
@@ -67,6 +68,129 @@ struct GameScreen
     double projectileSpeed = 28.0;
     int projectileWidth = 40;
     int projectileHeight = 20;
+    int levelScore = 0;
+    vector<int> levelScores;
+    double levelElapsedSeconds = 0.0;
+    array<double, 4> enemySpawnTimes = {0.0, 0.0, 0.0, 0.0};
+    array<bool, 4> enemySpawnTracked = {false, false, false, false};
+    array<bool, 4> enemyKillScored = {false, false, false, false};
+    double bossSpawnTime = 0.0;
+    bool bossSpawnTracked = false;
+    bool bossKillScored = false;
+
+    int calculateKillScore(double elapsedSeconds, int maxScore) const
+    {
+        int earned = maxScore - (int)elapsedSeconds;
+        return max(0, min(maxScore, earned));
+    }
+
+    void beginLevelScoreTracking()
+    {
+        levelScore = 0;
+        levelElapsedSeconds = 0.0;
+        enemySpawnTracked = {false, false, false, false};
+        enemyKillScored = {false, false, false, false};
+        enemySpawnTimes = {0.0, 0.0, 0.0, 0.0};
+        bossSpawnTime = 0.0;
+        bossSpawnTracked = false;
+        bossKillScored = false;
+    }
+
+    void updateScoreTimer(double deltaSeconds)
+    {
+        if (deltaSeconds > 0.0)
+        {
+            levelElapsedSeconds += deltaSeconds;
+        }
+    }
+
+    void updateSpawnTracking()
+    {
+        Enemy* enemies[4] = {&enemy1, &enemy2, &enemy3, &enemy4};
+        for (int i = 0; i < 4; i++)
+        {
+            if (!enemySpawnTracked[i] && enemies[i]->isActive)
+            {
+                enemySpawnTracked[i] = true;
+                enemySpawnTimes[i] = levelElapsedSeconds;
+            }
+        }
+
+        if (!bossSpawnTracked && boss.isActive)
+        {
+            bossSpawnTracked = true;
+            bossSpawnTime = levelElapsedSeconds;
+        }
+    }
+
+    void updateKillScores()
+    {
+        Enemy* enemies[4] = {&enemy1, &enemy2, &enemy3, &enemy4};
+        for (int i = 0; i < 4; i++)
+        {
+            if (enemySpawnTracked[i] && !enemyKillScored[i] && enemies[i]->enemyHealth <= 0)
+            {
+                double elapsed = levelElapsedSeconds - enemySpawnTimes[i];
+                levelScore += calculateKillScore(elapsed, 100);
+                enemyKillScored[i] = true;
+            }
+        }
+
+        if (bossSpawnTracked && !bossKillScored && boss.bossHealth <= 0)
+        {
+            double elapsed = levelElapsedSeconds - bossSpawnTime;
+            levelScore += calculateKillScore(elapsed, 300);
+            bossKillScored = true;
+        }
+
+        if ((int)levelScores.size() <= level)
+        {
+            levelScores.resize(level + 1, 0);
+        }
+        levelScores[level] = levelScore;
+    }
+
+    void updateScoreSystem(double deltaSeconds)
+    {
+        updateScoreTimer(deltaSeconds);
+        updateSpawnTracking();
+        updateKillScores();
+    }
+
+    int getCurrentLevelKillCount() const
+    {
+        int kills = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            if (enemyKillScored[i])
+            {
+                kills++;
+            }
+        }
+        if (bossKillScored)
+        {
+            kills++;
+        }
+        return kills;
+    }
+
+    int getCombinedScoreUpToCurrentLevel() const
+    {
+        int total = 0;
+        int lastLevel = min(level, (int)levelScores.size() - 1);
+        for (int currentLevel = 1; currentLevel <= lastLevel; currentLevel++)
+        {
+            total += levelScores[currentLevel];
+        }
+        return total;
+    }
+
+    void drawScoreTopRight()
+    {
+        char scoreText[64];
+        sprintf_s(scoreText, "Score: %d", levelScore);
+        iText(SCREEN_WIDTH - 190, SCREEN_HEIGHT - 30, scoreText, GLUT_BITMAP_HELVETICA_18);
+    }
 
     void init_projectile()
     {
@@ -271,6 +395,7 @@ struct GameScreen
         projectileRight = true;
         projectileX = 0.0;
         projectileY = 0.0;
+        beginLevelScoreTracking();
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
         groundY = hero1.characterPosition_Y;
@@ -361,7 +486,7 @@ struct GameScreen
 		hero1.attack_timer = 0;
 		hero1.dead_timer = 0;
 		hero1.isDead = false;
-		
+		hero1.HeroHealth = 100;
 		if (level == 1){
             powerUp.revert(hero1);
 			powerUp.init(600.0, 100.0);
@@ -379,6 +504,10 @@ struct GameScreen
     void initgame_screen(int level)
     {
         this->level = level;
+        if ((int)levelScores.size() <= level)
+        {
+            levelScores.resize(level + 1, 0);
+        }
         resetgame();
         BgImages.clear();
         health_bar_images.clear();
@@ -627,6 +756,7 @@ struct GameScreen
         {
             iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
         }
+        drawScoreTopRight();
 
     }
 };

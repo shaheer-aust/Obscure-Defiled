@@ -47,6 +47,7 @@ playerInfo playerProfile;
 
 int bgm_audio = -1;
 vector<int> menu_images;
+int lastStoredWinLevel = 0;
 
 /* -------------------- DRAW -------------------- */
 void iDraw()
@@ -161,6 +162,7 @@ void iMouse(int button, int state, int mx, int my)
 		// Handle menu selection based on mouse position
 		if (menu.isPlayButtonClicked(mx, my))
 		{
+			lastStoredWinLevel = 0;
 			mciSendString("close bgsong", NULL, 0, NULL);
 			mciSendString("play gamebg repeat", NULL, 0, NULL);
 			screens.push("game_screen");
@@ -311,6 +313,7 @@ void iKeyboard(unsigned char key)
 		}
 		else if (buttonType == 3) // Play
 		{
+			lastStoredWinLevel = 0;
 			mciSendString("close bgsong", NULL, 0, NULL);
 
 			screens.push("game_screen");
@@ -643,6 +646,10 @@ void all_50_ms_ticks()
 {
 	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
+		if (screens.top() == "game_screen")
+		{
+			game_screen.updateScoreSystem(0.05);
+		}
 		
 		if (game_screen.hero1.isDead)
 		{
@@ -654,6 +661,18 @@ void all_50_ms_ticks()
 		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0) ||
 			(game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
+			if (lastStoredWinLevel != game_screen.level)
+			{
+				playerProfile.kills += game_screen.getCurrentLevelKillCount();
+				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
+				if (game_screen.level == 1)
+				{
+					playerProfile.levelReached = max(playerProfile.levelReached, 2);
+				}
+				savePlayerWinDetails(playerProfile);
+				scoreScreen.load_scores_from_file();
+				lastStoredWinLevel = game_screen.level;
+			}
 		
 			if (counter == 0) {
 				screens.push("victory");
