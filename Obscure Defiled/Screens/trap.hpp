@@ -128,7 +128,7 @@ struct Trap
 					if (!hero.isDead)
 					{
 						// Increased damage 2x: changed from 5 to 10
-						hero.HeroHealth -= 5;
+						hero.HeroHealth -= 10;
 
 						if (hero.HeroHealth <= 0)
 						{
@@ -144,6 +144,9 @@ struct Trap
 
 						traps[i].active = false;
 					}
+				}else{
+                    hero.gettingHit = false;
+                    hero.hit_index = 0;
                 }
 			}
 		}
