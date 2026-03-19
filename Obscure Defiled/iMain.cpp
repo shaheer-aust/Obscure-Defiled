@@ -638,9 +638,14 @@ void hero_hit_loop()
 		}
 	}
 }
+bool isreset = false;
 int counter = 0;
 void all_50_ms_ticks()
 {
+	if(screens.top() == "gameOver" && isreset){
+		game_screen.resetgame();
+		isreset=true;
+	}
 	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
 		
