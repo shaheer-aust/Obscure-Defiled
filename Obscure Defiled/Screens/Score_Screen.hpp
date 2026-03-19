@@ -63,11 +63,11 @@ public:
 		iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, iLoadImage("resources//scoreboard//scorebg.png"));
 
         // Draw title
-		iShowImage(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT - 150, 400, 100, iLoadImage("resources//menu_screen//title.png"));
+		iShowImage(SCREEN_WIDTH / 2 - 200, SCREEN_HEIGHT - 150, 400, 200, iLoadImage("resources//menu_screen//title.png"));
 
         // Draw score entries
         int startX = 60;
-        int startY = 280;
+        int startY = 560;
         int rowHeight = 50;
         int columnWidth = 200;
 		char t[50];

@@ -731,6 +731,7 @@ int main()
 
 	// Only initialize menu screen at startup - others load on-demand
 	initPlayerProfile(playerProfile);
+	bool requireCreateProfile = shouldSkipPlayerStorage(playerProfile.playerName);
 
 	menu.initmenubar();
 	setting.initsettingbar(menu.images[0]);
@@ -755,8 +756,12 @@ int main()
 	//  iSetTimer(100, boss_hit_loop);
 
 	screens.push("Menu");
+	if (requireCreateProfile)
+	{
+		screens.push("CreateAccount");
+	}
 	// menu_images[1] = menu.initmenubar1();
-	if (screens.top() == "Menu")
+	if (screens.top() == "Menu" || screens.top() == "CreateAccount")
 	{
 
 		mciSendString("play bgsong repeat", NULL, 0, NULL);

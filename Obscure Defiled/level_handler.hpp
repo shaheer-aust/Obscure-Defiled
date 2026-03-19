@@ -120,11 +120,8 @@ void appendScoreEntry(const playerInfo &info)
     }
 
     int rank = nextScoreRank();
-    if (file.tellp() > 0)
-    {
-        file << "\n";
-    }
-    file << rank << " " << info.playerName << " " << info.kills << " " << info.totalScore;
+
+    file <<"\n"<< rank << " " << info.playerName << " " << info.kills << " " << info.totalScore;
     file.close();
 }
 
