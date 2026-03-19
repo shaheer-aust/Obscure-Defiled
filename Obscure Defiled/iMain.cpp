@@ -734,11 +734,16 @@ void all_50_ms_ticks()
 		character_movement();
 		double healthBeforeObstacle = game_screen.hero1.HeroHealth;
 		game_screen.updateAnimatedObstacle(game_screen.hero1);
-		if (game_screen.hero1.HeroHealth < healthBefore)
+		if (game_screen.hero1.HeroHealth < healthBeforeObstacle)
 		{
 			game_screen.triggerHitOverlay();
 		}
+		double healthBeforeEnemy = game_screen.hero1.HeroHealth;
 		enemy_movement();
+		if (game_screen.hero1.HeroHealth < healthBeforeEnemy)
+		{
+			game_screen.triggerHitOverlay();
+		}
 		game_screen.updateProjectile();
 		update_attack_animation();
 		hero_hit_loop();
