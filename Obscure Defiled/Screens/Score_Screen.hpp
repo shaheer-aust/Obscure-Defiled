@@ -32,7 +32,13 @@ public:
         //BgImages.push_back(iLoadImage("resources//scoreboard//scorebg.png"));
         //BgImages.push_back(iLoadImage("resources//menu_screen//title.png"));
     }
+    void func(const ScoreEntry& a, const ScoreEntry& b) {
+        return a.totalScore > b.totalScore; // Sort in descending order
 
+    }
+    void sort_scores() {
+        sort(scoreData.begin(), scoreData.end(),func())// Sort in descending order
+        };
     // Load scores from score.txt file
     void load_scores_from_file() {
 		cout << "load score";
@@ -52,7 +58,7 @@ public:
 		for (ScoreEntry c : scoreData){
 			cout << c.playerName << endl;
 		}
-
+        sort_scores();
         file.close();
     }
 

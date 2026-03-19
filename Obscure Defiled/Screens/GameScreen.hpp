@@ -68,6 +68,8 @@ struct GameScreen
     double projectileSpeed = 28.0;
     int projectileWidth = 40;
     int projectileHeight = 20;
+    int healthRecoverIconImage = 0;
+    bool healthRecoverUsed = false;
     int levelScore = 0;
     vector<int> levelScores;
     double levelElapsedSeconds = 0.0;
@@ -191,6 +193,43 @@ struct GameScreen
         char scoreText[64];
         sprintf_s(scoreText, "Score: %d", levelScore);
         iText(SCREEN_WIDTH - 190, SCREEN_HEIGHT - 30, scoreText, GLUT_BITMAP_HELVETICA_18);
+    }
+
+    bool canShowHealthRecoverPrompt() const
+    {
+        return (level == 2 && levelScore > 400 && !healthRecoverUsed && healthRecoverIconImage != 0);
+    }
+
+    void drawHealthRecoverPrompt()
+    {
+        if (!canShowHealthRecoverPrompt())
+        {
+            return;
+        }
+
+        int iconX = 40;
+        int iconY = SCREEN_HEIGHT / 2;
+        int iconWidth = 72;
+        int iconHeight = 72;
+        iShowImage(iconX, iconY, iconWidth, iconHeight, healthRecoverIconImage);
+
+        char hintText[] = "press H";
+        iText(iconX, iconY - 25, hintText, GLUT_BITMAP_HELVETICA_18);
+    }
+
+    bool tryUseHealthRecover()
+    {
+        if (!canShowHealthRecoverPrompt())
+        {
+            return false;
+        }
+
+        hero1.HeroHealth = 100;
+        healthRecoverUsed = true;
+        mciSendString("close powerupsfx", NULL, 0, NULL);
+        mciSendString("open \"resources//sounds//powerUp.mp3\" alias powerupsfx", NULL, 0, NULL);
+        mciSendString("play powerupsfx from 0", NULL, 0, NULL);
+        return true;
     }
 
     void init_projectile()
@@ -396,6 +435,7 @@ struct GameScreen
         projectileRight = true;
         projectileX = 0.0;
         projectileY = 0.0;
+        healthRecoverUsed = false;
         beginLevelScoreTracking();
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
@@ -522,6 +562,7 @@ struct GameScreen
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
         init_animated_obstacle();
         init_projectile();
+        healthRecoverIconImage = iLoadImage("resources/power_up_icon/Health_recover/Health_Boast_up.png");
 
         if (level == 1)
         {
@@ -757,6 +798,7 @@ struct GameScreen
         {
             iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
         }
+        drawHealthRecoverPrompt();
         drawScoreTopRight();
 
     }

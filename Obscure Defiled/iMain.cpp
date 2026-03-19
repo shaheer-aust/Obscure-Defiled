@@ -354,6 +354,10 @@ void iKeyboard(unsigned char key)
 			game_screen.hero1.isright = true;
 			game_screen.hero1.isMoving = true;
 		}
+		else if (key == 'h' || key == 'H')
+		{
+			game_screen.tryUseHealthRecover();
+		}
 	}
 	else if (screens.top() == "After_lvl_1")
 	{
@@ -644,6 +648,11 @@ void hero_hit_loop()
 int counter = 0;
 void all_50_ms_ticks()
 {
+	mciSendString("open \"resources//menu_screen//bg_audio//menu_bg.mp3\" alias bgsong", NULL, 0, NULL);
+	mciSendString("open \"resources//menu_screen//button_sound//button.mp3\" alias ggsong", NULL, 0, NULL);
+	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
+	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
+	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
 		if (screens.top() == "game_screen")
@@ -658,8 +667,7 @@ void all_50_ms_ticks()
 		}
 		// --- ADD YOUR LEVEL TRANSITION CONDITION HERE ---
 		
-		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0) ||
-			(game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
+		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
 			if (lastStoredWinLevel != game_screen.level)
 			{
@@ -686,6 +694,31 @@ void all_50_ms_ticks()
 				
 			}
 			
+		}else if((game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0)){
+			if (lastStoredWinLevel != game_screen.level)
+			{
+				playerProfile.kills += game_screen.getCurrentLevelKillCount();
+				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
+				if (game_screen.level == 1)
+				{
+					playerProfile.levelReached = max(playerProfile.levelReached, 2);
+				}
+				savePlayerWinDetails(playerProfile);
+				scoreScreen.load_scores_from_file();
+				lastStoredWinLevel = game_screen.level;
+			}
+		
+			if (counter == 0) {
+				screens.push("victory");
+				counter++;
+			}
+			else{
+				cout << "init called" << endl;
+				game_screen.initgame_screen(1);
+				mciSendString("close gamebg", NULL, 0, NULL);
+				mciSendString("play gamebg2 repeat", NULL, 0, NULL);
+				
+			}
 		}
 		// ------------------------------------------------
 
