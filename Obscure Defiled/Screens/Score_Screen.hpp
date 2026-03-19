@@ -7,6 +7,7 @@
 #define SCREEN_HEIGHT 720
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include <string>
 #include <vector>
 using namespace std;
@@ -32,12 +33,10 @@ public:
         //BgImages.push_back(iLoadImage("resources//scoreboard//scorebg.png"));
         //BgImages.push_back(iLoadImage("resources//menu_screen//title.png"));
     }
-    void func(const ScoreEntry& a, const ScoreEntry& b) {
-        return a.totalScore > b.totalScore; // Sort in descending order
 
-    }
     void sort_scores() {
-        sort(scoreData.begin(), scoreData.end(),func())// Sort in descending order
+		sort(scoreData.begin(), scoreData.end(), [](ScoreEntry& a, ScoreEntry& b){
+			return a.totalScore >= b.totalScore; });// Sort in descending order
         };
     // Load scores from score.txt file
     void load_scores_from_file() {

@@ -197,7 +197,7 @@ struct GameScreen
 
     bool canShowHealthRecoverPrompt() const
     {
-        return (level == 2 && levelScore > 400 && !healthRecoverUsed && healthRecoverIconImage != 0);
+        return (level == 2 && levelScore > 100 && !healthRecoverUsed && healthRecoverIconImage != 0);
     }
 
     void drawHealthRecoverPrompt()

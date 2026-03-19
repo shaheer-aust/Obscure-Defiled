@@ -708,7 +708,7 @@ void all_50_ms_ticks()
 				lastStoredWinLevel = game_screen.level;
 			}
 		
-			if (counter == 0) {
+			if (counter == 1) {
 				screens.push("victory");
 				counter++;
 			}
