@@ -75,7 +75,7 @@ struct GameScreen
         projectileRight = true;
         projectileX = 0.0;
         projectileY = 0.0;
-        projectileSpeed = 38.0;
+        projectileSpeed = 28.0;
         projectileWidth = 40;
         projectileHeight = 20;
     }
