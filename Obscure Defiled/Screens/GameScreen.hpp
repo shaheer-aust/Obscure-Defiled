@@ -71,9 +71,10 @@ struct GameScreen
     int levelScore = 0;
     vector<int> levelScores;
     double levelElapsedSeconds = 0.0;
-    array<double, 4> enemySpawnTimes = {0.0, 0.0, 0.0, 0.0};
-    array<bool, 4> enemySpawnTracked = {false, false, false, false};
-    array<bool, 4> enemyKillScored = {false, false, false, false};
+    vector<double> enemySpawnTimes;
+    vector<bool> enemySpawnTracked;
+    vector<bool> enemyKillScored;
+	
     double bossSpawnTime = 0.0;
     bool bossSpawnTracked = false;
     bool bossKillScored = false;

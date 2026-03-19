@@ -1,3 +1,4 @@
-3 rahul 02 300
-2 zubair 06 600
-1 shaheer 08 800
+2 rahul 02 300
+1 zubair 06 600
+3 shaheer 5 679
+4 rafi 4 577

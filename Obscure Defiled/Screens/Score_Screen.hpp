@@ -67,8 +67,8 @@ public:
 
         // Draw score entries
         int startX = 60;
-        int startY = 560;
-        int rowHeight = 50;
+        int startY = 420;
+        int rowHeight = 49;
         int columnWidth = 200;
 		char t[50];
 
@@ -76,8 +76,8 @@ public:
         for (const auto& entry : scoreData) {
             // Draw rank
             iSetColor(255, 255, 255); 
-			sprintf_s(t, "%d", entry.rank);
-            iText(startX, startY, t);
+			//sprintf_s(t, "%d", entry.rank);
+            //iText(startX, startY, t);
 			//sprintf_s(t, "%s", entry.playerName);
             // Draw player name
 			int i = 0;
@@ -87,12 +87,14 @@ public:
             iText(startX + columnWidth, startY, t);
 
             // Draw kills
-			sprintf_s(t, "%d", entry.kills);
-            iText(startX + 2 * columnWidth, startY, t);
+			sprintf_s(t, "%d", entry.kills); 
+			iSetColor(0, 0, 0);
+            iText(startX + 2 * columnWidth-10, startY, t,GLUT_BITMAP_HELVETICA_18);
+			iSetColor(255, 255, 255);
 
             // Draw total score
 			sprintf_s(t, "%d", entry.totalScore);
-            iText(startX + 3 * columnWidth, startY, t);
+            iText(startX + 3 * columnWidth-120, startY, t);
 
             startY -= rowHeight; // Move to next row
         }
