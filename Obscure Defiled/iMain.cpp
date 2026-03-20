@@ -158,6 +158,7 @@ void iMouse(int button, int state, int mx, int my)
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
 	mciSendString("open \"resources//sounds//knife.mp3\" alias knifesound", NULL, 0, NULL);
+	mciSendString("open \"resources//sounds//pistol.mp3\" alias pistolsound", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
 		// Handle menu selection based on mouse position
@@ -254,6 +255,9 @@ void iMouse(int button, int state, int mx, int my)
 		if (game_screen.level == 1)
 		{
 			mciSendString("play knifesound from 0", NULL, 0, NULL);
+		}else if (game_screen.level == 2)
+		{
+			mciSendString("play pistolsound from 0", NULL, 0, NULL);
 		}
 		game_screen.startHeroAttack();
 	}
@@ -667,6 +671,8 @@ void all_50_ms_ticks()
 	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	mciSendString("open \"resources//sounds//gameOver.mp3\" alias gameoversound", NULL, 0, NULL);
+	mciSendString("open \"resources//sounds//victory.mp3\" alias victorysound", NULL, 0, NULL);
+	
 	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
 		if (screens.top() == "game_screen")
@@ -701,6 +707,7 @@ void all_50_ms_ticks()
 			}
 		
 			if (counter == 0) {
+				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.push("victory");
 				counter++;
 			}
@@ -727,6 +734,7 @@ void all_50_ms_ticks()
 			}
 		
 			if (counter == 1) {
+				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.push("victory");
 				counter++;
 			}
@@ -794,6 +802,7 @@ int main()
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	mciSendString("open \"resources//sounds//gameOver.mp3\" alias gameoversound", NULL, 0, NULL);
 	mciSendString("open \"resources//sounds//knife.mp3\" alias knifesound", NULL, 0, NULL);
+	mciSendString("open \"resources//sounds//victory.mp3\" alias victorysound", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 
