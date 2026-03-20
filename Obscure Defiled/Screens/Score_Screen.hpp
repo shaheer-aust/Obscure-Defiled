@@ -12,6 +12,7 @@
 #include <vector>
 using namespace std;
 struct ScoreEntry {
+    int rank;
 	string playerName;
     int kills;
     int totalScore;
@@ -40,22 +41,18 @@ public:
     // Load scores from score.txt file
     void load_scores_from_file() {
 		cout << "load score";
-        FILE *file = fopen("scores.txt", "rb");
+        ifstream file("score.txt");
         scoreData.clear();
 
-        if (!file) {
+        if (!file.is_open()) {
             return;
         }
 
-		map<string, pair<int, int>> entryMap;
-		while (fread(&entryMap, sizeof(entryMap), 1, file)){
-			for (const auto& pair : entryMap) {
-				ScoreEntry entry;
-				entry.playerName = pair.first;
-				entry.kills = pair.second.first;
-				entry.totalScore = pair.second.second;
-				scoreData.push_back(entry);
-			}
+		ScoreEntry entry;
+		
+		while (file >> entry.rank >> entry.playerName >> entry.kills >> entry.totalScore){
+			scoreData.push_back(entry);
+			
 		}
        
 		for (ScoreEntry c : scoreData){
