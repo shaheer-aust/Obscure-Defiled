@@ -116,8 +116,8 @@ void upsertScoreEntry(const playerInfo &info)
     {
         if (trimLower(entry.playerName) == normalizedName)
         {
-            entry.kills = info.kills;
-            entry.totalScore = info.totalScore;
+            entry.kills += info.kills;
+            entry.totalScore += info.totalScore;
             found = true;
             break;
         }
@@ -148,25 +148,25 @@ void upsertScoreEntry(const playerInfo &info)
     vector<ScoreStorageEntry> uniqueEntries;
     vector<string> seenNames;
     for (const ScoreStorageEntry &entry : entries)
-    {
-        string normalizedEntryName = trimLower(entry.playerName);
-        bool alreadySeen = false;
-        for (const string &seen : seenNames)
-        {
-            if (seen == normalizedEntryName)
-            {
-                alreadySeen = true;
-                break;
-            }
-        }
+    // {
+    //     string normalizedEntryName = trimLower(entry.playerName);
+    //     bool alreadySeen = false;
+    //     for (const string &seen : seenNames)
+    //     {
+    //         if (seen == normalizedEntryName)
+    //         {
+    //             alreadySeen = true;
+    //             break;
+    //         }
+    //     }
 
-        if (!alreadySeen)
-        {
-            seenNames.push_back(normalizedEntryName);
-            uniqueEntries.push_back(entry);
-        }
-    }
-    entries = uniqueEntries;
+    //     if (!alreadySeen)
+    //     {
+    //         seenNames.push_back(normalizedEntryName);
+    //         uniqueEntries.push_back(entry);
+    //     }
+    // }
+    //entries = uniqueEntries;
 
     ofstream outputFile("score.txt", ios::trunc);
     if (!outputFile.is_open())

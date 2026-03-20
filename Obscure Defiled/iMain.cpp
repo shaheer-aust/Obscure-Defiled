@@ -157,6 +157,7 @@ void iMouse(int button, int state, int mx, int my)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
+	mciSendString("open \"resources//sounds//knife.mp3\" alias knifesound", NULL, 0, NULL);
 	if (state == GLUT_DOWN && screens.top() == "Menu")
 	{
 		// Handle menu selection based on mouse position
@@ -250,6 +251,10 @@ void iMouse(int button, int state, int mx, int my)
 	{
 		// Handle left mouse click for attack
 		// level_1_screen.hero1.startAttack();
+		if (game_screen.level == 1)
+		{
+			mciSendString("play knifesound from 0", NULL, 0, NULL);
+		}
 		game_screen.startHeroAttack();
 	}
 	else if (state == GLUT_DOWN && screens.top() == "Credits")
@@ -661,6 +666,7 @@ void all_50_ms_ticks()
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
+	mciSendString("open \"resources//sounds//gameOver.mp3\" alias gameoversound", NULL, 0, NULL);
 	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
 		if (screens.top() == "game_screen")
@@ -671,6 +677,9 @@ void all_50_ms_ticks()
 		
 		if (game_screen.hero1.isDead)
 		{
+			mciSendString("close gamebg", NULL, 0, NULL);
+			mciSendString("close gamebg2", NULL, 0, NULL);
+			mciSendString("play gameoversound from 0", NULL, 0, NULL);
 			screens.pop();
 			screens.push("gameOver");
 		}
@@ -783,6 +792,8 @@ int main()
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
 	mciSendString("open \"resources//game_screen//level_2//bg_2//song.mp3\" alias gamebg2", NULL, 0, NULL);
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
+	mciSendString("open \"resources//sounds//gameOver.mp3\" alias gameoversound", NULL, 0, NULL);
+	mciSendString("open \"resources//sounds//knife.mp3\" alias knifesound", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
 
