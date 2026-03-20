@@ -5,8 +5,7 @@
 #define SCORE_SCREEN_HPP
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-#include <cstdio>
-#include <iostream>
+#include <fstream>
 #include <sstream>
 #include <algorithm>
 #include <string>
@@ -42,18 +41,16 @@ public:
     // Load scores from score.txt file
     void load_scores_from_file() {
 		cout << "load score";
+        ifstream file("score.txt");
         scoreData.clear();
 
-        FILE *file = fopen("score.txt", "r");
-        if (!file) {
+        if (!file.is_open()) {
             return;
         }
 
 		ScoreEntry entry;
-		char playerNameBuffer[256];
 		
-		while (fscanf(file, "%d %255s %d %d", &entry.rank, playerNameBuffer, &entry.kills, &entry.totalScore) == 4){
-			entry.playerName = playerNameBuffer;
+		while (file >> entry.rank >> entry.playerName >> entry.kills >> entry.totalScore){
 			scoreData.push_back(entry);
 			
 		}
@@ -62,7 +59,7 @@ public:
 			cout << c.playerName << endl;
 		}
         sort_scores();
-        fclose(file);
+        file.close();
     }
 
     // Draw the score board on screen
@@ -89,7 +86,10 @@ public:
             //iText(startX, startY, t);
 			//sprintf_s(t, "%s", entry.playerName);
             // Draw player name
-            sprintf_s(t, "%s", entry.playerName.c_str());
+			int i = 0;
+			for (char c : entry.playerName){
+				t[i++] = c;
+			}
             iText(startX + columnWidth, startY, t);
 
             // Draw kills

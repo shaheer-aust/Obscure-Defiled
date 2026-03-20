@@ -5,8 +5,7 @@
 #define level_handler_H
 #define TOTAL_PICS 4
 #include <iostream>
-#include <cstdio>
-#include <cstdlib>
+#include <fstream>
 #include <vector>
 #include <algorithm>
 #include <cctype>
@@ -18,62 +17,53 @@ struct playerInfo {
     int levelReached;
 };
 void initPlayerProfile(playerInfo& info){
-    FILE *file = fopen("player.txt", "r");
-    if (!file){
-        return;
-    }
+    ifstream file("player.txt");
+    if (file.is_open()){
+        string line;
+        // expected format:
+        // Player Name,
+        // level: 1,
+        // Kills: 3,
+        // Score: 500
+        if (getline(file, line)) {
+            // remove trailing comma
+            if (!line.empty() && line.back() == ',') line.pop_back();
+            info.playerName = line;
+        }
+        if (getline(file, line)) {
+			string to_remove = "level: ";
+			line.erase(0, to_remove.length());
+			line.pop_back();
+           
+			info.levelReached = stoi(line);
+            
+        }
+        if (getline(file, line)) {
+			string to_remove = "Kills: ";
+			line.erase(0, to_remove.length());
+			line.pop_back();
 
-    char buffer[512];
-    string line;
+			info.kills = stoi(line);
+        }
+        if (getline(file, line)) {
+			string to_remove = "Score: ";
+			line.erase(0, to_remove.length());
+			//line.pop_back();
 
-    if (fgets(buffer, sizeof(buffer), file)) {
-        line = buffer;
-        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
-        if (!line.empty() && line.back() == ',') line.pop_back();
-        info.playerName = line;
-    }
-    if (fgets(buffer, sizeof(buffer), file)) {
-		line = buffer;
-        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
-		string to_remove = "level: ";
-        if (line.rfind(to_remove, 0) == 0) {
-			line.erase(0, to_remove.length());
+            info.totalScore = stoi(line);
         }
-        if (!line.empty() && line.back() == ',') line.pop_back();
-		info.levelReached = atoi(line.c_str());
+        file.close();
     }
-    if (fgets(buffer, sizeof(buffer), file)) {
-		line = buffer;
-        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
-		string to_remove = "Kills: ";
-        if (line.rfind(to_remove, 0) == 0) {
-			line.erase(0, to_remove.length());
-        }
-        if (!line.empty() && line.back() == ',') line.pop_back();
-		info.kills = atoi(line.c_str());
-    }
-    if (fgets(buffer, sizeof(buffer), file)) {
-		line = buffer;
-        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
-		string to_remove = "Score: ";
-        if (line.rfind(to_remove, 0) == 0) {
-			line.erase(0, to_remove.length());
-        }
-        info.totalScore = atoi(line.c_str());
-    }
-    fclose(file);
 }
 void savePlayerProfile(const playerInfo& info) {
-    FILE *file = fopen("player.txt", "w");
-    if (!file) {
-        return;
+    ofstream file("player.txt");
+    if (file.is_open()) {
+        file << info.playerName << ",\n"
+             << "level: " << info.levelReached << ",\n"
+             << "Kills: " << info.kills << ",\n"
+             << "Score: " << info.totalScore;
+        file.close();
     }
-
-    fprintf(file, "%s,\n", info.playerName.c_str());
-    fprintf(file, "level: %d,\n", info.levelReached);
-    fprintf(file, "Kills: %d,\n", info.kills);
-    fprintf(file, "Score: %d", info.totalScore);
-    fclose(file);
 }
 
 string trimLower(string text)
@@ -108,18 +98,16 @@ struct ScoreStorageEntry
 void upsertScoreEntry(const playerInfo &info)
 {
     vector<ScoreStorageEntry> entries;
-    FILE *inputFile = fopen("score.txt", "r");
+    ifstream inputFile("score.txt");
 
-    if (inputFile)
+    if (inputFile.is_open())
     {
         ScoreStorageEntry entry;
-        char playerNameBuffer[256];
-        while (fscanf(inputFile, "%d %255s %d %d", &entry.rank, playerNameBuffer, &entry.kills, &entry.totalScore) == 4)
+        while (inputFile >> entry.rank >> entry.playerName >> entry.kills >> entry.totalScore)
         {
-            entry.playerName = playerNameBuffer;
             entries.push_back(entry);
         }
-        fclose(inputFile);
+        inputFile.close();
     }
 
     bool found = false;
@@ -181,17 +169,17 @@ void upsertScoreEntry(const playerInfo &info)
     }
     entries = uniqueEntries;
 
-    FILE *outputFile = fopen("score.txt", "w");
-    if (!outputFile)
+    ofstream outputFile("score.txt", ios::trunc);
+    if (!outputFile.is_open())
     {
         return;
     }
 
     for (size_t i = 0; i < entries.size(); ++i)
     {
-        fprintf(outputFile, "%d %s %d %d\n", (int)(i + 1), entries[i].playerName.c_str(), entries[i].kills, entries[i].totalScore);
+        outputFile << (i + 1) << " " << entries[i].playerName << " " << entries[i].kills << " " << entries[i].totalScore << "\n";
     }
-    fclose(outputFile);
+    outputFile.close();
 }
 
 void savePlayerWinDetails(const playerInfo &info)
