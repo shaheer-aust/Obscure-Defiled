@@ -56,6 +56,7 @@ void initPlayerProfile(playerInfo& info){
     }
 }
 void savePlayerProfile(const playerInfo& info) {
+    
     ofstream file("player.txt");
     if (file.is_open()) {
         file << info.playerName << ",\n"
@@ -89,7 +90,6 @@ bool shouldSkipPlayerStorage(const string &playerName)
 
 struct ScoreStorageEntry
 {
-    int rank;
     string playerName;
     int kills;
     int totalScore;
@@ -103,7 +103,7 @@ void upsertScoreEntry(const playerInfo &info)
     if (inputFile.is_open())
     {
         ScoreStorageEntry entry;
-        while (inputFile >> entry.rank >> entry.playerName >> entry.kills >> entry.totalScore)
+        while (inputFile >> entry.playerName >> entry.kills >> entry.totalScore)
         {
             entries.push_back(entry);
         }
@@ -126,7 +126,6 @@ void upsertScoreEntry(const playerInfo &info)
     if (!found)
     {
         ScoreStorageEntry newEntry;
-        newEntry.rank = 0;
         newEntry.playerName = info.playerName;
         newEntry.kills = info.kills;
         newEntry.totalScore = info.totalScore;
@@ -177,7 +176,7 @@ void upsertScoreEntry(const playerInfo &info)
 
     for (size_t i = 0; i < entries.size(); ++i)
     {
-        outputFile << (i + 1) << " " << entries[i].playerName << " " << entries[i].kills << " " << entries[i].totalScore << "\n";
+        outputFile << entries[i].playerName << " " << entries[i].kills << " " << entries[i].totalScore << "\n";
     }
     outputFile.close();
 }

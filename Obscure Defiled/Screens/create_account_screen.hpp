@@ -132,7 +132,7 @@ struct CreateAccount_screen
 			isInputActive = false;
 		}
 		
-		if (isCreateButtonClicked(mx, my)) {
+		if (isCreateButtonClicked(mx, my,&GameScreen game)) {
 			// Create new player profile with default values
 			playerInfo newPlayer;
 			newPlayer.playerName = playerNameInput.empty()?"Unknown Player":playerNameInput;
@@ -141,6 +141,7 @@ struct CreateAccount_screen
 			newPlayer.totalScore = 0;
 			
 			// Save the profile
+			game.initgame_screen(1);
 			savePlayerProfile(newPlayer);
 			
 			// Reset input

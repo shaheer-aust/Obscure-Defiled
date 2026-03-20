@@ -229,10 +229,10 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			createAccountScreen.handleMouseClick(mx, my);
 			// Check if profile was created and go back
-			if (createAccountScreen.isCreateButtonClicked(mx, my))
+			if (createAccountScreen.isCreateButtonClicked(mx, my,&game_screen))
 			{
 				// Reload player profile after creation
-				cout << "accounty created!";
+				cout << "accounty created!" << endl;
 				initPlayerProfile(playerProfile);
 				screens.pop(); // Go back to settings
 			}

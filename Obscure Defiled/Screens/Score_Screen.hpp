@@ -50,7 +50,7 @@ public:
 
 		ScoreEntry entry;
 		
-		while (file >> entry.rank >> entry.playerName >> entry.kills >> entry.totalScore){
+		while (file >> entry.playerName >> entry.kills >> entry.totalScore){
 			scoreData.push_back(entry);
 			
 		}
