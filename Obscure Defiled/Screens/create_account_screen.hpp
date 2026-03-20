@@ -13,7 +13,7 @@
 #define INPUT_BOX_HEIGHT 50
 #define MAX_NAME_LENGTH 20
 #define HOVER_COOLDOWN 300
-
+#include "GameScreen.hpp";
 #include <iostream>
 #include <string>
 #include <vector>
@@ -91,7 +91,7 @@ struct CreateAccount_screen
 		
 		// Draw button text
 		iSetColor(255, 255, 255);
-		iText(buttonX + 90, buttonY + 40, "Create Profile", GLUT_BITMAP_HELVETICA_18);
+		iText(buttonX + 70, buttonY + 25, "Create Profile", GLUT_BITMAP_HELVETICA_18);
 		
 		// Draw instruction text
 		iSetColor(200, 200, 200);
@@ -124,7 +124,7 @@ struct CreateAccount_screen
 	}
 
 	// Handle mouse click
-	void handleMouseClick(int mx, int my)
+	void handleMouseClick(int mx, int my,GameScreen* game)
 	{
 		if (isInputBoxClicked(mx, my)) {
 			isInputActive = true;
@@ -132,7 +132,7 @@ struct CreateAccount_screen
 			isInputActive = false;
 		}
 		
-		if (isCreateButtonClicked(mx, my,&GameScreen game)) {
+		if (isCreateButtonClicked(mx, my)) {
 			// Create new player profile with default values
 			playerInfo newPlayer;
 			newPlayer.playerName = playerNameInput.empty()?"Unknown Player":playerNameInput;
@@ -141,7 +141,7 @@ struct CreateAccount_screen
 			newPlayer.totalScore = 0;
 			
 			// Save the profile
-			game.initgame_screen(1);
+			game->initgame_screen(1);
 			savePlayerProfile(newPlayer);
 			
 			// Reset input

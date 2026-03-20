@@ -227,9 +227,9 @@ void iMouse(int button, int state, int mx, int my)
 		}
 		else
 		{
-			createAccountScreen.handleMouseClick(mx, my);
+			createAccountScreen.handleMouseClick(mx, my,&game_screen);
 			// Check if profile was created and go back
-			if (createAccountScreen.isCreateButtonClicked(mx, my,&game_screen))
+			if (createAccountScreen.isCreateButtonClicked(mx, my))
 			{
 				// Reload player profile after creation
 				cout << "accounty created!" << endl;

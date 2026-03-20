@@ -1,4 +1,4 @@
-﻿Build started 20-03-2026 03:18:21.
+﻿Build started 21-03-2026 01:25:23.
      1>Project "C:\Users\Shaheer\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -50,7 +50,7 @@
                  c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\intro_screen.hpp(6) : see previous definition of 'TOTAL_PICS'
      1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\level_handler.hpp(6): warning C4005: 'TOTAL_PICS' : macro redefinition
                  c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\after_lvl_1_screen.hpp(6) : see previous definition of 'TOTAL_PICS'
-     1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\imain.cpp(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\create_account_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
      1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(11): warning C4005: 'BUTTON_WIDTH' : macro redefinition
                  c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\game_over_screen.hpp(8) : see previous definition of 'BUTTON_WIDTH'
      1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(12): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
@@ -60,6 +60,7 @@
      1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(404): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(691): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(699): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\shaheer\documents\github\obscure-defiled\obscure defiled\imain.cpp(21): warning C4067: unexpected tokens following preprocessor directive - expected a newline
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Shaheer\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Shaheer\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Shaheer\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.lib" /MACHINE:X86 Debug\iMain.obj
          Obscure Defiled.vcxproj -> C:\Users\Shaheer\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe
@@ -67,4 +68,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.10
+Time Elapsed 00:00:02.97

@@ -1,4 +1,4 @@
 shaheer,
 level: 2,
 Kills: 9,
-Score: 1257
+Score: 577
