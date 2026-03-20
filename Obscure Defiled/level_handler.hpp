@@ -116,8 +116,8 @@ void upsertScoreEntry(const playerInfo &info)
     {
         if (trimLower(entry.playerName) == normalizedName)
         {
-            entry.kills += info.kills;
-            entry.totalScore += info.totalScore;
+            entry.kills == info.kills;
+            entry.totalScore == info.totalScore;
             found = true;
             break;
         }
@@ -145,9 +145,9 @@ void upsertScoreEntry(const playerInfo &info)
         return trimLower(a.playerName) < trimLower(b.playerName);
     });
 
-    vector<ScoreStorageEntry> uniqueEntries;
-    vector<string> seenNames;
-    for (const ScoreStorageEntry &entry : entries)
+    //vector<ScoreStorageEntry> uniqueEntries;
+    //vector<string> seenNames;
+    //for (const ScoreStorageEntry &entry : entries)
     // {
     //     string normalizedEntryName = trimLower(entry.playerName);
     //     bool alreadySeen = false;
