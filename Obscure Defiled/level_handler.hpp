@@ -5,8 +5,10 @@
 #define level_handler_H
 #define TOTAL_PICS 4
 #include <iostream>
-#include <fstream>
+#include <cstdio>
+#include <cstdlib>
 #include <vector>
+#include <algorithm>
 #include <cctype>
 using namespace std;
 struct playerInfo {
@@ -16,53 +18,62 @@ struct playerInfo {
     int levelReached;
 };
 void initPlayerProfile(playerInfo& info){
-    ifstream file("player.txt");
-    if (file.is_open()){
-        string line;
-        // expected format:
-        // Player Name,
-        // level: 1,
-        // Kills: 3,
-        // Score: 500
-        if (getline(file, line)) {
-            // remove trailing comma
-            if (!line.empty() && line.back() == ',') line.pop_back();
-            info.playerName = line;
-        }
-        if (getline(file, line)) {
-			string to_remove = "level: ";
-			line.erase(0, to_remove.length());
-			line.pop_back();
-           
-			info.levelReached = stoi(line);
-            
-        }
-        if (getline(file, line)) {
-			string to_remove = "Kills: ";
-			line.erase(0, to_remove.length());
-			line.pop_back();
-
-			info.kills = stoi(line);
-        }
-        if (getline(file, line)) {
-			string to_remove = "Score: ";
-			line.erase(0, to_remove.length());
-			//line.pop_back();
-
-            info.totalScore = stoi(line);
-        }
-        file.close();
+    FILE *file = fopen("player.txt", "r");
+    if (!file){
+        return;
     }
+
+    char buffer[512];
+    string line;
+
+    if (fgets(buffer, sizeof(buffer), file)) {
+        line = buffer;
+        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
+        if (!line.empty() && line.back() == ',') line.pop_back();
+        info.playerName = line;
+    }
+    if (fgets(buffer, sizeof(buffer), file)) {
+		line = buffer;
+        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
+		string to_remove = "level: ";
+        if (line.rfind(to_remove, 0) == 0) {
+			line.erase(0, to_remove.length());
+        }
+        if (!line.empty() && line.back() == ',') line.pop_back();
+		info.levelReached = atoi(line.c_str());
+    }
+    if (fgets(buffer, sizeof(buffer), file)) {
+		line = buffer;
+        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
+		string to_remove = "Kills: ";
+        if (line.rfind(to_remove, 0) == 0) {
+			line.erase(0, to_remove.length());
+        }
+        if (!line.empty() && line.back() == ',') line.pop_back();
+		info.kills = atoi(line.c_str());
+    }
+    if (fgets(buffer, sizeof(buffer), file)) {
+		line = buffer;
+        while (!line.empty() && (line.back() == '\n' || line.back() == '\r')) line.pop_back();
+		string to_remove = "Score: ";
+        if (line.rfind(to_remove, 0) == 0) {
+			line.erase(0, to_remove.length());
+        }
+        info.totalScore = atoi(line.c_str());
+    }
+    fclose(file);
 }
 void savePlayerProfile(const playerInfo& info) {
-    ofstream file("player.txt");
-    if (file.is_open()) {
-        file << info.playerName << ",\n"
-             << "level: " << info.levelReached << ",\n"
-             << "Kills: " << info.kills << ",\n"
-             << "Score: " << info.totalScore;
-        file.close();
+    FILE *file = fopen("player.txt", "w");
+    if (!file) {
+        return;
     }
+
+    fprintf(file, "%s,\n", info.playerName.c_str());
+    fprintf(file, "level: %d,\n", info.levelReached);
+    fprintf(file, "Kills: %d,\n", info.kills);
+    fprintf(file, "Score: %d", info.totalScore);
+    fclose(file);
 }
 
 string trimLower(string text)
@@ -86,43 +97,101 @@ bool shouldSkipPlayerStorage(const string &playerName)
     return normalized.empty() || normalized == "unknown player";
 }
 
-int nextScoreRank()
+struct ScoreStorageEntry
 {
-    ifstream file("score.txt");
-    if (!file.is_open())
+    int rank;
+    string playerName;
+    int kills;
+    int totalScore;
+};
+
+void upsertScoreEntry(const playerInfo &info)
+{
+    vector<ScoreStorageEntry> entries;
+    FILE *inputFile = fopen("score.txt", "r");
+
+    if (inputFile)
     {
-        return 1;
+        ScoreStorageEntry entry;
+        char playerNameBuffer[256];
+        while (fscanf(inputFile, "%d %255s %d %d", &entry.rank, playerNameBuffer, &entry.kills, &entry.totalScore) == 4)
+        {
+            entry.playerName = playerNameBuffer;
+            entries.push_back(entry);
+        }
+        fclose(inputFile);
     }
 
-    int rank = 0;
-    int kills = 0;
-    int totalScore = 0;
-    int maxRank = 0;
-    string playerName;
-
-    while (file >> rank >> playerName >> kills >> totalScore)
+    bool found = false;
+    string normalizedName = trimLower(info.playerName);
+    for (ScoreStorageEntry &entry : entries)
     {
-        if (rank > maxRank)
+        if (trimLower(entry.playerName) == normalizedName)
         {
-            maxRank = rank;
+            entry.kills = info.kills;
+            entry.totalScore = info.totalScore;
+            found = true;
+            break;
         }
     }
-    file.close();
-    return maxRank + 1;
-}
 
-void appendScoreEntry(const playerInfo &info)
-{
-    ofstream file("score.txt", ios::app);
-    if (!file.is_open())
+    if (!found)
+    {
+        ScoreStorageEntry newEntry;
+        newEntry.rank = 0;
+        newEntry.playerName = info.playerName;
+        newEntry.kills = info.kills;
+        newEntry.totalScore = info.totalScore;
+        entries.push_back(newEntry);
+    }
+
+    sort(entries.begin(), entries.end(), [](const ScoreStorageEntry &a, const ScoreStorageEntry &b)
+    {
+        if (a.totalScore != b.totalScore)
+        {
+            return a.totalScore > b.totalScore;
+        }
+        if (a.kills != b.kills)
+        {
+            return a.kills > b.kills;
+        }
+        return trimLower(a.playerName) < trimLower(b.playerName);
+    });
+
+    vector<ScoreStorageEntry> uniqueEntries;
+    vector<string> seenNames;
+    for (const ScoreStorageEntry &entry : entries)
+    {
+        string normalizedEntryName = trimLower(entry.playerName);
+        bool alreadySeen = false;
+        for (const string &seen : seenNames)
+        {
+            if (seen == normalizedEntryName)
+            {
+                alreadySeen = true;
+                break;
+            }
+        }
+
+        if (!alreadySeen)
+        {
+            seenNames.push_back(normalizedEntryName);
+            uniqueEntries.push_back(entry);
+        }
+    }
+    entries = uniqueEntries;
+
+    FILE *outputFile = fopen("score.txt", "w");
+    if (!outputFile)
     {
         return;
     }
 
-    int rank = nextScoreRank();
-
-	file << rank << " " << info.playerName << " " << info.kills << " " << info.totalScore << "\n";
-    file.close();
+    for (size_t i = 0; i < entries.size(); ++i)
+    {
+        fprintf(outputFile, "%d %s %d %d\n", (int)(i + 1), entries[i].playerName.c_str(), entries[i].kills, entries[i].totalScore);
+    }
+    fclose(outputFile);
 }
 
 void savePlayerWinDetails(const playerInfo &info)
@@ -132,6 +201,6 @@ void savePlayerWinDetails(const playerInfo &info)
         return;
     }
     savePlayerProfile(info);
-    appendScoreEntry(info);
+    upsertScoreEntry(info);
 }
 #endif
