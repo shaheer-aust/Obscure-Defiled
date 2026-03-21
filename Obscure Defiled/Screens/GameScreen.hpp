@@ -13,6 +13,7 @@ extern int getIdleIndex();
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include "enemy_functions\enemy.hpp";
+#include "enemy_functions\enemy_lvl_2.hpp";
 #include "character_functions\Hero.hpp";
 //#include "Screens\Level_2_game_screen.hpp";
 //#include "Screens\Level_1_game_screen.hpp";
@@ -34,6 +35,7 @@ struct GameScreen
     Enemy enemy3;
     Enemy enemy4;
     Boss boss;
+    EnemyWaveManager waveManager;
     Hero hero1;
     Trap level2Trap;
     PowerUpSystem powerUp;
@@ -481,7 +483,7 @@ struct GameScreen
         enemy1.isAttacking = false;
         enemy1.attack_index = 0;
         enemy1.hit_index = 0;
-        enemy1.isActive = true; // Whether this enemy is currently active in the game
+        enemy1.isActive = true;  // enemy1 is always first — starts active
         enemy1.enemyType = 1;
         //enemy2.enemyPosition_X = SCREEN_WIDTH - 64;
         //enemy2.enemyPosition_Y = 100.0;
@@ -563,7 +565,6 @@ struct GameScreen
 		{
 			level2Trap.isActive = false;
 		}
-
     }
     void initgame_screen(int level)
     {
@@ -605,8 +606,9 @@ struct GameScreen
 
         enemy2.isActive = false;     // Start with enemy2 inactive
         enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
-        boss.initboss(level);             // Initialize boss
-        boss.isActive = false;       // Start with boss inactive
+        boss.initboss(level);        // Initialize boss
+        boss.isActive = false;        // Boss starts inactive
+        enemy1.isActive = true;       // enemy1 is always first — starts active
         if(level == 1){
 
             powerUp.init(600.0, 100.0);

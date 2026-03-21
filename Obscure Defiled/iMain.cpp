@@ -577,35 +577,42 @@ void enemy_movement()
 			// Step 5: scroll the power-up icon with the background
 			game_screen.powerUp.shiftIcon(game_screen.bg_speed);
 		}
-		// Spawn enemy2 when hero reaches halfway across the screen
-		if (!game_screen.enemy2Spawned && game_screen.hero1.characterPosition_X >= SCREEN_WIDTH / 2)
+		// Level 1: one-at-a-time kill chain → e1 → e2 → e3 → e4 → boss
+		if (game_screen.level == 1 && !game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)
 		{
 			game_screen.enemy2.isActive = true;
 			game_screen.enemy2Spawned = true;
 		}
 
-		if (game_screen.level == 1 && !game_screen.enemy3Spawned && game_screen.enemy1.enemyHealth <= 0)
+		if (game_screen.level == 1 && !game_screen.enemy3Spawned && game_screen.enemy2.enemyHealth <= 0)
 		{
 			game_screen.enemy3.isActive = true;
 			game_screen.enemy3Spawned = true;
 		}
 
-		if (game_screen.level == 1 && !game_screen.enemy4Spawned && game_screen.enemy2.enemyHealth <= 0)
+		if (game_screen.level == 1 && !game_screen.enemy4Spawned && game_screen.enemy3.enemyHealth <= 0)
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
-			game_screen.enemy4.enemyPosition_X = -15; // Spawn enemy4 from the left side for level 1;
+			game_screen.enemy4.enemyPosition_X = -15;
 		}
 
-		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy1.enemyHealth <= 0)
+		// Level 2: one-at-a-time kill chain → e1 → e2 → e4 → boss
+		if (game_screen.level == 2 && !game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)
+		{
+			game_screen.enemy2.isActive = true;
+			game_screen.enemy2Spawned = true;
+		}
+
+		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy2.enemyHealth <= 0)
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
-			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH+12;	
+			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH + 12;
 		}
 
-		// Spawn boss when hero reaches 75% across the screen
-		if (!game_screen.bossSpawned && game_screen.hero1.characterPosition_X >= (SCREEN_WIDTH * 0.75))
+		// Boss spawns after the last regular enemy is defeated (both levels)
+		if (!game_screen.bossSpawned && game_screen.enemy4.enemyHealth <= 0 && game_screen.enemy4Spawned)
 		{
 			game_screen.boss.isActive = true;
 			game_screen.bossSpawned = true;
