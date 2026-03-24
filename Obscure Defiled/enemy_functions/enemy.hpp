@@ -396,7 +396,7 @@ struct Enemy
     }
     void show_enemy_hit()
     {
-        if (enemy_hit_R_images.empty() || enemy_hit_L_images.empty())
+        if (enemy_hit_R_images.empty() || enemy_hit_L_images.empty()||level == 3)
             return;
 
         int currentIdx = hit_index % enemy_hit_R_images.size();

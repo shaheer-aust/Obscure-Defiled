@@ -301,7 +301,8 @@ void iKeyboard(unsigned char key)
 			}
 		}
 	}
-	else if (key == 13 && screens.top() == "victory"){
+	else if (key == 13 && screens.top() == "victory" && game_screen.level == 1) // Enter key on victory screen after level 1
+	{
 		screens.pop();
 		screens.push("After_lvl_1");
 
@@ -734,6 +735,10 @@ void all_50_ms_ticks()
 			}
 		
 			if (counter == 0) {
+				mciSendString("close gamebg", NULL, 0, NULL);
+				mciSendString("close gamebg2", NULL, 0, NULL);
+				mciSendString("close gamebg3", NULL, 0, NULL);
+
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.push("victory");
 				counter++;
@@ -761,6 +766,9 @@ void all_50_ms_ticks()
 			}
 		
 			if (counter == 1) {
+				mciSendString("close gamebg", NULL, 0, NULL);
+				mciSendString("close gamebg2", NULL, 0, NULL);
+
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.push("victory");
 				counter++;
@@ -768,8 +776,7 @@ void all_50_ms_ticks()
 			else{
 				cout << "init called" << endl;
 				game_screen.initgame_screen(3);
-				mciSendString("close gamebg", NULL, 0, NULL);
-				mciSendString("close gamebg2", NULL, 0, NULL);
+				
 				mciSendString("play gamebg3 repeat", NULL, 0, NULL);
 				
 			}
@@ -785,15 +792,17 @@ void all_50_ms_ticks()
 			}
 
 			if (counter == 2) {
+				mciSendString("close gamebg2", NULL, 0, NULL);
+				mciSendString("close gamebg3", NULL, 0, NULL);
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
+				screens.pop(); // Remove game_screen
 				screens.push("victory");
 				counter++;
 			}
 			else{
 				cout << "init called" << endl;
-				game_screen.initgame_screen(1);
-				mciSendString("close gamebg2", NULL, 0, NULL);
-				mciSendString("close gamebg3", NULL, 0, NULL);
+				//game_screen.initgame_screen(1);
+				
 				mciSendString("play gamebg repeat", NULL, 0, NULL);
 			}
 		}
