@@ -307,6 +307,7 @@ void iKeyboard(unsigned char key)
 	}
 	else if (key == 13 && screens.top() == "victory") // Enter key on victory screen after level 1
 	{
+		cout << "Enter pressed on victory screen" <<game_screen.level<< endl;
 		screens.pop();
 		screens.push("After_lvl_1");
 	}
