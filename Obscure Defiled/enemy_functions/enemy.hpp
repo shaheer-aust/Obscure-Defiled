@@ -280,18 +280,18 @@ struct Enemy
                     sprintf_s(a, "resources/Level_3/enemy 3/left/attacking/frame_%03d.png", i);
                     enemy_attacking_L_images.push_back(iLoadImage(a));
                 }
-                for (int i = 0; i <= 35; i++)
-                {
-                    char a[200];
-                    sprintf_s(a, "resources/Level_3/enemy 3/right/getting hit/frame_%03d.png", i);
-                    enemy_hit_R_images.push_back(iLoadImage(a));
-                }
-                for (int i = 0; i <= 35; i++)
-                {
-                    char a[200];
-                    sprintf_s(a, "resources/Level_3/enemy 3/left/getting hit/frame_%03d.png", i);
-                    enemy_hit_L_images.push_back(iLoadImage(a));
-                }
+                // for (int i = 0; i <= 35; i++)
+                // {
+                //     char a[200];
+                //     sprintf_s(a, "resources/Level_3/enemy 3/right/getting hit/frame_%03d.png", i);
+                //     enemy_hit_R_images.push_back(iLoadImage(a));
+                // }
+                // for (int i = 0; i <= 35; i++)
+                // {
+                //     char a[200];
+                //     sprintf_s(a, "resources/Level_3/enemy 3/left/getting hit/frame_%03d.png", i);
+                //     enemy_hit_L_images.push_back(iLoadImage(a));
+                // }
             }
         }
         else if (enemyType == 4)
