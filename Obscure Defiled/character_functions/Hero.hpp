@@ -133,7 +133,7 @@ struct Hero
                 sprintf_s(a, "resources//Main_Character//Normal//With Knife//Jumping//jumping_left_%d.png", i);
                 character_jump_L_images.push_back(iLoadImage(a));
             }
-        }else if(level == 2){
+        }else if(level >= 2){
             // Load character idle images - adjust paths as needed
             for (int i = 0; i <= 15; i++)
             {
@@ -209,7 +209,7 @@ struct Hero
                 sprintf_s(a, "resources//Main_Character//Normal//With Knife//Ground Hitting//hit_left_%d.png", i);
                 character_attack_L_images.push_back(iLoadImage(a));
             }
-        }else if(level == 2){
+        }else if(level >= 2){
             for (int i = 0; i <= 12; i++)
             {
                 char a[200];
@@ -241,7 +241,7 @@ struct Hero
                 sprintf_s(a, "resources//Main_Character//Normal//With Knife//Getting Hit//idle+knife//idle_left_%d.png", i);
                 character_idle_hit_L_images.push_back(iLoadImage(a));
             }
-        }else if(level == 2){
+        }else if(level >= 2){
             for (int i = 0; i <= 34; i++)
             {
                 char a[200];
