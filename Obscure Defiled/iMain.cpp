@@ -305,7 +305,7 @@ void iKeyboard(unsigned char key)
 			}
 		}
 	}
-	else if (key == 13 && screens.top() == "victory" && game_screen.level == 1) // Enter key on victory screen after level 1
+	else if (key == 13 && screens.top() == "victory") // Enter key on victory screen after level 1
 	{
 		screens.pop();
 		screens.push("After_lvl_1");
@@ -741,7 +741,7 @@ void all_50_ms_ticks()
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.push("After_level_1");
+				//screens.push("After_level_1");
 				screens.push("victory");
 				counter++;
 			}
@@ -771,7 +771,7 @@ void all_50_ms_ticks()
 				mciSendString("close gamebg2", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.push("After_level_1");
+				//screens.push("After_level_1");
 				screens.push("victory");
 				counter++;
 			}
