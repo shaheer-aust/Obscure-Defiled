@@ -166,7 +166,7 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			lastStoredWinLevel = 0;
 			mciSendString("close bgsong", NULL, 0, NULL);
-			mciSendString("play gamebg repeat", NULL, 0, NULL);
+			// mciSendString("play gamebg repeat", NULL, 0, NULL);
 			screens.push("game_screen");
 			if (playerProfile.levelReached == 1)
 			{
@@ -211,7 +211,8 @@ void iMouse(int button, int state, int mx, int my)
 		else if (setting.isScoreButtonClicked(mx, my))
 		{
 			screens.push("Score");
-		}else if(setting.isControlsButtonClicked(mx, my))
+		}
+		else if (setting.isControlsButtonClicked(mx, my))
 		{
 			screens.push("Controls");
 		}
@@ -233,7 +234,7 @@ void iMouse(int button, int state, int mx, int my)
 		}
 		else
 		{
-			createAccountScreen.handleMouseClick(mx, my,&game_screen);
+			createAccountScreen.handleMouseClick(mx, my, &game_screen);
 			// Check if profile was created and go back
 			if (createAccountScreen.isCreateButtonClicked(mx, my))
 			{
@@ -259,7 +260,8 @@ void iMouse(int button, int state, int mx, int my)
 		if (game_screen.level == 1)
 		{
 			mciSendString("play knifesound from 0", NULL, 0, NULL);
-		}else if (game_screen.level >= 2)
+		}
+		else if (game_screen.level >= 2)
 		{
 			mciSendString("play pistolsound from 0", NULL, 0, NULL);
 		}
@@ -271,14 +273,16 @@ void iMouse(int button, int state, int mx, int my)
 		{
 			screens.pop();
 		}
-	}	else if (state == GLUT_DOWN && screens.top() == "Profile")
+	}
+	else if (state == GLUT_DOWN && screens.top() == "Profile")
 	{
 		// Handle profile screen click
 		if (profileScreen.isBackButtonClicked(mx, my))
 		{
 			screens.pop(); // Go back to settings
 		}
-	}}
+	}
+}
 void iKeyboard(unsigned char key)
 {
 	mciSendString("open \"resources//game_screen//level_1//bg_1//bg_audio.mp3\" alias gamebg", NULL, 0, NULL);
@@ -305,7 +309,6 @@ void iKeyboard(unsigned char key)
 	{
 		screens.pop();
 		screens.push("After_lvl_1");
-
 	}
 	else if (key == 13 && screens.top() == "Menu") // Enter key
 	{
@@ -499,7 +502,7 @@ void character_movement()
 			game_screen.x = 0;
 		}
 		game_screen.hero1.isMoving = true;
-		//game_screen.hero1.gettingHit = false;
+		// game_screen.hero1.gettingHit = false;
 		game_screen.hero1.movement_index++;
 		game_screen.hero1.characterPosition_X += game_screen.hero1.character_speed;
 		if (game_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
@@ -699,7 +702,7 @@ void all_50_ms_ticks()
 	mciSendString("open \"resources//credit//credit_bg.mp3\" alias creditbg", NULL, 0, NULL);
 	mciSendString("open \"resources//sounds//gameOver.mp3\" alias gameoversound", NULL, 0, NULL);
 	mciSendString("open \"resources//sounds//victory.mp3\" alias victorysound", NULL, 0, NULL);
-	
+
 	if (screens.top() == "game_screen" || screens.top() == "victory")
 	{
 		if (screens.top() == "game_screen")
@@ -707,7 +710,7 @@ void all_50_ms_ticks()
 			game_screen.updateScoreSystem(0.05);
 			game_screen.updateHitOverlayTimer();
 		}
-		
+
 		if (game_screen.hero1.isDead)
 		{
 			mciSendString("close gamebg", NULL, 0, NULL);
@@ -718,23 +721,22 @@ void all_50_ms_ticks()
 			screens.push("gameOver");
 		}
 		// --- ADD YOUR LEVEL TRANSITION CONDITION HERE ---
-		
+
 		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
-			if (lastStoredWinLevel != game_screen.level)
-			{
+		
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
-				if (game_screen.level == 1)
-				{
-					playerProfile.levelReached = max(playerProfile.levelReached, 2);
-				}
+
+				playerProfile.levelReached = max(playerProfile.levelReached, 2);
+
 				savePlayerWinDetails(playerProfile);
 				scoreScreen.load_scores_from_file();
-				lastStoredWinLevel = game_screen.level;
-			}
+				game_screen.level=2;
 		
-			if (counter == 0) {
+
+			if (counter == 0)
+			{
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
@@ -743,29 +745,29 @@ void all_50_ms_ticks()
 				screens.push("victory");
 				counter++;
 			}
-			else{
+			else
+			{
 				cout << "init called" << endl;
 				game_screen.initgame_screen(2);
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play gamebg2 repeat", NULL, 0, NULL);
-				
 			}
+		}
+		else if ((game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
+		{
 			
-		}else if((game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0)){
-			if (lastStoredWinLevel != game_screen.level)
-			{
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
-				if (game_screen.level == 2)
-				{
-					playerProfile.levelReached = max(playerProfile.levelReached, 3);
-				}
+
+				playerProfile.levelReached = max(playerProfile.levelReached, 3);
+
 				savePlayerWinDetails(playerProfile);
 				scoreScreen.load_scores_from_file();
-				lastStoredWinLevel = game_screen.level;
+				game_screen.level=3;
 			}
-		
-			if (counter == 1) {
+
+			if (counter == 1)
+			{
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("close gamebg2", NULL, 0, NULL);
 
@@ -773,25 +775,27 @@ void all_50_ms_ticks()
 				screens.push("victory");
 				counter++;
 			}
-			else{
+			else
+			{
 				cout << "init called" << endl;
 				game_screen.initgame_screen(3);
-				
+
 				mciSendString("play gamebg3 repeat", NULL, 0, NULL);
-				
 			}
-		}else if((game_screen.level == 3 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0)){
-			if (lastStoredWinLevel != game_screen.level)
-			{
+		}
+		else if ((game_screen.level == 3 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
+		{
+		
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 				playerProfile.levelReached = max(playerProfile.levelReached, 3);
 				savePlayerWinDetails(playerProfile);
 				scoreScreen.load_scores_from_file();
-				lastStoredWinLevel = game_screen.level;
+				game_screen.level=1;
 			}
 
-			if (counter == 2) {
+			if (counter == 2)
+			{
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
@@ -799,11 +803,12 @@ void all_50_ms_ticks()
 				screens.push("victory");
 				counter++;
 			}
-			else{
+			else
+			{
 				cout << "init called" << endl;
-				//game_screen.initgame_screen(1);
-				
-				mciSendString("play gamebg repeat", NULL, 0, NULL);
+				// game_screen.initgame_screen(1);
+
+				// mciSendString("play gamebg repeat", NULL, 0, NULL);
 			}
 		}
 		// ------------------------------------------------
