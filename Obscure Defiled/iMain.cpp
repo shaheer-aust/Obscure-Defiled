@@ -3,7 +3,6 @@
 #include "iGraphics.h";
 #include "Screens\menu_screen.hpp";
 #include "Screens\setting_screen.hpp";
-#include "Screens\Level_1_game_screen.hpp";
 #include "Screens\intro_screen.hpp";
 #include "Screens\credit_screen.hpp";
 #include "enemy_functions\enemy.hpp";
@@ -597,14 +596,22 @@ void enemy_movement()
 			game_screen.enemy4.enemyPosition_X = -15;
 		}
 
-		// Level 2: one-at-a-time kill chain → e1 → e2 → e4 → boss
+		// Level 2: one-at-a-time kill chain -> e1 -> e2 -> e3 -> e4 -> boss
 		if (game_screen.level == 2 && !game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)
 		{
 			game_screen.enemy2.isActive = true;
 			game_screen.enemy2Spawned = true;
+			game_screen.enemy2.enemyPosition_X = 64;
 		}
 
-		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy2.enemyHealth <= 0)
+		if (game_screen.level == 2 && !game_screen.enemy3Spawned && game_screen.enemy2.enemyHealth <= 0 && game_screen.enemy2Spawned)
+		{
+			game_screen.enemy3.isActive = true;
+			game_screen.enemy3Spawned = true;
+			game_screen.enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
+		}
+
+		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy3.enemyHealth <= 0 && game_screen.enemy3Spawned)
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
@@ -726,7 +733,7 @@ void all_50_ms_ticks()
 				
 			}
 			
-		}else if((game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0)){
+		}else if((game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0)){
 			if (lastStoredWinLevel != game_screen.level)
 			{
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();

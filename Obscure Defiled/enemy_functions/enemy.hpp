@@ -82,7 +82,7 @@ struct Enemy
         // Load enemy images based on type
         if (enemyType == 1)
         {
-            if (level == 1)
+            if (level == 1|| level == 2)
             {
                 // Load Small enemy 1 walking images
 				
@@ -99,24 +99,7 @@ struct Enemy
                     enemy_idle_L_images.push_back(iLoadImage(a));
                 }
             }
-            else if (level == 2)
-            {
-                // Load Small enemy 1 walking images for level 2 (can be different if desired)
-				
-                for (int i = 0; i <= 15; i++)
-                {
-                    char a[200];
-                    sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Walking/frame_%03d.png", i);
-                    enemy_idle_R_images.push_back(iLoadImage(a));
-                }
-                for (int i = 1; i <= 15; i++)
-                {
-                    char a[200];
-                    sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Walking/frame_%03d.png", i);
-                    enemy_idle_L_images.push_back(iLoadImage(a));
-                }
-				
-            }
+            
         }
         else if (enemyType == 2)
         {
@@ -199,6 +182,23 @@ struct Enemy
                     sprintf_s(a, "resources/Enemy/level_1/Small enemy 3/Left/Walking/frame_%03d.png", i);
                     enemy_idle_L_images.push_back(iLoadImage(a));
                 }
+            }else if (level == 2)
+            {
+                // Load Small enemy 1 walking images for level 2 (can be different if desired)
+				
+                for (int i = 0; i <= 15; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 1; i <= 15; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+				
             }
         }
         else if (enemyType == 4)

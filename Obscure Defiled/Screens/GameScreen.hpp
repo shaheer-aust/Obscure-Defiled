@@ -13,10 +13,7 @@ extern int getIdleIndex();
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include "enemy_functions\enemy.hpp";
-#include "enemy_functions\enemy_lvl_2.hpp";
 #include "character_functions\Hero.hpp";
-//#include "Screens\Level_2_game_screen.hpp";
-//#include "Screens\Level_1_game_screen.hpp";
 #include <vector>
 #include <array>
 #include "trap.hpp"
@@ -35,7 +32,6 @@ struct GameScreen
     Enemy enemy3;
     Enemy enemy4;
     Boss boss;
-    EnemyWaveManager waveManager;
     Hero hero1;
     Trap level2Trap;
     PowerUpSystem powerUp;
@@ -447,7 +443,7 @@ struct GameScreen
 		base_gravity = 5;
 		groundY = 100.0;
 		bg_speed = 4.0;
-		enemy2Spawned = false;
+        enemy2Spawned = false;
 		enemy3Spawned = false;
 		enemy4Spawned = false;
 		bossSpawned = false;
@@ -583,6 +579,7 @@ struct GameScreen
         hitOverlayImage = iLoadImage("resources/game_screen/getting hit frame.png");
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
+        enemy3.initenemy(3,level);         // Initialize Small enemy 3
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
         init_animated_obstacle();
         init_projectile();
@@ -590,7 +587,6 @@ struct GameScreen
 
         if (level == 1)
         {
-            enemy3.initenemy(3, level);
             enemy3.isActive = false;
             enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
             enemy4.isActive = false;
@@ -598,14 +594,14 @@ struct GameScreen
         }
         else
         {
-            enemy3.enemyHealth = 0;
             enemy3.isActive = false;
+            enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
             enemy4.isActive = false;
             enemy4.enemyPosition_X = SCREEN_WIDTH - 360;
         }
 
-        enemy2.isActive = false;     // Start with enemy2 inactive
-        enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
+        enemy2.isActive = false;       // Spawned later by kill chain
+        enemy2.enemyPosition_X = 64;   // Left side spawn when activated
         boss.initboss(level);        // Initialize boss
         boss.isActive = false;        // Boss starts inactive
         enemy1.isActive = true;       // enemy1 is always first — starts active
