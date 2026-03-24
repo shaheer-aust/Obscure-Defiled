@@ -13,6 +13,7 @@ extern int getIdleIndex();
 #define HOVER_COOLDOWN 300 // milliseconds
 #include <iostream>
 #include "enemy_functions\enemy.hpp";
+#include "enemy_functions\enemy_lvl_2.hpp";
 #include "character_functions\Hero.hpp";
 //#include "Screens\Level_2_game_screen.hpp";
 //#include "Screens\Level_1_game_screen.hpp";
@@ -34,7 +35,7 @@ struct GameScreen
     Enemy enemy3;
     Enemy enemy4;
     Boss boss;
-    
+    EnemyWaveManager waveManager;
     Hero hero1;
     Trap level2Trap;
     PowerUpSystem powerUp;
@@ -446,7 +447,7 @@ struct GameScreen
 		base_gravity = 5;
 		groundY = 100.0;
 		bg_speed = 4.0;
-        enemy2Spawned = (level == 2);
+		enemy2Spawned = false;
 		enemy3Spawned = false;
 		enemy4Spawned = false;
 		bossSpawned = false;
@@ -464,7 +465,7 @@ struct GameScreen
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
         groundY = hero1.characterPosition_Y;
-        enemy2.isActive = (level == 2); 
+        enemy2.isActive = false; 
         enemy2.enemyPosition_X = 64;
         enemy3.isActive = false;
         enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
@@ -494,7 +495,7 @@ struct GameScreen
         enemy2.isAttacking = false;
         enemy2.attack_index = 0;
         enemy2.hit_index = 0;
-        // enemy2 starts active in level 2
+        //enemy2.isActive = true; // Whether this enemy is currently active in the game
         enemy2.enemyType = 2;
         enemy3.enemyPosition_Y = 100.0;
         enemy3.enemyHealth = 100.0;
@@ -580,16 +581,8 @@ struct GameScreen
         hero1.init_character_images(level);
         victoryImage= iLoadImage("resources/victory_screen/victory_image.png");
         hitOverlayImage = iLoadImage("resources/game_screen/getting hit frame.png");
-        if (level == 2)
-        {
-            enemy1.initenemy(1, 1);        // Use level 1 type 1 in level 2
-            enemy2.initenemy(2, 1);        // Use level 1 type 2 in level 2
-        }
-        else
-        {
-            enemy1.initenemy(1, level);    // Initialize Small enemy 1
-            enemy2.initenemy(2, level);    // Initialize Small enemy 2
-        }
+        enemy1.initenemy(1,level);         // Initialize Small enemy 1
+        enemy2.initenemy(2,level);         // Initialize Small enemy 2
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
         init_animated_obstacle();
         init_projectile();
@@ -611,8 +604,8 @@ struct GameScreen
             enemy4.enemyPosition_X = SCREEN_WIDTH - 360;
         }
 
-        enemy2.isActive = (level == 2);     // In level 2, enemy2 starts active
-        enemy2.enemyPosition_X = 64;         // Spawn from left side
+        enemy2.isActive = false;     // Start with enemy2 inactive
+        enemy2.enemyPosition_X = 64; // Position enemy2 on the right side of the screen
         boss.initboss(level);        // Initialize boss
         boss.isActive = false;        // Boss starts inactive
         enemy1.isActive = true;       // enemy1 is always first — starts active

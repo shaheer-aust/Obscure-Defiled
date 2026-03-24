@@ -597,8 +597,14 @@ void enemy_movement()
 			game_screen.enemy4.enemyPosition_X = -15;
 		}
 
-		// Level 2: enemy1 and enemy2 appear together from opposite sides; then e4; then boss
-		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy1.enemyHealth <= 0 && game_screen.enemy2.enemyHealth <= 0)
+		// Level 2: one-at-a-time kill chain → e1 → e2 → e4 → boss
+		if (game_screen.level == 2 && !game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)
+		{
+			game_screen.enemy2.isActive = true;
+			game_screen.enemy2Spawned = true;
+		}
+
+		if (game_screen.level == 2 && !game_screen.enemy4Spawned && game_screen.enemy2.enemyHealth <= 0)
 		{
 			game_screen.enemy4.isActive = true;
 			game_screen.enemy4Spawned = true;
@@ -708,8 +714,6 @@ void all_50_ms_ticks()
 			}
 		
 			if (counter == 0) {
-				mciSendString("close gamebg", NULL, 0, NULL);
-				mciSendString("close gamebg2 repeat", NULL, 0, NULL);
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.push("victory");
 				counter++;
@@ -737,8 +741,6 @@ void all_50_ms_ticks()
 			}
 		
 			if (counter == 1) {
-				mciSendString("close gamebg", NULL, 0, NULL);
-				mciSendString("close gamebg2 repeat", NULL, 0, NULL);
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.push("victory");
 				counter++;
