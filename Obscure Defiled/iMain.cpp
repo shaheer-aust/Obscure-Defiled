@@ -724,7 +724,7 @@ void all_50_ms_ticks()
 
 		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
-
+			screens.push("victory");
 			playerProfile.kills += game_screen.getCurrentLevelKillCount();
 			playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
@@ -742,20 +742,20 @@ void all_50_ms_ticks()
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				//screens.push("After_level_1");
-				screens.push("victory");
+				
 				counter++;
 			}
 			else
 			{
 				cout << "init called" << endl;
 				game_screen.initgame_screen(2);
-				mciSendString("close gamebg", NULL, 0, NULL);
+				//mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play gamebg2 repeat", NULL, 0, NULL);
 			}
 		}
 		else if ((game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
-
+			screens.push("victory");
 			playerProfile.kills += game_screen.getCurrentLevelKillCount();
 			playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
@@ -772,7 +772,7 @@ void all_50_ms_ticks()
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				//screens.push("After_level_1");
-				screens.push("victory");
+				// screens.push("victory");
 				counter++;
 			}
 			else
@@ -785,7 +785,8 @@ void all_50_ms_ticks()
 		}
 		else if ((game_screen.level == 3 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
-
+			screens.pop();
+			screens.push("victory");
 			playerProfile.kills += game_screen.getCurrentLevelKillCount();
 			playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 			playerProfile.levelReached = max(playerProfile.levelReached, 3);
@@ -798,13 +799,14 @@ void all_50_ms_ticks()
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.pop(); // Remove game_screen
-				screens.push("victory");
+				// screens.pop(); // Remove game_screen
+				// screens.push("victory");
 				counter++;
 			}
 			else
 			{
-				cout << "init called" << endl;
+				//cout << "init called" << endl;
+				counter=0;
 				// game_screen.initgame_screen(1);
 
 				// mciSendString("play gamebg repeat", NULL, 0, NULL);
