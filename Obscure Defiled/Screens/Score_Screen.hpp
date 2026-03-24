@@ -40,7 +40,7 @@ public:
         };
     // Load scores from score.txt file
     void load_scores_from_file() {
-		cout << "load score";
+		cout << "load score hello";
         ifstream file("score.txt");
         scoreData.clear();
 

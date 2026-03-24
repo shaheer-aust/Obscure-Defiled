@@ -183,11 +183,12 @@ void upsertScoreEntry(const playerInfo &info)
 
 void savePlayerWinDetails(const playerInfo &info)
 {
+	savePlayerProfile(info);
     if (shouldSkipPlayerStorage(info.playerName))
     {
         return;
     }
-    savePlayerProfile(info);
+	
     upsertScoreEntry(info);
 }
 #endif

@@ -141,7 +141,7 @@ struct CreateAccount_screen
 			newPlayer.totalScore = 0;
 			
 			// Save the profile
-			game->initgame_screen(1);
+			game->initgame_screen(newPlayer.levelReached);
 			savePlayerProfile(newPlayer);
 			
 			// Reset input
