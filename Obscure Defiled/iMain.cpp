@@ -724,16 +724,15 @@ void all_50_ms_ticks()
 
 		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
-		
-				playerProfile.kills += game_screen.getCurrentLevelKillCount();
-				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
-				playerProfile.levelReached = max(playerProfile.levelReached, 2);
+			playerProfile.kills += game_screen.getCurrentLevelKillCount();
+			playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
-				savePlayerWinDetails(playerProfile);
-				scoreScreen.load_scores_from_file();
-				game_screen.level=2;
-		
+			playerProfile.levelReached = max(playerProfile.levelReached, 2);
+
+			savePlayerWinDetails(playerProfile);
+			scoreScreen.load_scores_from_file();
+			game_screen.level = 2;
 
 			if (counter == 0)
 			{
@@ -755,97 +754,95 @@ void all_50_ms_ticks()
 		}
 		else if ((game_screen.level == 2 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
-			
-				playerProfile.kills += game_screen.getCurrentLevelKillCount();
-				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
-				playerProfile.levelReached = max(playerProfile.levelReached, 3);
+			playerProfile.kills += game_screen.getCurrentLevelKillCount();
+			playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
-				savePlayerWinDetails(playerProfile);
-				scoreScreen.load_scores_from_file();
-				game_screen.level=3;
-			}
+			playerProfile.levelReached = max(playerProfile.levelReached, 3);
 
-			if (counter == 1)
-			{
-				mciSendString("close gamebg", NULL, 0, NULL);
-				mciSendString("close gamebg2", NULL, 0, NULL);
-
-				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.push("victory");
-				counter++;
-			}
-			else
-			{
-				cout << "init called" << endl;
-				game_screen.initgame_screen(3);
-
-				mciSendString("play gamebg3 repeat", NULL, 0, NULL);
-			}
+			savePlayerWinDetails(playerProfile);
+			scoreScreen.load_scores_from_file();
+			game_screen.level = 3;
 		}
-		else if ((game_screen.level == 3 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
+
+		if (counter == 1)
 		{
-		
-				playerProfile.kills += game_screen.getCurrentLevelKillCount();
-				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
-				playerProfile.levelReached = max(playerProfile.levelReached, 3);
-				savePlayerWinDetails(playerProfile);
-				scoreScreen.load_scores_from_file();
-				game_screen.level=1;
-			}
+			mciSendString("close gamebg", NULL, 0, NULL);
+			mciSendString("close gamebg2", NULL, 0, NULL);
 
-			if (counter == 2)
-			{
-				mciSendString("close gamebg2", NULL, 0, NULL);
-				mciSendString("close gamebg3", NULL, 0, NULL);
-				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.pop(); // Remove game_screen
-				screens.push("victory");
-				counter++;
-			}
-			else
-			{
-				cout << "init called" << endl;
-				// game_screen.initgame_screen(1);
+			mciSendString("play victorysound from 0", NULL, 0, NULL);
+			screens.push("victory");
+			counter++;
+		}
+		else
+		{
+			cout << "init called" << endl;
+			game_screen.initgame_screen(3);
 
-				// mciSendString("play gamebg repeat", NULL, 0, NULL);
-			}
+			mciSendString("play gamebg3 repeat", NULL, 0, NULL);
 		}
-		// ------------------------------------------------
+	}
+	else if ((game_screen.level == 3 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
+	{
 
-		character_movement();
-		double healthBeforeObstacle = game_screen.hero1.HeroHealth;
-		game_screen.updateAnimatedObstacle(game_screen.hero1);
-		if (game_screen.hero1.HeroHealth < healthBeforeObstacle)
-		{
-			game_screen.triggerHitOverlay();
-		}
-		double healthBeforeEnemy = game_screen.hero1.HeroHealth;
-		enemy_movement();
-		if (game_screen.hero1.HeroHealth < healthBeforeEnemy)
-		{
-			game_screen.triggerHitOverlay();
-		}
-		game_screen.updateProjectile();
-		update_attack_animation();
-		hero_hit_loop();
-		// Step 5 & 6: update power-up collision and revert check
-		if (game_screen.level == 1)
-		{
-			game_screen.powerUp.update(game_screen.hero1);
-			game_screen.powerUp.checkRevert(game_screen.enemy1, game_screen.enemy2, game_screen.enemy3, game_screen.enemy4, game_screen.boss, game_screen.hero1);
-		}
+		playerProfile.kills += game_screen.getCurrentLevelKillCount();
+		playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
+		playerProfile.levelReached = max(playerProfile.levelReached, 3);
+		savePlayerWinDetails(playerProfile);
+		scoreScreen.load_scores_from_file();
+		game_screen.level = 1;
+	}
 
-		// Handle Trap Collision for Level 2 and Level 3
-		if (game_screen.level >= 2)
-		{
-			double healthBeforeTrap = game_screen.hero1.HeroHealth;
-			game_screen.level2Trap.checkCollision(game_screen.hero1);
-			if (game_screen.hero1.HeroHealth < healthBeforeTrap)
-			{
-				game_screen.triggerHitOverlay();
-			}
-		}
+	if (counter == 2)
+	{
+		mciSendString("close gamebg2", NULL, 0, NULL);
+		mciSendString("close gamebg3", NULL, 0, NULL);
+		mciSendString("play victorysound from 0", NULL, 0, NULL);
+		screens.pop(); // Remove game_screen
+		screens.push("victory");
+		counter++;
+	}
+	else
+	{
+		cout << "init called" << endl;
+		// game_screen.initgame_screen(1);
+
+		// mciSendString("play gamebg repeat", NULL, 0, NULL);
+	}
+}
+// ------------------------------------------------
+
+character_movement();
+double healthBeforeObstacle = game_screen.hero1.HeroHealth;
+game_screen.updateAnimatedObstacle(game_screen.hero1);
+if (game_screen.hero1.HeroHealth < healthBeforeObstacle)
+{
+	game_screen.triggerHitOverlay();
+}
+double healthBeforeEnemy = game_screen.hero1.HeroHealth;
+enemy_movement();
+if (game_screen.hero1.HeroHealth < healthBeforeEnemy)
+{
+	game_screen.triggerHitOverlay();
+}
+game_screen.updateProjectile();
+update_attack_animation();
+hero_hit_loop();
+// Step 5 & 6: update power-up collision and revert check
+if (game_screen.level == 1)
+{
+	game_screen.powerUp.update(game_screen.hero1);
+	game_screen.powerUp.checkRevert(game_screen.enemy1, game_screen.enemy2, game_screen.enemy3, game_screen.enemy4, game_screen.boss, game_screen.hero1);
+}
+
+// Handle Trap Collision for Level 2 and Level 3
+if (game_screen.level >= 2)
+{
+	double healthBeforeTrap = game_screen.hero1.HeroHealth;
+	game_screen.level2Trap.checkCollision(game_screen.hero1);
+	if (game_screen.hero1.HeroHealth < healthBeforeTrap)
+	{
+		game_screen.triggerHitOverlay();
 	}
 }
 
