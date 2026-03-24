@@ -217,7 +217,7 @@ struct GameScreen
 
     bool canShowHealthRecoverPrompt() const
     {
-        return (level == 2 && levelScore > 100 && !healthRecoverUsed && healthRecoverIconImage != 0);
+        return (level >= 2 && levelScore > 100 && !healthRecoverUsed && healthRecoverIconImage != 0);
     }
 
     void drawHealthRecoverPrompt()
@@ -266,7 +266,7 @@ struct GameScreen
 
     void spawnProjectile()
     {
-        if (level != 2 || projectileImage == 0)
+        if (level < 2 || projectileImage == 0)
             return;
 
         projectileActive = true;
@@ -279,7 +279,7 @@ struct GameScreen
     {
         bool wasAttacking = hero1.isAttacking;
         hero1.startAttack();
-        if (level == 2 && !wasAttacking && hero1.isAttacking)
+        if (level >= 2 && !wasAttacking && hero1.isAttacking)
         {
             spawnProjectile();
         }
@@ -339,7 +339,7 @@ struct GameScreen
 
     void updateProjectile()
     {
-        if (level != 2 || !projectileActive)
+        if (level < 2 || !projectileActive)
             return;
 
         projectileX += (projectileRight ? projectileSpeed : -projectileSpeed);
@@ -574,6 +574,7 @@ struct GameScreen
         health_bar_images.clear();
         BgImages.push_back(iLoadImage("resources//game_screen//level_1/bg_1//screen_for_level_1_new.jpg"));
         BgImages.push_back(iLoadImage("resources//game_screen//level_2//bg_2//pic.jpg"));
+        BgImages.push_back(iLoadImage("resources//game_screen//level_3//bg_3//Screen_for_final_round.png"));
         hero1.init_character_images(level);
         victoryImage= iLoadImage("resources/victory_screen/victory_image.png");
         hitOverlayImage = iLoadImage("resources/game_screen/getting hit frame.png");
@@ -792,7 +793,7 @@ struct GameScreen
             iShowImage(enemy4.enemyPosition_X - 2, enemy4.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
         hero1.show_chracter_moving();
-        if (level == 2 && projectileActive && projectileImage != 0)
+        if (level >= 2 && projectileActive && projectileImage != 0)
         {
             iShowImage(projectileX, projectileY, projectileWidth, projectileHeight, projectileImage);
         }

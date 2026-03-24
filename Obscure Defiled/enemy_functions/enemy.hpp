@@ -99,6 +99,33 @@ struct Enemy
                     enemy_idle_L_images.push_back(iLoadImage(a));
                 }
             }
+            else if (level == 3)
+            {
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 1/right/walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 1/left/walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 1/right/attacking/frame_%03d.png", i);
+                    enemy_attacking_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 1/left/attacking/frame_%03d.png", i);
+                    enemy_attacking_L_images.push_back(iLoadImage(a));
+                }
+            }
             
         }
         else if (enemyType == 2)
@@ -165,6 +192,33 @@ struct Enemy
                     enemy_hit_L_images.push_back(iLoadImage(a));
                 }
             }
+            else if (level == 3)
+            {
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 2/right/walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 2/left/walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 2/right/attacking/frame_%03d.png", i);
+                    enemy_attacking_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 2/left/attacking/frame_%03d.png", i);
+                    enemy_attacking_L_images.push_back(iLoadImage(a));
+                }
+            }
         }
         else if (enemyType == 3)
         {
@@ -199,6 +253,45 @@ struct Enemy
                     enemy_idle_L_images.push_back(iLoadImage(a));
                 }
 				
+            }
+            else if (level == 3)
+            {
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 3/right/walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 3/left/walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 3/right/attacking/frame_%03d.png", i);
+                    enemy_attacking_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 3/left/attacking/frame_%03d.png", i);
+                    enemy_attacking_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 3/right/getting hit/frame_%03d.png", i);
+                    enemy_hit_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 3/left/getting hit/frame_%03d.png", i);
+                    enemy_hit_L_images.push_back(iLoadImage(a));
+                }
             }
         }
         else if (enemyType == 4)
@@ -257,6 +350,33 @@ struct Enemy
                     enemy_attacking_L_images.push_back(iLoadImage(a));
                 }
             }
+            else if (level == 3)
+            {
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 4/right/walking/frame_%03d.png", i);
+                    enemy_idle_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 4/left/walking/frame_%03d.png", i);
+                    enemy_idle_L_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 4/right/attacking/frame_%03d.png", i);
+                    enemy_attacking_R_images.push_back(iLoadImage(a));
+                }
+                for (int i = 0; i <= 35; i++)
+                {
+                    char a[200];
+                    sprintf_s(a, "resources/Level_3/enemy 4/left/attacking/frame_%03d.png", i);
+                    enemy_attacking_L_images.push_back(iLoadImage(a));
+                }
+            }
         }
     }
     void show_enemy_attack()
@@ -310,14 +430,14 @@ struct Enemy
 		}
 
 		int currentIdx = enemy_movement_index % enemy_idle_R_images.size();
-		cout << " index: " << currentIdx << endl;
+		//cout << " index: " << currentIdx << endl;
         if (isright)
         {
-			iShowImage(enemyPosition_X, enemyPosition_Y, level==1?100:150, 100, enemy_idle_R_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_R_images[currentIdx]);
         }
         else
         {
-			iShowImage(enemyPosition_X, enemyPosition_Y, level==1?100:150, 100, enemy_idle_L_images[currentIdx]);
+			iShowImage(enemyPosition_X, enemyPosition_Y, 100, 100, enemy_idle_L_images[currentIdx]);
         }
     }
     void move_enemy(Hero &hero1)
@@ -578,6 +698,45 @@ struct Boss
                 boss_dead_L_images.push_back(iLoadImage(a));
             }
         }
+        else if (level == 3)
+        {
+            for (int i = 0; i <= 8; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Level_3/boss/Right/walking/frame_%03d.png", i);
+                boss_walking_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 8; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Level_3/boss/Left/walking/frame_%03d.png", i);
+                boss_walking_L_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 8; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Level_3/boss/Right/attacking/frame_%03d.png", i);
+                boss_attacking_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 8; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Level_3/boss/Left/attacking/frame_%03d.png", i);
+                boss_attacking_L_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 8; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Level_3/boss/Right/dying/frame_%03d.png", i);
+                boss_dead_R_images.push_back(iLoadImage(a));
+            }
+            for (int i = 0; i <= 8; i++)
+            {
+                char a[200];
+                sprintf_s(a, "resources/Level_3/boss/Left/dying/frame_%03d.png", i);
+                boss_dead_L_images.push_back(iLoadImage(a));
+            }
+        }
     }
     void init_boss_health_bar_images()
     {
@@ -598,6 +757,9 @@ struct Boss
         if (!isActive)
             return; // Don't show inactive boss
 
+        if (boss_attacking_R_images.empty() || boss_attacking_L_images.empty())
+            return;
+
         int currentIdx = attack_index;
         if (isright)
         {
@@ -610,6 +772,8 @@ struct Boss
     }
     void show_boss_dead()
     {
+        if (boss_dead_R_images.empty() || boss_dead_L_images.empty())
+            return;
 
         if (isright)
         {
@@ -652,6 +816,13 @@ struct Boss
 
     void show_boss_hit()
     {
+        if (boss_hit_R_images.empty() || boss_hit_L_images.empty())
+        {
+            bossGettingHit = false;
+            hit_index = 0;
+            return;
+        }
+
         if (hit_index >= boss_hit_R_images.size()-1)
         {
             hit_index = 0;
