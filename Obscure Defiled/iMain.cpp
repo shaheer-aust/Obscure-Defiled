@@ -732,7 +732,7 @@ void all_50_ms_ticks()
 
 			savePlayerWinDetails(playerProfile);
 			scoreScreen.load_scores_from_file();
-			game_screen.level = 2;
+			//game_screen.level = 2;
 
 			if (counter == 0)
 			{
@@ -741,7 +741,7 @@ void all_50_ms_ticks()
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.push("after_level_1");
+				screens.push("After_level_1");
 				screens.push("victory");
 				counter++;
 			}
@@ -763,7 +763,7 @@ void all_50_ms_ticks()
 
 			savePlayerWinDetails(playerProfile);
 			scoreScreen.load_scores_from_file();
-			game_screen.level = 3;
+			//game_screen.level = 3;
 
 			if (counter == 1)
 			{
@@ -771,7 +771,7 @@ void all_50_ms_ticks()
 				mciSendString("close gamebg2", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.push("after_level_1");
+				screens.push("After_level_1");
 				screens.push("victory");
 				counter++;
 			}
