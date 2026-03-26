@@ -1,4 +1,4 @@
-﻿
+
 #include <stdio.h>
 #include "iGraphics.h";
 #include "Screens\menu_screen.hpp";
