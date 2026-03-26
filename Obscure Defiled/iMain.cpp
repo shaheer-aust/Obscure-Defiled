@@ -311,11 +311,19 @@ void iKeyboard(unsigned char key)
 
 		cout << "Enter pressed on victory screen" << game_screen.level << endl;
 		screens.pop();
-		if (game_screen.level == 3){
-			mciSendString("play bgsong repeat", NULL, 0, NULL);
+		if (game_screen.level==2){
+			cout << "pushing level " << game_screen.level << endl;
+			screens.push("After_lvl_1");
+			//mciSendString("play bgsong repeat", NULL, 0, NULL);
 			return;
 		}
-		screens.push("After_lvl_1");
+		else{
+			if (screens.top() == "Menu"){
+				game_screen.resetgame();
+				mciSendString("play bgsong repeat", NULL, 0, NULL);
+			}
+		}
+		
 	}
 	else if (key == 13 && screens.top() == "Menu") // Enter key
 	{
@@ -782,7 +790,7 @@ void all_50_ms_ticks()
 				scoreScreen.load_scores_from_file();
 				game_screen.initgame_screen(3);
 				counter = 0;
-				//mciSendString("close gamebg", NULL, 0, NULL);
+				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play gamebg3 repeat", NULL, 0, NULL);
 			}
 		}
