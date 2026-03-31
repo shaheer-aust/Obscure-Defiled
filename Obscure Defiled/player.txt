@@ -1,4 +1,4 @@
 asd,
-level: 3,
-Kills: 35,
-Score: 1355
+level: 1,
+Kills: 40,
+Score: 676
