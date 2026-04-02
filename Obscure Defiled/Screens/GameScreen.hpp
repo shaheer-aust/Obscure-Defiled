@@ -69,7 +69,7 @@ struct GameScreen
     int healthRecoverIconImage = 0;
     bool healthRecoverUsed = false;
     int levelScore = 0;
-    vector<int> levelScores;
+    vector<int> levelScores(4, 0); // Index 0 unused, levels start from 1
     double levelElapsedSeconds = 0.0;
     vector<double> enemySpawnTimes;
     vector<bool> enemySpawnTracked;
@@ -124,7 +124,10 @@ struct GameScreen
             bossSpawnTime = levelElapsedSeconds;
         }
     }
-
+    void updateScoreWhenLoadingLevel(PlayerInfo &info)
+    {
+        levelScores[info.reachedLevel] = info.totalScore;
+    }
     void updateKillScores()
     {
         Enemy* enemies[4] = {&enemy1, &enemy2, &enemy3, &enemy4};
@@ -143,11 +146,6 @@ struct GameScreen
             double elapsed = levelElapsedSeconds - bossSpawnTime;
             levelScore += calculateKillScore(elapsed, 300);
             bossKillScored = true;
-        }
-
-        if ((int)levelScores.size() <= level)
-        {
-            levelScores.resize(level + 1, 0);
         }
         levelScores[level] = levelScore;
     }

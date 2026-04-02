@@ -903,6 +903,7 @@ int main()
 	credit.initcreditbar();
 	after_level_1_intro_screen.initIntroScreen();
 	game_screen.initgame_screen(playerProfile.levelReached);
+	game_screen.updateScoreWhenLoadingLevel(playerProfile);
 	// level_2_screen.initgame_screen(); // Prevents vector out of range crash
 	createAccountScreen.initCreateAccountScreen(menu.images[0]);
 	profileScreen.initProfileScreen(menu.images[0]);
