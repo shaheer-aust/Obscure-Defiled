@@ -252,7 +252,7 @@ struct GameScreen
 
     void init_projectile()
     {
-        projectileImage = iLoadImage("resources/projectile/4.png");
+        projectileImage = iLoadImage(level == 3 ? "resources/projectile/2.png" : "resources/projectile/4.png");
         projectileActive = false;
         projectileRight = true;
         projectileX = 0.0;
