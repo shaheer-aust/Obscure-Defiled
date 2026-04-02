@@ -740,23 +740,22 @@ void all_50_ms_ticks()
 		else if ((game_screen.level == 1 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
 		{
 
-			if (counter == 0)
+			if (counter != 1)
 			{
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
+				cout << "pushing victory" << endl;
 				screens.push("victory");
 				counter++;
 			}
 			else
 			{
 				cout << "init called from 1 sesh" << endl;
-				cout << "level 1 score: " << playerProfile.totalScore << endl;
-				cout << "level 1 score1: " << game_screen.getCombinedScoreUpToCurrentLevel() << endl;
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
-				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
+				playerProfile.totalScore += game_screen.getCombinedScoreUpToCurrentLevel();
 
 				playerProfile.levelReached = 2;
 
@@ -764,6 +763,7 @@ void all_50_ms_ticks()
 				scoreScreen.load_scores_from_file();
 				game_screen.initgame_screen(2);
 				counter = 0;
+				//screens.pop();
 				//mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play gamebg2 repeat", NULL, 0, NULL);
 			}
@@ -777,16 +777,16 @@ void all_50_ms_ticks()
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
+				cout << "pushing victory" << endl;
 				screens.push("victory");
 				counter++;
 			}
 			else
 			{
 				cout << "init called from 2 sesh" << endl;
-				cout << "level 1 score: " << playerProfile.totalScore << endl;
-				cout << "level 1 score1: " << game_screen.getCombinedScoreUpToCurrentLevel() << endl;
+				
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
-				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
+				playerProfile.totalScore += game_screen.getCombinedScoreUpToCurrentLevel();
 
 				playerProfile.levelReached = 3;
 
@@ -794,6 +794,7 @@ void all_50_ms_ticks()
 				scoreScreen.load_scores_from_file();
 				game_screen.initgame_screen(3);
 				counter = 0;
+				//screens.pop();
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("play gamebg3 repeat", NULL, 0, NULL);
 			}
@@ -812,15 +813,15 @@ void all_50_ms_ticks()
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.pop();
 				screens.push("victory");
+				cout << "pushing victory" << endl;
 				counter++;
 			}
 			else
 			{
 				cout << "init called from 3 sesh" << endl;
-				cout << "level 1 score: " << playerProfile.totalScore << endl;
-				cout << "level 1 score1: " << game_screen.getCombinedScoreUpToCurrentLevel() << endl;
+
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
-				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
+				playerProfile.totalScore += game_screen.getCombinedScoreUpToCurrentLevel();
 
 				playerProfile.levelReached = 1;
 
@@ -828,6 +829,7 @@ void all_50_ms_ticks()
 				scoreScreen.load_scores_from_file();
 				game_screen.initgame_screen(1);
 				counter = 0;
+				//screens.pop();
 				//mciSendString("close gamebg", NULL, 0, NULL);
 				//mciSendString("play g repeat", NULL, 0, NULL);
 			}

@@ -14,6 +14,7 @@ extern int getIdleIndex();
 #include <iostream>
 #include "enemy_functions\enemy.hpp";
 #include "character_functions\Hero.hpp";
+#include "level_handler.hpp"
 #include <vector>
 #include <array>
 #include "trap.hpp"
@@ -69,7 +70,7 @@ struct GameScreen
     int healthRecoverIconImage = 0;
     bool healthRecoverUsed = false;
     int levelScore = 0;
-    vector<int> levelScores(4, 0); // Index 0 unused, levels start from 1
+	int levelScores[4]; // Index 0 unused, levels start from 1
     double levelElapsedSeconds = 0.0;
     vector<double> enemySpawnTimes;
     vector<bool> enemySpawnTracked;
@@ -124,9 +125,14 @@ struct GameScreen
             bossSpawnTime = levelElapsedSeconds;
         }
     }
-    void updateScoreWhenLoadingLevel(PlayerInfo &info)
+	void updateScoreWhenLoadingLevel(playerInfo &info)
     {
-        levelScores[info.reachedLevel] = info.totalScore;
+		levelScores[0] = 0;
+		levelScores[1] = 0;
+		levelScores[2] = 0;
+		levelScores[3] = 0;
+
+        levelScores[info.levelReached] = info.totalScore;
     }
     void updateKillScores()
     {
@@ -176,13 +182,7 @@ struct GameScreen
 
     int getCombinedScoreUpToCurrentLevel() const
     {
-        int total = 0;
-        int lastLevel = min(level, (int)levelScores.size() - 1);
-        for (int currentLevel = 1; currentLevel <= lastLevel; currentLevel++)
-        {
-            total += levelScores[currentLevel];
-        }
-        return total;
+		return levelScores[level-1];
     }
 
     void drawScoreTopRight()
@@ -563,10 +563,6 @@ struct GameScreen
     void initgame_screen(int level)
     {
         this->level = level;
-        if ((int)levelScores.size() <= level)
-        {
-            levelScores.resize(level + 1, 0);
-        }
         resetgame();
         BgImages.clear();
         health_bar_images.clear();

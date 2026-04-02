@@ -1,4 +1,4 @@
-asd,
+unknown player,
 level: 1,
 Kills: 0,
 Score: 0
