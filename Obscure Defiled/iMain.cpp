@@ -753,6 +753,8 @@ void all_50_ms_ticks()
 			else
 			{
 				cout << "init called from 1 sesh" << endl;
+				cout << "level 1 score: " << playerProfile.totalScore << endl;
+				cout << "level 1 score1: " << game_screen.getCombinedScoreUpToCurrentLevel() << endl;
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
@@ -781,6 +783,8 @@ void all_50_ms_ticks()
 			else
 			{
 				cout << "init called from 2 sesh" << endl;
+				cout << "level 1 score: " << playerProfile.totalScore << endl;
+				cout << "level 1 score1: " << game_screen.getCombinedScoreUpToCurrentLevel() << endl;
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
@@ -813,6 +817,8 @@ void all_50_ms_ticks()
 			else
 			{
 				cout << "init called from 3 sesh" << endl;
+				cout << "level 1 score: " << playerProfile.totalScore << endl;
+				cout << "level 1 score1: " << game_screen.getCombinedScoreUpToCurrentLevel() << endl;
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore = game_screen.getCombinedScoreUpToCurrentLevel();
 
