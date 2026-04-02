@@ -1,4 +1,4 @@
-asd
-level: 1
-Kills: 40
+asd,
+level: 1,
+Kills: 40,
 Score: 676

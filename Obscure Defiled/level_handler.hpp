@@ -17,28 +17,41 @@ struct playerInfo {
     int levelReached;
 };
 void initPlayerProfile(playerInfo& info){
-    FILE *file = fopen("player.txt", "r");
-    if (file == nullptr) {
-        info.playerName = "Unknown Player";
-        info.kills = 0;
-        info.totalScore = 0;
-        info.levelReached = 0;
-        return;
-    }else{
-
-    //ifstream file("player.txt");
-    // if (file.is_open()){
-    //     string line;
+    ifstream file("player.txt");
+    if (file.is_open()){
+        string line;
         // expected format:
-        // Player Name
-        // level: 1
-        // Kills: 3
+        // Player Name,
+        // level: 1,
+        // Kills: 3,
         // Score: 500
-       
-        fscanf(file, "\nName: %s", &info.playerName);
-        fscanf(file, "\nlevel: %d", &info.levelReached);
-        fscanf(file, "\nKills: %d", &info.kills);
-        fscanf(file, "\nScore: %d", &info.totalScore);
+        if (getline(file, line)) {
+            // remove trailing comma
+            if (!line.empty() && line.back() == ',') line.pop_back();
+            info.playerName = line;
+        }
+        if (getline(file, line)) {
+			string to_remove = "level: ";
+			line.erase(0, to_remove.length());
+			line.pop_back();
+           
+			info.levelReached = stoi(line);
+            
+        }
+        if (getline(file, line)) {
+			string to_remove = "Kills: ";
+			line.erase(0, to_remove.length());
+			line.pop_back();
+
+			info.kills = stoi(line);
+        }
+        if (getline(file, line)) {
+			string to_remove = "Score: ";
+			line.erase(0, to_remove.length());
+			//line.pop_back();
+
+            info.totalScore = stoi(line);
+        }
         file.close();
     }
 }
@@ -46,10 +59,10 @@ void savePlayerProfile(const playerInfo& info) {
     
     ofstream file("player.txt");
     if (file.is_open()) {
-        file << "Name: " << info.playerName << "\n"
-             << "level: " << info.levelReached << "\n"
-             << "Kills: " << info.kills << "\n"
-             << "Score: " << info.totalScore << "\n";
+        file << info.playerName << ",\n"
+             << "level: " << info.levelReached << ",\n"
+             << "Kills: " << info.kills << ",\n"
+             << "Score: " << info.totalScore;
         file.close();
     }
 }
