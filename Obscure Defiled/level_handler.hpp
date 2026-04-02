@@ -112,12 +112,15 @@ void upsertScoreEntry(const playerInfo &info)
 
     bool found = false;
     string normalizedName = trimLower(info.playerName);
+    int traceIndex = -1;
     for (ScoreStorageEntry &entry : entries)
     {
+        traceIndex++;
+  
         if (trimLower(entry.playerName) == normalizedName)
         {
-            entry.kills == info.kills;
-            entry.totalScore == info.totalScore;
+            entry.kills = info.kills;
+            entry.totalScore = info.totalScore;
             found = true;
             break;
         }
@@ -130,6 +133,10 @@ void upsertScoreEntry(const playerInfo &info)
         newEntry.kills = info.kills;
         newEntry.totalScore = info.totalScore;
         entries.push_back(newEntry);
+    }else{
+        cout << "Updated existing entry for player: " << info.playerName << " at index " << traceIndex << endl;
+        entries[traceIndex].kills = info.kills;
+        entries[traceIndex].totalScore = info.totalScore;
     }
 
     sort(entries.begin(), entries.end(), [](const ScoreStorageEntry &a, const ScoreStorageEntry &b)
