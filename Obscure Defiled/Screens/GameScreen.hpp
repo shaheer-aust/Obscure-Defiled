@@ -63,10 +63,10 @@ struct GameScreen
     bool projectileActive = false;
     bool projectileRight = true;
     double projectileX = 0.0;
-    double projectileY = 0.0;
+	double projectileY = 0.0;
     double projectileSpeed = 28.0;
-    int projectileWidth = 40;
-    int projectileHeight = 20;
+    int projectileWidth =40;
+    int projectileHeight =20;
     int healthRecoverIconImage = 0;
     bool healthRecoverUsed = false;
     int levelScore = 0;
@@ -252,14 +252,14 @@ struct GameScreen
 
     void init_projectile()
     {
-        projectileImage = iLoadImage("resources/projectile/4.png");
+        projectileImage = iLoadImage(level==2?"resources/projectile/4.png":"resources/projectile/2.png");
         projectileActive = false;
         projectileRight = true;
         projectileX = 0.0;
         projectileY = 0.0;
         projectileSpeed = 28.0;
-        projectileWidth = 40;
-        projectileHeight = 20;
+		projectileWidth = level == 2 ? 40:80;
+		projectileHeight = level == 2 ? 20:40;
     }
 
     void spawnProjectile()

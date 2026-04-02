@@ -1,4 +1,4 @@
-unknown player,
-level: 1,
-Kills: 0,
-Score: 0
+asd,
+level: 3,
+Kills: 20,
+Score: 691
