@@ -96,4 +96,22 @@ struct Lightning
 		double heroHalfH = 152.0 / 2.0;
 
 		double boltCenterX = bolt.x + (bolt.width / 2.0);
-		double boltCenterY = bolt.y + (bolt.height / 2.
+		double boltCenterY = bolt.y + (bolt.height / 2.0);
+
+		// Simple AABB overlap check
+		bool hitX = (boltCenterX >= hero.characterPosition_X) &&
+		            (boltCenterX <= hero.characterPosition_X + 152.0);
+		bool hitY = (boltCenterY >= hero.characterPosition_Y) &&
+		            (boltCenterY <= hero.characterPosition_Y + 152.0);
+
+		if (hitX && hitY)
+		{
+			hero.HeroHealth -= 10;
+			if (hero.HeroHealth < 0) hero.HeroHealth = 0;
+			bolt.hasHit = true;
+			bolt.active = false;
+		}
+	}
+};
+
+#endif

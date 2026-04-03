@@ -1,23 +1,22 @@
-﻿
+
 #include <stdio.h>
-#include "iGraphics.h";
-#include "Screens\menu_screen.hpp";
-#include "Screens\setting_screen.hpp";
-#include "Screens\intro_screen.hpp";
-#include "Screens\credit_screen.hpp";
-#include "enemy_functions\enemy.hpp";
-#include "Screens\credit_screen.hpp";
-#include "character_functions\Hero.hpp";
-#include "Screens\option_screen.hpp";
-#include "Screens\game_over_screen.hpp";
-#include "Screens\Score_Screen.hpp";
+#include "iGraphics.h"
+#include "Screens\menu_screen.hpp"
+#include "Screens\setting_screen.hpp"
+#include "Screens\intro_screen.hpp"
+#include "Screens\credit_screen.hpp"
+#include "enemy_functions\enemy.hpp"
+#include "character_functions\Hero.hpp"
+#include "Screens\option_screen.hpp"
+#include "Screens\game_over_screen.hpp"
+#include "Screens\Score_Screen.hpp"
 #include "Screens\after_lvl_1_screen.hpp"
 #include "level_handler.hpp"
 #include "Screens\create_account_screen.hpp"
 #include "Screens\profile_screen.hpp"
 #include "Screens\controls_screen.hpp"
 // #include "Screens\Level_2_game_screen.hpp";
-#include "Screens\GameScreen.hpp";
+#include "Screens\GameScreen.hpp"
 #include <vector>
 #include <stack>
 #include <string>

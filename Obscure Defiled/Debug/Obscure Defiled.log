@@ -1,53 +1,10 @@
-﻿Build started 4/3/2026 3:37:51 PM.
-     1>Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
+﻿Build started 03-Apr-26 10:01:02 PM.
+     1>Project "C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt iMain.cpp
-         iMain.cpp
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(3): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(8): warning C4005: 'BUTTON_WIDTH' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\menu_screen.hpp(8) : see previous definition of 'BUTTON_WIDTH'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\menu_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(7): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(318): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(412): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\character_functions\hero.hpp(435): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(480): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(491): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(518): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(826): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(846): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(917): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(931): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\enemy_functions\enemy.hpp(944): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(12): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\imain.cpp(13): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\after_lvl_1_screen.hpp(6): warning C4005: 'TOTAL_PICS' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\intro_screen.hpp(6) : see previous definition of 'TOTAL_PICS'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\level_handler.hpp(6): warning C4005: 'TOTAL_PICS' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\after_lvl_1_screen.hpp(6) : see previous definition of 'TOTAL_PICS'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\create_account_screen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(11): warning C4005: 'BUTTON_WIDTH' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(8) : see previous definition of 'BUTTON_WIDTH'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(12): warning C4005: 'BUTTON_HEIGHT' : macro redefinition
-                 c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\setting_screen.hpp(9) : see previous definition of 'BUTTON_HEIGHT'
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(15): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(16): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\lava.hpp(75): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\user\documents\github\obscure-defiled\obscure defiled\lightning.hpp(100): fatal error C1070: mismatched #if/#endif pair in file 'c:\users\user\documents\github\obscure-defiled\obscure defiled\lightning.hpp'
-     1>Done Building Project "C:\Users\user\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)) -- FAILED.
+     1>Link:
+         Obscure Defiled.vcxproj -> C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe
+     1>Done Building Project "C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:00.58
+Time Elapsed 00:00:00.13
