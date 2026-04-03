@@ -844,7 +844,7 @@ else
                     shiftAnimatedObstacle(-bg_speed);
                     shiftMainObstacle(-bg_speed);
                     cloudLayer2.shift(-bg_speed); // scroll clouds during mid-air right move
-                x -= bg_speed;
+                    x -= bg_speed;
                     if (x <= -SCREEN_WIDTH)
                     {
                         x = 0;
@@ -859,14 +859,24 @@ else
             }
             else if (leftPressed)
             {
-                x += bg_speed;
-                shiftAnimatedObstacle(bg_speed);
-                if (x >= SCREEN_WIDTH)
+                if (canHeroMoveHorizontal(hero1.character_speed - 5))
                 {
-                    x = 0;
+                    heroMovementBlockedByMainObstacle = false;
+                    shiftAnimatedObstacle(+bg_speed);
+                    shiftMainObstacle(+bg_speed);
+                    cloudLayer2.shift(+bg_speed);
+                    x += bg_speed;
+                    if (x >= SCREEN_WIDTH)
+                    {
+                        x = 0;
+                    }
+                    hero1.characterPosition_X -= hero1.character_speed - 5;
+                    hero1.isright = false;
                 }
-                hero1.characterPosition_X -= hero1.character_speed - 5;
-                hero1.isright = false;
+                else
+                {
+                    heroMovementBlockedByMainObstacle = true;
+                }
             }
             // apply vertical movement
             hero1.characterPosition_Y += jumpVelocity;
