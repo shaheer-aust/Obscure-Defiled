@@ -510,6 +510,7 @@ void character_movement()
 	if (game_screen.rightPressed && !game_screen.hero1.isJumping)
 	{
 		game_screen.x -= game_screen.bg_speed;
+		game_screen.cloudLayer2.shift(-game_screen.bg_speed); // scroll clouds right
 
 		if (game_screen.x <= -SCREEN_WIDTH)
 		{
@@ -527,6 +528,7 @@ void character_movement()
 	else if (game_screen.leftPressed && !game_screen.hero1.isJumping)
 	{
 		game_screen.x += game_screen.bg_speed;
+		game_screen.cloudLayer2.shift(game_screen.bg_speed); // scroll clouds left
 
 		if (game_screen.x >= SCREEN_WIDTH)
 		{
