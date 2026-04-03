@@ -513,6 +513,7 @@ void character_movement()
 		{
 			game_screen.heroMovementBlockedByMainObstacle = false;
 			game_screen.x -= game_screen.bg_speed;
+		game_screen.cloudLayer2.shift(-game_screen.bg_speed); // scroll clouds right
 
 			if (game_screen.x <= -SCREEN_WIDTH)
 			{
@@ -538,6 +539,7 @@ void character_movement()
 		{
 			game_screen.heroMovementBlockedByMainObstacle = false;
 			game_screen.x += game_screen.bg_speed;
+		game_screen.cloudLayer2.shift(game_screen.bg_speed); // scroll clouds left
 
 			if (game_screen.x >= SCREEN_WIDTH)
 			{

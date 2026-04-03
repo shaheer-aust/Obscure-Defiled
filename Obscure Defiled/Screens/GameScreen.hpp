@@ -19,6 +19,7 @@ extern int getIdleIndex();
 #include <array>
 #include "trap.hpp"
 #include "cloud.hpp"
+#include "../cloud2.hpp"
 #include "power.hpp"
 #include "lava.hpp"
 #include "lightning.hpp"
@@ -44,6 +45,7 @@ struct GameScreen
     Lava level3Lava;
     Cloud cloud1;
     Cloud cloud2;
+    CloudLayer cloudLayer2;
     Lightning lightning1;
     PowerUpSystem powerUp;
     bool spacePressed = false;
@@ -785,11 +787,13 @@ else
             // Initializes the trap ahead of the hero on the ground
             // Ground is at 100, so we can place it somewhere ahead like x=800
             // Image size may vary but a width of 100 and height of 50 works for collisions
-            level2Trap.initTrap(800, 100, 100, 50); 
+            level2Trap.initTrap(800, 100, 100, 50);
+            cloudLayer2.initCloudLayer(); // cloud band at top of screen
         }
-        else 
+        else
         {
             level2Trap.isActive = false;
+            cloudLayer2.isActive = false;
         }
 
         init_health_bar_images();
@@ -839,7 +843,8 @@ else
                     heroMovementBlockedByMainObstacle = false;
                     shiftAnimatedObstacle(-bg_speed);
                     shiftMainObstacle(-bg_speed);
-                    x -= bg_speed;
+                    cloudLayer2.shift(-bg_speed); // scroll clouds during mid-air right move
+                x -= bg_speed;
                     if (x <= -SCREEN_WIDTH)
                     {
                         x = 0;
@@ -854,23 +859,14 @@ else
             }
             else if (leftPressed)
             {
-                if (canHeroMoveHorizontal(-(hero1.character_speed - 5)))
+                x += bg_speed;
+                shiftAnimatedObstacle(bg_speed);
+                if (x >= SCREEN_WIDTH)
                 {
-                    heroMovementBlockedByMainObstacle = false;
-                    x += bg_speed;
-                    shiftAnimatedObstacle(bg_speed);
-                    shiftMainObstacle(bg_speed);
-                    if (x >= SCREEN_WIDTH)
-                    {
-                        x = 0;
-                    }
-                    hero1.characterPosition_X -= hero1.character_speed - 5;
-                    hero1.isright = false;
+                    x = 0;
                 }
-                else
-                {
-                    heroMovementBlockedByMainObstacle = true;
-                }
+                hero1.characterPosition_X -= hero1.character_speed - 5;
+                hero1.isright = false;
             }
             // apply vertical movement
             hero1.characterPosition_Y += jumpVelocity;
@@ -941,6 +937,9 @@ else
         iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
+
+        // Layer: cloud band on top of BG (level 2 only)
+        cloudLayer2.draw(level);
 
         // cout << "Hero Health: " << hero1.HeroHealth << endl;
         iShowImage(SCREEN_WIDTH / 2 - (275 / 2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
