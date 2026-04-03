@@ -22,6 +22,9 @@ extern int getIdleIndex();
 #include "power.hpp"
 #include "lava.hpp"
 #include "lightning.hpp"
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
 using namespace std;
 struct GameScreen
 {
@@ -87,6 +90,152 @@ struct GameScreen
     bool bossSpawnTracked = false;
     bool bossKillScored = false;
     int hitOverlayTimerTicks = 0;
+    int mainObstacleImage = 0;
+    double mainObstacleX = 760.0;
+    double mainObstacleY = 100.0;
+    int mainObstacleWidth = 70;
+    int mainObstacleHeight = 110;
+    bool heroMovementBlockedByMainObstacle = false;
+
+    void randomizeMainObstacleX()
+    {
+        static bool seeded = false;
+        if (!seeded)
+        {
+            srand((unsigned int)time(NULL));
+            seeded = true;
+        }
+
+        int minX = 100+ 20;
+        int maxX = SCREEN_WIDTH - 100 - mainObstacleWidth;
+        if (maxX <= minX)
+        {
+            mainObstacleX = minX;
+            return;
+        }
+
+        mainObstacleX = minX + (rand() % (maxX - minX + 1));
+    }
+
+    void shiftMainObstacle(double dx)
+    {
+        mainObstacleX += dx;
+    }
+
+    bool overlapsMainObstacle(double actorLeft, double actorRight, double actorBottom, double actorTop) const
+    {
+        if (mainObstacleImage == 0)
+        {
+            return false;
+        }
+
+        double obstacleLeft = mainObstacleX;
+        double obstacleRight = mainObstacleX + mainObstacleWidth;
+        double obstacleBottom = mainObstacleY;
+        double obstacleTop = mainObstacleY + mainObstacleHeight-20;
+
+        bool horizontalOverlap = (actorRight > obstacleLeft) && (actorLeft < obstacleRight);
+        bool verticalOverlap = (actorTop > obstacleBottom) && (actorBottom < obstacleTop);
+        return horizontalOverlap && verticalOverlap;
+    }
+
+    bool canHeroMoveHorizontal(double deltaX) const
+    {
+        double heroLeft = hero1.characterPosition_X + 20.0;
+        double heroRight = hero1.characterPosition_X + 132.0;
+        double heroBottom = hero1.characterPosition_Y;
+        double heroTop = hero1.characterPosition_Y + 120.0;
+
+        return !overlapsMainObstacle(heroLeft + deltaX, heroRight + deltaX, heroBottom, heroTop);
+    }
+
+    void keepEnemyOutsideMainObstacle(Enemy &enemy, double previousX)
+    {
+        if (!enemy.isActive || enemy.enemyHealth <= 0)
+        {
+            return;
+        }
+
+        double width = 100.0;
+        double height = 100.0;
+        double currentLeft = enemy.enemyPosition_X;
+        double currentRight = enemy.enemyPosition_X + width;
+        double currentBottom = enemy.enemyPosition_Y;
+        double currentTop = enemy.enemyPosition_Y + height;
+        if (!overlapsMainObstacle(currentLeft, currentRight, currentBottom, currentTop))
+        {
+            return;
+        }
+
+        double obstacleLeft = mainObstacleX;
+        double obstacleRight = mainObstacleX + mainObstacleWidth;
+        double previousRight = previousX + width;
+        if (previousRight <= obstacleLeft)
+        {
+            enemy.enemyPosition_X = obstacleLeft - width;
+            return;
+        }
+        if (previousX >= obstacleRight)
+        {
+            enemy.enemyPosition_X = obstacleRight;
+            return;
+        }
+
+        double leftResolve = obstacleLeft - width;
+        double rightResolve = obstacleRight;
+        if (fabs(previousX - leftResolve) <= fabs(previousX - rightResolve))
+        {
+            enemy.enemyPosition_X = leftResolve;
+        }
+        else
+        {
+            enemy.enemyPosition_X = rightResolve;
+        }
+    }
+
+    void keepBossOutsideMainObstacle(double previousX)
+    {
+        if (!boss.isActive || boss.bossHealth <= 0)
+        {
+            return;
+        }
+
+        double width = (boss.level == 1 ? 122.0 : 130.0);
+        double height = (boss.level == 1 ? 81.0 : 170.0);
+        double currentLeft = boss.bossPosition_X;
+        double currentRight = boss.bossPosition_X + width;
+        double currentBottom = boss.bossPosition_Y;
+        double currentTop = boss.bossPosition_Y + height;
+        if (!overlapsMainObstacle(currentLeft, currentRight, currentBottom, currentTop))
+        {
+            return;
+        }
+
+        double obstacleLeft = mainObstacleX;
+        double obstacleRight = mainObstacleX + mainObstacleWidth;
+        double previousRight = previousX + width;
+        if (previousRight <= obstacleLeft)
+        {
+            boss.bossPosition_X = obstacleLeft - width;
+            return;
+        }
+        if (previousX >= obstacleRight)
+        {
+            boss.bossPosition_X = obstacleRight;
+            return;
+        }
+
+        double leftResolve = obstacleLeft - width;
+        double rightResolve = obstacleRight;
+        if (fabs(previousX - leftResolve) <= fabs(previousX - rightResolve))
+        {
+            boss.bossPosition_X = leftResolve;
+        }
+        else
+        {
+            boss.bossPosition_X = rightResolve;
+        }
+    }
 
     int calculateKillScore(double elapsedSeconds, int maxScore) const
     {
@@ -448,6 +597,7 @@ struct GameScreen
 		base_gravity = 5;
 		groundY = 100.0;
 		bg_speed = 4.0;
+        heroMovementBlockedByMainObstacle = false;
         enemy2Spawned = false;
 		enemy3Spawned = false;
 		enemy4Spawned = false;
@@ -465,6 +615,7 @@ struct GameScreen
         beginLevelScoreTracking();
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
+        randomizeMainObstacleX();
         groundY = hero1.characterPosition_Y;
         enemy2.isActive = false; 
         enemy2.enemyPosition_X = 64;
@@ -596,6 +747,7 @@ else
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
         init_animated_obstacle();
         init_projectile();
+        mainObstacleImage = iLoadImage("resources/obstacles/obstacles_main_size/Obstacle_2_main.png");
         healthRecoverIconImage = iLoadImage("resources/power_up_icon/Health_recover/Health_Boast_up.png");
 
         if (level == 1)
@@ -682,25 +834,43 @@ else
         {
             if (rightPressed)
             {
-                shiftAnimatedObstacle(-bg_speed);
-                x -= bg_speed;
-                if (x <= -SCREEN_WIDTH)
+                if (canHeroMoveHorizontal(hero1.character_speed - 5))
                 {
-                    x = 0;
+                    heroMovementBlockedByMainObstacle = false;
+                    shiftAnimatedObstacle(-bg_speed);
+                    shiftMainObstacle(-bg_speed);
+                    x -= bg_speed;
+                    if (x <= -SCREEN_WIDTH)
+                    {
+                        x = 0;
+                    }
+                    hero1.characterPosition_X += hero1.character_speed - 5;
+                    hero1.isright = true;
                 }
-                hero1.characterPosition_X += hero1.character_speed - 5;
-                hero1.isright = true;
+                else
+                {
+                    heroMovementBlockedByMainObstacle = true;
+                }
             }
             else if (leftPressed)
             {
-                x += bg_speed;
-                shiftAnimatedObstacle(bg_speed);
-                if (x >= SCREEN_WIDTH)
+                if (canHeroMoveHorizontal(-(hero1.character_speed - 5)))
                 {
-                    x = 0;
+                    heroMovementBlockedByMainObstacle = false;
+                    x += bg_speed;
+                    shiftAnimatedObstacle(bg_speed);
+                    shiftMainObstacle(bg_speed);
+                    if (x >= SCREEN_WIDTH)
+                    {
+                        x = 0;
+                    }
+                    hero1.characterPosition_X -= hero1.character_speed - 5;
+                    hero1.isright = false;
                 }
-                hero1.characterPosition_X -= hero1.character_speed - 5;
-                hero1.isright = false;
+                else
+                {
+                    heroMovementBlockedByMainObstacle = true;
+                }
             }
             // apply vertical movement
             hero1.characterPosition_Y += jumpVelocity;
@@ -825,6 +995,10 @@ if (level == 1)
             iShowImage(enemy4.enemyPosition_X - 2, enemy4.enemyPosition_Y + 100, 50, 15, boss.boss_health_bar_images[frameIndex]);
         }
         hero1.show_chracter_moving();
+        if (mainObstacleImage != 0)
+        {
+            iShowImage(mainObstacleX, mainObstacleY, mainObstacleWidth, mainObstacleHeight, mainObstacleImage);
+        }
         if (level >= 2 && projectileActive && projectileImage != 0)
         {
             iShowImage(projectileX, projectileY, projectileWidth, projectileHeight, projectileImage);

@@ -509,43 +509,62 @@ void character_movement()
 {
 	if (game_screen.rightPressed && !game_screen.hero1.isJumping)
 	{
-		game_screen.x -= game_screen.bg_speed;
+		if (game_screen.canHeroMoveHorizontal(game_screen.hero1.character_speed))
+		{
+			game_screen.heroMovementBlockedByMainObstacle = false;
+			game_screen.x -= game_screen.bg_speed;
 
-		if (game_screen.x <= -SCREEN_WIDTH)
-		{
-			game_screen.x = 0;
+			if (game_screen.x <= -SCREEN_WIDTH)
+			{
+				game_screen.x = 0;
+			}
+			game_screen.hero1.isMoving = true;
+			game_screen.hero1.movement_index++;
+			game_screen.hero1.characterPosition_X += game_screen.hero1.character_speed;
+			if (game_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
+			{
+				game_screen.hero1.characterPosition_X = SCREEN_WIDTH - 70;
+			}
 		}
-		game_screen.hero1.isMoving = true;
-		// game_screen.hero1.gettingHit = false;
-		game_screen.hero1.movement_index++;
-		game_screen.hero1.characterPosition_X += game_screen.hero1.character_speed;
-		if (game_screen.hero1.characterPosition_X >= SCREEN_WIDTH - 70)
+		else
 		{
-			game_screen.hero1.characterPosition_X = SCREEN_WIDTH - 70;
+			game_screen.heroMovementBlockedByMainObstacle = true;
+			game_screen.hero1.isMoving = false;
 		}
 	}
 	else if (game_screen.leftPressed && !game_screen.hero1.isJumping)
 	{
-		game_screen.x += game_screen.bg_speed;
+		if (game_screen.canHeroMoveHorizontal(-game_screen.hero1.character_speed))
+		{
+			game_screen.heroMovementBlockedByMainObstacle = false;
+			game_screen.x += game_screen.bg_speed;
 
-		if (game_screen.x >= SCREEN_WIDTH)
-		{
-			game_screen.x = 0;
+			if (game_screen.x >= SCREEN_WIDTH)
+			{
+				game_screen.x = 0;
+			}
+			game_screen.hero1.isMoving = true;
+			game_screen.hero1.movement_index++;
+			game_screen.hero1.characterPosition_X -= game_screen.hero1.character_speed;
+			if (game_screen.hero1.characterPosition_X < 0)
+			{
+				game_screen.hero1.characterPosition_X = 0;
+			}
 		}
-		game_screen.hero1.isMoving = true;
-		game_screen.hero1.movement_index++;
-		game_screen.hero1.characterPosition_X -= game_screen.hero1.character_speed;
-		if (game_screen.hero1.characterPosition_X < 0)
+		else
 		{
-			game_screen.hero1.characterPosition_X = 0;
+			game_screen.heroMovementBlockedByMainObstacle = true;
+			game_screen.hero1.isMoving = false;
 		}
 	}
 	else if (game_screen.hero1.isJumping)
 	{
+		game_screen.heroMovementBlockedByMainObstacle = false;
 		game_screen.hero1.isMoving = false;
 	}
 	else
 	{
+		game_screen.heroMovementBlockedByMainObstacle = false;
 		game_screen.hero1.isMoving = false;
 	}
 }
@@ -553,7 +572,7 @@ void enemy_movement()
 {
 	if (screens.top() == "game_screen")
 	{
-		if (game_screen.rightPressed && !game_screen.hero1.isJumping)
+		if (game_screen.rightPressed && !game_screen.hero1.isJumping && !game_screen.heroMovementBlockedByMainObstacle)
 		{
 			if (game_screen.enemy1.isActive)
 			{
@@ -572,6 +591,7 @@ void enemy_movement()
 				game_screen.enemy4.enemyPosition_X -= game_screen.bg_speed;
 			}
 			game_screen.shiftAnimatedObstacle(-game_screen.bg_speed);
+			game_screen.shiftMainObstacle(-game_screen.bg_speed);
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X -= game_screen.bg_speed;
@@ -579,7 +599,7 @@ void enemy_movement()
 			// Step 5: scroll the power-up icon with the background
 			game_screen.powerUp.shiftIcon(-game_screen.bg_speed);
 		}
-		if (game_screen.leftPressed && !game_screen.hero1.isJumping)
+		if (game_screen.leftPressed && !game_screen.hero1.isJumping && !game_screen.heroMovementBlockedByMainObstacle)
 		{
 			if (game_screen.enemy1.isActive)
 			{
@@ -598,6 +618,7 @@ void enemy_movement()
 				game_screen.enemy4.enemyPosition_X += game_screen.bg_speed;
 			}
 			game_screen.shiftAnimatedObstacle(game_screen.bg_speed);
+			game_screen.shiftMainObstacle(game_screen.bg_speed);
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X += game_screen.bg_speed;
@@ -654,11 +675,23 @@ void enemy_movement()
 			game_screen.bossSpawned = true;
 		}
 
+		double enemy1PrevX = game_screen.enemy1.enemyPosition_X;
+		double enemy2PrevX = game_screen.enemy2.enemyPosition_X;
+		double enemy3PrevX = game_screen.enemy3.enemyPosition_X;
+		double enemy4PrevX = game_screen.enemy4.enemyPosition_X;
+		double bossPrevX = game_screen.boss.bossPosition_X;
+
 		game_screen.enemy1.move_enemy(game_screen.hero1);
 		game_screen.enemy2.move_enemy(game_screen.hero1);
 		game_screen.enemy3.move_enemy(game_screen.hero1);
 		game_screen.enemy4.move_enemy(game_screen.hero1);
 		game_screen.boss.move_boss(game_screen.hero1);
+
+		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy1, enemy1PrevX);
+		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy2, enemy2PrevX);
+		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy3, enemy3PrevX);
+		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy4, enemy4PrevX);
+		game_screen.keepBossOutsideMainObstacle(bossPrevX);
 
 		// Handle Trap movement for Level 2 and Level 3
 		if (game_screen.level >= 2 && game_screen.level2Trap.isActive)
@@ -741,18 +774,19 @@ void all_50_ms_ticks()
 
 			if (counter != 1)
 			{
+				screens.push("victory");
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				cout << "pushing victory" << endl;
-				screens.push("victory");
+				cout << "pushing victory" <<counter<< endl;
+				
 				counter++;
 			}
 			else
 			{
-				cout << "init called from 1 sesh" << endl;
+				cout << "init called from 1 sesh"<<counter << endl;
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore += game_screen.getCombinedScoreUpToCurrentLevel();
 
@@ -771,18 +805,19 @@ void all_50_ms_ticks()
 		{
 			if (counter == 0)
 			{
+				screens.push("victory");
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				cout << "pushing victory" << endl;
-				screens.push("victory");
+				cout << "pushing victory" << counter << endl;
+				
 				counter++;
 			}
 			else
 			{
-				cout << "init called from 2 sesh" << endl;
+				cout << "init called from 2 sesh" << counter << endl;
 				
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore += game_screen.getCombinedScoreUpToCurrentLevel();
@@ -805,19 +840,20 @@ void all_50_ms_ticks()
 
 			if (counter == 0)
 			{
+				screens.push("victory");
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
 				screens.pop();
-				screens.push("victory");
-				cout << "pushing victory" << endl;
+				
+				cout << "pushing victory" << counter << endl;
 				counter++;
 			}
 			else
 			{
-				cout << "init called from 3 sesh" << endl;
+				cout << "init called from 3 sesh" << counter << endl;
 
 				playerProfile.kills += game_screen.getCurrentLevelKillCount();
 				playerProfile.totalScore += game_screen.getCombinedScoreUpToCurrentLevel();
