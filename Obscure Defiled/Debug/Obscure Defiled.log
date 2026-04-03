@@ -1,4 +1,4 @@
-﻿Build started 04-Apr-26 2:08:40 AM.
+﻿Build started 04-Apr-26 2:54:07 AM.
      1>Project "C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Obscure Defiled\Obscure Defiled.vcxproj" on node 2 (Build target(s)).
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (demo.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
@@ -37,8 +37,8 @@
                  c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\cloud2.hpp(2) : see previous definition of 'CLOUD2_H'
      1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\lava.hpp(75): warning C4018: '>=' : signed/unsigned mismatch
      1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(560): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(895): warning C4018: '>=' : signed/unsigned mismatch
-     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(903): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(897): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\dell\onedrive\documents\github\obscure-defiled\obscure defiled\screens\gamescreen.hpp(905): warning C4018: '>=' : signed/unsigned mismatch
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.lib" /MACHINE:X86 Debug\iMain.obj
          Obscure Defiled.vcxproj -> C:\Users\Dell\OneDrive\Documents\GitHub\Obscure-Defiled\Debug\Obscure Defiled.exe
@@ -46,4 +46,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:03.01
+Time Elapsed 00:00:03.61

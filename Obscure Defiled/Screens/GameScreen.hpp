@@ -718,8 +718,9 @@ struct GameScreen
 		}
 		if (level == 2)
 		{
-			level2Trap.initTrap(800, 100, 100, 50);
+			level2Trap.isActive = false; // Disabled falling fireballs unconditionally
             rainEffect.initRain();
+            lightning1.initLightning(60, 120, 4.0);
 		}
 		else
 		{
@@ -791,9 +792,10 @@ else
             // Initializes the trap ahead of the hero on the ground
             // Ground is at 100, so we can place it somewhere ahead like x=800
             // Image size may vary but a width of 100 and height of 50 works for collisions
-            level2Trap.initTrap(800, 100, 100, 50);
+            level2Trap.isActive = false; // Disabled falling fireballs
             cloudLayer2.initCloudLayer(); // cloud band at top of screen
             rainEffect.initRain();
+            lightning1.initLightning(60, 120, 4.0);
         }
         else
         {
@@ -963,7 +965,7 @@ else
 {
     cloud1.drawCloud(level);
 }
-if (level == 1)
+if (level == 1 || level == 2)
 {
     lightning1.drawLightning(level);
     lightning1.checkCollision(hero1, level);

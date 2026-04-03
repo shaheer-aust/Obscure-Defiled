@@ -24,12 +24,14 @@ struct Lightning
 	vector<int> lightningImages;
 	int boltWidth;
 	int boltHeight;
+	double baseSpeed;
 	bool isActive;
 
 	void initLightning(int width, int height, double speed)
 	{
 		boltWidth = width;
 		boltHeight = height;
+		baseSpeed = speed;
 		isActive = true;
 
 		lightningImages.clear();
@@ -40,14 +42,16 @@ struct Lightning
 			lightningImages.push_back(iLoadImage(path));
 		}
 
-		spawnBolt(speed);
+		spawnBolt(baseSpeed);
 	}
 
-	void spawnBolt(double speed)
+	void spawnBolt(double inSpeed)
 	{
 		bolt.x = rand() % (SCREEN_WIDTH - boltWidth);
-		bolt.y = SCREEN_HEIGHT + rand() % 1500;
-		bolt.speed = (speed + (rand() % 3)) / 25.0;
+		// Spawn just above the screen instead of miles away
+		bolt.y = SCREEN_HEIGHT + 10 + (rand() % 300);
+		// Hardcoded solid integer dropping speed with no random variance 
+		bolt.speed = 2.0; 
 		bolt.width = boltWidth;
 		bolt.height = boltHeight;
 		bolt.active = true;
@@ -57,12 +61,12 @@ struct Lightning
 
 	void drawLightning(int currentLevel)
 	{
-		if (currentLevel != 1) return;
+		if (currentLevel != 1 && currentLevel != 2) return;
 		if (!isActive) return;
 
 		if (!bolt.active)
 		{
-			spawnBolt(bolt.speed * 25.0); // respawn next bolt
+			spawnBolt(baseSpeed); // respawn next bolt
 			return;
 		}
 
@@ -78,16 +82,16 @@ struct Lightning
 
 		bolt.y -= bolt.speed;
 
-		// Respawn when off screen
-		if (bolt.y + bolt.height < 0)
+		// Respawn when it reaches 100 pixels from the bottom of the screen
+		if (bolt.y <= 100.0)
 		{
-			spawnBolt(bolt.speed * 25.0);
+			spawnBolt(baseSpeed);
 		}
 	}
 
 	void checkCollision(Hero& hero, int currentLevel)
 	{
-		if (currentLevel != 1) return;
+		if (currentLevel != 1 && currentLevel != 2) return;
 		if (!isActive || !bolt.active || bolt.hasHit) return;
 
 		double heroCenterX = hero.characterPosition_X + (152.0 / 2.0);
