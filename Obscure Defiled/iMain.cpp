@@ -648,33 +648,71 @@ void enemy_movement()
 			game_screen.enemy4.enemyPosition_X = -15;
 		}
 
-		// Level 2 & 3: one-at-a-time kill chain -> e1 -> e2 -> e3 -> e4 -> boss
-		if (game_screen.level >= 2 && !game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)
+		// Level 2 : one-at-a-time kill chain -> e1 -> e2 -> e3 -> e4 -> boss
+		// Level 3 : one-at-a-time kill chain -> e1 -> e2 -> boss e3 -> e4 
+		if (game_screen.level == 2)
 		{
-			game_screen.enemy2.isActive = true;
-			game_screen.enemy2Spawned = true;
-			game_screen.enemy2.enemyPosition_X = 64;
-		}
+			if (!game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)
+			{
+				game_screen.enemy2.isActive = true;
+				game_screen.enemy2Spawned = true;
+				game_screen.enemy2.enemyPosition_X = 64;
+			}
 
-		if (game_screen.level >= 2 && !game_screen.enemy3Spawned && game_screen.enemy2.enemyHealth <= 0 && game_screen.enemy2Spawned)
-		{
-			game_screen.enemy3.isActive = true;
-			game_screen.enemy3Spawned = true;
-			game_screen.enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
-		}
+			if (!game_screen.enemy3Spawned && game_screen.enemy2.enemyHealth <= 0 && game_screen.enemy2Spawned)
+			{
+				game_screen.enemy3.isActive = true;
+				game_screen.enemy3Spawned = true;
+				game_screen.enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
+			}
 
-		if (game_screen.level >= 2 && !game_screen.enemy4Spawned && game_screen.enemy3.enemyHealth <= 0 && game_screen.enemy3Spawned)
-		{
-			game_screen.enemy4.isActive = true;
-			game_screen.enemy4Spawned = true;
-			game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH + 12;
-		}
+			if (!game_screen.enemy4Spawned && game_screen.enemy3.enemyHealth <= 0 && game_screen.enemy3Spawned)
+			{
+				game_screen.enemy4.isActive = true;
+				game_screen.enemy4Spawned = true;
+				game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH + 12;
+			}
 
-		// Boss spawns after the last regular enemy is defeated (both levels)
-		if (!game_screen.bossSpawned && game_screen.enemy4.enemyHealth <= 0 && game_screen.enemy4Spawned)
+			if (!game_screen.bossSpawned && game_screen.enemy4.enemyHealth <= 0 && game_screen.enemy4Spawned)
+			{
+				game_screen.boss.isActive = true;
+				game_screen.bossSpawned = true;
+			}
+		}
+		else if (game_screen.level == 3)
 		{
-			game_screen.boss.isActive = true;
-			game_screen.bossSpawned = true;
+			if (!game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)
+			{
+				game_screen.enemy2.isActive = true;
+				game_screen.enemy2Spawned = true;
+				game_screen.enemy2.enemyPosition_X = 64;
+			}
+
+			if (!game_screen.bossSpawned && game_screen.enemy2.enemyHealth <= 0 && game_screen.enemy2Spawned)
+			{
+				game_screen.boss.isActive = true;
+				game_screen.bossSpawned = true;
+			}
+
+			if (!game_screen.enemy3Spawned && game_screen.boss.bossHealth <= 0 && game_screen.bossSpawned)
+			{
+				game_screen.enemy3.isActive = true;
+				game_screen.enemy3Spawned = true;
+				game_screen.enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
+			}
+
+			if (!game_screen.enemy4Spawned && game_screen.enemy3.enemyHealth <= 0 && game_screen.enemy3Spawned)
+			{
+				game_screen.enemy4.isActive = true;
+				game_screen.enemy4Spawned = true;
+				game_screen.enemy4.enemyPosition_X = SCREEN_WIDTH + 12;
+			}
+
+			if (!game_screen.alphaBossSpawned && game_screen.enemy4.enemyHealth <= 0 && game_screen.enemy4Spawned)
+			{
+				game_screen.alphaBoss.isActive = true;
+				game_screen.alphaBossSpawned = true;
+			}
 		}
 
 		double enemy1PrevX = game_screen.enemy1.enemyPosition_X;
@@ -688,6 +726,7 @@ void enemy_movement()
 		game_screen.enemy3.move_enemy(game_screen.hero1);
 		game_screen.enemy4.move_enemy(game_screen.hero1);
 		game_screen.boss.move_boss(game_screen.hero1);
+		game_screen.alphaBoss.move_alpha(game_screen.hero1);
 
 		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy1, enemy1PrevX);
 		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy2, enemy2PrevX);
@@ -718,6 +757,8 @@ void update_attack_animation()
 		game_screen.boss.update_attack();
 		game_screen.boss.update_dead();
 		game_screen.boss.boss_hit_loop();
+		game_screen.alphaBoss.update_attack();
+		game_screen.alphaBoss.update_dead();
 	}
 }
 void hero_hit_loop()
@@ -835,20 +876,21 @@ void all_50_ms_ticks()
 				mciSendString("play gamebg3 repeat", NULL, 0, NULL);
 			}
 		}
-		else if ((game_screen.level == 3 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0))
+		else if ((game_screen.level == 3 && game_screen.enemy1.enemyHealth == 0 && game_screen.enemy2.enemyHealth == 0 && game_screen.enemy3.enemyHealth == 0 && game_screen.enemy4.enemyHealth == 0 && game_screen.boss.bossHealth == 0 && game_screen.alphaBoss.alphaHealth == 0))
 		{
 			cout << "level 3 ends" << endl;
 
 
 			if (counter == 0)
 			{
+				screens.pop();
 				screens.push("victory");
 				mciSendString("close gamebg", NULL, 0, NULL);
 				mciSendString("close gamebg2", NULL, 0, NULL);
 				mciSendString("close gamebg3", NULL, 0, NULL);
 
 				mciSendString("play victorysound from 0", NULL, 0, NULL);
-				screens.pop();
+				
 				
 				cout << "pushing victory" << counter << endl;
 				counter++;
@@ -931,7 +973,7 @@ int main()
 	mciSendString("open \"resources//sounds//victory.mp3\" alias victorysound", NULL, 0, NULL);
 	// iSetTimer(50,moveBG);
 	iInitialize(SCREEN_WIDTH, SCREEN_HEIGHT, "Obscure Defiled");
-
+	counter = 0;
 	// Only initialize menu screen at startup - others load on-demand
 	initPlayerProfile(playerProfile);
 	bool requireCreateProfile = shouldSkipPlayerStorage(playerProfile.playerName);

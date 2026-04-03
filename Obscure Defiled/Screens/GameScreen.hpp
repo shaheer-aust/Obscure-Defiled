@@ -41,6 +41,7 @@ struct GameScreen
     Enemy enemy3;
     Enemy enemy4;
     Boss boss;
+    AlphaBoss alphaBoss;
     Hero hero1;
     Trap level2Trap;
     Lava level3Lava;
@@ -63,6 +64,7 @@ struct GameScreen
     bool enemy3Spawned = false;
     bool enemy4Spawned = false;
     bool bossSpawned = false;
+    bool alphaBossSpawned = false;
     int hitOverlayImage = 0;
     vector<int> animatedObstacleFrames;
     double animatedObstacleX = 980.0;
@@ -606,6 +608,7 @@ struct GameScreen
 		enemy3Spawned = false;
 		enemy4Spawned = false;
 		bossSpawned = false;
+        alphaBossSpawned = false;
         animatedObstacleVisible = false;
         animatedObstacleFrameIndex = 0;
         animatedObstacleFrameTimer = 0;
@@ -628,6 +631,7 @@ struct GameScreen
         enemy4.isActive = false;
         enemy4.enemyPosition_X = SCREEN_WIDTH - 360;
         boss.isActive = false; 
+        alphaBoss.isActive = false;
         //enemy
         enemy1.enemyPosition_X = SCREEN_WIDTH - 64;
         enemy1.enemyPosition_Y = 100.0;
@@ -689,6 +693,16 @@ struct GameScreen
         boss.attack_timer = 0;
         boss.dead_index = 0;
         boss.dead_timer = 0;
+        alphaBoss.alphaPosition_X = SCREEN_WIDTH - 180;
+        alphaBoss.alphaPosition_Y = 100.0;
+        alphaBoss.alphaHealth = 300.0;
+        alphaBoss.maxAlphaHealth = 300.0;
+        alphaBoss.isAttacking = false;
+        alphaBoss.attack_index = 0;
+        alphaBoss.attack_timer = 0;
+        alphaBoss.dead_index = 0;
+        alphaBoss.dead_timer = 0;
+        alphaBoss.isActive = false;
 		//hero
 		hero1.characterPosition_X = 100;
 		hero1.attack_index = 0;
@@ -752,6 +766,7 @@ else
         enemy2.initenemy(2,level);         // Initialize Small enemy 2
         enemy3.initenemy(3,level);         // Initialize Small enemy 3
         enemy4.initenemy(4,level);         // Initialize Small enemy 4
+        alphaBoss.initAlphaBoss(level);
         init_animated_obstacle();
         init_projectile();
         mainObstacleImage = iLoadImage("resources/obstacles/obstacles_main_size/Obstacle_2_main.png");
@@ -778,6 +793,7 @@ else
         enemy2.enemyPosition_X = 64;   // Left side spawn when activated
         boss.initboss(level);        // Initialize boss
         boss.isActive = false;        // Boss starts inactive
+        alphaBoss.isActive = false;
         enemy1.isActive = true;       // enemy1 is always first — starts active
         if(level == 1){
 
@@ -981,6 +997,14 @@ if (level == 1 || level == 2)
             int frameIndex = (int)floor((currentHealth / 200.0) * 15);
             iShowImage(boss.bossPosition_X - 10, boss.bossPosition_Y + (level==1?100:200), 122, 20, boss.boss_health_bar_images[frameIndex]);
         }
+        if (alphaBossSpawned && alphaBoss.alphaHealth > 0 && !boss.boss_health_bar_images.empty())
+        {
+            double currentHealth = max(0.0, min(alphaBoss.maxAlphaHealth, alphaBoss.alphaHealth));
+            int frameIndex = (int)floor((currentHealth / alphaBoss.maxAlphaHealth) * 15.0);
+            if (frameIndex < 0) frameIndex = 0;
+            if (frameIndex > 15) frameIndex = 15;
+            iShowImage(alphaBoss.alphaPosition_X + 18, alphaBoss.alphaPosition_Y + 190, 122, 20, boss.boss_health_bar_images[frameIndex]);
+        }
         if (enemy1.isActive && !boss.boss_health_bar_images.empty())
         {
             double currentHealth = max(0.0, min(100.0, enemy1.enemyHealth)); // Clamp health between 0 and 100
@@ -1038,6 +1062,7 @@ if (level == 1 || level == 2)
             iShowImage(animatedObstacleX, animatedObstacleY-20, animatedObstacleWidth, animatedObstacleHeight, animatedObstacleFrames[animatedObstacleFrameIndex]);
         }
         boss.show_boss_moving();
+        alphaBoss.show_alpha_moving();
 
         // Draw trap for level 2
         if (level == 2 && level2Trap.isActive)

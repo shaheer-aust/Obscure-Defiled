@@ -7,6 +7,8 @@ extern void takeDamage();
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "character_functions\Hero.hpp";
 // #include "Screens\Level_1_game_screen.hpp"
 #include <vector>
@@ -959,6 +961,346 @@ struct Boss
 
             bossHealth = 0;
             isActive = false; // Boss defeated
+        }
+    }
+};
+
+struct AlphaBoss
+{
+    vector<int> walking_R_images;
+    vector<int> walking_L_images;
+    vector<int> dying_R_images;
+    vector<int> dying_L_images;
+    vector<int> chanting_R_images;
+    vector<int> chanting_L_images;
+    vector<int> firing_R_images;
+    vector<int> firing_L_images;
+    vector<int> sword_R_images;
+    vector<int> sword_L_images;
+
+    double alphaPosition_X = SCREEN_WIDTH - 180;
+    double alphaPosition_Y = 100.0;
+    double alphaHealth = 300.0;
+    double maxAlphaHealth = 300.0;
+    double alpha_speed = 4.0;
+    bool isright = true;
+    bool isActive = false;
+    bool isAttacking = false;
+    int movement_index = 0;
+    int attack_index = 0;
+    int dead_index = 0;
+    int dead_timer = 0;
+    int attack_timer = 0;
+    int attackMode = 0; // 0: chanting, 1: firing, 2: sword
+    int level = 3;
+
+    void initAlphaBoss(int level = 3)
+    {
+        this->level = level;
+        alphaPosition_X = SCREEN_WIDTH - 180;
+        alphaPosition_Y = 100.0;
+        alphaHealth = 300.0;
+        maxAlphaHealth = 300.0;
+        alpha_speed = 4.0;
+        isright = true;
+        isActive = false;
+        isAttacking = false;
+        movement_index = 0;
+        attack_index = 0;
+        dead_index = 0;
+        dead_timer = 0;
+        attack_timer = 0;
+        attackMode = 0;
+
+        static bool seeded = false;
+        if (!seeded)
+        {
+            srand((unsigned int)time(NULL));
+            seeded = true;
+        }
+
+        init_alpha_images(level);
+    }
+
+    void init_alpha_images(int level = 3)
+    {
+        walking_R_images.clear();
+        walking_L_images.clear();
+        dying_R_images.clear();
+        dying_L_images.clear();
+        chanting_R_images.clear();
+        chanting_L_images.clear();
+        firing_R_images.clear();
+        firing_L_images.clear();
+        sword_R_images.clear();
+        sword_L_images.clear();
+
+        if (level != 3)
+        {
+            return;
+        }
+
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[220];
+            sprintf_s(a, "resources/Level_3/alpha boss/Right/Walking/frame_%03d.png", i);
+            walking_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[220];
+            sprintf_s(a, "resources/Level_3/alpha boss/Left/Walking/frame_%03d.png", i);
+            walking_L_images.push_back(iLoadImage(a));
+        }
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[220];
+            sprintf_s(a, "resources/Level_3/alpha boss/Right/Dying/frame_%03d.png", i);
+            dying_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[220];
+            sprintf_s(a, "resources/Level_3/alpha boss/Left/Dying/frame_%03d.png", i);
+            dying_L_images.push_back(iLoadImage(a));
+        }
+
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[240];
+            sprintf_s(a, "resources/Level_3/alpha boss/Right/Attacking/Chanting/frame_%03d.png", i);
+            chanting_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[240];
+            sprintf_s(a, "resources/Level_3/alpha boss/Left/Attacking/Chanting/frame_%03d.png", i);
+            chanting_L_images.push_back(iLoadImage(a));
+        }
+
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[240];
+            sprintf_s(a, "resources/Level_3/alpha boss/Right/Attacking/Firing/frame_%03d.png", i);
+            firing_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[240];
+            sprintf_s(a, "resources/Level_3/alpha boss/Left/Attacking/Firing/frame_%03d.png", i);
+            firing_L_images.push_back(iLoadImage(a));
+        }
+
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[240];
+            sprintf_s(a, "resources/Level_3/alpha boss/Right/Attacking/Sword/frame_%03d.png", i);
+            sword_R_images.push_back(iLoadImage(a));
+        }
+        for (int i = 0; i <= 35; i++)
+        {
+            char a[240];
+            sprintf_s(a, "resources/Level_3/alpha boss/Left/Attacking/Sword/frame_%03d.png", i);
+            sword_L_images.push_back(iLoadImage(a));
+        }
+    }
+
+    vector<int>& currentAttackFramesRight()
+    {
+        if (attackMode == 0) return chanting_R_images;
+        if (attackMode == 1) return firing_R_images;
+        return sword_R_images;
+    }
+
+    vector<int>& currentAttackFramesLeft()
+    {
+        if (attackMode == 0) return chanting_L_images;
+        if (attackMode == 1) return firing_L_images;
+        return sword_L_images;
+    }
+
+    int currentAttackDamage() const
+    {
+        if (attackMode == 0) return 2;
+        if (attackMode == 1) return 3;
+        return 4;
+    }
+
+    void chooseRandomAttack()
+    {
+        attackMode = rand() % 3;
+    }
+
+    void alphaTakeDamage(double damage)
+    {
+        alphaHealth -= damage;
+        if (alphaHealth <= 0)
+        {
+            alphaHealth = 0;
+            isActive = false;
+            isAttacking = false;
+            attack_index = 0;
+        }
+    }
+
+    void show_alpha_moving()
+    {
+        if (alphaHealth <= 0)
+        {
+            if (dying_R_images.empty() || dying_L_images.empty())
+                return;
+
+            int idx = dead_index;
+            if (idx >= (int)dying_R_images.size())
+            {
+                idx = (int)dying_R_images.size() - 1;
+            }
+
+            if (isright)
+            {
+                iShowImage(alphaPosition_X, alphaPosition_Y - 20, 220, 220, dying_R_images[idx]);
+            }
+            else
+            {
+                iShowImage(alphaPosition_X, alphaPosition_Y - 20, 220, 220, dying_L_images[idx]);
+            }
+            return;
+        }
+
+        if (!isActive)
+            return;
+
+        if (isAttacking)
+        {
+            vector<int>& attackR = currentAttackFramesRight();
+            vector<int>& attackL = currentAttackFramesLeft();
+            if (attackR.empty() || attackL.empty())
+                return;
+
+            int idx = attack_index;
+            if (idx >= (int)attackR.size())
+            {
+                idx = (int)attackR.size() - 1;
+            }
+
+            if (isright)
+            {
+                iShowImage(alphaPosition_X, alphaPosition_Y - 30, 240, 240, attackR[idx]);
+            }
+            else
+            {
+                iShowImage(alphaPosition_X, alphaPosition_Y - 30, 240, 240, attackL[idx]);
+            }
+            return;
+        }
+
+        if (walking_R_images.empty() || walking_L_images.empty())
+            return;
+
+        int idx = movement_index % walking_R_images.size();
+        if (isright)
+        {
+            iShowImage(alphaPosition_X, alphaPosition_Y, 180, 180, walking_R_images[idx]);
+        }
+        else
+        {
+            iShowImage(alphaPosition_X, alphaPosition_Y, 180, 180, walking_L_images[idx]);
+        }
+    }
+
+    void move_alpha(Hero &hero1)
+    {
+        if (alphaHealth <= 0)
+            return;
+
+        if (!isActive)
+            return;
+
+        double characterX = hero1.characterPosition_X;
+        double characterY = hero1.characterPosition_Y;
+        bool inAttackRange = (abs(alphaPosition_X - characterX) < 120 && abs(alphaPosition_Y - characterY) < 80);
+
+        if (inAttackRange && hero1.isAttacking)
+        {
+            alphaTakeDamage(hero1.attack_damage * 0.7);
+        }
+
+        if (inAttackRange)
+        {
+            if (!isAttacking)
+            {
+                chooseRandomAttack();
+                isAttacking = true;
+                attack_index = 0;
+                attack_timer = 0;
+            }
+        }
+
+        if (isAttacking)
+        {
+            attack_timer++;
+            if (inAttackRange && attack_timer % 12 == 0)
+            {
+                hero1.takeDamage(currentAttackDamage());
+                hero1.gettingHit = true;
+            }
+            return;
+        }
+
+        if (alphaPosition_X > characterX + 110)
+        {
+            alphaPosition_X -= alpha_speed;
+            isright = false;
+        }
+        else if (alphaPosition_X < characterX - 110)
+        {
+            alphaPosition_X += alpha_speed;
+            isright = true;
+        }
+
+        movement_index++;
+        if (movement_index >= (int)walking_R_images.size())
+        {
+            movement_index = 0;
+        }
+    }
+
+    void update_attack()
+    {
+        if (!isAttacking)
+            return;
+
+        vector<int>& attackR = currentAttackFramesRight();
+        if (attackR.empty())
+        {
+            isAttacking = false;
+            attack_index = 0;
+            return;
+        }
+
+        attack_index++;
+        if (attack_index >= (int)attackR.size())
+        {
+            attack_index = 0;
+            isAttacking = false;
+            attack_timer = 0;
+        }
+    }
+
+    void update_dead()
+    {
+        if (alphaHealth > 0)
+            return;
+
+        dead_timer++;
+        if (dead_timer > 4)
+        {
+            dead_timer = 0;
+            dead_index++;
+            if (dead_index >= (int)dying_R_images.size())
+            {
+                dead_index = (int)dying_R_images.size() - 1;
+            }
         }
     }
 };
