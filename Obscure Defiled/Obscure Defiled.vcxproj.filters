@@ -77,6 +77,9 @@
     <ClInclude Include="Screens\profile_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="lava.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\._.DS_Store">

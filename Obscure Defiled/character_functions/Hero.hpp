@@ -265,13 +265,13 @@ struct Hero
             }
 		}
 		else if (level == 3){
-			for (int i = 0; i <= 35; i++)
+			for (int i = 0; i <= 8; i++)
 			{
 				char a[200];
 				sprintf_s(a, "resources/Main_Character/Normal/With Shotgun/Right/Shooting/frame_%03d.png", i);
 				character_attack_R_images.push_back(iLoadImage(a));
 			}
-			for (int i = 0; i <= 35; i++)
+			for (int i = 0; i <= 8; i++)
 			{
 				char a[200];
 				sprintf_s(a, "resources/Main_Character/Normal/With Shotgun/Left/Shooting/frame_%03d.png", i);

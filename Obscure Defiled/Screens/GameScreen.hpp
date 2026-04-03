@@ -19,6 +19,7 @@ extern int getIdleIndex();
 #include <array>
 #include "trap.hpp"
 #include "power.hpp"
+#include "lava.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -35,6 +36,7 @@ struct GameScreen
     Boss boss;
     Hero hero1;
     Trap level2Trap;
+    Lava level3Lava;
     PowerUpSystem powerUp;
     bool spacePressed = false;
     bool rightPressed = false;
@@ -559,6 +561,14 @@ struct GameScreen
 		{
 			level2Trap.isActive = false;
 		}
+        if (level == 3)
+{
+    level3Lava.initLava(1280, 100, 200, 80, .15);
+}
+else
+{
+    level3Lava.isActive = false;
+}
     }
     void initgame_screen(int level)
     {
@@ -620,6 +630,14 @@ struct GameScreen
         }
 
         init_health_bar_images();
+        if (level == 3)
+    {
+    level3Lava.initLava(1280, 100, 200, 80, .15);
+    }
+    else
+    {
+    level3Lava.isActive = false;
+    }
     }
 
     void init_health_bar_images()
@@ -791,6 +809,15 @@ struct GameScreen
         {
             iShowImage(projectileX, projectileY, projectileWidth, projectileHeight, projectileImage);
         }
+        if (level == 3)
+{
+    level3Lava.drawLava(level);
+    level3Lava.checkCollision(hero1);
+    if (!level3Lava.isActive)
+    {
+        level3Lava.spawnLava(1280, 100, level);
+    }
+}
         enemy1.show_enemy_moving();
         enemy2.show_enemy_moving();
         enemy3.show_enemy_moving();
