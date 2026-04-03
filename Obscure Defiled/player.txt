@@ -1,4 +1,4 @@
 ADAS,
-level: 1,
-Kills: 0,
+level: 2,
+Kills: 10,
 Score: 0
