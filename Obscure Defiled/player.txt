@@ -1,4 +1,4 @@
 ADAS,
-level: 3,
+level: 2,
 Kills: 75,
 Score: 669

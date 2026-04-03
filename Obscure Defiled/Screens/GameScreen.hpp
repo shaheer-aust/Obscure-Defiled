@@ -26,6 +26,7 @@ extern int getIdleIndex();
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+#include "rain.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -47,6 +48,7 @@ struct GameScreen
     Cloud cloud2;
     CloudLayer cloudLayer2;
     Lightning lightning1;
+    RainSystem rainEffect;
     PowerUpSystem powerUp;
     bool spacePressed = false;
     bool rightPressed = false;
@@ -717,10 +719,12 @@ struct GameScreen
 		if (level == 2)
 		{
 			level2Trap.initTrap(800, 100, 100, 50);
+            rainEffect.initRain();
 		}
 		else
 		{
 			level2Trap.isActive = false;
+            rainEffect.isActive = false;
 		}
         if (level == 3)
 {
@@ -789,11 +793,13 @@ else
             // Image size may vary but a width of 100 and height of 50 works for collisions
             level2Trap.initTrap(800, 100, 100, 50);
             cloudLayer2.initCloudLayer(); // cloud band at top of screen
+            rainEffect.initRain();
         }
         else
         {
             level2Trap.isActive = false;
             cloudLayer2.isActive = false;
+            rainEffect.isActive = false;
         }
 
         init_health_bar_images();
@@ -1035,6 +1041,30 @@ if (level == 1)
         if (level == 2 && level2Trap.isActive)
         {
             level2Trap.drawTrap();
+        }
+        
+        if (level == 2)
+        {
+            std::vector<BoundingBox> surfaces;
+            surfaces.push_back({hero1.characterPosition_X + 20, hero1.characterPosition_Y, 112, 120});
+            if(enemy1.isActive && enemy1.enemyHealth > 0) surfaces.push_back({enemy1.enemyPosition_X, enemy1.enemyPosition_Y, 150, 100});
+            if(enemy2.isActive && enemy2.enemyHealth > 0) surfaces.push_back({enemy2.enemyPosition_X, enemy2.enemyPosition_Y, 150, 100});
+            if(enemy3.isActive && enemy3.enemyHealth > 0) surfaces.push_back({enemy3.enemyPosition_X, enemy3.enemyPosition_Y, 150, 100});
+            if(enemy4.isActive && enemy4.enemyHealth > 0) surfaces.push_back({enemy4.enemyPosition_X, enemy4.enemyPosition_Y, 150, 100});
+            if(boss.isActive && boss.bossHealth > 0) surfaces.push_back({boss.bossPosition_X, boss.bossPosition_Y, 200, 220});
+            
+            if(level2Trap.isActive) {
+                for(int i = 0; i < (int)level2Trap.traps.size(); i++) {
+                    if(level2Trap.traps[i].active) {
+                        surfaces.push_back({level2Trap.traps[i].x, level2Trap.traps[i].y, (double)level2Trap.trapWidth, (double)level2Trap.trapHeight});
+                    }
+                }
+            }
+            
+            if(animatedObstacleVisible) surfaces.push_back({animatedObstacleX, animatedObstacleY, (double)animatedObstacleWidth, (double)animatedObstacleHeight});
+            if(mainObstacleImage != 0) surfaces.push_back({mainObstacleX, mainObstacleY, (double)mainObstacleWidth, (double)mainObstacleHeight - 20});
+            
+            rainEffect.drawRain(groundY, surfaces);
         }
         if(level == 1 ){
             powerUp.draw();    
