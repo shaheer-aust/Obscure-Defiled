@@ -15,14 +15,18 @@
 struct CloudLayer
 {
     int  cloudImage;      // loaded image handle
-    bool isActive;        // only active during level 2
+    bool isActive;        // only active during specific level
     double offsetX;       // horizontal scroll offset driven by hero movement
+    int targetLevel;      // level this cloud layer attaches to
 
-    void initCloudLayer()
+    void initCloudLayer(const char* imagePath, int attachLevel)
     {
-        cloudImage = iLoadImage("resources\\cloud\\image.png");
+        char tempPath[256];
+        strcpy_s(tempPath, 256, imagePath);
+        cloudImage = iLoadImage(tempPath);
         isActive   = true;
         offsetX    = 0.0;
+        targetLevel = attachLevel;
     }
 
     // Call this every frame the hero moves right (+dx) or left (-dx)
@@ -39,7 +43,7 @@ struct CloudLayer
     // Draw the cloud band across the top of the screen
     void draw(int currentLevel)
     {
-        if (currentLevel != 2) return;
+        if (currentLevel != targetLevel) return;
         if (!isActive)         return;
         if (cloudImage == -1)  return;
 
