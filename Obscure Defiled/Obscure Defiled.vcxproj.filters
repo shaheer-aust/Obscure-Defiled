@@ -80,6 +80,12 @@
     <ClInclude Include="lava.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="cloud.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lightning.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\._.DS_Store">

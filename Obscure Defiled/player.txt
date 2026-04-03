@@ -1,4 +1,4 @@
-asd,
+ADAS,
 level: 1,
-Kills: 25,
-Score: 691
+Kills: 0,
+Score: 0

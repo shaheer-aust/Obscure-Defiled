@@ -18,8 +18,10 @@ extern int getIdleIndex();
 #include <vector>
 #include <array>
 #include "trap.hpp"
+#include "cloud.hpp"
 #include "power.hpp"
 #include "lava.hpp"
+#include "lightning.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -37,6 +39,9 @@ struct GameScreen
     Hero hero1;
     Trap level2Trap;
     Lava level3Lava;
+    Cloud cloud1;
+    Cloud cloud2;
+    Lightning lightning1;
     PowerUpSystem powerUp;
     bool spacePressed = false;
     bool rightPressed = false;
@@ -552,6 +557,9 @@ struct GameScreen
 		if (level == 1){
             powerUp.revert(hero1);
 			powerUp.init(600.0, 100.0);
+            cloud1.initCloud(640, 580, 350, 180);
+            lightning1.initLightning(60, 120, 4.0);
+            cloud2.initCloud(0, 580, 400, 200);
 		}
 		if (level == 2)
 		{
@@ -563,7 +571,7 @@ struct GameScreen
 		}
         if (level == 3)
 {
-    level3Lava.initLava(1280, 100, 200, 80, .15);
+    level3Lava.initLava(1280, 100, 350, 80, .12);
 }
 else
 {
@@ -596,6 +604,8 @@ else
             enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
             enemy4.isActive = false;
             enemy4.enemyPosition_X = SCREEN_WIDTH - 360;
+            lightning1.initLightning(60, 120, 4.0);
+            cloud2.initCloud(0, 580, 400, 200);
         }
         else
         {
@@ -613,6 +623,7 @@ else
         if(level == 1){
 
             powerUp.init(600.0, 100.0);
+            cloud1.initCloud(640, 580, 350, 180);
         }
         
         // Trap Initialization for Level 2
@@ -632,7 +643,7 @@ else
         init_health_bar_images();
         if (level == 3)
     {
-    level3Lava.initLava(1280, 100, 200, 80, .15);
+    level3Lava.initLava(1280, 100, 350, 80, .12);
     }
     else
     {
@@ -763,6 +774,15 @@ else
 
         // cout << "Hero Health: " << hero1.HeroHealth << endl;
         iShowImage(SCREEN_WIDTH / 2 - (275 / 2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
+        if (level == 1)
+{
+    cloud1.drawCloud(level);
+}
+if (level == 1)
+{
+    lightning1.drawLightning(level);
+    lightning1.checkCollision(hero1, level);
+}
 
         // Draw boss health bar if boss is active
         if (boss.isActive && !boss.boss_health_bar_images.empty())

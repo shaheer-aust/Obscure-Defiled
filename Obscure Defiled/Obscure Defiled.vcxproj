@@ -68,9 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character_functions\Hero.hpp" />
+    <ClInclude Include="cloud.hpp" />
     <ClInclude Include="enemy_functions\enemy.hpp" />
     <ClInclude Include="lava.hpp" />
     <ClInclude Include="level_handler.hpp" />
+    <ClInclude Include="lightning.hpp" />
     <ClInclude Include="Screens\after_lvl_1_screen.hpp" />
     <ClInclude Include="Screens\controls_screen.hpp" />
     <ClInclude Include="Screens\create_account_screen.hpp" />
