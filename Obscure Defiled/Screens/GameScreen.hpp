@@ -110,7 +110,7 @@ struct GameScreen
             seeded = true;
         }
 
-        int minX = 100+ 20;
+        int minX = 250+ 20;
         int maxX = SCREEN_WIDTH - 100 - mainObstacleWidth;
         if (maxX <= minX)
         {
@@ -126,27 +126,27 @@ struct GameScreen
         mainObstacleX += dx;
     }
 
-    bool overlapsMainObstacle(double actorLeft, double actorRight, double actorBottom, double actorTop) const
+    bool overlapsMainObstacle(double heroLeft, double heroRight, double heroBottom, double heroTop) const
     {
         if (mainObstacleImage == 0)
         {
             return false;
         }
 
-        double obstacleLeft = mainObstacleX;
-        double obstacleRight = mainObstacleX + mainObstacleWidth;
+        double obstacleLeft = mainObstacleX-20;
+        double obstacleRight = mainObstacleX + mainObstacleWidth-20;
         double obstacleBottom = mainObstacleY;
         double obstacleTop = mainObstacleY + mainObstacleHeight-20;
 
-        bool horizontalOverlap = (actorRight > obstacleLeft) && (actorLeft < obstacleRight);
-        bool verticalOverlap = (actorTop > obstacleBottom) && (actorBottom < obstacleTop);
+        bool horizontalOverlap = (heroRight > obstacleLeft) && (heroLeft < obstacleRight);
+        bool verticalOverlap = (heroTop > obstacleBottom) && (heroBottom < obstacleTop);
         return horizontalOverlap && verticalOverlap;
     }
 
     bool canHeroMoveHorizontal(double deltaX) const
     {
         double heroLeft = hero1.characterPosition_X + 20.0;
-        double heroRight = hero1.characterPosition_X + 132.0;
+        double heroRight = hero1.characterPosition_X + 100;
         double heroBottom = hero1.characterPosition_Y;
         double heroTop = hero1.characterPosition_Y + 120.0;
 
@@ -197,49 +197,49 @@ struct GameScreen
         }
     }
 
-    void keepBossOutsideMainObstacle(double previousX)
-    {
-        if (!boss.isActive || boss.bossHealth <= 0)
-        {
-            return;
-        }
+    // void keepBossOutsideMainObstacle(double previousX)
+    // {
+    //     if (!boss.isActive || boss.bossHealth <= 0)
+    //     {
+    //         return;
+    //     }
 
-        double width = (boss.level == 1 ? 122.0 : 130.0);
-        double height = (boss.level == 1 ? 81.0 : 170.0);
-        double currentLeft = boss.bossPosition_X;
-        double currentRight = boss.bossPosition_X + width;
-        double currentBottom = boss.bossPosition_Y;
-        double currentTop = boss.bossPosition_Y + height;
-        if (!overlapsMainObstacle(currentLeft, currentRight, currentBottom, currentTop))
-        {
-            return;
-        }
+    //     double width = (boss.level == 1 ? 122.0 : 130.0);
+    //     double height = (boss.level == 1 ? 81.0 : 170.0);
+    //     double currentLeft = boss.bossPosition_X;
+    //     double currentRight = boss.bossPosition_X + width;
+    //     double currentBottom = boss.bossPosition_Y;
+    //     double currentTop = boss.bossPosition_Y + height;
+    //     if (!overlapsMainObstacle(currentLeft, currentRight, currentBottom, currentTop))
+    //     {
+    //         return;
+    //     }
 
-        double obstacleLeft = mainObstacleX;
-        double obstacleRight = mainObstacleX + mainObstacleWidth;
-        double previousRight = previousX + width;
-        if (previousRight <= obstacleLeft)
-        {
-            boss.bossPosition_X = obstacleLeft - width;
-            return;
-        }
-        if (previousX >= obstacleRight)
-        {
-            boss.bossPosition_X = obstacleRight;
-            return;
-        }
+    //     double obstacleLeft = mainObstacleX;
+    //     double obstacleRight = mainObstacleX + mainObstacleWidth;
+    //     double previousRight = previousX + width;
+    //     if (previousRight <= obstacleLeft)
+    //     {
+    //         boss.bossPosition_X = obstacleLeft - width;
+    //         return;
+    //     }
+    //     if (previousX >= obstacleRight)
+    //     {
+    //         boss.bossPosition_X = obstacleRight;
+    //         return;
+    //     }
 
-        double leftResolve = obstacleLeft - width;
-        double rightResolve = obstacleRight;
-        if (fabs(previousX - leftResolve) <= fabs(previousX - rightResolve))
-        {
-            boss.bossPosition_X = leftResolve;
-        }
-        else
-        {
-            boss.bossPosition_X = rightResolve;
-        }
-    }
+    //     double leftResolve = obstacleLeft - width;
+    //     double rightResolve = obstacleRight;
+    //     if (fabs(previousX - leftResolve) <= fabs(previousX - rightResolve))
+    //     {
+    //         boss.bossPosition_X = leftResolve;
+    //     }
+    //     else
+    //     {
+    //         boss.bossPosition_X = rightResolve;
+    //     }
+    // }
 
     int calculateKillScore(double elapsedSeconds, int maxScore) const
     {

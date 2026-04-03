@@ -691,9 +691,9 @@ void enemy_movement()
 
 		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy1, enemy1PrevX);
 		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy2, enemy2PrevX);
-		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy3, enemy3PrevX);
-		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy4, enemy4PrevX);
-		game_screen.keepBossOutsideMainObstacle(bossPrevX);
+		//game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy3, enemy3PrevX);
+		//game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy4, enemy4PrevX);
+		//game_screen.keepBossOutsideMainObstacle(bossPrevX);
 
 		// Handle Trap movement for Level 2 and Level 3
 		if (game_screen.level >= 2 && game_screen.level2Trap.isActive)
