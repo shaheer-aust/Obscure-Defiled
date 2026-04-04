@@ -113,25 +113,6 @@ struct GameScreen
     double floatingWallY = 200.0;
     int floatingWallWidth = 180;
     int floatingWallHeight = 50;
-    void randomizeMainObstacleX()
-    {
-        static bool seeded = false;
-        if (!seeded)
-        {
-            srand((unsigned int)time(NULL));
-            seeded = true;
-        }
-
-        int minX = 250 + 20;
-        int maxX = SCREEN_WIDTH - 100 - mainObstacleWidth;
-        if (maxX <= minX)
-        {
-            mainObstacleX = minX;
-            return;
-        }
-
-        mainObstacleX = minX + (rand() % (maxX - minX + 1));
-    }
 
     void shiftMainObstacle(double dx)
     {
@@ -693,7 +674,8 @@ struct GameScreen
         floatingWallWidth = 180;
         floatingWallHeight = 50;
         floatingWallActive = (level == 3);
-        randomizeMainObstacleX();
+        mainObstacleX = 760.0;
+        mainObstacleY = 100.0;
         groundY = hero1.characterPosition_Y;
         enemy2.isActive = false;
         enemy2.enemyPosition_X = 64;
