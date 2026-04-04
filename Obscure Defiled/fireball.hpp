@@ -154,7 +154,8 @@ struct FireballSystem
 
             if (hitX && hitY && !fb.hitHero)
             {
-                hero.HeroHealth -= 10;
+                hero.HeroHealth -= 5;
+                hero.gettingHit = true;
                 if (hero.HeroHealth < 0) hero.HeroHealth = 0;
                 fb.hitHero = true;
             }

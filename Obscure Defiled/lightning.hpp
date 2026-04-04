@@ -110,7 +110,8 @@ struct Lightning
 
 		if (hitX && hitY)
 		{
-			hero.HeroHealth -= 10;
+			hero.HeroHealth -= 5;
+			hero.gettingHit = true;
 			if (hero.HeroHealth < 0) hero.HeroHealth = 0;
 			bolt.hasHit = true;
 			bolt.active = false;
