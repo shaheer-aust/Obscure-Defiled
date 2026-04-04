@@ -636,6 +636,7 @@ struct GameScreen
 
     void resetgame()
     {
+        
         spacePressed = false;
         rightPressed = false;
         leftPressed = false;
@@ -778,12 +779,13 @@ struct GameScreen
         hero1.HeroHealth = 100;
         if (level == 1)
         {
+            fireballSystem.isActive=true;
             powerUp.revert(hero1);
             powerUp.init(600.0, 100.0);
             cloud1.initCloud(640, 580, 350, 180);
             lightning1.initLightning(60, 120, 4.0);
             cloud2.initCloud(0, 580, 400, 200);
-            fireballSystem.isActive = false; // re-init in initgame_screen
+            //fireballSystem.isActive = false; // re-init in initgame_screen
         }
         if (level == 2)
         {

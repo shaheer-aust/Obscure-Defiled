@@ -193,13 +193,13 @@ struct Enemy
 					sprintf_s(a, "resources/Level_1/Boss/Attacking/left/%d.png", i);
 					enemy_attacking_L_images.push_back(iLoadImage(a));
 				}
-				for (int i = 2; i <= 22; i++)
+				for (int i = 2; i <= 8; i++)
 				{
 					char a[200];
 					sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
 					enemy_hit_R_images.push_back(iLoadImage(a));
 				}
-				for (int i = 2; i <= 22; i++)
+				for (int i = 2; i <= 8; i++)
 				{
 					char a[200];
 					sprintf_s(a, "resources/Level_1/Boss/Getting Hit/left/%d.png", i);
@@ -610,13 +610,13 @@ struct Boss
 				sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
 				boss_walking_L_images.push_back(iLoadImage(a));
 			}
-			for (int i = 2; i <= 22; i++)
+			for (int i = 2; i <= 8; i++)
 			{
 				char a[200];
 				sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
 				boss_hit_R_images.push_back(iLoadImage(a));
 			}
-			for (int i = 2; i <= 22; i++)
+			for (int i = 2; i <= 8; i++)
 			{
 				char a[200];
 				sprintf_s(a, "resources/Level_1/Boss/Getting Hit/left/%d.png", i);
