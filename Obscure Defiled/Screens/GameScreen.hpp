@@ -726,17 +726,20 @@ struct GameScreen
 		hero1.HeroHealth = 100;
 		if (level == 1){
             powerUp.revert(hero1);
-			powerUp.init(600.0, 100.0);
-		}
-		if (level == 2)
-		{
-			level2Trap.isActive = false; // Disabled falling fireballs unconditionally
+            powerUp.init(600.0, 100.0);
+            cloud1.initCloud(640, 580, 350, 180);
+            lightning1.initLightning(60, 120, 4.0);
+            cloud2.initCloud(0, 580, 400, 200);
+        }
+        if (level == 2)
+        {
+            level2Trap.isActive = false; // Disabled falling fireballs unconditionally
             rainEffect.initRain();
             lightning1.initLightning(60, 120, 4.0);
-		}
-		else
-		{
-			level2Trap.isActive = false;
+        }
+        else
+        {
+            level2Trap.isActive = false;
             rainEffect.isActive = false;
 		}
         if (level == 3)
@@ -807,7 +810,7 @@ else
             level2Trap.isActive = false; // Disabled falling fireballs
             cloudLayer2.initCloudLayer("resources\\cloud\\image.png", 2); // cloud band at top of screen
             rainEffect.initRain();
-            lightning1.initLightning(60, 120, 4.0);
+            lightning1.initLightning(60, 120, 5.0);
         }
         else
         {

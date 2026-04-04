@@ -27,9 +27,9 @@ struct Lava
 	{
 		x = startX;
 		y = startY;
-		lavaWidth = width;
+		lavaWidth = width *1.2;
 		lavaHeight = height;
-		speed = moveSpeed;
+		speed = moveSpeed *2;
 		isActive = true;
 		frameIndex = 0;
 		frameTimer = 0;
