@@ -174,8 +174,8 @@ struct GameScreen
             return;
         }
 
-        double obstacleLeft = mainObstacleX;
-        double obstacleRight = mainObstacleX + mainObstacleWidth;
+        double obstacleLeft = mainObstacleX - 20;
+        double obstacleRight = mainObstacleX + mainObstacleWidth - 20;
         double previousRight = previousX + width;
         if (previousRight <= obstacleLeft)
         {

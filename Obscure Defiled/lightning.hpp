@@ -51,7 +51,7 @@ struct Lightning
 		// Spawn just above the screen instead of miles away
 		bolt.y = SCREEN_HEIGHT + 10 + (rand() % 300);
 		// Hardcoded solid integer dropping speed with no random variance 
-		bolt.speed = .2; 
+		bolt.speed = 1.1;
 		bolt.width = boltWidth;
 		bolt.height = boltHeight;
 		bolt.active = true;

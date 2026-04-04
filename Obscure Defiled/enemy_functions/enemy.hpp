@@ -1,4 +1,4 @@
-﻿#ifndef ENEMY_H
+#ifndef ENEMY_H
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
 extern void takeDamage();
@@ -82,7 +82,8 @@ struct Enemy
 		enemyGettingHit = true;
 		hit_index = 0;
 		isAttacking = false;
-		attack_index = 0;
+		// Note: do NOT reset attack_index here — let the frame continue
+		// so the attack animation doesn't restart from 0 on every hero hit (looks stuck)
 		if (enemyHealth <= 0)
 		{
 			enemyHealth = 0;
@@ -258,7 +259,7 @@ struct Enemy
 					sprintf_s(a, "resources/Level_2/Small enemy 1/Right/Walking/frame_%03d.png", i);
 					enemy_idle_R_images.push_back(iLoadImage(a));
 				}
-				for (int i = 1; i <= 15; i++)
+				for (int i = 0; i <= 15; i++)
 				{
 					char a[200];
 					sprintf_s(a, "resources/Level_2/Small enemy 1/Left/Walking/frame_%03d.png", i);
@@ -465,15 +466,24 @@ struct Enemy
 			attack_index = 0;
 		}
 
-		if (enemyGettingHit && !enemy_hit_R_images.empty() && !enemy_hit_L_images.empty())
+		if (enemyGettingHit)
 		{
-			hit_index++;
-			if (hit_index >= (int)enemy_hit_R_images.size())
+			if (enemy_hit_R_images.empty() || enemy_hit_L_images.empty())
 			{
-				hit_index = 0;
+				// No hit images — clear immediately so enemy doesn't stay stuck
 				enemyGettingHit = false;
+				hit_index = 0;
 			}
-			return;
+			else
+			{
+				hit_index++;
+				if (hit_index >= (int)enemy_hit_R_images.size())
+				{
+					hit_index = 0;
+					enemyGettingHit = false;
+				}
+				return;
+			}
 		}
 
 		if (isAttacking && !enemy_attacking_R_images.empty() && !enemy_attacking_L_images.empty())
@@ -498,7 +508,7 @@ struct Enemy
 		}
 
 		enemy_movement_index++;
-		if (enemy_movement_index >= (int)enemy_idle_R_images.size() - 1)
+		if (enemy_movement_index >= (int)enemy_idle_R_images.size())
 			enemy_movement_index = 0;
 	}
 };
@@ -587,6 +597,7 @@ struct Boss
 
 		if (level == 1)
 		{
+			// Walking: use Level 2 Enemy 2 sprites
 			for (int i = 0; i <= 35; i++)
 			{
 				char a[200];
@@ -599,13 +610,13 @@ struct Boss
 				sprintf_s(a, "resources/Enemy/level_1/Small enemy 2/left/%d.png", i);
 				boss_walking_L_images.push_back(iLoadImage(a));
 			}
-			for (int i = 2; i <= 8; i++)
+			for (int i = 2; i <= 22; i++)
 			{
 				char a[200];
 				sprintf_s(a, "resources/Level_1/Boss/Getting Hit/right/%d.png", i);
 				boss_hit_R_images.push_back(iLoadImage(a));
 			}
-			for (int i = 2; i <= 8; i++)
+			for (int i = 2; i <= 22; i++)
 			{
 				char a[200];
 				sprintf_s(a, "resources/Level_1/Boss/Getting Hit/left/%d.png", i);

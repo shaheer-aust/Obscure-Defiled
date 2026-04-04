@@ -648,6 +648,12 @@ void enemy_movement()
 			game_screen.enemy4.enemyPosition_X = -15;
 		}
 
+		if (game_screen.level == 1 && !game_screen.bossSpawned && game_screen.enemy4.enemyHealth <= 0 && game_screen.enemy4Spawned)
+		{
+			game_screen.boss.isActive = true;
+			game_screen.bossSpawned = true;
+		}
+
 		// Level 2 : one-at-a-time kill chain -> e1 -> e2 -> e3 -> e4 -> boss
 		// Level 3 : one-at-a-time kill chain -> e1 -> e2 -> boss e3 -> e4 
 		if (game_screen.level == 2)
@@ -730,8 +736,8 @@ void enemy_movement()
 
 		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy1, enemy1PrevX);
 		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy2, enemy2PrevX);
-		//game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy3, enemy3PrevX);
-		//game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy4, enemy4PrevX);
+		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy3, enemy3PrevX);
+		game_screen.keepEnemyOutsideMainObstacle(game_screen.enemy4, enemy4PrevX);
 		//game_screen.keepBossOutsideMainObstacle(bossPrevX);
 
 		// Handle Trap movement for Level 2 and Level 3
