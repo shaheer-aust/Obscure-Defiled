@@ -395,6 +395,10 @@ void iKeyboard(unsigned char key)
 		{
 			game_screen.tryUseHealthRecover();
 		}
+		else if (key == 'p' || key == 'P')
+		{
+			game_screen.lvl2PowerUp.handleKeyboard(key, game_screen.hero1);
+		}
 	}
 	else if (screens.top() == "After_lvl_1")
 	{
@@ -600,6 +604,7 @@ void enemy_movement()
 			}
 			// Step 5: scroll the power-up icon with the background
 			game_screen.powerUp.shiftIcon(-game_screen.bg_speed);
+			game_screen.lvl2PowerUp.shiftIcon(-game_screen.bg_speed);
 		}
 		if (game_screen.leftPressed && !game_screen.hero1.isJumping && !game_screen.heroMovementBlockedByMainObstacle)
 		{
@@ -627,6 +632,7 @@ void enemy_movement()
 			}
 			// Step 5: scroll the power-up icon with the background
 			game_screen.powerUp.shiftIcon(game_screen.bg_speed);
+			game_screen.lvl2PowerUp.shiftIcon(game_screen.bg_speed);
 		}
 		// Level 1: one-at-a-time kill chain → e1 → e2 → e3 → e4 → boss
 		if (game_screen.level == 1 && !game_screen.enemy2Spawned && game_screen.enemy1.enemyHealth <= 0)

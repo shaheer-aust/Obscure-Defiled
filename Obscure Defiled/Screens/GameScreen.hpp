@@ -28,6 +28,7 @@ extern int getIdleIndex();
 #include <cmath>
 #include "rain.hpp"
 #include "../fireball.hpp"
+#include "../icon.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -53,6 +54,7 @@ struct GameScreen
     Lightning lightning1;
     RainSystem rainEffect;
     PowerUpSystem powerUp;
+    Level2PowerUp lvl2PowerUp;
     FireballSystem fireballSystem;
     bool spacePressed = false;
     bool rightPressed = false;
@@ -622,6 +624,10 @@ struct GameScreen
         projectileY = 0.0;
         healthRecoverUsed = false;
         hitOverlayTimerTicks = 0;
+        lvl2PowerUp.iconVisible = false;
+        lvl2PowerUp.animationActive = false;
+        lvl2PowerUp.animationDone = false;
+        lvl2PowerUp.iconX = 100;
         beginLevelScoreTracking();
         animatedObstacleX = 980.0;
         animatedObstacleY = 100.0;
@@ -764,6 +770,7 @@ else
         BgImages.push_back(iLoadImage("resources//game_screen//level_2//bg_2//pic.jpg"));
         BgImages.push_back(iLoadImage("resources//game_screen//level_3//bg_3//Screen_for_final_round.png"));
         hero1.init_character_images(level);
+        lvl2PowerUp.init(level);
         victoryImage= iLoadImage("resources/victory_screen/victory_image.png");
         hitOverlayImage = iLoadImage("resources/game_screen/getting hit frame.png");
         enemy1.initenemy(1,level);         // Initialize Small enemy 1
@@ -872,6 +879,7 @@ else
                     shiftMainObstacle(-bg_speed);
                     cloudLayer1.shift(-bg_speed);
                     cloudLayer2.shift(-bg_speed); // scroll clouds during mid-air right move
+                    lvl2PowerUp.shiftIcon(-bg_speed);
                     x -= bg_speed;
                     if (x <= -SCREEN_WIDTH)
                     {
@@ -894,6 +902,7 @@ else
                     shiftMainObstacle(+bg_speed);
                     cloudLayer1.shift(+bg_speed);
                     cloudLayer2.shift(+bg_speed);
+                    lvl2PowerUp.shiftIcon(+bg_speed);
                     x += bg_speed;
                     if (x >= SCREEN_WIDTH)
                     {
@@ -1111,6 +1120,13 @@ if (level == 2)
         {
             iShowImage(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, hitOverlayImage);
         }
+        
+        if (level == 2 || level == 3)
+        {
+            bool boss1Defeated = (bossSpawned && boss.bossHealth <= 0);
+            lvl2PowerUp.updateAndDraw(level, getCurrentLevelKillCount(), hero1.characterPosition_X, hero1.characterPosition_Y, boss1Defeated);
+        }
+        
         drawHealthRecoverPrompt();
         drawScoreTopRight();
 
