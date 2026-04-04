@@ -27,6 +27,7 @@ extern int getIdleIndex();
 #include <ctime>
 #include <cmath>
 #include "rain.hpp"
+#include "../fireball.hpp"
 using namespace std;
 struct GameScreen
 {
@@ -52,6 +53,7 @@ struct GameScreen
     Lightning lightning1;
     RainSystem rainEffect;
     PowerUpSystem powerUp;
+    FireballSystem fireballSystem;
     bool spacePressed = false;
     bool rightPressed = false;
     bool leftPressed = false;
@@ -730,6 +732,7 @@ struct GameScreen
             cloud1.initCloud(640, 580, 350, 180);
             lightning1.initLightning(60, 120, 4.0);
             cloud2.initCloud(0, 580, 400, 200);
+            fireballSystem.isActive = false; // re-init in initgame_screen
         }
         if (level == 2)
         {
@@ -798,6 +801,7 @@ else
 
             cloudLayer1.initCloudLayer("resources\\cloud\\image1.png", 1);
             powerUp.init(600.0, 100.0);
+            fireballSystem.init(); // Fireballs falling behind cloud layer
         }
         
         // Trap Initialization for Level 2
@@ -972,6 +976,14 @@ else
         iShowImage(-SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
+
+        // Fireballs drawn before cloud layer so they appear BEHIND the clouds (level 1 only)
+        if (level == 1)
+        {
+            fireballSystem.update();
+            fireballSystem.checkCollisions(hero1, enemy1, enemy2, enemy3, enemy4, boss);
+            fireballSystem.draw();
+        }
 
         // Layer: cloud band on top of BG (levels 1 & 2)
         cloudLayer1.draw(level);
