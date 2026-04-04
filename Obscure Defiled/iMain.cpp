@@ -514,7 +514,6 @@ void character_movement()
 			game_screen.heroMovementBlockedByMainObstacle = false;
 			game_screen.x -= game_screen.bg_speed;
 			game_screen.cloudLayer2.shift(-game_screen.bg_speed); // scroll clouds right
-			game_screen.shiftFloatingWall(game_screen.bg_speed);
 
 			if (game_screen.x <= -SCREEN_WIDTH)
 			{
@@ -541,7 +540,6 @@ void character_movement()
 			game_screen.heroMovementBlockedByMainObstacle = false;
 			game_screen.x += game_screen.bg_speed;
 			game_screen.cloudLayer2.shift(game_screen.bg_speed); // scroll clouds left
-			game_screen.shiftFloatingWall(-game_screen.bg_speed);
 
 			if (game_screen.x >= SCREEN_WIDTH)
 			{
@@ -596,7 +594,6 @@ void enemy_movement()
 			}
 			game_screen.shiftAnimatedObstacle(-game_screen.bg_speed);
 			game_screen.shiftMainObstacle(-game_screen.bg_speed);
-			game_screen.shiftFloatingWall(-game_screen.bg_speed);
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X -= game_screen.bg_speed;
@@ -624,7 +621,6 @@ void enemy_movement()
 			}
 			game_screen.shiftAnimatedObstacle(game_screen.bg_speed);
 			game_screen.shiftMainObstacle(game_screen.bg_speed);
-			game_screen.shiftFloatingWall(game_screen.bg_speed);
 			if (game_screen.boss.isActive || game_screen.boss.bossHealth <= 0)
 			{
 				game_screen.boss.bossPosition_X += game_screen.bg_speed;
@@ -920,7 +916,6 @@ void all_50_ms_ticks()
 		// ------------------------------------------------
 
 		character_movement();
-		game_screen.updateFloatingWallGroundSupport();
 		double healthBeforeObstacle = game_screen.hero1.HeroHealth;
 		game_screen.updateAnimatedObstacle(game_screen.hero1);
 		if (game_screen.hero1.HeroHealth < healthBeforeObstacle)
