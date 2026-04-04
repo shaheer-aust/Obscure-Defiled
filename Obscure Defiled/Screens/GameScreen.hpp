@@ -535,6 +535,32 @@ struct GameScreen
         return true;
     }
 
+    bool hitAlphaBossWithProjectile()
+    {
+        if (!projectileActive || !alphaBoss.isActive || alphaBoss.alphaHealth <= 0)
+            return false;
+
+        double projectileLeft = projectileX;
+        double projectileRightEdge = projectileX + projectileWidth;
+        double projectileBottom = projectileY;
+        double projectileTop = projectileY + projectileHeight;
+
+        double alphaWidth = 180.0;
+        double alphaHeight = 180.0;
+        double alphaLeft = alphaBoss.alphaPosition_X;
+        double alphaRightEdge = alphaBoss.alphaPosition_X + alphaWidth;
+        double alphaBottom = alphaBoss.alphaPosition_Y;
+        double alphaTop = alphaBoss.alphaPosition_Y + alphaHeight;
+
+        bool overlap = (projectileRightEdge > alphaLeft) && (projectileLeft < alphaRightEdge) && (projectileTop > alphaBottom) && (projectileBottom < alphaTop);
+        if (!overlap)
+            return false;
+
+        alphaBoss.alphaTakeDamage(hero1.attack_damage);
+        projectileActive = false;
+        return true;
+    }
+
     void updateProjectile()
     {
         if (level < 2 || !projectileActive)
@@ -556,7 +582,9 @@ struct GameScreen
             return;
         if (hitEnemyWithProjectile(enemy4))
             return;
-        hitBossWithProjectile();
+        if (hitBossWithProjectile())
+            return;
+        hitAlphaBossWithProjectile();
     }
 
     void init_animated_obstacle()
