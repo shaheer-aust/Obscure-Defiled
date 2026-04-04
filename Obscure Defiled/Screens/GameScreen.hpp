@@ -47,7 +47,6 @@ struct GameScreen
     Lava level3Lava;
     Cloud cloud1;
     Cloud cloud2;
-    CloudLayer cloudLayer1;
     CloudLayer cloudLayer2;
     Lightning lightning1;
     RainSystem rainEffect;
@@ -727,6 +726,9 @@ struct GameScreen
 		if (level == 1){
             powerUp.revert(hero1);
 			powerUp.init(600.0, 100.0);
+            cloud1.initCloud(640, 580, 350, 180);
+            lightning1.initLightning(60, 120, 4.0);
+            cloud2.initCloud(0, 580, 400, 200);
 		}
 		if (level == 2)
 		{
@@ -776,6 +778,8 @@ else
             enemy3.enemyPosition_X = SCREEN_WIDTH - 220;
             enemy4.isActive = false;
             enemy4.enemyPosition_X = SCREEN_WIDTH - 360;
+            lightning1.initLightning(60, 120, 4.0);
+            cloud2.initCloud(0, 580, 400, 200);
         }
         else
         {
@@ -793,8 +797,8 @@ else
         enemy1.isActive = true;       // enemy1 is always first — starts active
         if(level == 1){
 
-            cloudLayer1.initCloudLayer("resources\\cloud\\image1.png", 1);
             powerUp.init(600.0, 100.0);
+            cloud1.initCloud(640, 580, 350, 180);
         }
         
         // Trap Initialization for Level 2
@@ -805,7 +809,7 @@ else
             // Ground is at 100, so we can place it somewhere ahead like x=800
             // Image size may vary but a width of 100 and height of 50 works for collisions
             level2Trap.isActive = false; // Disabled falling fireballs
-            cloudLayer2.initCloudLayer("resources\\cloud\\image.png", 2); // cloud band at top of screen
+            cloudLayer2.initCloudLayer(); // cloud band at top of screen
             rainEffect.initRain();
             lightning1.initLightning(60, 120, 4.0);
         }
@@ -863,7 +867,6 @@ else
                     heroMovementBlockedByMainObstacle = false;
                     shiftAnimatedObstacle(-bg_speed);
                     shiftMainObstacle(-bg_speed);
-                    cloudLayer1.shift(-bg_speed);
                     cloudLayer2.shift(-bg_speed); // scroll clouds during mid-air right move
                     x -= bg_speed;
                     if (x <= -SCREEN_WIDTH)
@@ -885,7 +888,6 @@ else
                     heroMovementBlockedByMainObstacle = false;
                     shiftAnimatedObstacle(+bg_speed);
                     shiftMainObstacle(+bg_speed);
-                    cloudLayer1.shift(+bg_speed);
                     cloudLayer2.shift(+bg_speed);
                     x += bg_speed;
                     if (x >= SCREEN_WIDTH)
@@ -970,13 +972,16 @@ else
         iShowImage(x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
         iShowImage(SCREEN_WIDTH + x, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BgImages[level-1]);
 
-        // Layer: cloud band on top of BG (levels 1 & 2)
-        cloudLayer1.draw(level);
+        // Layer: cloud band on top of BG (level 2 only)
         cloudLayer2.draw(level);
 
         // cout << "Hero Health: " << hero1.HeroHealth << endl;
         iShowImage(SCREEN_WIDTH / 2 - (275 / 2), SCREEN_HEIGHT - 150, 275, 200, health_bar_images[(hero1.HeroHealth / 10)]);
-if (level == 2)
+        if (level == 1)
+{
+    cloud1.drawCloud(level);
+}
+if (level == 1 || level == 2)
 {
     lightning1.drawLightning(level);
     lightning1.checkCollision(hero1, level);
