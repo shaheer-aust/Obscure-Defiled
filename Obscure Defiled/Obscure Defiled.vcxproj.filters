@@ -86,6 +86,9 @@
     <ClInclude Include="lightning.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\after_lvl_2_screen.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\._.DS_Store">
