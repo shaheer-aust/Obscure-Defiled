@@ -521,6 +521,7 @@ void character_movement()
 			game_screen.x -= game_screen.bg_speed;
 			game_screen.cloudLayer2.shift(-game_screen.bg_speed); // scroll clouds right
 			game_screen.shiftFloatingWall(-game_screen.bg_speed);
+			game_screen.fireballSystem.shift(-game_screen.bg_speed); // scroll fireballs right
 
 			if (game_screen.x <= -SCREEN_WIDTH)
 			{
@@ -548,7 +549,7 @@ void character_movement()
 			game_screen.x += game_screen.bg_speed;
 			game_screen.cloudLayer2.shift(game_screen.bg_speed); // scroll clouds left
 			game_screen.shiftFloatingWall(game_screen.bg_speed);
-
+			game_screen.fireballSystem.shift(game_screen.bg_speed); // scroll fireballs left
 			if (game_screen.x >= SCREEN_WIDTH)
 			{
 				game_screen.x = 0;

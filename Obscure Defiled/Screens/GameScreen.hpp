@@ -933,6 +933,7 @@ struct GameScreen
                     cloudLayer1.shift(-bg_speed);
                     cloudLayer2.shift(-bg_speed); // scroll clouds during mid-air right move
                     lvl2PowerUp.shiftIcon(-bg_speed);
+                    fireballSystem.shift(-bg_speed);
                     x -= bg_speed;
                     if (x <= -SCREEN_WIDTH)
                     {
@@ -956,6 +957,7 @@ struct GameScreen
                     shiftFloatingWall(+bg_speed);
                     cloudLayer1.shift(+bg_speed);
                     cloudLayer2.shift(+bg_speed);
+                    fireballSystem.shift(bg_speed);
                     lvl2PowerUp.shiftIcon(+bg_speed);
                     x += bg_speed;
                     if (x >= SCREEN_WIDTH)
