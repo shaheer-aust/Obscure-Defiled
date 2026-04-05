@@ -70,6 +70,7 @@
     <ClInclude Include="character_functions\Hero.hpp" />
     <ClInclude Include="cloud.hpp" />
     <ClInclude Include="enemy_functions\enemy.hpp" />
+    <ClInclude Include="fireball.hpp" />
     <ClInclude Include="lava.hpp" />
     <ClInclude Include="level_handler.hpp" />
     <ClInclude Include="lightning.hpp" />

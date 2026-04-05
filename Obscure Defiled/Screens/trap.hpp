@@ -29,7 +29,7 @@ struct Trap
     void initTrap(int startX, int startY, int width, int height)
     {
         trapWidth = width;
-        trapHeight = height;
+        trapHeight = height * 2.5;
         isActive = true;
         
         trapImages[0] = iLoadImage("resources//obstacles//obstacles_resize//1.png"); 

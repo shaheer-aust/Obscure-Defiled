@@ -65,7 +65,7 @@ struct FireballSystem
         // stagger starting heights so they don't all arrive at once
         int extra        = stagger ? (rand() % 600) : 0;
         fb.y             = (double)(FB_SPAWN_MIN_Y + extra);
-        fb.speed         = FB_SPEED;
+        fb.speed         = FB_SPEED *1.6;
         fb.showEffect    = false;
         fb.effectTimer   = 0;
         fb.hitHero       = false;
@@ -154,7 +154,7 @@ struct FireballSystem
 
             if (hitX && hitY && !fb.hitHero)
             {
-                hero.HeroHealth -= 5;
+                hero.HeroHealth -= 12;
                 hero.gettingHit = true;
                 if (hero.HeroHealth < 0) hero.HeroHealth = 0;
                 fb.hitHero = true;

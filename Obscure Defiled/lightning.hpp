@@ -31,7 +31,7 @@ struct Lightning
 	{
 		boltWidth = width;
 		boltHeight = height;
-		baseSpeed = speed;
+		baseSpeed = speed *3;
 		isActive = true;
 
 		lightningImages.clear();
