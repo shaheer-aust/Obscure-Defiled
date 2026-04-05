@@ -2,6 +2,9 @@
 #define ICON_HPP
 
 #include <iostream>
+#include <windows.h>
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
 #include <vector>
 #include "character_functions/Hero.hpp"
 
@@ -88,8 +91,8 @@ struct Level2PowerUp
             if (!animationFrames.empty() && animationFrames[currentFrame] != -1)
             {
                 // Draw animation centered on the hero X, but vertically locked
-                int yPos = (currentLevel == 3) ? 65 : 80;
-                iShowImage(heroX - 32, yPos, 200, 200, animationFrames[currentFrame]);
+                int yPos = (currentLevel == 3) ? 62 : 80;
+                iShowImage(heroX - 34, yPos, 200, 200, animationFrames[currentFrame]);
             }
             
             animationTimer++;
@@ -116,6 +119,10 @@ struct Level2PowerUp
             animationActive = true;
             currentFrame = 0;
             animationTimer = 0;
+            
+            mciSendString("close powerupaudio", NULL, 0, NULL);
+            mciSendString("open \"resources//Level_2//powerUp//Sound//Audio.mp3\" alias powerupaudio", NULL, 0, NULL);
+            mciSendString("play powerupaudio from 0", NULL, 0, NULL);
             
             // Apply actual power up effect
             if (currentLevel == 2)
