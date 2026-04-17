@@ -255,11 +255,12 @@ Obscure Defiled/
 
 
 **Team Members:**
-**- Sheikh Zubayer Kabir —** Developed core gameplay systems including hero weapons, projectiles, boss mechanics, and level transitions with environmental elements.
 
-**- Rahul Podder —** Designed environment effects, assets, and power-up systems while contributing to level visuals and gameplay improvements.
+- **Sheikh Zubayer Kabir —** Developed core gameplay systems including hero weapons, projectiles, boss mechanics, and level transitions with environmental elements.
 
-**- Mahammad Shaheer Imam —** Built GameScreen architecture, UI features, and implemented gameplay mechanics like enemies, obstacles, health, projectiles, and bug fixes.
+- **Rahul Podder —** Designed environment effects, assets, and power-up systems while contributing to level visuals and gameplay improvements.
+
+- **Mahammad Shaheer Imam —** Built GameScreen architecture, UI features, and implemented gameplay mechanics like enemies, obstacles, health, projectiles, and bug fixes.
 
 
 ## Technical Implementation
