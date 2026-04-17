@@ -254,7 +254,7 @@ Obscure Defiled/
 ## Project Contributors
 
 
-#Team Members:
+**Team Members:**
 **- Sheikh Zubayer Kabir —** Developed core gameplay systems including hero weapons, projectiles, boss mechanics, and level transitions with environmental elements.
 
 **- Rahul Podder —** Designed environment effects, assets, and power-up systems while contributing to level visuals and gameplay improvements.
